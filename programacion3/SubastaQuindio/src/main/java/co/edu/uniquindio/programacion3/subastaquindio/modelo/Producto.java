@@ -1,27 +1,28 @@
 package co.edu.uniquindio.programacion3.subastaquindio.modelo;
 
+import co.edu.uniquindio.programacion3.subastaquindio.enumm.TipoProducto;
+
 import java.time.LocalDate;
 
 public class Producto {
     private String nombreProducto;
     private String descripcion;
+    private TipoProducto tipoProducto;
     private String photo;
     private String nombreAnunciante;
     private LocalDate fechaPublicacion;
     private LocalDate fechaFinPublicacion;
     private double valorInicial;
 
-    public Producto(String nombreProducto, String descripcion, String photo, String nombreAnunciante, LocalDate fechaPublicacion, LocalDate fechaFinPublicacion, double valorInicial) {
+    public Producto(String nombreProducto, String descripcion, TipoProducto tipoProducto, String photo, String nombreAnunciante, LocalDate fechaPublicacion, LocalDate fechaFinPublicacion, double valorInicial) {
         this.nombreProducto = nombreProducto;
         this.descripcion = descripcion;
+        this.tipoProducto = tipoProducto;
         this.photo = photo;
         this.nombreAnunciante = nombreAnunciante;
         this.fechaPublicacion = fechaPublicacion;
         this.fechaFinPublicacion = fechaFinPublicacion;
         this.valorInicial = valorInicial;
-    }
-    public Producto (){
-
     }
 
     public String getNombreProducto() {
@@ -38,6 +39,14 @@ public class Producto {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public TipoProducto getTipoProducto() {
+        return tipoProducto;
+    }
+
+    public void setTipoProducto(TipoProducto tipoProducto) {
+        this.tipoProducto = tipoProducto;
     }
 
     public String getPhoto() {
