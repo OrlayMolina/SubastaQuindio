@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import java.net.URL?>
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
@@ -17,16 +19,16 @@
 
 <AnchorPane prefHeight="520.0" prefWidth="788.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.programacion3.subastaquindio.viewController.ProductoViewController">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ecf1f5" height="48.0" layoutX="7.0" layoutY="269.0" stroke="#b5aeae" strokeType="INSIDE" width="763.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f3f4f5" height="250.0" layoutX="7.0" layoutY="14.0" stroke="#c3b6b6" strokeType="INSIDE" width="763.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="151.0" layoutX="16.0" layoutY="22.0" stroke="#bca8a8" strokeType="INSIDE" width="199.0" />
-      <Label layoutX="92.0" layoutY="78.0" text="Foto">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ecf1f5" height="48.0" layoutX="7.0" layoutY="291.0" stroke="#b5aeae" strokeType="INSIDE" width="763.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f3f4f5" height="271.0" layoutX="7.0" layoutY="14.0" stroke="#c3b6b6" strokeType="INSIDE" width="763.0" />
+      <Rectangle fx:id="ImageView" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="253.0" layoutX="11.0" layoutY="22.0" stroke="#bca8a8" strokeType="INSIDE" width="214.0" />
+      <Label layoutX="94.0" layoutY="132.0" text="Foto">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fdfeff" height="151.0" layoutX="228.0" layoutY="22.0" stroke="#cdc2c2" strokeType="INSIDE" width="533.0" />
-      <GridPane layoutX="243.0" layoutY="37.0">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fdfeff" height="186.0" layoutX="228.0" layoutY="22.0" stroke="#cdc2c2" strokeType="INSIDE" width="533.0" />
+      <GridPane layoutX="240.0" layoutY="25.0" prefHeight="171.0" prefWidth="510.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="230.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="50.0" />
@@ -35,7 +37,10 @@
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
@@ -60,20 +65,30 @@
                   <Font size="18.0" />
                </font>
             </Label>
-            <TextField prefHeight="34.0" prefWidth="230.0" promptText="Nombre del Producto ..." GridPane.rowIndex="1" />
-            <TextField prefHeight="32.0" prefWidth="230.0" promptText="Anunciante ..." GridPane.columnIndex="2" GridPane.rowIndex="1" />
-            <DatePicker prefHeight="40.0" prefWidth="230.0" promptText="Eliga una Fecha" GridPane.rowIndex="4" />
-            <DatePicker prefHeight="38.0" prefWidth="230.0" promptText="Elija una Fecha" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+            <TextField fx:id="txfNombreProducto" prefHeight="34.0" prefWidth="230.0" promptText="Nombre del Producto ..." GridPane.rowIndex="1" />
+            <TextField fx:id="txfAnunciante" prefHeight="32.0" prefWidth="230.0" promptText="Anunciante ..." GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <DatePicker fx:id="dateFechaPublicación" prefHeight="40.0" prefWidth="230.0" promptText="Eliga una Fecha" GridPane.rowIndex="4" />
+            <DatePicker fx:id="dateFechaFinPublicacion" prefHeight="38.0" prefWidth="230.0" promptText="Elija una Fecha" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+            <Label text="Valor Inicial:" GridPane.rowIndex="6">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txfValorInicial" prefHeight="35.0" prefWidth="199.0" promptText="Ingrese el valor Inicial ..." GridPane.rowIndex="7" />
+            <Label text="Tipo Producto:" GridPane.columnIndex="2" GridPane.rowIndex="6">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="cmbTipoProducto" prefWidth="248.0" promptText="Elija el Tipo de Producto" styleClass="check-box" GridPane.columnIndex="2" GridPane.rowIndex="7">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </ComboBox>
          </children>
       </GridPane>
-      <TextField layoutX="18.0" layoutY="219.0" prefHeight="35.0" prefWidth="199.0" promptText="Ingrese el valor Inicial ..." />
-      <Label layoutX="19.0" layoutY="184.0" text="Valor Inicial:">
-         <font>
-            <Font name="System Bold" size="19.0" />
-         </font>
-      </Label>
-      <TextArea layoutX="228.0" layoutY="179.0" prefHeight="75.0" prefWidth="533.0" promptText="Descripción del Producto ..." />
-      <GridPane layoutX="201.0" layoutY="278.0">
+      <TextArea fx:id="txaDescripción" layoutX="228.0" layoutY="217.0" prefHeight="57.0" prefWidth="533.0" promptText="Descripción del Producto ..." />
+      <GridPane layoutX="201.0" layoutY="300.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="50.0" />
@@ -85,18 +100,22 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button mnemonicParsing="false" prefHeight="31.0" prefWidth="100.0" styleClass="primary" text="Agregar" />
-            <Button mnemonicParsing="false" prefHeight="38.0" prefWidth="100.0" styleClass="warning" text="Actualizar" GridPane.columnIndex="2" />
-            <Button mnemonicParsing="false" prefHeight="52.0" prefWidth="100.0" styleClass="danger" text="Eliminar" GridPane.columnIndex="4" />
+            <Button mnemonicParsing="false" onAction="#agregarProducto" prefHeight="31.0" prefWidth="100.0" styleClass="primary" text="Agregar" />
+            <Button mnemonicParsing="false" onAction="#actualizarProducto" prefHeight="38.0" prefWidth="100.0" styleClass="warning" text="Actualizar" GridPane.columnIndex="2" />
+            <Button mnemonicParsing="false" onAction="#eliminarProducto" prefHeight="52.0" prefWidth="100.0" styleClass="danger" text="Eliminar" GridPane.columnIndex="4" />
          </children>
       </GridPane>
-      <TableView layoutX="7.0" layoutY="323.0" prefHeight="127.0" prefWidth="763.0">
+      <TableView layoutX="7.0" layoutY="345.0" prefHeight="133.0" prefWidth="763.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="C1" />
-          <TableColumn prefWidth="75.0" text="C2" />
+          <TableColumn prefWidth="114.0" text="Nombre Producto" />
+          <TableColumn prefWidth="115.0" text="Descripción" />
+            <TableColumn prefWidth="116.0" text="Anunciante" />
+            <TableColumn prefWidth="110.0" text="Tipo Producto" />
+            <TableColumn prefWidth="110.0" text="Fecha Publicación" />
+            <TableColumn prefWidth="105.0" text="Fecha Fin Puja" />
+            <TableColumn prefWidth="92.0" text="Valor Inicial" />
         </columns>
       </TableView>
-      <Button layoutX="717.0" layoutY="454.0" mnemonicParsing="false" styleClass="info" text="Atrás" />
    </children>
    <stylesheets>
       <URL value="@tema.css" />
