@@ -65,7 +65,7 @@
                         <id>default-cli</id>
                         <configuration>
                             <mainClass>
-                                co.edu.uniquindio.programacion3.subastaquindio/co.edu.uniquindio.programacion3.subastaquindio.HelloApplication
+                                co.edu.uniquindio.programacion3.subastaquindio/co.edu.uniquindio.programacion3.subastaquindio.SubastaApplication
                             </mainClass>
                             <launcher>app</launcher>
                             <jlinkZipName>app</jlinkZipName>
