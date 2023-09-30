@@ -6,29 +6,24 @@ import java.time.LocalDate;
 
 public class Producto {
 
+    private String codigoUnico;
     private String nombreProducto;
-
     private String descripcion;
-
-    private TipoProducto tipoProducto;
-
+    private String tipoProducto;
     private String photo;
-
     private String nombreAnunciante;
-
-    private LocalDate fechaPublicacion;
-
-    private LocalDate fechaFinPublicacion;
-
+    private String fechaPublicacion;
+    private String fechaFinPublicacion;
     private double valorInicial;
-
     public Producto(){
 
     }
 
-    public Producto(String nombreProducto, String descripcion, TipoProducto tipoProducto,
-                    String photo, String nombreAnunciante, LocalDate fechaPublicacion,
-                    LocalDate fechaFinPublicacion, double valorInicial) {
+    public Producto(String codigoUnico, String nombreProducto, String descripcion,
+                    String tipoProducto, String photo, String nombreAnunciante,
+                    String fechaPublicacion, String fechaFinPublicacion,
+                    double valorInicial) {
+        this.codigoUnico = codigoUnico;
         this.nombreProducto = nombreProducto;
         this.descripcion = descripcion;
         this.tipoProducto = tipoProducto;
@@ -55,11 +50,11 @@ public class Producto {
         this.descripcion = descripcion;
     }
 
-    public TipoProducto getTipoProducto() {
+    public String getTipoProducto() {
         return tipoProducto;
     }
 
-    public void setTipoProducto(TipoProducto tipoProducto) {
+    public void setTipoProducto(String tipoProducto) {
         this.tipoProducto = tipoProducto;
     }
 
@@ -79,19 +74,19 @@ public class Producto {
         this.nombreAnunciante = nombreAnunciante;
     }
 
-    public LocalDate getFechaPublicacion() {
+    public String getFechaPublicacion() {
         return fechaPublicacion;
     }
 
-    public void setFechaPublicacion(LocalDate fechaPublicacion) {
+    public void setFechaPublicacion(String fechaPublicacion) {
         this.fechaPublicacion = fechaPublicacion;
     }
 
-    public LocalDate getFechaFinPublicacion() {
+    public String getFechaFinPublicacion() {
         return fechaFinPublicacion;
     }
 
-    public void setFechaFinPublicacion(LocalDate fechaFinPublicacion) {
+    public void setFechaFinPublicacion(String fechaFinPublicacion) {
         this.fechaFinPublicacion = fechaFinPublicacion;
     }
 
@@ -101,5 +96,13 @@ public class Producto {
 
     public void setValorInicial(double valorInicial) {
         this.valorInicial = valorInicial;
+    }
+
+    public String getCodigoUnico() {
+        return codigoUnico;
+    }
+
+    public void setCodigoUnico(String codigoUnico) {
+        this.codigoUnico = codigoUnico;
     }
 }
