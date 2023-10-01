@@ -265,7 +265,7 @@ public class ProductoViewController {
         if(mensaje.equals("")){
             return true;
         }else{
-            mostrarMensaje("Notificación cliente","Datos invalidos",mensaje, Alert.AlertType.WARNING);
+            mostrarMensaje("Notificación producto", "Producto no creado", mensaje, Alert.AlertType.ERROR);
             return false;
         }
     }
