@@ -47,6 +47,39 @@ public class SubastaQuindio implements ISubastaQuindioService {
         return nuevoProducto;
     }
 
+    @Override
+    public Boolean eliminarProducto(String codigoUnico) throws ProductoException {
+        Producto producto = null;
+        boolean flagExiste = false;
+        producto = obtenerProducto(codigoUnico);
+        if(producto == null)
+            throw new ProductoException("El empleado a eliminar no existe");
+        else{
+            getListaProductos().remove(producto);
+            flagExiste = true;
+        }
+        return flagExiste;
+    }
+
+    @Override
+    public boolean actualizarProducto(String codigoUnico, Producto producto) throws ProductoException {
+        Producto productoActual = obtenerProducto(codigoUnico);
+        if(productoActual == null)
+            throw new ProductoException("El producto a actualizar no existe");
+        else{
+            productoActual.setCodigoUnico(producto.getCodigoUnico());
+            productoActual.setNombreProducto(producto.getNombreProducto());
+            productoActual.setDescripcion(producto.getDescripcion());
+            productoActual.setTipoProducto(producto.getTipoProducto());
+            productoActual.setPhoto(producto.getPhoto());
+            productoActual.setNombreAnunciante(producto.getNombreAnunciante());
+            productoActual.setFechaPublicacion(producto.getFechaPublicacion());
+            productoActual.setFechaFinPublicacion(producto.getFechaFinPublicacion());
+            productoActual.setValorInicial(producto.getValorInicial());
+            return true;
+        }
+    }
+
     public void agregarProducto(Producto nuevoProducto) throws ProductoException{
         getListaProductos().add(nuevoProducto);
     }
@@ -69,6 +102,18 @@ public class SubastaQuindio implements ISubastaQuindioService {
             }
         }
         return productoEncontrado;
+    }
+
+    @Override
+    public Producto obtenerProducto(String cedula) {
+        Producto empleadoEncontrado = null;
+        for (Producto empleado : getListaProductos()) {
+            if(empleado.getCodigoUnico().equalsIgnoreCase(cedula)){
+                empleadoEncontrado = empleado;
+                break;
+            }
+        }
+        return empleadoEncontrado;
     }
 
     @Override

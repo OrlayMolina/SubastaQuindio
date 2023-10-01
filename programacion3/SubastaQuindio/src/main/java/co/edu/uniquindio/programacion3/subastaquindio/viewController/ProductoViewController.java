@@ -141,7 +141,7 @@ public class ProductoViewController {
 
     @FXML
     void actualizarProducto(ActionEvent event) {
-
+        actualizarProducto();
     }
 
     @FXML
@@ -151,7 +151,7 @@ public class ProductoViewController {
 
     @FXML
     void eliminarProducto(ActionEvent event) {
-
+        eliminarProducto();
     }
 
     private void crearProducto() {
@@ -161,15 +161,61 @@ public class ProductoViewController {
         if(datosValidos(productoDto)){
             if(productoControllerService.agregarProducto(productoDto)){
                 listaProductosDto.add(productoDto);
-                mostrarMensaje("Notificación productos", "Producto creado", "El empleado se ha creado con éxito", Alert.AlertType.INFORMATION);
+                mostrarMensaje("Notificación producto", "Producto creado", "El empleado se ha creado con éxito", Alert.AlertType.INFORMATION);
                 limpiarCamposProductos();
             }else{
-                mostrarMensaje("Notificación productos", "Producto no creado", "El empleado no se ha creado con éxito", Alert.AlertType.ERROR);
+                mostrarMensaje("Notificación producto", "Producto no creado", "El empleado no se ha creado con éxito", Alert.AlertType.ERROR);
             }
         }else{
-            mostrarMensaje("Notificación productos", "Producto no creado", "Los datos ingresados son invalidos", Alert.AlertType.ERROR);
+            mostrarMensaje("Notificación producto", "Producto no creado", "Los datos ingresados son invalidos", Alert.AlertType.ERROR);
         }
 
+    }
+
+    private void eliminarProducto() {
+        boolean productoEliminado = false;
+        if(productoSeleccionado != null){
+            if(mostrarMensajeConfirmacion("¿Estas seguro de elmininar al empleado?")){
+                productoEliminado = productoControllerService.eliminarProducto(productoSeleccionado.codigoUnico());
+                if(productoEliminado == true){
+                    listaProductosDto.remove(productoSeleccionado);
+                    productoSeleccionado = null;
+                    tableProductos.getSelectionModel().clearSelection();
+                    limpiarCamposProductos();
+                    mostrarMensaje("Notificación producto", "Producto eliminado", "El producto se ha eliminado con éxito", Alert.AlertType.INFORMATION);
+                }else{
+                    mostrarMensaje("Notificación producto", "Producto no eliminado", "El producto no se puede eliminar", Alert.AlertType.ERROR);
+                }
+            }
+        }else{
+            mostrarMensaje("Notificación producto", "Producto no seleccionado", "Seleccionado un empleado de la lista", Alert.AlertType.WARNING);
+        }
+    }
+
+    private void actualizarProducto() {
+        boolean clienteActualizado = false;
+        //1. Capturar los datos
+        String cedulaActual = productoSeleccionado.codigoUnico();
+        ProductoDTO productoDto = construirProductoDto();
+        //2. verificar el empleado seleccionado
+        if(productoSeleccionado != null){
+            //3. Validar la información
+            if(datosValidos(productoSeleccionado)){
+                clienteActualizado = productoControllerService.actualizarProducto(cedulaActual,productoDto);
+                if(clienteActualizado){
+                    listaProductosDto.remove(productoSeleccionado);
+                    listaProductosDto.add(productoDto);
+                    tableProductos.refresh();
+                    mostrarMensaje("Notificación producto", "Producto actualizado", "El empleado se ha actualizado con éxito", Alert.AlertType.INFORMATION);
+                    limpiarCamposProductos();
+                }else{
+                    mostrarMensaje("Notificación producto", "Producto no actualizado", "El empleado no se ha actualizado con éxito", Alert.AlertType.INFORMATION);
+                }
+            }else{
+                mostrarMensaje("Notificación producto", "Producto no creado", "Los datos ingresados son invalidos", Alert.AlertType.ERROR);
+            }
+
+        }
     }
 
     private ProductoDTO construirProductoDto() {

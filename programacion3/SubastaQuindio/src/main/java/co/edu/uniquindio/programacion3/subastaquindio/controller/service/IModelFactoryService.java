@@ -10,4 +10,8 @@ public interface IModelFactoryService {
     List<ProductoDTO> obtenerProductos();
 
     boolean agregarProducto(ProductoDTO productoDto);
+
+    boolean eliminarProducto(String codigoUnico);
+
+    boolean actualizarProducto(String cedulaActual, ProductoDTO productoDto);
 }
