@@ -77,10 +77,10 @@ public class ModelFactoryController implements IModelFactoryService {
     }
 
     @Override
-    public boolean actualizarProducto(String cedulaActual, ProductoDTO productoDto) {
+    public boolean actualizarProducto(String codigoActual, ProductoDTO productoDto) {
         try {
             Producto producto = mapper.productoDtoToProducto(productoDto);
-            getSubasta().actualizarProducto(cedulaActual, producto);
+            getSubasta().actualizarProducto(codigoActual, producto);
             return true;
         } catch (ProductoException e) {
             e.printStackTrace();

@@ -195,21 +195,21 @@ public class ProductoViewController {
     private void actualizarProducto() {
         boolean clienteActualizado = false;
         //1. Capturar los datos
-        String cedulaActual = productoSeleccionado.codigoUnico();
+        String codigoUnico = productoSeleccionado.codigoUnico();
         ProductoDTO productoDto = construirProductoDto();
         //2. verificar el empleado seleccionado
         if(productoSeleccionado != null){
             //3. Validar la información
             if(datosValidos(productoSeleccionado)){
-                clienteActualizado = productoControllerService.actualizarProducto(cedulaActual,productoDto);
+                clienteActualizado = productoControllerService.actualizarProducto(codigoUnico, productoDto);
                 if(clienteActualizado){
                     listaProductosDto.remove(productoSeleccionado);
                     listaProductosDto.add(productoDto);
                     tableProductos.refresh();
-                    mostrarMensaje("Notificación producto", "Producto actualizado", "El empleado se ha actualizado con éxito", Alert.AlertType.INFORMATION);
+                    mostrarMensaje("Notificación producto", "Producto actualizado", "El producto se ha actualizado con éxito", Alert.AlertType.INFORMATION);
                     limpiarCamposProductos();
                 }else{
-                    mostrarMensaje("Notificación producto", "Producto no actualizado", "El empleado no se ha actualizado con éxito", Alert.AlertType.INFORMATION);
+                    mostrarMensaje("Notificación producto", "Producto no actualizado", "El producto no se ha actualizado con éxito", Alert.AlertType.INFORMATION);
                 }
             }else{
                 mostrarMensaje("Notificación producto", "Producto no creado", "Los datos ingresados son invalidos", Alert.AlertType.ERROR);
