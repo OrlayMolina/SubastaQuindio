@@ -25,11 +25,13 @@ public class ProductoController implements IProductoControllerService {
 
     @Override
     public boolean eliminarProducto(String codigoUnico) {
-        return false;
+        return modelFactoryController.eliminarProducto(codigoUnico);
     }
 
     @Override
     public boolean actualizarProducto(String codigoUnico, ProductoDTO productoDto) {
-        return false;
+        return modelFactoryController.actualizarProducto(codigoUnico, productoDto);
     }
+
+
 }
