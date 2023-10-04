@@ -163,6 +163,7 @@ public class ProductoViewController {
                 listaProductosDto.add(productoDto);
                 mostrarMensaje("Notificación producto", "Producto creado", "El producto se ha creado con éxito", Alert.AlertType.INFORMATION);
                 limpiarCamposProductos();
+                registrarAcciones("Producto agregado",1, "Agregar empleado");
             }else{
                 mostrarMensaje("Notificación producto", "Producto no creado", "El producto no se ha creado", Alert.AlertType.ERROR);
             }
@@ -182,6 +183,7 @@ public class ProductoViewController {
                     productoSeleccionado = null;
                     tableProductos.getSelectionModel().clearSelection();
                     limpiarCamposProductos();
+                    registrarAcciones("Producto eliminado",1, "Agregar empleado");
                     mostrarMensaje("Notificación producto", "Producto eliminado", "El producto se ha eliminado con éxito", Alert.AlertType.INFORMATION);
                 }else{
                     mostrarMensaje("Notificación producto", "Producto no eliminado", "El producto no se puede eliminar", Alert.AlertType.ERROR);
@@ -208,6 +210,7 @@ public class ProductoViewController {
                     tableProductos.refresh();
                     mostrarMensaje("Notificación producto", "Producto actualizado", "El producto se ha actualizado con éxito", Alert.AlertType.INFORMATION);
                     limpiarCamposProductos();
+                    registrarAcciones("Producto actualizado",1, "Agregar empleado");
                 }else{
                     mostrarMensaje("Notificación producto", "Producto no actualizado", "El producto no se ha actualizado con éxito", Alert.AlertType.INFORMATION);
                 }
@@ -242,6 +245,10 @@ public class ProductoViewController {
         txfFechaPublicacion.setText("");
         txfFechaFinPublicacion.setText("");
         txfTipoProducto.setText("");
+    }
+
+    private void registrarAcciones(String mensaje, int nivel, String accion) {
+        productoControllerService.registrarAcciones(mensaje, nivel, accion);
     }
 
     private boolean datosValidos(ProductoDTO productoDto) {

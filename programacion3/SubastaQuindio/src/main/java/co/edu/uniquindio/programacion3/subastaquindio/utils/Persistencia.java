@@ -11,10 +11,6 @@ import java.util.ArrayList;
 
 public class Persistencia {
 
-
-    //bancoUq/src/main/resources/persistencia/archivoClientes.txt
-
-
     public static final String RUTA_ARCHIVO_PRODUCTOS = "src/main/resources/persistencia/archivos/archivoProductos.txt";
     public static final String RUTA_ARCHIVO_USUARIOS = "src/main/resources/persistencia/archivos/archivoUsuarios.txt";
     public static final String RUTA_ARCHIVO_LOG = "src/main/resources/persistencia/log/SubastaLog.txt";
@@ -51,8 +47,8 @@ public class Persistencia {
         // TODO Auto-generated method stub
         String contenido = "";
         for (Producto producto : listaProductos) {
-            contenido += producto.getCodigoUnico() + "," + producto.getNombreProducto() + "," + producto.getDescripcion() + "," + producto.getNombreAnunciante()
-                    + "," + producto.getTipoProducto() + "," + producto.getFechaPublicacion() + "," + producto.getFechaFinPublicacion() + "," + producto.getValorInicial() + "\n";
+            contenido += producto.getCodigoUnico() + "@@" + producto.getNombreProducto() + "@@" + producto.getDescripcion() + "@@" + producto.getNombreAnunciante()
+                    + "@@" + producto.getTipoProducto() + "@@" + producto.getFechaPublicacion() + "@@" + producto.getFechaFinPublicacion() + "@@" + producto.getValorInicial() + "\n";
         }
         ArchivoUtil.guardarArchivo(RUTA_ARCHIVO_PRODUCTOS, contenido, false);
     }
@@ -72,16 +68,16 @@ public class Persistencia {
         ArrayList<String> contenido = ArchivoUtil.leerArchivo(RUTA_ARCHIVO_PRODUCTOS);
         String linea = "";
         for (int i = 0; i < contenido.size(); i++) {
-            linea = contenido.get(i);//juan,arias,125454,Armenia,uni1@,12454,125444
+            linea = contenido.get(i);//juan@@arias@@125454@@Armenia@@uni1@@@12454@@125444
             Producto producto = new Producto();
-            producto.setCodigoUnico(linea.split(",")[0]);
-            producto.setNombreProducto(linea.split(",")[1]);
-            producto.setDescripcion(linea.split(",")[2]);
-            producto.setNombreAnunciante(linea.split(",")[3]);
-            producto.setTipoProducto(linea.split(",")[4]);
-            producto.setFechaPublicacion(linea.split(",")[5]);
-            producto.setFechaFinPublicacion(linea.split(",")[6]);
-            producto.setValorInicial(Double.parseDouble(linea.split(",")[7]));
+            producto.setCodigoUnico(linea.split("@@")[0]);
+            producto.setNombreProducto(linea.split("@@")[1]);
+            producto.setDescripcion(linea.split("@@")[2]);
+            producto.setNombreAnunciante(linea.split("@@")[3]);
+            producto.setTipoProducto(linea.split("@@")[4]);
+            producto.setFechaPublicacion(linea.split("@@")[5]);
+            producto.setFechaFinPublicacion(linea.split("@@")[6]);
+            producto.setValorInicial(Double.parseDouble(linea.split("@@")[7]));
             productos.add(producto);
         }
         return productos;

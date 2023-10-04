@@ -33,5 +33,10 @@ public class ProductoController implements IProductoControllerService {
         return modelFactoryController.actualizarProducto(codigoUnico, productoDto);
     }
 
+    @Override
+    public void registrarAcciones(String mensaje, int nivel, String accion) {
+        modelFactoryController.registrarAccionesSistema(mensaje, nivel, accion);
+    }
+
 
 }
