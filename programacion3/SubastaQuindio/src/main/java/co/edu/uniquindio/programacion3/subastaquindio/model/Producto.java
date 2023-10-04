@@ -2,10 +2,12 @@ package co.edu.uniquindio.programacion3.subastaquindio.model;
 
 import co.edu.uniquindio.programacion3.subastaquindio.enumm.TipoProducto;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Producto {
+public class Producto implements Serializable {
 
+    private static final long serialVersionUID = 1L;
     private String codigoUnico;
     private String nombreProducto;
     private String descripcion;

@@ -161,10 +161,10 @@ public class ProductoViewController {
         if(datosValidos(productoDto)){
             if(productoControllerService.agregarProducto(productoDto)){
                 listaProductosDto.add(productoDto);
-                mostrarMensaje("Notificación producto", "Producto creado", "El empleado se ha creado con éxito", Alert.AlertType.INFORMATION);
+                mostrarMensaje("Notificación producto", "Producto creado", "El producto se ha creado con éxito", Alert.AlertType.INFORMATION);
                 limpiarCamposProductos();
             }else{
-                mostrarMensaje("Notificación producto", "Producto no creado", "El empleado no se ha creado con éxito", Alert.AlertType.ERROR);
+                mostrarMensaje("Notificación producto", "Producto no creado", "El producto no se ha creado", Alert.AlertType.ERROR);
             }
         }else{
             mostrarMensaje("Notificación producto", "Producto no creado", "Los datos ingresados son invalidos", Alert.AlertType.ERROR);

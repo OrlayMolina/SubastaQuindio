@@ -4,6 +4,8 @@ module co.edu.uniquindio.programacion3.subastaquindio {
 
     requires org.kordamp.bootstrapfx.core;
     requires org.mapstruct;
+    requires java.logging;
+    requires java.desktop;
 
     opens co.edu.uniquindio.programacion3.subastaquindio to javafx.fxml;
     exports co.edu.uniquindio.programacion3.subastaquindio;
