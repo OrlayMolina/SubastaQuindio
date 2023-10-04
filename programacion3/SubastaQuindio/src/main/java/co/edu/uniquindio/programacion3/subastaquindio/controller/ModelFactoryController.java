@@ -98,6 +98,7 @@ public class ModelFactoryController implements IModelFactoryService {
             if(!subasta.verificarProductoExistente(productoDto.codigoUnico())) {
                 Producto producto = mapper.productoDtoToProducto(productoDto);
                 getSubasta().agregarProducto(producto);
+                guardarResourceXML();
             }
             return true;
         }catch (ProductoException e){
@@ -111,6 +112,7 @@ public class ModelFactoryController implements IModelFactoryService {
         boolean flagExiste = false;
         try {
             flagExiste = getSubasta().eliminarProducto(codigoUnico);
+            guardarResourceXML(); //Pendiente verificar si este método es adecuado
         } catch (ProductoException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -123,6 +125,7 @@ public class ModelFactoryController implements IModelFactoryService {
         try {
             Producto producto = mapper.productoDtoToProducto(productoDto);
             getSubasta().actualizarProducto(codigoActual, producto);
+            guardarResourceXML(); //Pendiente verificar si este método es adecuado 
             return true;
         } catch (ProductoException e) {
             e.printStackTrace();
