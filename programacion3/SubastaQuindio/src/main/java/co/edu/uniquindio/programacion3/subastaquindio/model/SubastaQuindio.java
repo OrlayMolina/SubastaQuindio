@@ -3,9 +3,10 @@ package co.edu.uniquindio.programacion3.subastaquindio.model;
 import co.edu.uniquindio.programacion3.subastaquindio.exceptions.ProductoException;
 import co.edu.uniquindio.programacion3.subastaquindio.model.service.ISubastaQuindioService;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class SubastaQuindio implements ISubastaQuindioService {
+public class SubastaQuindio implements ISubastaQuindioService, Serializable {
 
     private static final long serialVersionUID = 1L;
     private ArrayList<Producto> listaProductos = new ArrayList<>();
@@ -121,5 +122,6 @@ public class SubastaQuindio implements ISubastaQuindioService {
         // TODO Auto-generated method stub
         return getListaProductos();
     }
+
 
 }

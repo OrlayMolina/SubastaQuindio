@@ -14,4 +14,5 @@ public interface IProductoControllerService {
 
     boolean actualizarProducto(String codigoUnico, ProductoDTO productoDto);
 
+    void registrarAcciones(String mensaje, int nivel, String accion);
 }
