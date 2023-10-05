@@ -32,7 +32,7 @@ public class ModelFactoryController implements IModelFactoryService {
     public ModelFactoryController() {
         //1. inicializar datos y luego guardarlo en archivos
         System.out.println("invocación clase singleton");
-        //cargarDatosBase();
+        cargarDatosBase();
         //salvarDatosPrueba();
 
         //2. Cargar los datos de los archivos
@@ -44,13 +44,15 @@ public class ModelFactoryController implements IModelFactoryService {
 
         //4. Guardar y Cargar el recurso serializable XML
         //guardarResourceXML();
-        cargarResourceXML();
+        guardarRespaldoXML();
+        //cargarResourceXML();
 
         //Siempre se debe verificar si la raiz del recurso es null
 
         if(subasta == null){
             cargarDatosBase();
             guardarResourceXML();
+            guardarRespaldoXML();
         }
         registrarAccionesSistema("Inicio de sesión", 1, "inicioSesión");
 
@@ -125,7 +127,7 @@ public class ModelFactoryController implements IModelFactoryService {
         try {
             Producto producto = mapper.productoDtoToProducto(productoDto);
             getSubasta().actualizarProducto(codigoActual, producto);
-            guardarResourceXML(); //Pendiente verificar si este método es adecuado 
+            guardarResourceXML(); //Pendiente verificar si este método es adecuado
             return true;
         } catch (ProductoException e) {
             e.printStackTrace();
@@ -139,6 +141,10 @@ public class ModelFactoryController implements IModelFactoryService {
 
     private void guardarResourceXML() {
         Persistencia.guardarRecursoSubastaXML(subasta);
+    }
+
+    private void guardarRespaldoXML(){
+        Persistencia.guardarRespaldoSubastaXML(subasta);
     }
 
     private void cargarResourceBinario() {

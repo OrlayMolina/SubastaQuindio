@@ -12,8 +12,6 @@ public abstract class Persona implements Serializable {
     private String correo;
     private String fechaNacimiento;
 
-
-
     public Persona() {
 
     }

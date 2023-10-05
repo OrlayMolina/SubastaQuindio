@@ -9,11 +9,17 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import static co.edu.uniquindio.programacion3.subastaquindio.utils.ArchivoUtil.cargarFechaSistemaFormatoRespaldo;
+
 public class Persistencia {
+
+    static String fechaRespaldo = cargarFechaSistemaFormatoRespaldo();
 
     public static final String RUTA_ARCHIVO_PRODUCTOS = "src/main/resources/persistencia/archivos/archivoProductos.txt";
     public static final String RUTA_ARCHIVO_USUARIOS = "src/main/resources/persistencia/archivos/archivoUsuarios.txt";
     public static final String RUTA_ARCHIVO_LOG = "src/main/resources/persistencia/log/SubastaLog.txt";
+
+    public static final String RUTA_ARCHIVO_RESPALDO_XML = "src/main/resources/persistencia/respaldo/subastaRespaldo" + fechaRespaldo +".xml";
     public static final String RUTA_ARCHIVO_OBJETOS = "src/main/resources/persistencia/archivos/archivoObjetos.txt";
     public static final String RUTA_ARCHIVO_MODELO_SUBASTA_BINARIO = "src/main/resources/persistencia/model.dat";
     public static final String RUTA_ARCHIVO_MODELO_SUBASTA_XML = "src/main/resources/persistencia/model.xml";
@@ -196,6 +202,16 @@ public class Persistencia {
 
         try {
             ArchivoUtil.salvarRecursoSerializadoXML(RUTA_ARCHIVO_MODELO_SUBASTA_XML, subasta);
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
+    public static void guardarRespaldoSubastaXML(SubastaQuindio subasta) {
+
+        try {
+            ArchivoUtil.salvarRecursoSerializadoXML(RUTA_ARCHIVO_RESPALDO_XML, subasta);
         } catch (Exception e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
