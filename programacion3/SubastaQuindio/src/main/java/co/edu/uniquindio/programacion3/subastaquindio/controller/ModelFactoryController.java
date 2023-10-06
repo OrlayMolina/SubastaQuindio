@@ -16,6 +16,7 @@ import java.util.List;
 public class ModelFactoryController implements IModelFactoryService {
 
     SubastaQuindio subasta;
+    Producto producto;
     SubastaMapper mapper = SubastaMapper.INSTANCE;
 
     //------------------------------  Singleton ------------------------------------------------

@@ -2,21 +2,16 @@ package co.edu.uniquindio.programacion3.subastaquindio.utils;
 
 import java.beans.XMLDecoder;
 import java.beans.XMLEncoder;
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
+
+import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
 
 /**
@@ -151,7 +146,7 @@ public  class ArchivoUtil {
         int dia = cal1.get(Calendar.DATE);
         int mes = cal1.get(Calendar.MONTH) + 1;
         int año = cal1.get(Calendar.YEAR);
-        int hora = cal1.get(Calendar.HOUR);
+        int hora = cal1.get(Calendar.HOUR_OF_DAY);
         int minuto = cal1.get(Calendar.MINUTE);
         int segundo = cal1.get(Calendar.SECOND);
 
