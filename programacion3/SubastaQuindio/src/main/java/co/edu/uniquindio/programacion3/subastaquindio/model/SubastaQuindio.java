@@ -10,6 +10,7 @@ public class SubastaQuindio implements ISubastaQuindioService, Serializable {
 
     private static final long serialVersionUID = 1L;
     private ArrayList<Producto> listaProductos = new ArrayList<>();
+    private ArrayList<Usuario> listaUsuarios = new ArrayList<>();
 
     public SubastaQuindio() {
 
@@ -19,8 +20,16 @@ public class SubastaQuindio implements ISubastaQuindioService, Serializable {
         return listaProductos;
     }
 
-    public void setListaProductos(ArrayList<Producto> listaClientes) {
-        this.listaProductos = listaClientes;
+    public void setListaProductos(ArrayList<Producto> listaProductos) {
+        this.listaProductos = listaProductos;
+    }
+
+    public ArrayList<Usuario> getListaUsuarios() {
+        return listaUsuarios;
+    }
+
+    public void setListaUsuarios(ArrayList<Usuario> listaUsuarios) {
+        this.listaUsuarios = listaUsuarios;
     }
 
 
