@@ -44,3 +44,17 @@ oct. 05, 2023 1:10:36 P. M. co.edu.uniquindio.programacion3.subastaquindio.util
 INFORMACIÓN: inicioSesión,Inicio de sesión,2023-10-05
 oct. 05, 2023 1:12:04 P. M. co.edu.uniquindio.programacion3.subastaquindio.utils.ArchivoUtil guardarRegistroLog
 INFORMACIÓN: inicioSesión,Inicio de sesión,2023-10-05
+oct. 07, 2023 11:49:18 A. M. co.edu.uniquindio.programacion3.subastaquindio.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioSesión,Inicio de sesión,2023-10-07
+oct. 07, 2023 1:35:19 P. M. co.edu.uniquindio.programacion3.subastaquindio.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioSesión,Inicio de sesión,2023-10-07
+oct. 07, 2023 1:35:57 P. M. co.edu.uniquindio.programacion3.subastaquindio.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioSesión,Inicio de sesión,2023-10-07
+oct. 07, 2023 1:46:48 P. M. co.edu.uniquindio.programacion3.subastaquindio.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioSesión,Inicio de sesión,2023-10-07
+oct. 07, 2023 1:47:19 P. M. co.edu.uniquindio.programacion3.subastaquindio.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioSesión,Inicio de sesión,2023-10-07
+oct. 07, 2023 1:57:23 P. M. co.edu.uniquindio.programacion3.subastaquindio.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioSesión,Inicio de sesión,2023-10-07
+oct. 07, 2023 1:57:30 P. M. co.edu.uniquindio.programacion3.subastaquindio.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: Inicio Sesión,Inicio de sesión, usuario:Matias,2023-10-07

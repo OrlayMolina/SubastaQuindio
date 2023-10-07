@@ -19,6 +19,8 @@ public interface ISubastaQuindioService {
 
     boolean verificarProductoExistente(String codigoUnico) throws ProductoException;
 
+    boolean usuarioExiste(String nombreUsuario, String password);
+
     Producto obtenerProducto(String cedula);
 
     ArrayList<Producto> obtenerProductos();

@@ -1,9 +1,6 @@
 package co.edu.uniquindio.programacion3.subastaquindio.utils;
 
-import co.edu.uniquindio.programacion3.subastaquindio.model.Comprador;
-import co.edu.uniquindio.programacion3.subastaquindio.model.Producto;
-import co.edu.uniquindio.programacion3.subastaquindio.model.SubastaQuindio;
-import co.edu.uniquindio.programacion3.subastaquindio.model.Usuario;
+import co.edu.uniquindio.programacion3.subastaquindio.model.*;
 
 public class SubastaUtils {
 
@@ -27,8 +24,29 @@ public class SubastaUtils {
         usuario.setContrasenia("2019");
         subasta.getListaUsuarios().add(usuario);
 
+        Usuario usuario2 = new Usuario();
+        usuario2.setUsuario("Jorge");
+        usuario2.setContrasenia("2019");
+        subasta.getListaUsuarios().add(usuario2);
+
         Comprador comprador = new Comprador();
         comprador.setNombre("Matias");
+        comprador.setApellido("Rodriguez");
+        comprador.setCedula("1462653");
+        comprador.setTelefono("310787916");
+        comprador.setDireccion("mza 2 # 24");
+        comprador.setCorreo("matias@gmail.com");
+        comprador.setFechaNacimiento("30-05-1990");
+
+        Anunciante anunciante = new Anunciante();
+        anunciante.setNombre("Jorge");
+        anunciante.setApellido("Molina");
+        anunciante.setCedula("86266656");
+        anunciante.setTelefono("314651963");
+        anunciante.setDireccion("mza 2 # 36");
+        anunciante.setCorreo("jorge@gmail.com");
+        anunciante.setFechaNacimiento("16-05-1989");
+
 
         return subasta;
     }

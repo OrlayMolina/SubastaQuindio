@@ -14,4 +14,6 @@ public interface IModelFactoryService {
     boolean eliminarProducto(String codigoUnico);
 
     boolean actualizarProducto(String cedulaActual, ProductoDTO productoDto);
+
+    boolean inicioSesion(String usuario, String password) throws Exception;
 }
