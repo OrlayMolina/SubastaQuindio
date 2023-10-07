@@ -1,2 +1,6 @@
 oct 07, 2023 12:28:21 P. M. co.edu.uniquindio.programacion3.subastaquindio.utils.ArchivoUtil guardarRegistroLog
 INFO: inicioSesión,Inicio de sesión,2023-10-07
+oct 07, 2023 2:47:41 P. M. co.edu.uniquindio.programacion3.subastaquindio.utils.ArchivoUtil guardarRegistroLog
+INFO: inicioSesión,Inicio de sesión,2023-10-07
+oct 07, 2023 2:48:36 P. M. co.edu.uniquindio.programacion3.subastaquindio.utils.ArchivoUtil guardarRegistroLog
+INFO: Inicio Sesión,Inicio de sesión, usuario: Matias,2023-10-07
