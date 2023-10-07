@@ -3,12 +3,14 @@ package co.edu.uniquindio.programacion3.subastaquindio.model;
 import co.edu.uniquindio.programacion3.subastaquindio.exceptions.ProductoException;
 import co.edu.uniquindio.programacion3.subastaquindio.model.service.ISubastaQuindioService;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class SubastaQuindio implements ISubastaQuindioService {
+public class SubastaQuindio implements ISubastaQuindioService, Serializable {
 
     private static final long serialVersionUID = 1L;
     private ArrayList<Producto> listaProductos = new ArrayList<>();
+    private ArrayList<Usuario> listaUsuarios = new ArrayList<>();
 
     public SubastaQuindio() {
 
@@ -18,8 +20,16 @@ public class SubastaQuindio implements ISubastaQuindioService {
         return listaProductos;
     }
 
-    public void setListaProductos(ArrayList<Producto> listaClientes) {
-        this.listaProductos = listaClientes;
+    public void setListaProductos(ArrayList<Producto> listaProductos) {
+        this.listaProductos = listaProductos;
+    }
+
+    public ArrayList<Usuario> getListaUsuarios() {
+        return listaUsuarios;
+    }
+
+    public void setListaUsuarios(ArrayList<Usuario> listaUsuarios) {
+        this.listaUsuarios = listaUsuarios;
     }
 
 
@@ -121,5 +131,6 @@ public class SubastaQuindio implements ISubastaQuindioService {
         // TODO Auto-generated method stub
         return getListaProductos();
     }
+
 
 }
