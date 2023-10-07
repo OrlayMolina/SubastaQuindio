@@ -1,0 +1,2 @@
+oct 07, 2023 12:28:21 P. M. co.edu.uniquindio.programacion3.subastaquindio.utils.ArchivoUtil guardarRegistroLog
+INFO: inicioSesión,Inicio de sesión,2023-10-07
