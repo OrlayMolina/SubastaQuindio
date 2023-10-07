@@ -33,6 +33,10 @@ public class SubastaQuindio implements ISubastaQuindioService, Serializable {
     }
 
 
+    public boolean inicioSesion(String usuario, String password){
+        boolean encontrado = usuarioExiste(usuario, password);
+        return encontrado;
+    }
     @Override
     public Producto crearProducto(String codigoUnico, String nombreProducto, String descripcion, String tipoProducto,
                                   String foto, String nombreAnunciante, String fechaPublicacion, String fechaFinPublicacion,
@@ -112,6 +116,19 @@ public class SubastaQuindio implements ISubastaQuindioService, Serializable {
             }
         }
         return productoEncontrado;
+    }
+
+    @Override
+    public boolean usuarioExiste(String nombreUsuario, String password){
+        boolean usuarioExiste = false;
+        for(Usuario usuario : getListaUsuarios()){
+            if(usuario.getUsuario().equalsIgnoreCase(nombreUsuario) &&
+                    usuario.getContrasenia().equalsIgnoreCase(password)){
+                usuarioExiste = true;
+                break;
+            }
+        }
+        return usuarioExiste;
     }
 
     @Override

@@ -16,7 +16,6 @@ import java.util.List;
 public class ModelFactoryController implements IModelFactoryService {
 
     SubastaQuindio subasta;
-    Producto producto;
     SubastaMapper mapper = SubastaMapper.INSTANCE;
 
     //------------------------------  Singleton ------------------------------------------------
@@ -134,6 +133,11 @@ public class ModelFactoryController implements IModelFactoryService {
             e.printStackTrace();
             return false;
         }
+    }
+
+    @Override
+    public boolean inicioSesion(String usuario, String password) {
+        return getSubasta().inicioSesion(usuario, password);
     }
 
     private void cargarResourceXML() {
