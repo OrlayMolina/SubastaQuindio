@@ -213,6 +213,7 @@ public class ProductoViewController {
                     registrarAcciones("Producto actualizado",1, "Actualizar producto");
                 }else{
                     mostrarMensaje("Notificación producto", "Producto no actualizado", "El producto no se ha actualizado con éxito", Alert.AlertType.INFORMATION);
+                    registrarAcciones("Producto no actualizado",1, "Actualizar producto");
                 }
             }else{
                 mostrarMensaje("Notificación producto", "Producto no creado", "Los datos ingresados son invalidos", Alert.AlertType.ERROR);
