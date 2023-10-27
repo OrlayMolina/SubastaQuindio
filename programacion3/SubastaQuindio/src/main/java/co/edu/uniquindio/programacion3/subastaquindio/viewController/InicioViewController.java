@@ -41,6 +41,7 @@ public class InicioViewController {
             cerrarVentana(btnIniciarSesion);
             app.cargarTabuladores();
         }else{
+            registrarAcciones("Inicio de sesión incorrecto",1, "Inicio sesión");
             mostrarMensaje("Notificación inicio sesión", "Inicio sesión incorrecto", "usuario o contraseña incorrecta", Alert.AlertType.ERROR);
         }
 
