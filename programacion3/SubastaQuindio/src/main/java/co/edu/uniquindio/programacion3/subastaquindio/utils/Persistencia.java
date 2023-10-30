@@ -208,24 +208,9 @@ public class Persistencia {
         }
     }
 
-    public static void guardarRespaldoSubastaXML(Object objeto) {
+    public static void copiarArchivoRespaldoXml(){
+        ArchivoUtil.copiarArchivoRespaldo(RUTA_ARCHIVO_MODELO_SUBASTA_XML,RUTA_ARCHIVO_RESPALDO_XML);
 
-        try {
-            ArchivoUtil.salvarRecursoSerializadoXML(RUTA_ARCHIVO_RESPALDO_XML, objeto);
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-    }
-
-    public static void guardarRespaldoProductoXML(Object objeto) {
-
-        try {
-            ArchivoUtil.salvarRecursoSerializadoXML(RUTA_ARCHIVO_PRODUCTOS_RESPALDO_XML, objeto);
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
     }
 
 }

@@ -76,23 +76,23 @@ public class SubastaQuindio implements ISubastaQuindioService, Serializable {
     }
 
     @Override
-        public boolean actualizarProducto(String codigoUnico, Producto producto) throws ProductoException {
-            Producto productoActual = obtenerProducto(codigoUnico);
-            if(productoActual == null)
-                throw new ProductoException("El producto a actualizar no existe");
-            else{
-                productoActual.setCodigoUnico(producto.getCodigoUnico());
-                productoActual.setNombreProducto(producto.getNombreProducto());
-                productoActual.setDescripcion(producto.getDescripcion());
-                productoActual.setTipoProducto(producto.getTipoProducto());
-                productoActual.setPhoto(producto.getPhoto());
-                productoActual.setNombreAnunciante(producto.getNombreAnunciante());
-                productoActual.setFechaPublicacion(producto.getFechaPublicacion());
-                productoActual.setFechaFinPublicacion(producto.getFechaFinPublicacion());
-                productoActual.setValorInicial(producto.getValorInicial());
-                return true;
-            }
+    public boolean actualizarProducto(String codigoUnico, Producto producto) throws ProductoException {
+        Producto productoActual = obtenerProducto(codigoUnico);
+        if(productoActual == null)
+            throw new ProductoException("El producto a actualizar no existe");
+        else{
+            productoActual.setCodigoUnico(producto.getCodigoUnico());
+            productoActual.setNombreProducto(producto.getNombreProducto());
+            productoActual.setDescripcion(producto.getDescripcion());
+            productoActual.setTipoProducto(producto.getTipoProducto());
+            productoActual.setPhoto(producto.getPhoto());
+            productoActual.setNombreAnunciante(producto.getNombreAnunciante());
+            productoActual.setFechaPublicacion(producto.getFechaPublicacion());
+            productoActual.setFechaFinPublicacion(producto.getFechaFinPublicacion());
+            productoActual.setValorInicial(producto.getValorInicial());
+            return true;
         }
+    }
 
     public void agregarProducto(Producto nuevoProducto) throws ProductoException{
         getListaProductos().add(nuevoProducto);

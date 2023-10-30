@@ -176,7 +176,7 @@ public class ProductoViewController {
     private void eliminarProducto() {
         boolean productoEliminado = false;
         if(productoSeleccionado != null){
-            if(mostrarMensajeConfirmacion("¿Estas seguro de elmininar al empleado?")){
+            if(mostrarMensajeConfirmacion("¿Estas seguro de elmininar al producto?")){
                 productoEliminado = productoControllerService.eliminarProducto(productoSeleccionado.codigoUnico());
                 if(productoEliminado == true){
                     listaProductosDto.remove(productoSeleccionado);
