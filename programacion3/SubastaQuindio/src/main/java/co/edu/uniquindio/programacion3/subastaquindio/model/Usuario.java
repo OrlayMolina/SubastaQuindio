@@ -1,23 +1,28 @@
 package co.edu.uniquindio.programacion3.subastaquindio.model;
 
 
+import co.edu.uniquindio.programacion3.subastaquindio.enumm.Rol;
+
 import java.io.Serializable;
 
 public class Usuario implements Serializable {
 
     //atributos
     private static final long serialVersionUID = 1L;
+
+    private Rol rol;
     private String usuario;
     private String contrasenia;
 
 
-    public Usuario(String usuario, String contrasenia) {
+    public Usuario(Rol rol, String usuario, String contrasenia) {
         super();
+        this.rol = rol;
         this.usuario = usuario;
         this.contrasenia = contrasenia;
     }
 
-    // contsructir sin parametros
+    // constructor sin parametros
     public Usuario() {
         super();
 
@@ -30,6 +35,15 @@ public class Usuario implements Serializable {
     public void setUsuario(String usuario) {
         this.usuario = usuario;
     }
+
+    public Rol getRol() {
+        return rol;
+    }
+
+    public void setRol(Rol rol) {
+        this.rol = rol;
+    }
+
     public String getContrasenia() {
         return contrasenia;
     }
@@ -40,7 +54,7 @@ public class Usuario implements Serializable {
 
     @Override
     public String toString() {
-        return "Usuario [usuario=" + usuario + ", contrasenia=" + contrasenia + "]";
+        return usuario + " -- " + rol;
     }
 
 

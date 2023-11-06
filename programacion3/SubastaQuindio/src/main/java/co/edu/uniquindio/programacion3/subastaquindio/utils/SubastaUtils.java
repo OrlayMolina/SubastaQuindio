@@ -1,5 +1,6 @@
 package co.edu.uniquindio.programacion3.subastaquindio.utils;
 
+import co.edu.uniquindio.programacion3.subastaquindio.enumm.Rol;
 import co.edu.uniquindio.programacion3.subastaquindio.model.*;
 
 public class SubastaUtils {
@@ -20,11 +21,13 @@ public class SubastaUtils {
         subasta.getListaProductos().add(producto);
 
         Usuario usuario = new Usuario();
+        usuario.setRol(Rol.Anunciante);
         usuario.setUsuario("Matias");
         usuario.setContrasenia("2019");
         subasta.getListaUsuarios().add(usuario);
 
         Usuario usuario2 = new Usuario();
+        usuario2.setRol(Rol.Comprador);
         usuario2.setUsuario("Jorge");
         usuario2.setContrasenia("2019");
         subasta.getListaUsuarios().add(usuario2);
