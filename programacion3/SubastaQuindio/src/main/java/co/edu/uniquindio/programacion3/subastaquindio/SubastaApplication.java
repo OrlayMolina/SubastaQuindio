@@ -13,7 +13,7 @@ public class SubastaApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
         FXMLLoader fxmlLoader = new FXMLLoader(SubastaApplication.class.getResource("InicioView.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 788, 520);
+        Scene scene = new Scene(fxmlLoader.load(), 788, 522);
         stage.setTitle("Subastas Quindío");
         stage.setResizable(false);
         stage.setScene(scene);

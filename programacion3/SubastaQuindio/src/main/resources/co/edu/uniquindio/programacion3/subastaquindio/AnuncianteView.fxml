@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="520.0" prefWidth="788.0" stylesheets="@tema.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.programacion3.subastaquindio.controller.AnuncianteViewController">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ecf1f5" height="223.0" layoutX="5.0" layoutY="12.0" stroke="#b5aeae" strokeType="INSIDE" width="778.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ecf1f5" height="48.0" layoutX="6.0" layoutY="244.0" stroke="#b5aeae" strokeType="INSIDE" width="778.0" />
+      <GridPane layoutX="198.0" layoutY="253.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="50.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="50.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Button fx:id="btnAgregar" mnemonicParsing="false" onAction="#agregarProducto" prefHeight="31.0" prefWidth="100.0" styleClass="primary" text="Agregar" />
+            <Button fx:id="btnActualizar" mnemonicParsing="false" onAction="#actualizarProducto" prefHeight="38.0" prefWidth="100.0" styleClass="primary" text="Actualizar" GridPane.columnIndex="2" />
+            <Button fx:id="btnEliminar" mnemonicParsing="false" onAction="#eliminarProducto" prefHeight="52.0" prefWidth="100.0" styleClass="primary" text="Eliminar" GridPane.columnIndex="4" />
+         </children>
+      </GridPane>
+      <GridPane layoutX="14.0" layoutY="93.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="148.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="56.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="148.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="56.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="145.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="56.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="148.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label text="Dirección:">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <TextField prefHeight="46.0" prefWidth="150.0" promptText="Ingrese el nombre ..." GridPane.rowIndex="2" />
+            <Label text="Correo:" GridPane.columnIndex="2">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label text="Fecha de Nacimiento:" GridPane.columnIndex="4">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <TextField prefHeight="50.0" prefWidth="150.0" promptText="Ingrese el apellido ..." GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <Label text="Usuario Asociado:" GridPane.columnIndex="6">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <DatePicker prefWidth="180.0" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+            <ComboBox prefHeight="58.0" prefWidth="169.0" GridPane.columnIndex="6" GridPane.rowIndex="2" />
+         </children>
+      </GridPane>
+      <GridPane layoutX="13.0" layoutY="18.0">
+         <columnConstraints>
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="148.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="56.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="148.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="56.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="148.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="56.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="148.0" />
+         </columnConstraints>
+         <rowConstraints>
+            <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         </rowConstraints>
+         <children>
+            <Label text="Nombre Anunciante:">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <TextField prefHeight="46.0" prefWidth="150.0" promptText="Ingrese el nombre ..." GridPane.rowIndex="2" />
+            <Label text="Apellido Anunciante:" GridPane.columnIndex="2">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label text="Cédula:" GridPane.columnIndex="4">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <TextField prefHeight="50.0" prefWidth="150.0" promptText="Ingrese el apellido ..." GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <TextField promptText="Ingrese la cédula ..." GridPane.columnIndex="4" GridPane.rowIndex="2" />
+            <TextField GridPane.columnIndex="6" GridPane.rowIndex="2" />
+            <Label text="Teléfono:" GridPane.columnIndex="6">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </GridPane>
+      <TextField layoutX="219.0" layoutY="194.0" prefWidth="348.0" />
+      <Label layoutX="219.0" layoutY="167.0" text="Lista de Productos?">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

@@ -12,7 +12,6 @@ public class Anunciante extends Persona implements Serializable {
     public Anunciante(){
 
     }
-
     public Anunciante(Usuario usuarioAsociado, ArrayList<Producto> listProductos) {
         this.usuarioAsociado = usuarioAsociado;
         this.listProductos = listProductos;
