@@ -4,6 +4,8 @@
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -36,11 +38,11 @@
       <GridPane layoutX="14.0" layoutY="93.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="148.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="56.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="54.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="148.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="56.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="54.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="145.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="56.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="54.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="148.0" />
         </columnConstraints>
         <rowConstraints>
@@ -54,7 +56,7 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <TextField prefHeight="46.0" prefWidth="150.0" promptText="Ingrese el nombre ..." GridPane.rowIndex="2" />
+            <TextField prefHeight="46.0" prefWidth="150.0" promptText="Ingrese la dirección ..." GridPane.rowIndex="2" />
             <Label text="Correo:" GridPane.columnIndex="2">
                <font>
                   <Font size="14.0" />
@@ -65,24 +67,24 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <TextField prefHeight="50.0" prefWidth="150.0" promptText="Ingrese el apellido ..." GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <TextField prefHeight="50.0" prefWidth="150.0" promptText="Ingrese el correo ..." GridPane.columnIndex="2" GridPane.rowIndex="2" />
             <Label text="Usuario Asociado:" GridPane.columnIndex="6">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
             <DatePicker prefWidth="180.0" GridPane.columnIndex="4" GridPane.rowIndex="2" />
-            <ComboBox prefHeight="58.0" prefWidth="169.0" GridPane.columnIndex="6" GridPane.rowIndex="2" />
+            <ComboBox prefHeight="58.0" prefWidth="169.0" promptText="Usuario ..." GridPane.columnIndex="6" GridPane.rowIndex="2" />
          </children>
       </GridPane>
       <GridPane layoutX="13.0" layoutY="18.0">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="148.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="56.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="54.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="148.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="56.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="54.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="148.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="56.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="54.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="148.0" />
          </columnConstraints>
          <rowConstraints>
@@ -109,7 +111,7 @@
             </Label>
             <TextField prefHeight="50.0" prefWidth="150.0" promptText="Ingrese el apellido ..." GridPane.columnIndex="2" GridPane.rowIndex="2" />
             <TextField promptText="Ingrese la cédula ..." GridPane.columnIndex="4" GridPane.rowIndex="2" />
-            <TextField GridPane.columnIndex="6" GridPane.rowIndex="2" />
+            <TextField promptText="Ingrese un teléfono ..." GridPane.columnIndex="6" GridPane.rowIndex="2" />
             <Label text="Teléfono:" GridPane.columnIndex="6">
                <font>
                   <Font size="14.0" />
@@ -123,5 +125,11 @@
             <Font size="14.0" />
          </font>
       </Label>
+      <TableView layoutX="7.0" layoutY="298.0" prefHeight="200.0" prefWidth="778.0">
+        <columns>
+          <TableColumn prefWidth="118.0" text="Nombre" />
+          <TableColumn prefWidth="99.0" text="Apellidos" />
+        </columns>
+      </TableView>
    </children>
 </AnchorPane>

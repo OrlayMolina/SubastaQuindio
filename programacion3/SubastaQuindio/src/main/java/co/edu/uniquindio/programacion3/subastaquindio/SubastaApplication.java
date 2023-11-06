@@ -12,7 +12,7 @@ import java.io.IOException;
 public class SubastaApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(SubastaApplication.class.getResource("InicioView.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(SubastaApplication.class.getResource("AnunciosView.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 788, 522);
         stage.setTitle("Subastas Quindío");
         stage.setResizable(false);
