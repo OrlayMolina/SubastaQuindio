@@ -1,4 +1,4 @@
-package co.edu.uniquindio.programacion3.subastaquindio.controller;
+package co.edu.uniquindio.programacion3.subastaquindio.viewController;
 
 import co.edu.uniquindio.programacion3.subastaquindio.SubastaApplication;
 import javafx.event.ActionEvent;
@@ -8,6 +8,8 @@ import javafx.stage.Stage;
 
 public class AnunciosViewController {
 
+    InicioViewController inicioViewController = new InicioViewController();
+
     SubastaApplication app = new SubastaApplication();
 
     @FXML
@@ -15,8 +17,12 @@ public class AnunciosViewController {
 
     @FXML
     void crearPuja(ActionEvent event) {
-        cerrarVentana(btnCrearPuja);
-        app.cargarVentanaInicio();
+        if(!inicioViewController.sesionActiva()){
+            cerrarVentana(btnCrearPuja);
+            app.cargarVentanaInicio();
+        }else {
+
+        }
     }
 
     public void cerrarVentana(Button btn) {

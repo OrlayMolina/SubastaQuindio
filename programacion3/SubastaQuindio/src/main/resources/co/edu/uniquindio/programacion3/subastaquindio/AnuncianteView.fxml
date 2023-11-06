@@ -14,7 +14,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="520.0" prefWidth="788.0" stylesheets="@tema.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.programacion3.subastaquindio.controller.AnuncianteViewController">
+<AnchorPane prefHeight="520.0" prefWidth="788.0" stylesheets="@tema.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.programacion3.subastaquindio.viewController.AnuncianteViewController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ecf1f5" height="223.0" layoutX="5.0" layoutY="12.0" stroke="#b5aeae" strokeType="INSIDE" width="778.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ecf1f5" height="48.0" layoutX="6.0" layoutY="244.0" stroke="#b5aeae" strokeType="INSIDE" width="778.0" />

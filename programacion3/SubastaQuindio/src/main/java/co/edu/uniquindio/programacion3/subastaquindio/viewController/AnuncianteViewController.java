@@ -1,4 +1,4 @@
-package co.edu.uniquindio.programacion3.subastaquindio.controller;
+package co.edu.uniquindio.programacion3.subastaquindio.viewController;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

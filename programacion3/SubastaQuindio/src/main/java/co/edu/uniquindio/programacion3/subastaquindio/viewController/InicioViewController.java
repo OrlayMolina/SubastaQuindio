@@ -16,6 +16,8 @@ public class InicioViewController {
     InicioController inicioController = new InicioController();
     SubastaApplication app = new SubastaApplication();
 
+    public static boolean sesionActiva = false;
+
     @FXML
     private Button btnIniciarSesion;
 
@@ -38,6 +40,7 @@ public class InicioViewController {
 
         if(permitirIngreso){
             registrarAcciones("Inicio de sesión, usuario: " + usuario,1, "Inicio Sesión");
+            sesionActiva = true;
             cerrarVentana(btnIniciarSesion);
             app.cargarTabuladores();
         }else{
@@ -62,6 +65,10 @@ public class InicioViewController {
         aler.setHeaderText(header);
         aler.setContentText(contenido);
         aler.showAndWait();
+    }
+
+    public boolean sesionActiva(){
+        return sesionActiva;
     }
 
 }
