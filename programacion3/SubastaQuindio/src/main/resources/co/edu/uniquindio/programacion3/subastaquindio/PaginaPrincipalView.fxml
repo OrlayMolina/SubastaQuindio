@@ -33,7 +33,7 @@
                         <Font name="System Bold" size="14.0" />
                      </font>
                   </Label>
-                  <Button fx:id="btnCrearPuja1" layoutX="505.0" layoutY="86.0" mnemonicParsing="false" onAction="#crearPuja" prefHeight="75.0" prefWidth="203.0" styleClass="primary" text="Hacer una Puja">
+                  <Button fx:id="btnCrearPuja" layoutX="505.0" layoutY="86.0" mnemonicParsing="false" onAction="#crearPuja" prefHeight="75.0" prefWidth="203.0" styleClass="primary" text="Hacer una Puja">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -65,7 +65,7 @@
                         <Font size="18.0" />
                      </font>
                   </Hyperlink>
-                  <Button fx:id="btnCrearPuja2" layoutX="505.0" layoutY="280.0" mnemonicParsing="false" onAction="#crearPuja" prefHeight="75.0" prefWidth="203.0" styleClass="primary" text="Hacer una Puja">
+                  <Button fx:id="btnCrearPuja" layoutX="505.0" layoutY="280.0" mnemonicParsing="false" onAction="#crearPuja" prefHeight="75.0" prefWidth="203.0" styleClass="primary" text="Hacer una Puja">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -106,7 +106,7 @@
                         <Image url="@img/carro.jpeg" />
                      </image>
                   </ImageView>
-                  <Button fx:id="btnCrearPuja3" layoutX="505.0" layoutY="479.0" mnemonicParsing="false" onAction="#crearPuja" prefHeight="75.0" prefWidth="203.0" styleClass="primary" text="Hacer una Puja">
+                  <Button fx:id="btnCrearPuja" layoutX="505.0" layoutY="479.0" mnemonicParsing="false" onAction="#crearPuja" prefHeight="75.0" prefWidth="203.0" styleClass="primary" text="Hacer una Puja">
                      <font>
                         <Font size="14.0" />
                      </font>

@@ -15,7 +15,7 @@ import static co.edu.uniquindio.programacion3.subastaquindio.viewController.Inic
 public class SubastaApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(SubastaApplication.class.getResource("AnunciosView.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(SubastaApplication.class.getResource("PaginaPrincipalView.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 788, 522);
         stage.setTitle("Subastas Quindío");
         stage.setResizable(false);

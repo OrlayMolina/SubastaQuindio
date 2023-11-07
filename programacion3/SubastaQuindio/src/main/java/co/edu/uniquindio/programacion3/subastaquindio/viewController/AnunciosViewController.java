@@ -15,11 +15,6 @@ public class AnunciosViewController {
     @FXML
     private Button btnCrearPuja;
 
-    @FXML
-    private Button btnCrearPuja2;
-
-    @FXML
-    private Button btnCrearPuja3;
 
     @FXML
     void crearPuja(ActionEvent event) {
