@@ -10,14 +10,11 @@ public class Usuario implements Serializable {
     //atributos
     private static final long serialVersionUID = 1L;
 
-    private Rol rol;
     private String usuario;
     private String contrasenia;
 
 
-    public Usuario(Rol rol, String usuario, String contrasenia) {
-        super();
-        this.rol = rol;
+    public Usuario(String usuario, String contrasenia) {
         this.usuario = usuario;
         this.contrasenia = contrasenia;
     }
@@ -36,25 +33,11 @@ public class Usuario implements Serializable {
         this.usuario = usuario;
     }
 
-    public Rol getRol() {
-        return rol;
-    }
-
-    public void setRol(Rol rol) {
-        this.rol = rol;
-    }
-
     public String getContrasenia() {
         return contrasenia;
     }
     public void setContrasenia(String contrasenia) {
         this.contrasenia = contrasenia;
-    }
-
-
-    @Override
-    public String toString() {
-        return usuario + " -- " + rol;
     }
 
 

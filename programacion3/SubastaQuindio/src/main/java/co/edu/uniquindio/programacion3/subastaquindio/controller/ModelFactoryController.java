@@ -2,10 +2,13 @@ package co.edu.uniquindio.programacion3.subastaquindio.controller;
 
 import co.edu.uniquindio.programacion3.subastaquindio.controller.service.IModelFactoryService;
 import co.edu.uniquindio.programacion3.subastaquindio.exceptions.ProductoException;
+import co.edu.uniquindio.programacion3.subastaquindio.exceptions.UsuarioException;
 import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.ProductoDto;
+import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.UsuarioDto;
 import co.edu.uniquindio.programacion3.subastaquindio.mapping.mappers.SubastaMapper;
 import co.edu.uniquindio.programacion3.subastaquindio.model.Producto;
 import co.edu.uniquindio.programacion3.subastaquindio.model.SubastaQuindio;
+import co.edu.uniquindio.programacion3.subastaquindio.model.Usuario;
 import co.edu.uniquindio.programacion3.subastaquindio.utils.Persistencia;
 import co.edu.uniquindio.programacion3.subastaquindio.utils.SubastaUtils;
 
@@ -102,6 +105,11 @@ public class ModelFactoryController implements IModelFactoryService {
     }
 
     @Override
+    public List<UsuarioDto> obtenerUsuarios() {
+        return  mapper.getUsuarioDto(subasta.getListaUsuarios());
+    }
+
+    @Override
     public boolean agregarProducto(ProductoDto productoDto) {
         try{
             if(!subasta.verificarProductoExistente(productoDto.codigoUnico())) {
@@ -137,6 +145,47 @@ public class ModelFactoryController implements IModelFactoryService {
             guardarResourceXML(); //Pendiente verificar si este método es adecuado
             return true;
         } catch (ProductoException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public boolean agregarUsuario(UsuarioDto usuarioDto) {
+        try{
+            if(!subasta.verificarUsuarioExistente(usuarioDto.usuario())) {
+                Usuario usuario = mapper.usuarioDtoToUsuario(usuarioDto);
+                getSubasta().agregarUsuario(usuario);
+                guardarResourceXML();
+            }
+            return true;
+        }catch (UsuarioException e){
+            e.getMessage();
+            return false;
+        }
+    }
+
+    @Override
+    public boolean eliminarUsuario(String nombreUsuario) {
+        boolean flagExiste = false;
+        try {
+            flagExiste = getSubasta().eliminarUsuario(nombreUsuario);
+            guardarResourceXML(); //Pendiente verificar si este método es adecuado
+        } catch (UsuarioException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return flagExiste;
+    }
+
+    @Override
+    public boolean actualizarUsuario(String nombreUsuario, UsuarioDto usuarioDto) {
+        try {
+            Usuario usuario = mapper.usuarioDtoToUsuario(usuarioDto);
+            getSubasta().actualizarUsuario(nombreUsuario, usuario);
+            guardarResourceXML(); //Pendiente verificar si este método es adecuado
+            return true;
+        } catch (UsuarioException e) {
             e.printStackTrace();
             return false;
         }

@@ -14,11 +14,7 @@ public class UsuarioUtil {
         return usuarioDto -> usuarioDto.contrasenia().contains(contrasenia);
     }
 
-    public static Predicate<UsuarioDto> buscarPorRol(String rol){
-        return usuarioDto -> usuarioDto.rol().contains(rol);
-    }
-
-    public static Predicate<UsuarioDto> buscarPorTodo(String usuario, String contrasenia, String rol) {
+    public static Predicate<UsuarioDto> buscarPorTodo(String usuario, String contrasenia) {
 
         Predicate<UsuarioDto> predicado = usuarioDto -> true;
 
@@ -27,9 +23,6 @@ public class UsuarioUtil {
         }
         if( contrasenia != null && !contrasenia.isEmpty() ){
             predicado = predicado.and(buscarPorContrasenia(contrasenia));
-        }
-        if( rol != null && !rol.isEmpty() ){
-            predicado = predicado.and(buscarPorRol(rol));
         }
 
         return predicado;
