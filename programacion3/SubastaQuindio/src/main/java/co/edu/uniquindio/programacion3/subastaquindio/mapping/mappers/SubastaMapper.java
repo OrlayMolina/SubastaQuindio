@@ -1,8 +1,10 @@
 package co.edu.uniquindio.programacion3.subastaquindio.mapping.mappers;
 
 
-import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.ProductoDTO;
+import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.ProductoDto;
+import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.UsuarioDto;
 import co.edu.uniquindio.programacion3.subastaquindio.model.Producto;
+import co.edu.uniquindio.programacion3.subastaquindio.model.Usuario;
 import org.mapstruct.IterableMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Named;
@@ -17,12 +19,20 @@ public interface SubastaMapper {
     SubastaMapper INSTANCE = Mappers.getMapper(SubastaMapper.class);
 
     @Named("productoToProductoDto")
-    ProductoDTO productoToProductoDto(Producto producto);
+    ProductoDto productoToProductoDto(Producto producto);
 
-    Producto productoDtoToProducto(ProductoDTO productoDto);
+    Producto productoDtoToProducto(ProductoDto productoDto);
 
     @IterableMapping(qualifiedByName = "productoToProductoDto")
-    List<ProductoDTO> getProductoDto(List<Producto> listaProductos);
+    List<ProductoDto> getProductoDto(List<Producto> listaProductos);
+
+    @Named("usuarioToUsuarioDto")
+    UsuarioDto usuarioToUsuarioDto(Usuario usuario);
+
+    Usuario usuarioDtoToUsuario(UsuarioDto usuarioDto);
+
+    @IterableMapping(qualifiedByName = "usuarioToUsuarioDto")
+    List<UsuarioDto> getUsuarioDto(List<Usuario> listaUsuarios);
 
 
 }

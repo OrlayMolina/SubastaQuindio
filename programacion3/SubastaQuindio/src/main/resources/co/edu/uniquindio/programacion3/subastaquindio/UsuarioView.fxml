@@ -76,7 +76,7 @@
             <Button fx:id="btnLimpiarCampos" mnemonicParsing="false" onAction="#limpiarBusqueda" prefHeight="32.0" prefWidth="145.0" styleClass="primary" text="Limpiar Campos" GridPane.columnIndex="8" />
          </children>
       </GridPane>
-      <TableView layoutX="6.0" layoutY="168.0" prefHeight="332.0" prefWidth="769.0">
+      <TableView fx:id="tableUsuarios" layoutX="6.0" layoutY="168.0" prefHeight="332.0" prefWidth="769.0">
         <columns>
           <TableColumn fx:id="colUsuario" prefWidth="246.0" text="Nombre de Usuario" />
           <TableColumn fx:id="colContrasenia" prefWidth="269.0" text="Contraseña del Usuario" />

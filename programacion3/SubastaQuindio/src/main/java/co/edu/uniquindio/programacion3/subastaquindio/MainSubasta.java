@@ -1,7 +1,7 @@
 package co.edu.uniquindio.programacion3.subastaquindio;
 
 import co.edu.uniquindio.programacion3.subastaquindio.controller.ModelFactoryController;
-import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.ProductoDTO;
+import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.ProductoDto;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ public class MainSubasta {
 
         ModelFactoryController modelFactoryController = ModelFactoryController.getInstance();
 
-        ProductoDTO productoDto = new ProductoDTO(
+        ProductoDto productoDto = new ProductoDto(
                 "1",
                 "Renault Logan",
                 "Carro nuevo",
@@ -29,7 +29,7 @@ public class MainSubasta {
             System.out.println("Ya existe");
         }
 
-        List<ProductoDTO> empleadoDtoList = modelFactoryController.obtenerProductos();
+        List<ProductoDto> empleadoDtoList = modelFactoryController.obtenerProductos();
         empleadoDtoList.forEach(System.out::println);
     }
 
