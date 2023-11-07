@@ -18,6 +18,8 @@ public class InicioViewController {
 
     public static boolean sesionActiva = false;
 
+    public static String usuarioLogeado = "";
+
     @FXML
     private Button btnIniciarSesion;
 
@@ -41,6 +43,7 @@ public class InicioViewController {
         if(permitirIngreso){
             registrarAcciones("Inicio de sesión, usuario: " + usuario,1, "Inicio Sesión");
             sesionActiva = true;
+            usuarioLogeado = usuario;
             cerrarVentana(btnIniciarSesion);
             app.cargarTabuladores();
         }else{

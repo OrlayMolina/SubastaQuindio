@@ -16,12 +16,24 @@ public class AnunciosViewController {
     private Button btnCrearPuja;
 
     @FXML
+    private Button btnCrearPuja2;
+
+    @FXML
+    private Button btnCrearPuja3;
+
+    @FXML
     void crearPuja(ActionEvent event) {
         if(!inicioViewController.sesionActiva()){
             cerrarVentana(btnCrearPuja);
             app.cargarVentanaInicio();
-        }else {
+        }
+    }
 
+    @FXML
+    void irAPujas(ActionEvent event) {
+        if(!inicioViewController.sesionActiva()){
+            cerrarVentana(btnCrearPuja);
+            app.cargarVentanaInicio();
         }
     }
 

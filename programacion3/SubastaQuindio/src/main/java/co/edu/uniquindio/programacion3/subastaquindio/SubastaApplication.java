@@ -8,6 +8,9 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Objects;
+
+import static co.edu.uniquindio.programacion3.subastaquindio.viewController.InicioViewController.usuarioLogeado;
 
 public class SubastaApplication extends Application {
     @Override
@@ -48,7 +51,7 @@ public class SubastaApplication extends Application {
             newStage.centerOnScreen();
             Image iconImage = new Image("file:///resources/co/edu/uniquindio/programacion3/subastaquindio/img/logo.PNG");
             newStage.getIcons().add(iconImage);
-            newStage.setTitle("Subastas Quindío | Anunciantes");
+            newStage.setTitle("Subastas Quindío | usuario: " + usuarioLogeado );
             newStage.setResizable(false);
             newStage.setScene(scene);
             newStage.show();
