@@ -192,3 +192,7 @@ nov. 07, 2023 9:53:12 A. M. co.edu.uniquindio.programacion3.subastaquindio.util
 INFORMACIÓN: inicioSesión,Inicio de sesión,2023-11-07
 nov. 07, 2023 9:53:23 A. M. co.edu.uniquindio.programacion3.subastaquindio.utils.ArchivoUtil guardarRegistroLog
 INFORMACIÓN: Inicio Sesión,Inicio de sesión, usuario: jorge,2023-11-07
+nov. 07, 2023 10:17:41 A. M. co.edu.uniquindio.programacion3.subastaquindio.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: Creación de un usuario, acción realizada por ,Usuario creado,2023-11-07
+nov. 07, 2023 10:17:59 A. M. co.edu.uniquindio.programacion3.subastaquindio.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: Estudiante eliminado, acción realizada por ,Estudiante eliminado,2023-11-07

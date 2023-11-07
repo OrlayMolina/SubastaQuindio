@@ -137,14 +137,14 @@ public class UsuarioViewController {
                     usuarioSeleccionado = null;
                     tableUsuarios.getSelectionModel().clearSelection();
                     limpiarCamposUsuarios();
-                    registrarAcciones("Estudiante eliminado",1, "Estudiante eliminado, acción realizada por ");
-                    mostrarMensaje("Notificación estudiante", "Estudiante eliminado", "El estudiante se ha eliminado con éxito.", Alert.AlertType.INFORMATION);
+                    registrarAcciones("Usuario eliminado",1, "Usuario eliminado, acción realizada por ");
+                    mostrarMensaje("Notificación usuario", "Usuario eliminado", "El usuario se ha eliminado con éxito.", Alert.AlertType.INFORMATION);
                 }else{
-                    mostrarMensaje("Notificación estudiante", "Estudiante no eliminado", "El estudiante no se puede eliminar", Alert.AlertType.ERROR);
+                    mostrarMensaje("Notificación usuario", "Usuario no eliminado", "El usuario no se puede eliminar", Alert.AlertType.ERROR);
                 }
             }
         }else{
-            mostrarMensaje("Notificación estudiante", "Estudiante no seleccionado", "Seleccionado un estudiante de la lista", Alert.AlertType.WARNING);
+            mostrarMensaje("Notificación usuario", "Estudiante no seleccionado", "Seleccionado un usuario de la lista", Alert.AlertType.WARNING);
         }
     }
 
