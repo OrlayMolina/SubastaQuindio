@@ -7,14 +7,12 @@ public class Anunciante extends Persona implements Serializable {
 
     private static final long serialVersionUID = 1L;
     Usuario usuarioAsociado;
-    ArrayList<Producto> listProductos = new ArrayList<Producto>();
 
     public Anunciante(){
 
     }
-    public Anunciante(Usuario usuarioAsociado, ArrayList<Producto> listProductos) {
+    public Anunciante(Usuario usuarioAsociado) {
         this.usuarioAsociado = usuarioAsociado;
-        this.listProductos = listProductos;
     }
 
     public Usuario getUsuarioAsociado() {
@@ -25,11 +23,4 @@ public class Anunciante extends Persona implements Serializable {
         this.usuarioAsociado = usuarioAsociado;
     }
 
-    public ArrayList<Producto> getListProductos() {
-        return listProductos;
-    }
-
-    public void setListProductos(ArrayList<Producto> listProductos) {
-        this.listProductos = listProductos;
-    }
 }

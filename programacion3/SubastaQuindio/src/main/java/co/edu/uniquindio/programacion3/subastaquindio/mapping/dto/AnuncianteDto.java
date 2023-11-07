@@ -10,5 +10,6 @@ public record AnuncianteDto(
         String direccion,
         String correo,
         String fechaNacimiento,
-        String rol) {
+        String rol,
+        String usuarioAsociado) {
 }

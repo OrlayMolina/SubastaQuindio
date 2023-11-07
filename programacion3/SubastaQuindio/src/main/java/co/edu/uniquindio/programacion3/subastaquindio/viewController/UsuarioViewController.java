@@ -20,7 +20,6 @@ public class UsuarioViewController {
     UsuarioController usuarioControllerService;
     SubastaQuindio subastaQuindio;
     ObservableList<UsuarioDto> listaUsuarios = FXCollections.observableArrayList();
-    ObservableList<String> listaRoles = FXCollections.observableArrayList();
     UsuarioDto usuarioSeleccionado;
 
     @FXML
