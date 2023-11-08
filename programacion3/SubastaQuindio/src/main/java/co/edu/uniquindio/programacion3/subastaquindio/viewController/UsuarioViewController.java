@@ -15,11 +15,14 @@ import javafx.scene.control.*;
 import java.util.Optional;
 import java.util.function.Predicate;
 
+import static co.edu.uniquindio.programacion3.subastaquindio.viewController.InicioViewController.usuarioLogeado;
+
 public class UsuarioViewController {
 
     UsuarioController usuarioControllerService;
     SubastaQuindio subastaQuindio;
     ObservableList<UsuarioDto> listaUsuarios = FXCollections.observableArrayList();
+    ObservableList<String> listaRoles = FXCollections.observableArrayList();
     UsuarioDto usuarioSeleccionado;
 
     @FXML
@@ -44,6 +47,12 @@ public class UsuarioViewController {
     private TableColumn<UsuarioDto, String> colUsuario;
 
     @FXML
+    private TableColumn<UsuarioDto, String> colRol;
+
+    @FXML
+    private ComboBox<String> cmbRol;
+
+    @FXML
     private TableView<UsuarioDto> tableUsuarios;
 
     @FXML
@@ -66,7 +75,8 @@ public class UsuarioViewController {
     void busquedaUsuario(ActionEvent event) {
         String usuario = txfUsuario.getText();
         String contrasenia = pwdContrasenia.getText();
-        buscarUsuario(usuario, contrasenia);
+        String rol = cmbRol.getValue();
+        buscarUsuario(usuario, contrasenia, rol);
     }
 
     @FXML
@@ -89,6 +99,7 @@ public class UsuarioViewController {
     private void initView() {
         initDataBinding();
         obtenerUsuarios();
+        mostrarRoles();
         tableUsuarios.getItems().clear();
         tableUsuarios.setItems(listaUsuarios);
         listenerSelection();
@@ -97,6 +108,7 @@ public class UsuarioViewController {
     private void initDataBinding() {
         colUsuario.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().usuario()));
         colContrasenia.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().contrasenia()));
+        colRol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().rol()));
     }
 
     private void listenerSelection() {
@@ -104,6 +116,12 @@ public class UsuarioViewController {
             usuarioSeleccionado = newSelection;
             mostrarInformacionUsuario(usuarioSeleccionado);
         });
+    }
+
+    public void mostrarRoles(){
+        listaRoles.add(String.valueOf(Rol.Anunciante));
+        listaRoles.add(String.valueOf(Rol.Comprador));
+        cmbRol.setItems(listaRoles);
     }
 
     private void crearUsuario() {
@@ -114,7 +132,7 @@ public class UsuarioViewController {
             if(usuarioControllerService.agregarUsuario(usuarioDto)){
                 listaUsuarios.add(usuarioDto);
                 mostrarMensaje("Notificación usuario", "Usuario creado", "El usuario se ha creado con éxito", Alert.AlertType.INFORMATION);
-                registrarAcciones("Usuario creado",1, "Creación de un usuario, acción realizada por " );
+                registrarAcciones("Usuario creado",1, "Creación de un usuario, acción realizada por "  + usuarioLogeado);
                 limpiarCamposUsuarios();
 
             }else{
@@ -136,7 +154,7 @@ public class UsuarioViewController {
                     usuarioSeleccionado = null;
                     tableUsuarios.getSelectionModel().clearSelection();
                     limpiarCamposUsuarios();
-                    registrarAcciones("Usuario eliminado",1, "Usuario eliminado, acción realizada por ");
+                    registrarAcciones("Usuario eliminado",1, "Usuario eliminado, acción realizada por " + usuarioLogeado);
                     mostrarMensaje("Notificación usuario", "Usuario eliminado", "El usuario se ha eliminado con éxito.", Alert.AlertType.INFORMATION);
                 }else{
                     mostrarMensaje("Notificación usuario", "Usuario no eliminado", "El usuario no se puede eliminar", Alert.AlertType.ERROR);
@@ -163,7 +181,7 @@ public class UsuarioViewController {
                     tableUsuarios.refresh();
                     mostrarMensaje("Notificación usuario", "Usuario actualizado", "El usuario se ha actualizado con éxito.", Alert.AlertType.INFORMATION);
                     limpiarCamposUsuarios();
-                    registrarAcciones("Usuario actualizado",1, "Usuario actualizado, acción realizada por ");
+                    registrarAcciones("Usuario actualizado",1, "Usuario actualizado, acción realizada por " + usuarioLogeado);
                 }else{
                     mostrarMensaje("Notificación usuario", "Usuario no actualizado", "El usuario no se ha actualizado con éxito", Alert.AlertType.INFORMATION);
                     registrarAcciones("Usuario no actualizado",1, "Actualizar usuario");
@@ -175,9 +193,9 @@ public class UsuarioViewController {
         }
     }
 
-    private void buscarUsuario(String usuario, String contrasenia) {
+    private void buscarUsuario(String usuario, String contrasenia, String rol) {
 
-        Predicate<UsuarioDto> predicado = UsuarioUtil.buscarPorTodo(usuario, contrasenia);
+        Predicate<UsuarioDto> predicado = UsuarioUtil.buscarPorTodo(usuario, contrasenia, rol);
         ObservableList<UsuarioDto> usuariosFiltrados = listaUsuarios.filtered(predicado);
         tableUsuarios.setItems(usuariosFiltrados);
     }
@@ -197,13 +215,15 @@ public class UsuarioViewController {
         if(usuarioSeleccionado != null){
             txfUsuario.setText(usuarioSeleccionado.usuario());
             pwdContrasenia.setText(usuarioSeleccionado.contrasenia());
+            cmbRol.setValue(usuarioSeleccionado.rol());
         }
     }
 
     private UsuarioDto construirUsuarioDto() {
         return new UsuarioDto(
                 txfUsuario.getText(),
-                pwdContrasenia.getText()
+                pwdContrasenia.getText(),
+                cmbRol.getValue()
 
         );
     }
@@ -211,6 +231,7 @@ public class UsuarioViewController {
     private void limpiarCamposUsuarios() {
         txfUsuario.setText("");
         pwdContrasenia.setText("");
+        cmbRol.setValue(null);// Ojo con el UsuarioUtil
     }
 
     private void registrarAcciones(String mensaje, int nivel, String accion) {
@@ -224,6 +245,8 @@ public class UsuarioViewController {
             mensaje += "El nombre Usuario es invalido \n" ;
         if(usuarioDto.contrasenia() == null || usuarioDto.contrasenia() .equals(""))
             mensaje += "La Contraseña del usuario es invalido \n" ;
+        if(usuarioDto.rol() == null || usuarioDto.rol() .equals(""))
+            mensaje += "El rol del usuario es invalido \n" ;
 
         if(mensaje.equals("")){
             return true;

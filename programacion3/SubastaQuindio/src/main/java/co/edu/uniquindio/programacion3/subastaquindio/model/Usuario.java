@@ -13,18 +13,17 @@ public class Usuario implements Serializable {
     private String usuario;
     private String contrasenia;
 
+    private Rol rol;
 
-    public Usuario(String usuario, String contrasenia) {
+    public Usuario(){
+
+    }
+
+    public Usuario(String usuario, String contrasenia, Rol rol) {
         this.usuario = usuario;
         this.contrasenia = contrasenia;
+        this.rol = rol;
     }
-
-    // constructor sin parametros
-    public Usuario() {
-        super();
-
-    }
-
 
     public String getUsuario() {
         return usuario;
@@ -40,5 +39,11 @@ public class Usuario implements Serializable {
         this.contrasenia = contrasenia;
     }
 
+    public Rol getRol() {
+        return rol;
+    }
 
+    public void setRol(Rol rol) {
+        this.rol = rol;
+    }
 }

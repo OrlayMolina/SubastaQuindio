@@ -13,7 +13,6 @@ public abstract class Persona implements Serializable {
     private String direccion;
     private String correo;
     private String fechaNacimiento;
-    private Rol rol;
 
     public Persona() {
 
@@ -83,11 +82,4 @@ public abstract class Persona implements Serializable {
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    public Rol getRol() {
-        return rol;
-    }
-
-    public void setRol(Rol rol) {
-        this.rol = rol;
-    }
 }

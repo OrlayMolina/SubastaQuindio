@@ -31,7 +31,7 @@ public class AnuncianteUtil {
     }
 
     public static Predicate<AnuncianteDto> buscarPorUsuarioAsociado(String usuarioAsociado){
-        return anuncianteDto -> anuncianteDto.usuarioAsociado().contains(usuarioAsociado);
+        return anuncianteDto -> anuncianteDto.getUsuarioAsociado().usuario().contains(usuarioAsociado);
     }
 
 
@@ -59,7 +59,7 @@ public class AnuncianteUtil {
         if( fechaNacimiento != null && !fechaNacimiento.isEmpty() ){
             predicado = predicado.and(buscarPorFechaNacimiento(fechaNacimiento));
         }
-        if( usuarioAsociado != null && !usuarioAsociado.isEmpty() ){
+        if( usuarioAsociado != null && !usuarioAsociado.isEmpty() && !usuarioAsociado.equals("null")){
             predicado = predicado.and(buscarPorUsuarioAsociado(usuarioAsociado));
         }
 

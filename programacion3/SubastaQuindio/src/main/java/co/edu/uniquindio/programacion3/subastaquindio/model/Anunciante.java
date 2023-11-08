@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public class Anunciante extends Persona implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    String usuarioAsociado;
+    private String usuarioAsociado;
 
     public Anunciante(){
 

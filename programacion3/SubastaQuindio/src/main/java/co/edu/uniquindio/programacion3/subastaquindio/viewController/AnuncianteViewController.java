@@ -1,8 +1,6 @@
 package co.edu.uniquindio.programacion3.subastaquindio.viewController;
 
 import co.edu.uniquindio.programacion3.subastaquindio.controller.AnuncianteController;
-import co.edu.uniquindio.programacion3.subastaquindio.controller.UsuarioController;
-import co.edu.uniquindio.programacion3.subastaquindio.enumm.Rol;
 import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.AnuncianteDto;
 import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.UsuarioDto;
 import co.edu.uniquindio.programacion3.subastaquindio.model.SubastaQuindio;
@@ -14,16 +12,20 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
-import java.time.LocalDate;
 import java.util.Optional;
 import java.util.function.Predicate;
+
+import static co.edu.uniquindio.programacion3.subastaquindio.viewController.InicioViewController.usuarioLogeado;
 
 public class AnuncianteViewController {
 
     AnuncianteController anuncianteControllerService;
     SubastaQuindio subastaQuindio;
+
+    UsuarioDto usuarioDto;
     ObservableList<AnuncianteDto> listaAnunciantes = FXCollections.observableArrayList();
-    ObservableList<String> listaRoles = FXCollections.observableArrayList();
+
+    ObservableList<UsuarioDto> listaUsuarios = FXCollections.observableArrayList();
     AnuncianteDto anuncianteSeleccionado;
 
     @FXML
@@ -42,7 +44,7 @@ public class AnuncianteViewController {
     private Button btnLimpiarCampos;
 
     @FXML
-    private ComboBox<String> cmbUsuario;
+    private ComboBox<UsuarioDto> cmbUsuario;
 
     @FXML
     private TableColumn<AnuncianteDto, String> colApellidos;
@@ -110,7 +112,7 @@ public class AnuncianteViewController {
         String correo = txfCorreo.getText();
         String telefono = txfTelefono.getText();
         String fechaNacimiento = txfFechaNacimiento.getText();
-        String usuarioAsociado = cmbUsuario.getValue();
+        String usuarioAsociado = String.valueOf(cmbUsuario.getValue());
         buscarAnunciante(cedula, nombres, apellidos, correo, telefono, fechaNacimiento, usuarioAsociado);
     }
 
@@ -134,6 +136,8 @@ public class AnuncianteViewController {
     private void initView() {
         initDataBinding();
         obtenerAnunciantes();
+        mostrarUsuarios();
+        getListaUsuarios();
         tableAnunciantes.getItems().clear();
         tableAnunciantes.setItems(listaAnunciantes);
         listenerSelection();
@@ -147,7 +151,7 @@ public class AnuncianteViewController {
         colDireccion.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().direccion()));
         colCorreo.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().correo()));
         colFechaNacimiento.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().fechaNacimiento()));
-        colUsuarioAsociado.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().usuarioAsociado()));
+        colUsuarioAsociado.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getUsuarioAsociado().toString()));
     }
 
     private void listenerSelection() {
@@ -165,7 +169,7 @@ public class AnuncianteViewController {
             if(anuncianteControllerService.agregarAnunciante(anuncianteDto)){
                 listaAnunciantes.add(anuncianteDto);
                 mostrarMensaje("Notificación anunciante", "Anunciante creado", "El anunciante se ha creado con éxito", Alert.AlertType.INFORMATION);
-                registrarAcciones("Anunciante creado",1, "Creación de un anunciante, acción realizada por " );
+                registrarAcciones("Anunciante creado",1, "Creación de un anunciante, acción realizada por "  + usuarioLogeado);
                 limpiarCamposAnunciantes();
 
             }else{
@@ -187,7 +191,7 @@ public class AnuncianteViewController {
                     anuncianteSeleccionado = null;
                     tableAnunciantes.getSelectionModel().clearSelection();
                     limpiarCamposAnunciantes();
-                    registrarAcciones("Anunciante eliminado",1, "Anunciante eliminado, acción realizada por ");
+                    registrarAcciones("Anunciante eliminado",1, "Anunciante eliminado, acción realizada por " + usuarioLogeado);
                     mostrarMensaje("Notificación anunciante", "Anunciante eliminado", "El anunciante se ha eliminado con éxito.", Alert.AlertType.INFORMATION);
                 }else{
                     mostrarMensaje("Notificación anunciante", "Anunciante no eliminado", "El anunciante no se puede eliminar", Alert.AlertType.ERROR);
@@ -214,7 +218,7 @@ public class AnuncianteViewController {
                     tableAnunciantes.refresh();
                     mostrarMensaje("Notificación anunciante", "Anunciante actualizado", "El anunciante se ha actualizado con éxito.", Alert.AlertType.INFORMATION);
                     limpiarCamposAnunciantes();
-                    registrarAcciones("Anunciante actualizado",1, "Anunciante actualizado, acción realizada por ");
+                    registrarAcciones("Anunciante actualizado",1, "Anunciante actualizado, acción realizada por " + usuarioLogeado);
                 }else{
                     mostrarMensaje("Notificación anunciante", "Anunciante no actualizado", "El anunciante no se ha actualizado con éxito", Alert.AlertType.INFORMATION);
                     registrarAcciones("Anunciante no actualizado",1, "Actualizar anunciante");
@@ -241,6 +245,11 @@ public class AnuncianteViewController {
         listenerSelection();
     }
 
+    public void mostrarUsuarios(){
+        listaUsuarios.add(usuarioDto);
+        cmbUsuario.setItems(listaUsuarios);
+    }
+
     private void obtenerAnunciantes() {
         listaAnunciantes.addAll(anuncianteControllerService.obtenerAnunciantes());
     }
@@ -254,23 +263,20 @@ public class AnuncianteViewController {
             txfDireccion.setText(anuncianteSeleccionado.direccion());
             txfCorreo.setText(anuncianteSeleccionado.correo());
             txfFechaNacimiento.setText(anuncianteSeleccionado.fechaNacimiento());
-            cmbUsuario.setValue(anuncianteSeleccionado.usuarioAsociado());
+            cmbUsuario.setValue(anuncianteSeleccionado.getUsuarioAsociado());
         }
     }
 
     private AnuncianteDto construirAnuncianteDto() {
-        return new AnuncianteDto(
-                txfNombreAnunciante.getText(),
-                txfApellidoAnunciante.getText(),
-                txfCedula.getText(),
-                txfTelefono.getText(),
-                txfDireccion.getText(),
-                txfCorreo.getText(),
-                txfFechaNacimiento.getText(),
-                cmbUsuario.getValue(),
-                "Anunciante"
-
-        );
+        String nombre = txfNombreAnunciante.getText();
+        String apellido = txfApellidoAnunciante.getText();
+        String cedula = txfCedula.getText();
+        String telefono = txfTelefono.getText();
+        String direccion = txfDireccion.getText();
+        String correo = txfCorreo.getText();
+        String fechaNacimiento = txfFechaNacimiento.getText();
+        String usuarioAsociado = String.valueOf(cmbUsuario.getValue());
+        return new AnuncianteDto(nombre, apellido, cedula, telefono,direccion, correo, fechaNacimiento, usuarioAsociado);
     }
 
     private void limpiarCamposAnunciantes() {
@@ -282,6 +288,11 @@ public class AnuncianteViewController {
         txfCorreo.setText("");
         txfFechaNacimiento.setText("");
         cmbUsuario.setValue(null);
+    }
+
+    public ObservableList<UsuarioDto> getListaUsuarios() {
+        listaUsuarios.addAll(anuncianteControllerService.obtenerUsuarios());
+        return listaUsuarios;
     }
 
     private void registrarAcciones(String mensaje, int nivel, String accion) {

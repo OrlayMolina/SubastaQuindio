@@ -2,7 +2,6 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -13,7 +12,6 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
-
 
 <AnchorPane prefHeight="473.0" prefWidth="774.0" stylesheets="@tema.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.programacion3.subastaquindio.viewController.CompradorViewController">
    <children>
@@ -35,13 +33,13 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Label text="Nombre Anunciante:">
+            <Label text="Nombre Comprador:">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <TextField prefHeight="46.0" prefWidth="150.0" promptText="Ingrese el nombre ..." GridPane.rowIndex="2" />
-            <Label text="Apellido Anunciante:" GridPane.columnIndex="2">
+            <TextField fx:id="txfNombreComprador" prefHeight="46.0" prefWidth="150.0" promptText="Ingrese el nombre ..." GridPane.rowIndex="2" />
+            <Label text="Apellido Comprador:" GridPane.columnIndex="2">
                <font>
                   <Font size="14.0" />
                </font>
@@ -51,9 +49,9 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <TextField prefHeight="50.0" prefWidth="150.0" promptText="Ingrese el apellido ..." GridPane.columnIndex="2" GridPane.rowIndex="2" />
-            <TextField promptText="Ingrese la cédula ..." GridPane.columnIndex="4" GridPane.rowIndex="2" />
-            <TextField promptText="Ingrese un teléfono ..." GridPane.columnIndex="6" GridPane.rowIndex="2" />
+            <TextField fx:id="txfApellidosComprador" prefHeight="50.0" prefWidth="150.0" promptText="Ingrese el apellido ..." GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <TextField fx:id="txfCedula" promptText="Ingrese la cédula ..." GridPane.columnIndex="4" GridPane.rowIndex="2" />
+            <TextField fx:id="txfTelefono" promptText="Ingrese un teléfono ..." GridPane.columnIndex="6" GridPane.rowIndex="2" />
             <Label text="Teléfono:" GridPane.columnIndex="6">
                <font>
                   <Font size="14.0" />
@@ -82,7 +80,7 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <TextField prefHeight="46.0" prefWidth="150.0" promptText="Ingrese la dirección ..." GridPane.rowIndex="2" />
+            <TextField fx:id="txfDireccion" prefHeight="46.0" prefWidth="150.0" promptText="Ingrese la dirección ..." GridPane.rowIndex="2" />
             <Label text="Correo:" GridPane.columnIndex="2">
                <font>
                   <Font size="14.0" />
@@ -93,14 +91,14 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <TextField prefHeight="50.0" prefWidth="150.0" promptText="Ingrese el correo ..." GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <TextField fx:id="txfCorreo" prefHeight="50.0" prefWidth="150.0" promptText="Ingrese el correo ..." GridPane.columnIndex="2" GridPane.rowIndex="2" />
             <Label text="Usuario Asociado:" GridPane.columnIndex="6">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <DatePicker prefWidth="180.0" GridPane.columnIndex="4" GridPane.rowIndex="2" />
-            <ComboBox prefHeight="58.0" prefWidth="169.0" promptText="Usuario ..." GridPane.columnIndex="6" GridPane.rowIndex="2" />
+            <ComboBox fx:id="cmbUsuario" prefHeight="58.0" prefWidth="169.0" promptText="Usuario ..." GridPane.columnIndex="6" GridPane.rowIndex="2" />
+            <TextField fx:id="txfFechaNacimiento" prefHeight="42.0" prefWidth="145.0" promptText="Ingrese la fecha de nacimiento" GridPane.columnIndex="4" GridPane.rowIndex="2" />
          </children>
       </GridPane>
       <GridPane layoutX="61.0" layoutY="185.0">
@@ -126,11 +124,17 @@
             <Button fx:id="btnLimpiarCampos" mnemonicParsing="false" onAction="#limpiarBusqueda" prefHeight="32.0" prefWidth="145.0" styleClass="primary" text="Limpiar Campos" GridPane.columnIndex="8" />
          </children>
       </GridPane>
-      <TableView fx:id="tableCompradores" layoutX="6.0" layoutY="231.0" prefHeight="234.0" prefWidth="763.0">
-        <columns>
-          <TableColumn fx:id="colNombre" prefWidth="110.0" text="Nombre" />
-          <TableColumn prefWidth="105.0" text="Apellidos" />
-        </columns>
+      <TableView fx:id="tableCompradores" layoutX="5.0" layoutY="232.0" prefHeight="232.0" prefWidth="763.0">
+         <columns>
+            <TableColumn fx:id="colNombres" prefWidth="118.0" text="Nombre" />
+            <TableColumn fx:id="colApellidos" prefWidth="99.0" text="Apellidos" />
+            <TableColumn fx:id="colCedula" prefWidth="75.0" text="Cédula" />
+            <TableColumn fx:id="colTelefono" prefWidth="75.0" text="Teléfono" />
+            <TableColumn fx:id="colDireccion" prefWidth="81.0" text="Dirección" />
+            <TableColumn fx:id="colCorreo" prefWidth="75.0" text="Correo" />
+            <TableColumn fx:id="colFechaNacimiento" prefWidth="126.0" text="Fecha de Nacimiento" />
+            <TableColumn fx:id="colUsuarioAsociado" prefWidth="113.0" text="Usuario Asociado" />
+         </columns>
       </TableView>
    </children>
 </AnchorPane>

@@ -1,8 +1,6 @@
 package co.edu.uniquindio.programacion3.subastaquindio.mapping.dto;
 
-import co.edu.uniquindio.programacion3.subastaquindio.enumm.Rol;
-
-public record AnuncianteDto(
+public record CompradorDto(
         String nombre,
         String apellido,
         String cedula,

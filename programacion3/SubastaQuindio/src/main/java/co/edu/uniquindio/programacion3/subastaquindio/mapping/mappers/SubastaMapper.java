@@ -2,9 +2,11 @@ package co.edu.uniquindio.programacion3.subastaquindio.mapping.mappers;
 
 
 import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.AnuncianteDto;
+import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.CompradorDto;
 import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.ProductoDto;
 import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.UsuarioDto;
 import co.edu.uniquindio.programacion3.subastaquindio.model.Anunciante;
+import co.edu.uniquindio.programacion3.subastaquindio.model.Comprador;
 import co.edu.uniquindio.programacion3.subastaquindio.model.Producto;
 import co.edu.uniquindio.programacion3.subastaquindio.model.Usuario;
 import org.mapstruct.IterableMapping;
@@ -43,6 +45,14 @@ public interface SubastaMapper {
 
     @IterableMapping(qualifiedByName = "anuncianteToAnuncianteDto")
     List<AnuncianteDto> getAnuncianteDto(List<Anunciante> listaAnunciantes);
+
+    @Named("compradorToCompradorDto")
+    CompradorDto compradorToCompradorDto(Comprador comprador);
+
+    Comprador compradorDtoToComprador(CompradorDto compradorDto);
+
+    @IterableMapping(qualifiedByName = "compradorToCompradorDto")
+    List<CompradorDto> getCompradorDto(List<Comprador> listaCompradores);
 
 
 }
