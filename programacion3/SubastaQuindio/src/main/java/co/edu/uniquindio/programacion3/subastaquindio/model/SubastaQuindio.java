@@ -1,6 +1,7 @@
 package co.edu.uniquindio.programacion3.subastaquindio.model;
 
 import co.edu.uniquindio.programacion3.subastaquindio.exceptions.AnuncianteException;
+import co.edu.uniquindio.programacion3.subastaquindio.exceptions.CompradorException;
 import co.edu.uniquindio.programacion3.subastaquindio.exceptions.ProductoException;
 import co.edu.uniquindio.programacion3.subastaquindio.exceptions.UsuarioException;
 import co.edu.uniquindio.programacion3.subastaquindio.model.service.ISubastaQuindioService;
@@ -14,6 +15,7 @@ public class SubastaQuindio implements ISubastaQuindioService, Serializable {
     private ArrayList<Producto> listaProductos = new ArrayList<>();
     private ArrayList<Usuario> listaUsuarios = new ArrayList<>();
     private ArrayList<Anunciante> listaAnunciantes = new ArrayList<>();
+    private ArrayList<Comprador> listaCompradores = new ArrayList<>();
 
     public SubastaQuindio() {
 
@@ -42,6 +44,15 @@ public class SubastaQuindio implements ISubastaQuindioService, Serializable {
     public void setListaAnunciantes(ArrayList<Anunciante> listaAnunciantes) {
         this.listaAnunciantes = listaAnunciantes;
     }
+
+    public ArrayList<Comprador> getListaCompradores() {
+        return listaCompradores;
+    }
+
+    public void setListaCompradores(ArrayList<Comprador> listaCompradores) {
+        this.listaCompradores = listaCompradores;
+    }
+
 
 
     public boolean inicioSesion(String usuario, String password){
@@ -115,6 +126,20 @@ public class SubastaQuindio implements ISubastaQuindioService, Serializable {
     }
 
     @Override
+    public Boolean eliminarComprador(String cedula) throws CompradorException {
+        Comprador comprador = null;
+        boolean flagExiste = false;
+        comprador = obtenerComprador(cedula);
+        if(comprador == null)
+            throw new CompradorException("El comprador a eliminar no existe");
+        else{
+            getListaCompradores().remove(comprador);
+            flagExiste = true;
+        }
+        return flagExiste;
+    }
+
+    @Override
     public boolean actualizarProducto(String codigoUnico, Producto producto) throws ProductoException {
         Producto productoActual = obtenerProducto(codigoUnico);
         if(productoActual == null)
@@ -164,6 +189,24 @@ public class SubastaQuindio implements ISubastaQuindioService, Serializable {
         }
     }
 
+    @Override
+    public boolean actualizarComprador(String cedula, Comprador comprador) throws CompradorException {
+        Comprador compradorActual = obtenerComprador(cedula);
+        if(compradorActual == null)
+            throw new CompradorException("El comprador a actualizar no existe");
+        else{
+            compradorActual.setCedula(comprador.getCedula());
+            compradorActual.setNombre(comprador.getNombre());
+            compradorActual.setApellido(comprador.getApellido());
+            compradorActual.setTelefono(comprador.getTelefono());
+            compradorActual.setCorreo(comprador.getCorreo());
+            compradorActual.setDireccion(comprador.getDireccion());
+            compradorActual.setFechaNacimiento(comprador.getFechaNacimiento());
+            compradorActual.setUsuarioAsociado(comprador.getUsuarioAsociado());
+            return true;
+        }
+    }
+
     public void agregarProducto(Producto nuevoProducto) throws ProductoException{
         getListaProductos().add(nuevoProducto);
     }
@@ -174,6 +217,10 @@ public class SubastaQuindio implements ISubastaQuindioService, Serializable {
 
     public void agregarAnunciante(Anunciante nuevoAnunciante) throws AnuncianteException{
         getListaAnunciantes().add(nuevoAnunciante);
+    }
+
+    public void agregarComprador(Comprador nuevoComprador) throws CompradorException{
+        getListaCompradores().add(nuevoComprador);
     }
 
     @Override
@@ -198,6 +245,15 @@ public class SubastaQuindio implements ISubastaQuindioService, Serializable {
     public boolean verificarAnuncianteExistente(String cedula) throws AnuncianteException {
         if(anuncianteExiste(cedula)){
             throw new AnuncianteException("El anunciante con cédula: "+cedula+" ya existe");
+        }else{
+            return false;
+        }
+    }
+
+    @Override
+    public boolean verificarCompradorExistente(String cedula) throws CompradorException {
+        if(compradorExiste(cedula)){
+            throw new CompradorException("El comprador con cédula: "+cedula+" ya existe");
         }else{
             return false;
         }
@@ -234,6 +290,17 @@ public class SubastaQuindio implements ISubastaQuindioService, Serializable {
             }
         }
         return anuncianteEncontrado;
+    }
+
+    public boolean compradorExiste(String cedula) {
+        boolean compradorEncontrado = false;
+        for (Comprador comprador : getListaCompradores()) {
+            if(comprador.getCedula().equalsIgnoreCase(cedula)){
+                compradorEncontrado = true;
+                break;
+            }
+        }
+        return compradorEncontrado;
     }
 
     @Override
@@ -283,6 +350,18 @@ public class SubastaQuindio implements ISubastaQuindioService, Serializable {
             }
         }
         return anuncianteEncontrado;
+    }
+
+    @Override
+    public Comprador obtenerComprador(String cedula) {
+        Comprador compradorEncontrado = null;
+        for (Comprador comprador : getListaCompradores()) {
+            if(comprador.getCedula().equalsIgnoreCase(cedula)){
+                compradorEncontrado = comprador;
+                break;
+            }
+        }
+        return compradorEncontrado;
     }
 
     @Override

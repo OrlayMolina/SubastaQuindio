@@ -2,16 +2,15 @@ package co.edu.uniquindio.programacion3.subastaquindio.controller;
 
 import co.edu.uniquindio.programacion3.subastaquindio.controller.service.IModelFactoryService;
 import co.edu.uniquindio.programacion3.subastaquindio.exceptions.AnuncianteException;
+import co.edu.uniquindio.programacion3.subastaquindio.exceptions.CompradorException;
 import co.edu.uniquindio.programacion3.subastaquindio.exceptions.ProductoException;
 import co.edu.uniquindio.programacion3.subastaquindio.exceptions.UsuarioException;
 import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.AnuncianteDto;
+import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.CompradorDto;
 import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.ProductoDto;
 import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.UsuarioDto;
 import co.edu.uniquindio.programacion3.subastaquindio.mapping.mappers.SubastaMapper;
-import co.edu.uniquindio.programacion3.subastaquindio.model.Anunciante;
-import co.edu.uniquindio.programacion3.subastaquindio.model.Producto;
-import co.edu.uniquindio.programacion3.subastaquindio.model.SubastaQuindio;
-import co.edu.uniquindio.programacion3.subastaquindio.model.Usuario;
+import co.edu.uniquindio.programacion3.subastaquindio.model.*;
 import co.edu.uniquindio.programacion3.subastaquindio.utils.Persistencia;
 import co.edu.uniquindio.programacion3.subastaquindio.utils.SubastaUtils;
 
@@ -115,6 +114,11 @@ public class ModelFactoryController implements IModelFactoryService {
     @Override
     public List<AnuncianteDto> obtenerAnunciantes() {
         return  mapper.getAnuncianteDto(subasta.getListaAnunciantes());
+    }
+
+    @Override
+    public List<CompradorDto> obtenerCompradores() {
+        return  mapper.getCompradorDto(subasta.getListaCompradores());
     }
 
     @Override
@@ -235,6 +239,47 @@ public class ModelFactoryController implements IModelFactoryService {
             guardarResourceXML(); //Pendiente verificar si este método es adecuado
             return true;
         } catch (AnuncianteException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public boolean agregarComprador(CompradorDto compradorDto) {
+        try{
+            if(!subasta.verificarCompradorExistente(compradorDto.cedula())) {
+                Comprador comprador = mapper.compradorDtoToComprador(compradorDto);
+                getSubasta().agregarComprador(comprador);
+                guardarResourceXML();
+            }
+            return true;
+        }catch (CompradorException e){
+            e.getMessage();
+            return false;
+        }
+    }
+
+    @Override
+    public boolean eliminarComprador(String cedula) {
+        boolean flagExiste = false;
+        try {
+            flagExiste = getSubasta().eliminarComprador(cedula);
+            guardarResourceXML(); //Pendiente verificar si este método es adecuado
+        } catch (CompradorException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return flagExiste;
+    }
+
+    @Override
+    public boolean actualizarComprador(String cedulaActual, CompradorDto compradorDto) {
+        try {
+            Comprador comprador = mapper.compradorDtoToComprador(compradorDto);
+            getSubasta().actualizarComprador(cedulaActual, comprador);
+            guardarResourceXML(); //Pendiente verificar si este método es adecuado
+            return true;
+        } catch (CompradorException e) {
             e.printStackTrace();
             return false;
         }

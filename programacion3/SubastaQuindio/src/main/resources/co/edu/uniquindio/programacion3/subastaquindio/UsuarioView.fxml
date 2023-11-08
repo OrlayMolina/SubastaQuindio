@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TableColumn?>
@@ -13,14 +14,16 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="510.0" prefWidth="780.0" stylesheets="@tema.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.programacion3.subastaquindio.viewController.UsuarioViewController">
+<AnchorPane prefHeight="476.0" prefWidth="774.0" stylesheets="@tema.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.programacion3.subastaquindio.viewController.UsuarioViewController">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ebebeb" height="92.0" layoutX="6.0" layoutY="9.0" stroke="#978f8f" strokeType="INSIDE" width="769.0" />
-      <GridPane layoutX="21.0" layoutY="25.0">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ebebeb" height="92.0" layoutX="6.0" layoutY="9.0" stroke="#978f8f" strokeType="INSIDE" width="761.0" />
+      <GridPane layoutX="15.0" layoutY="25.0">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="250.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="240.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="250.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="180.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="180.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="180.0" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
@@ -40,9 +43,15 @@
             </Label>
             <TextField fx:id="txfUsuario" prefHeight="58.0" prefWidth="180.0" promptText="Ingresar Nombre de Usuario ..." GridPane.rowIndex="2" />
             <PasswordField fx:id="pwdContrasenia" prefHeight="65.0" prefWidth="180.0" promptText="Ingresar Contraseña ..." GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <Label text="Rol de Usuario:" GridPane.columnIndex="4">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <ComboBox fx:id="cmbRol" prefHeight="52.0" prefWidth="180.0" promptText="Roles" GridPane.columnIndex="4" GridPane.rowIndex="2" />
          </children>
       </GridPane>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ecf1f5" height="48.0" layoutX="5.0" layoutY="112.0" stroke="#b5aeae" strokeType="INSIDE" width="769.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ecf1f5" height="48.0" layoutX="5.0" layoutY="112.0" stroke="#b5aeae" strokeType="INSIDE" width="761.0" />
       <GridPane layoutX="51.0" layoutY="121.0">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="88.0" />
@@ -66,10 +75,11 @@
             <Button fx:id="btnLimpiarCampos" mnemonicParsing="false" onAction="#limpiarBusqueda" prefHeight="32.0" prefWidth="145.0" styleClass="primary" text="Limpiar Campos" GridPane.columnIndex="8" />
          </children>
       </GridPane>
-      <TableView fx:id="tableUsuarios" layoutX="6.0" layoutY="168.0" prefHeight="332.0" prefWidth="769.0">
+      <TableView fx:id="tableUsuarios" layoutX="6.0" layoutY="168.0" prefHeight="300.0" prefWidth="761.0">
         <columns>
-          <TableColumn fx:id="colUsuario" prefWidth="442.0" text="Nombre de Usuario" />
-          <TableColumn fx:id="colContrasenia" prefWidth="326.0" text="Contraseña del Usuario" />
+          <TableColumn fx:id="colUsuario" prefWidth="288.0" text="Nombre de Usuario" />
+          <TableColumn fx:id="colContrasenia" maxWidth="400.0" prefWidth="266.0" text="Contraseña del Usuario" />
+            <TableColumn fx:id="colRol" prefWidth="214.0" text="Rol de Usuario" />
         </columns>
       </TableView>
    </children>
