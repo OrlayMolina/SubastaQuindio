@@ -127,11 +127,11 @@ public class UsuarioViewController {
     }
 
     private void eliminarUsuario() {
-        boolean estudianteEliminado = false;
+        boolean usuarioEliminado = false;
         if(usuarioSeleccionado != null){
             if(mostrarMensajeConfirmacion("¿Estas seguro de eliminar al usuario?")){
-                estudianteEliminado = usuarioControllerService.eliminarUsuario(usuarioSeleccionado.usuario());
-                if(estudianteEliminado){
+                usuarioEliminado = usuarioControllerService.eliminarUsuario(usuarioSeleccionado.usuario());
+                if(usuarioEliminado){
                     listaUsuarios.remove(usuarioSeleccionado);
                     usuarioSeleccionado = null;
                     tableUsuarios.getSelectionModel().clearSelection();
@@ -148,7 +148,7 @@ public class UsuarioViewController {
     }
 
     private void actualizarUsuario() {
-        boolean estudianteActualizado = false;
+        boolean usuarioActualizado = false;
 
         String usuario = usuarioSeleccionado.usuario();
         UsuarioDto usuarioDto = construirUsuarioDto();
@@ -156,8 +156,8 @@ public class UsuarioViewController {
         if(usuarioSeleccionado != null){
 
             if(datosValidos(usuarioSeleccionado)){
-                estudianteActualizado = usuarioControllerService.actualizarUsuario(usuario, usuarioDto);
-                if(estudianteActualizado){
+                usuarioActualizado = usuarioControllerService.actualizarUsuario(usuario, usuarioDto);
+                if(usuarioActualizado){
                     listaUsuarios.remove(usuarioSeleccionado);
                     listaUsuarios.add(usuarioDto);
                     tableUsuarios.refresh();

@@ -94,27 +94,34 @@ public class AnuncianteViewController {
 
     @FXML
     void actualizarAnunciante(ActionEvent event) {
-
+        actualizarAnunciante();
     }
 
     @FXML
     void agregarAnunciante(ActionEvent event) {
-
+        crearAnunciante();
     }
 
     @FXML
     void busquedaAnunciante(ActionEvent event) {
-
+        String cedula = txfCedula.getText();
+        String nombres = txfNombreAnunciante.getText();
+        String apellidos = txfApellidoAnunciante.getText();
+        String correo = txfCorreo.getText();
+        String telefono = txfTelefono.getText();
+        String fechaNacimiento = txfFechaNacimiento.getText();
+        String usuarioAsociado = cmbUsuario.getValue();
+        buscarAnunciante(cedula, nombres, apellidos, correo, telefono, fechaNacimiento, usuarioAsociado);
     }
 
     @FXML
     void eliminarAnunciante(ActionEvent event) {
-
+        eliminarAnunciante();
     }
 
     @FXML
     void limpiarBusqueda(ActionEvent event) {
-
+        cancelarBusqueda();
     }
 
     @FXML
@@ -126,104 +133,105 @@ public class AnuncianteViewController {
 
     private void initView() {
         initDataBinding();
-        obtenerAunciantes();
-        tableUsuarios.getItems().clear();
-        tableUsuarios.setItems(listaUsuarios);
+        obtenerAnunciantes();
+        tableAnunciantes.getItems().clear();
+        tableAnunciantes.setItems(listaAnunciantes);
         listenerSelection();
     }
 
     private void initDataBinding() {
-        colUsuario.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().usuario()));
-        colContrasenia.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().contrasenia()));
+        colNombres.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().nombre()));
+        colApellidos.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().apellido()));
     }
 
     private void listenerSelection() {
-        tableUsuarios.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
-            usuarioSeleccionado = newSelection;
-            mostrarInformacionUsuario(usuarioSeleccionado);
+        tableAnunciantes.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
+            anuncianteSeleccionado = newSelection;
+            mostrarInformacionAnunciante(anuncianteSeleccionado);
         });
     }
 
-    private void crearUsuario() {
+    private void crearAnunciante() {
 
-        UsuarioDto usuarioDto = construirUsuarioDto();
+        AnuncianteDto anuncianteDto = construirAnuncianteDto();
 
-        if(datosValidos(usuarioDto)){
-            if(anuncianteControllerService.agregarUsuario(usuarioDto)){
-                listaUsuarios.add(usuarioDto);
-                mostrarMensaje("Notificación usuario", "Usuario creado", "El usuario se ha creado con éxito", Alert.AlertType.INFORMATION);
-                registrarAcciones("Usuario creado",1, "Creación de un usuario, acción realizada por " );
-                limpiarCamposUsuarios();
+        if(datosValidos(anuncianteDto)){
+            if(anuncianteControllerService.agregarAnunciante(anuncianteDto)){
+                listaAnunciantes.add(anuncianteDto);
+                mostrarMensaje("Notificación anunciante", "Anunciante creado", "El anunciante se ha creado con éxito", Alert.AlertType.INFORMATION);
+                registrarAcciones("Anunciante creado",1, "Creación de un anunciante, acción realizada por " );
+                limpiarCamposAnunciantes();
 
             }else{
-                mostrarMensaje("Notificación usuario", "Usuario no creado", "El usuario no se ha creado", Alert.AlertType.ERROR);
+                mostrarMensaje("Notificación anunciante", "Anunciante no creado", "El anunciante no se ha creado", Alert.AlertType.ERROR);
             }
         }else{
-            mostrarMensaje("Notificación usuario", "Usuario no creado", "Los datos ingresados son invalidos", Alert.AlertType.ERROR);
+            mostrarMensaje("Notificación anunciante", "Anunciante no creado", "Los datos ingresados son invalidos", Alert.AlertType.ERROR);
         }
 
     }
 
-    private void eliminarUsuario() {
-        boolean estudianteEliminado = false;
-        if(usuarioSeleccionado != null){
-            if(mostrarMensajeConfirmacion("¿Estas seguro de eliminar al usuario?")){
-                estudianteEliminado = anuncianteControllerService.eliminarUsuario(usuarioSeleccionado.usuario());
-                if(estudianteEliminado){
-                    listaUsuarios.remove(usuarioSeleccionado);
-                    usuarioSeleccionado = null;
-                    tableUsuarios.getSelectionModel().clearSelection();
-                    limpiarCamposUsuarios();
-                    registrarAcciones("Usuario eliminado",1, "Usuario eliminado, acción realizada por ");
-                    mostrarMensaje("Notificación usuario", "Usuario eliminado", "El usuario se ha eliminado con éxito.", Alert.AlertType.INFORMATION);
+    private void eliminarAnunciante() {
+        boolean anuncianteEliminado = false;
+        if(anuncianteSeleccionado != null){
+            if(mostrarMensajeConfirmacion("¿Estas seguro de eliminar al anunciante?")){
+                anuncianteEliminado = anuncianteControllerService.eliminarAnunciante(anuncianteSeleccionado.cedula());
+                if(anuncianteEliminado){
+                    listaAnunciantes.remove(anuncianteSeleccionado);
+                    anuncianteSeleccionado = null;
+                    tableAnunciantes.getSelectionModel().clearSelection();
+                    limpiarCamposAnunciantes();
+                    registrarAcciones("Anunciante eliminado",1, "Anunciante eliminado, acción realizada por ");
+                    mostrarMensaje("Notificación anunciante", "Anunciante eliminado", "El anunciante se ha eliminado con éxito.", Alert.AlertType.INFORMATION);
                 }else{
-                    mostrarMensaje("Notificación usuario", "Usuario no eliminado", "El usuario no se puede eliminar", Alert.AlertType.ERROR);
+                    mostrarMensaje("Notificación anunciante", "Anunciante no eliminado", "El anunciante no se puede eliminar", Alert.AlertType.ERROR);
                 }
             }
         }else{
-            mostrarMensaje("Notificación usuario", "Estudiante no seleccionado", "Seleccionado un usuario de la lista", Alert.AlertType.WARNING);
+            mostrarMensaje("Notificación anunciante", "Anunciante no seleccionado", "Seleccionado un anunciante de la lista", Alert.AlertType.WARNING);
         }
     }
 
-    private void actualizarUsuario() {
-        boolean estudianteActualizado = false;
+    private void actualizarAnunciante() {
+        boolean anuncianteActualizado = false;
 
-        String usuario = usuarioSeleccionado.usuario();
-        UsuarioDto usuarioDto = construirUsuarioDto();
+        String cedula = anuncianteSeleccionado.cedula();
+        AnuncianteDto anuncianteDto = construirAnuncianteDto();
 
-        if(usuarioSeleccionado != null){
+        if(anuncianteSeleccionado != null){
 
-            if(datosValidos(usuarioSeleccionado)){
-                estudianteActualizado = anuncianteControllerService.actualizarUsuario(usuario, usuarioDto);
-                if(estudianteActualizado){
-                    listaUsuarios.remove(usuarioSeleccionado);
-                    listaUsuarios.add(usuarioDto);
-                    tableUsuarios.refresh();
-                    mostrarMensaje("Notificación usuario", "Usuario actualizado", "El usuario se ha actualizado con éxito.", Alert.AlertType.INFORMATION);
-                    limpiarCamposUsuarios();
-                    registrarAcciones("Usuario actualizado",1, "Usuario actualizado, acción realizada por ");
+            if(datosValidos(anuncianteSeleccionado)){
+                anuncianteActualizado = anuncianteControllerService.actualizarAnunciante(cedula, anuncianteDto);
+                if(anuncianteActualizado){
+                    listaAnunciantes.remove(anuncianteSeleccionado);
+                    listaAnunciantes.add(anuncianteDto);
+                    tableAnunciantes.refresh();
+                    mostrarMensaje("Notificación anunciante", "Anunciante actualizado", "El anunciante se ha actualizado con éxito.", Alert.AlertType.INFORMATION);
+                    limpiarCamposAnunciantes();
+                    registrarAcciones("Anunciante actualizado",1, "Anunciante actualizado, acción realizada por ");
                 }else{
-                    mostrarMensaje("Notificación usuario", "Usuario no actualizado", "El usuario no se ha actualizado con éxito", Alert.AlertType.INFORMATION);
-                    registrarAcciones("Usuario no actualizado",1, "Actualizar usuario");
+                    mostrarMensaje("Notificación anunciante", "Anunciante no actualizado", "El anunciante no se ha actualizado con éxito", Alert.AlertType.INFORMATION);
+                    registrarAcciones("Anunciante no actualizado",1, "Actualizar anunciante");
                 }
             }else{
-                mostrarMensaje("Notificación usuario", "Usuario no creado", "Los datos ingresados son invalidos", Alert.AlertType.ERROR);
+                mostrarMensaje("Notificación anunciante", "Anunciante no creado", "Los datos ingresados son invalidos", Alert.AlertType.ERROR);
             }
 
         }
     }
 
-    private void buscarAnunciante(String usuario, String contrasenia) {
+    private void buscarAnunciante(String cedula, String nombres, String apellidos,
+                                  String correo, String telefono, String fechaNacimiento, String usuarioAsociado) {
 
-        Predicate<UsuarioDto> predicado = AnuncianteUtil.buscarPorTodo(usuario, contrasenia);
-        ObservableList<UsuarioDto> usuariosFiltrados = listaUsuarios.filtered(predicado);
-        tableAnunciantes.setItems(usuariosFiltrados);
+        Predicate<AnuncianteDto> predicado = AnuncianteUtil.buscarPorTodo(cedula, nombres, apellidos, correo, telefono, fechaNacimiento, usuarioAsociado);
+        ObservableList<AnuncianteDto> anunciantesFiltrados = listaAnunciantes.filtered(predicado);
+        tableAnunciantes.setItems(anunciantesFiltrados);
     }
 
     private void cancelarBusqueda(){
-        limpiarCamposUsuarios();
-        tableUsuarios.getSelectionModel().clearSelection();
-        tableUsuarios.setItems(listaUsuarios);
+        limpiarCamposAnunciantes();
+        tableAnunciantes.getSelectionModel().clearSelection();
+        tableAnunciantes.setItems(listaAnunciantes);
         listenerSelection();
     }
 
@@ -259,7 +267,7 @@ public class AnuncianteViewController {
         );
     }
 
-    private void limpiarCamposUsuarios() {
+    private void limpiarCamposAnunciantes() {
         txfNombreAnunciante.setText("");
         txfApellidoAnunciante.setText("");
         txfCedula.setText("");
@@ -274,18 +282,30 @@ public class AnuncianteViewController {
         anuncianteControllerService.registrarAcciones(mensaje, nivel, accion);
     }
 
-    private boolean datosValidos(UsuarioDto usuarioDto) {
+    private boolean datosValidos(AnuncianteDto anuncianteDto) {
         String mensaje = "";
 
-        if(usuarioDto.usuario() == null || usuarioDto.usuario() .equals(""))
-            mensaje += "El nombre Usuario es invalido \n" ;
-        if(usuarioDto.contrasenia() == null || usuarioDto.contrasenia() .equals(""))
-            mensaje += "La Contraseña del usuario es invalido \n" ;
+        if(anuncianteDto.cedula() == null || anuncianteDto.cedula().equals(""))
+            mensaje += "La cédula del anunciante es invalido \n" ;
+        if(anuncianteDto.nombre() == null || anuncianteDto.nombre() .equals(""))
+            mensaje += "Los nombres del anunciante es invalido \n" ;
+        if(anuncianteDto.apellido() == null || anuncianteDto.apellido() .equals(""))
+            mensaje += "los apellidos del anunciante es invalido \n" ;
+        if(anuncianteDto.telefono() == null || anuncianteDto.telefono() .equals(""))
+            mensaje += "El teléfono del anunciante es invalido \n" ;
+        if(anuncianteDto.direccion() == null || anuncianteDto.direccion() .equals(""))
+            mensaje += "El edad del anunciante es invalido \n" ;
+        if(anuncianteDto.correo() == null || anuncianteDto.correo() .equals(""))
+            mensaje += "El correo del anunciante es invalido \n" ;
+        if(anuncianteDto.fechaNacimiento() == null || anuncianteDto.fechaNacimiento() .equals(""))
+            mensaje += "El teléfono del anunciante es invalido \n" ;
+        if(anuncianteDto.usuarioAsociado() == null || anuncianteDto.usuarioAsociado() .equals(""))
+            mensaje += "El usuario asociado del anunciante es invalido \n" ;
 
         if(mensaje.equals("")){
             return true;
         }else{
-            mostrarMensaje("Notificación usuario", "Usuario no creado", mensaje, Alert.AlertType.ERROR);
+            mostrarMensaje("Notificación anunciante", "Anunciante no creado", mensaje, Alert.AlertType.ERROR);
             return false;
         }
     }
