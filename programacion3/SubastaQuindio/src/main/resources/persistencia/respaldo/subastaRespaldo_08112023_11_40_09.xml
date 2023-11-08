@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<java version="17.0.8.1" class="java.beans.XMLDecoder">
+ <object class="co.edu.uniquindio.programacion3.subastaquindio.model.SubastaQuindio" id="SubastaQuindio0">
+  <void property="listaAnunciantes">
+   <void method="add">
+    <object class="co.edu.uniquindio.programacion3.subastaquindio.model.Anunciante">
+     <void property="apellido">
+      <string>Rodriguez</string>
+     </void>
+     <void property="cedula">
+      <string>1094952204</string>
+     </void>
+     <void property="correo">
+      <string>juanrodriguez@hotmail.com</string>
+     </void>
+     <void property="direccion">
+      <string>mza 2 casa 24</string>
+     </void>
+     <void property="fechaNacimiento">
+      <string>12/10/2023</string>
+     </void>
+     <void property="nombre">
+      <string>Juan</string>
+     </void>
+     <void property="telefono">
+      <string>3147513654</string>
+     </void>
+     <void property="usuarioAsociado">
+      <string>Anunciante</string>
+     </void>
+    </object>
+   </void>
+  </void>
+  <void property="listaProductos">
+   <void method="add">
+    <object class="co.edu.uniquindio.programacion3.subastaquindio.model.Producto">
+     <void property="codigoUnico">
+      <string>1243</string>
+     </void>
+     <void property="descripcion">
+      <string>Lavadora casi nueva</string>
+     </void>
+     <void property="fechaFinPublicacion">
+      <string>29-09-2023</string>
+     </void>
+     <void property="fechaPublicacion">
+      <string>29-09-2023</string>
+     </void>
+     <void property="nombreAnunciante">
+      <string>Carlos Montes</string>
+     </void>
+     <void property="nombreProducto">
+      <string>Lavadora  actualizada</string>
+     </void>
+     <void property="tipoProducto">
+      <string>HOGAR</string>
+     </void>
+     <void property="valorInicial">
+      <double>1520000.0</double>
+     </void>
+    </object>
+   </void>
+  </void>
+  <void property="listaUsuarios">
+   <void method="add">
+    <object class="co.edu.uniquindio.programacion3.subastaquindio.model.Usuario">
+     <void property="contrasenia">
+      <string>2019</string>
+     </void>
+     <void property="usuario">
+      <string>Matias</string>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.programacion3.subastaquindio.model.Usuario">
+     <void property="contrasenia">
+      <string>2022</string>
+     </void>
+     <void property="usuario">
+      <string>Jorge</string>
+     </void>
+    </object>
+   </void>
+  </void>
+ </object>
+</java>

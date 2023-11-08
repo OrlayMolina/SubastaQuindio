@@ -238,3 +238,31 @@ nov. 07, 2023 2:51:32 P. M. co.edu.uniquindio.programacion3.subastaquindio.util
 INFORMACIÓN: inicioSesión,Inicio de sesión,2023-11-07
 nov. 07, 2023 2:51:53 P. M. co.edu.uniquindio.programacion3.subastaquindio.utils.ArchivoUtil guardarRegistroLog
 INFORMACIÓN: inicioSesión,Inicio de sesión,2023-11-07
+nov. 08, 2023 11:12:50 A. M. co.edu.uniquindio.programacion3.subastaquindio.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioSesión,Inicio de sesión,2023-11-08
+nov. 08, 2023 11:13:28 A. M. co.edu.uniquindio.programacion3.subastaquindio.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: Inicio Sesión,Inicio de sesión, usuario: jorge,2023-11-08
+nov. 08, 2023 11:35:40 A. M. co.edu.uniquindio.programacion3.subastaquindio.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioSesión,Inicio de sesión,2023-11-08
+nov. 08, 2023 11:36:10 A. M. co.edu.uniquindio.programacion3.subastaquindio.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: Inicio Sesión,Inicio de sesión, usuario: jorge,2023-11-08
+nov. 08, 2023 11:38:58 A. M. co.edu.uniquindio.programacion3.subastaquindio.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: Creación de un anunciante, acción realizada por ,Anunciante creado,2023-11-08
+nov. 08, 2023 11:40:09 A. M. co.edu.uniquindio.programacion3.subastaquindio.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioSesión,Inicio de sesión,2023-11-08
+nov. 08, 2023 11:40:31 A. M. co.edu.uniquindio.programacion3.subastaquindio.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: Inicio Sesión,Inicio de sesión, usuario: jorge,2023-11-08
+nov. 08, 2023 11:40:39 A. M. co.edu.uniquindio.programacion3.subastaquindio.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: Anunciante eliminado, acción realizada por ,Anunciante eliminado,2023-11-08
+nov. 08, 2023 11:42:50 A. M. co.edu.uniquindio.programacion3.subastaquindio.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioSesión,Inicio de sesión,2023-11-08
+nov. 08, 2023 11:43:00 A. M. co.edu.uniquindio.programacion3.subastaquindio.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: Inicio Sesión,Inicio de sesión, usuario: jorge,2023-11-08
+nov. 08, 2023 11:44:01 A. M. co.edu.uniquindio.programacion3.subastaquindio.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: Creación de un anunciante, acción realizada por ,Anunciante creado,2023-11-08
+nov. 08, 2023 11:44:53 A. M. co.edu.uniquindio.programacion3.subastaquindio.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: Creación de un anunciante, acción realizada por ,Anunciante creado,2023-11-08
+nov. 08, 2023 11:45:49 A. M. co.edu.uniquindio.programacion3.subastaquindio.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: Anunciante eliminado, acción realizada por ,Anunciante eliminado,2023-11-08
+nov. 08, 2023 11:45:53 A. M. co.edu.uniquindio.programacion3.subastaquindio.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: Anunciante eliminado, acción realizada por ,Anunciante eliminado,2023-11-08

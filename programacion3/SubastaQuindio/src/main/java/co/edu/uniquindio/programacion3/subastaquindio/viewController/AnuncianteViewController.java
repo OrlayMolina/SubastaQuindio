@@ -142,6 +142,12 @@ public class AnuncianteViewController {
     private void initDataBinding() {
         colNombres.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().nombre()));
         colApellidos.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().apellido()));
+        colCedula.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().cedula()));
+        colTelefono.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().telefono()));
+        colDireccion.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().direccion()));
+        colCorreo.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().correo()));
+        colFechaNacimiento.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().fechaNacimiento()));
+        colUsuarioAsociado.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().usuarioAsociado()));
     }
 
     private void listenerSelection() {
