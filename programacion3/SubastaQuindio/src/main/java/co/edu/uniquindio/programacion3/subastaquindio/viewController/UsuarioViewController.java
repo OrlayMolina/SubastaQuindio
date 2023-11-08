@@ -15,6 +15,8 @@ import javafx.scene.control.*;
 import java.util.Optional;
 import java.util.function.Predicate;
 
+import static co.edu.uniquindio.programacion3.subastaquindio.viewController.InicioViewController.usuarioLogeado;
+
 public class UsuarioViewController {
 
     UsuarioController usuarioControllerService;
@@ -130,7 +132,7 @@ public class UsuarioViewController {
             if(usuarioControllerService.agregarUsuario(usuarioDto)){
                 listaUsuarios.add(usuarioDto);
                 mostrarMensaje("Notificación usuario", "Usuario creado", "El usuario se ha creado con éxito", Alert.AlertType.INFORMATION);
-                registrarAcciones("Usuario creado",1, "Creación de un usuario, acción realizada por " );
+                registrarAcciones("Usuario creado",1, "Creación de un usuario, acción realizada por "  + usuarioLogeado);
                 limpiarCamposUsuarios();
 
             }else{
@@ -152,7 +154,7 @@ public class UsuarioViewController {
                     usuarioSeleccionado = null;
                     tableUsuarios.getSelectionModel().clearSelection();
                     limpiarCamposUsuarios();
-                    registrarAcciones("Usuario eliminado",1, "Usuario eliminado, acción realizada por ");
+                    registrarAcciones("Usuario eliminado",1, "Usuario eliminado, acción realizada por " + usuarioLogeado);
                     mostrarMensaje("Notificación usuario", "Usuario eliminado", "El usuario se ha eliminado con éxito.", Alert.AlertType.INFORMATION);
                 }else{
                     mostrarMensaje("Notificación usuario", "Usuario no eliminado", "El usuario no se puede eliminar", Alert.AlertType.ERROR);
@@ -179,7 +181,7 @@ public class UsuarioViewController {
                     tableUsuarios.refresh();
                     mostrarMensaje("Notificación usuario", "Usuario actualizado", "El usuario se ha actualizado con éxito.", Alert.AlertType.INFORMATION);
                     limpiarCamposUsuarios();
-                    registrarAcciones("Usuario actualizado",1, "Usuario actualizado, acción realizada por ");
+                    registrarAcciones("Usuario actualizado",1, "Usuario actualizado, acción realizada por " + usuarioLogeado);
                 }else{
                     mostrarMensaje("Notificación usuario", "Usuario no actualizado", "El usuario no se ha actualizado con éxito", Alert.AlertType.INFORMATION);
                     registrarAcciones("Usuario no actualizado",1, "Actualizar usuario");

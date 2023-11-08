@@ -15,6 +15,8 @@ import javafx.scene.control.*;
 import java.util.Optional;
 import java.util.function.Predicate;
 
+import static co.edu.uniquindio.programacion3.subastaquindio.viewController.InicioViewController.usuarioLogeado;
+
 public class AnuncianteViewController {
 
     AnuncianteController anuncianteControllerService;
@@ -167,7 +169,7 @@ public class AnuncianteViewController {
             if(anuncianteControllerService.agregarAnunciante(anuncianteDto)){
                 listaAnunciantes.add(anuncianteDto);
                 mostrarMensaje("Notificación anunciante", "Anunciante creado", "El anunciante se ha creado con éxito", Alert.AlertType.INFORMATION);
-                registrarAcciones("Anunciante creado",1, "Creación de un anunciante, acción realizada por " );
+                registrarAcciones("Anunciante creado",1, "Creación de un anunciante, acción realizada por "  + usuarioLogeado);
                 limpiarCamposAnunciantes();
 
             }else{
@@ -189,7 +191,7 @@ public class AnuncianteViewController {
                     anuncianteSeleccionado = null;
                     tableAnunciantes.getSelectionModel().clearSelection();
                     limpiarCamposAnunciantes();
-                    registrarAcciones("Anunciante eliminado",1, "Anunciante eliminado, acción realizada por ");
+                    registrarAcciones("Anunciante eliminado",1, "Anunciante eliminado, acción realizada por " + usuarioLogeado);
                     mostrarMensaje("Notificación anunciante", "Anunciante eliminado", "El anunciante se ha eliminado con éxito.", Alert.AlertType.INFORMATION);
                 }else{
                     mostrarMensaje("Notificación anunciante", "Anunciante no eliminado", "El anunciante no se puede eliminar", Alert.AlertType.ERROR);
@@ -216,7 +218,7 @@ public class AnuncianteViewController {
                     tableAnunciantes.refresh();
                     mostrarMensaje("Notificación anunciante", "Anunciante actualizado", "El anunciante se ha actualizado con éxito.", Alert.AlertType.INFORMATION);
                     limpiarCamposAnunciantes();
-                    registrarAcciones("Anunciante actualizado",1, "Anunciante actualizado, acción realizada por ");
+                    registrarAcciones("Anunciante actualizado",1, "Anunciante actualizado, acción realizada por " + usuarioLogeado);
                 }else{
                     mostrarMensaje("Notificación anunciante", "Anunciante no actualizado", "El anunciante no se ha actualizado con éxito", Alert.AlertType.INFORMATION);
                     registrarAcciones("Anunciante no actualizado",1, "Actualizar anunciante");

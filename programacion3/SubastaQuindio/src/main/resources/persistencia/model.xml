@@ -20,13 +20,43 @@
       <string>15/05/1989</string>
      </void>
      <void property="nombre">
-      <string>Miiguel Angel</string>
+      <string>Miguel Angel</string>
      </void>
      <void property="telefono">
       <string>3107845695</string>
      </void>
      <void property="usuarioAsociado">
-      <string>Miguel rol -- Anunciante</string>
+      <string>Miguel rol -- Anunciante rol -- </string>
+     </void>
+    </object>
+   </void>
+  </void>
+  <void property="listaCompradores">
+   <void method="add">
+    <object class="co.edu.uniquindio.programacion3.subastaquindio.model.Comprador">
+     <void property="apellido">
+      <string>Maldonado</string>
+     </void>
+     <void property="cedula">
+      <string>10447859632</string>
+     </void>
+     <void property="correo">
+      <string>laura@gmail.com</string>
+     </void>
+     <void property="direccion">
+      <string>Los Naranjos casa29 b</string>
+     </void>
+     <void property="fechaNacimiento">
+      <string>10/10/2001</string>
+     </void>
+     <void property="nombre">
+      <string>Laura Sofia</string>
+     </void>
+     <void property="telefono">
+      <string>3124589632</string>
+     </void>
+     <void property="usuarioAsociado">
+      <string>Laura rol -- Comprador</string>
      </void>
     </object>
    </void>

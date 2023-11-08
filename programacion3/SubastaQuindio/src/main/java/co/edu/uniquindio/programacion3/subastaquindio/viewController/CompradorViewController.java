@@ -1,12 +1,9 @@
 package co.edu.uniquindio.programacion3.subastaquindio.viewController;
 
-import co.edu.uniquindio.programacion3.subastaquindio.controller.AnuncianteController;
 import co.edu.uniquindio.programacion3.subastaquindio.controller.CompradorController;
-import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.AnuncianteDto;
 import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.CompradorDto;
 import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.UsuarioDto;
 import co.edu.uniquindio.programacion3.subastaquindio.model.SubastaQuindio;
-import co.edu.uniquindio.programacion3.subastaquindio.utils.AnuncianteUtil;
 import co.edu.uniquindio.programacion3.subastaquindio.utils.CompradorUtil;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -17,6 +14,8 @@ import javafx.scene.control.*;
 
 import java.util.Optional;
 import java.util.function.Predicate;
+
+import static co.edu.uniquindio.programacion3.subastaquindio.viewController.InicioViewController.usuarioLogeado;
 
 public class CompradorViewController {
 
@@ -47,37 +46,34 @@ public class CompradorViewController {
     private ComboBox<UsuarioDto> cmbUsuario;
 
     @FXML
-    private TableColumn<AnuncianteDto, String> colApellidos;
+    private TableColumn<CompradorDto, String> colApellidos;
 
     @FXML
-    private TableColumn<AnuncianteDto, String> colCedula;
+    private TableColumn<CompradorDto, String> colCedula;
 
     @FXML
-    private TableColumn<AnuncianteDto, String> colCorreo;
+    private TableColumn<CompradorDto, String> colCorreo;
 
     @FXML
-    private TableColumn<AnuncianteDto, String> colDireccion;
+    private TableColumn<CompradorDto, String> colDireccion;
 
     @FXML
-    private TableColumn<AnuncianteDto, String> colFechaNacimiento;
+    private TableColumn<CompradorDto, String> colFechaNacimiento;
 
     @FXML
-    private TableColumn<AnuncianteDto, String> colNombres;
+    private TableColumn<CompradorDto, String> colNombres;
 
     @FXML
-    private TableColumn<AnuncianteDto, String> colTelefono;
+    private TableColumn<CompradorDto, String> colTelefono;
 
     @FXML
-    private TableColumn<AnuncianteDto, String> colUsuarioAsociado;
-
-    @FXML
-    private TextField txfFechaNacimiento;
+    private TableColumn<CompradorDto, String> colUsuarioAsociado;
 
     @FXML
     private TableView<CompradorDto> tableCompradores;
 
     @FXML
-    private TextField txfApellidoAnunciante;
+    private TextField txfApellidosComprador;
 
     @FXML
     private TextField txfCedula;
@@ -89,7 +85,10 @@ public class CompradorViewController {
     private TextField txfDireccion;
 
     @FXML
-    private TextField txfNombreAnunciante;
+    private TextField txfFechaNacimiento;
+
+    @FXML
+    private TextField txfNombreComprador;
 
     @FXML
     private TextField txfTelefono;
@@ -107,8 +106,8 @@ public class CompradorViewController {
     @FXML
     void busquedaComprador(ActionEvent event) {
         String cedula = txfCedula.getText();
-        String nombres = txfNombreAnunciante.getText();
-        String apellidos = txfApellidoAnunciante.getText();
+        String nombres = txfNombreComprador.getText();
+        String apellidos = txfApellidosComprador.getText();
         String correo = txfCorreo.getText();
         String telefono = txfTelefono.getText();
         String fechaNacimiento = txfFechaNacimiento.getText();
@@ -135,7 +134,7 @@ public class CompradorViewController {
 
     private void initView() {
         initDataBinding();
-        obtenerAnunciantes();
+        obtenerCompradores();
         mostrarUsuarios();
         getListaUsuarios();
         tableCompradores.getItems().clear();
@@ -169,7 +168,7 @@ public class CompradorViewController {
             if(compradorControllerService.agregarComprador(compradorDto)){
                 listaCompradores.add(compradorDto);
                 mostrarMensaje("Notificación comprador", "Comprador creado", "El comprador se ha creado con éxito", Alert.AlertType.INFORMATION);
-                registrarAcciones("Comprador creado",1, "Creación de un comprador, acción realizada por " );
+                registrarAcciones("Comprador creado",1, "Creación de un comprador, acción realizada por " + usuarioLogeado );
                 limpiarCamposAnunciantes();
 
             }else{
@@ -191,7 +190,7 @@ public class CompradorViewController {
                     compradorSeleccionado = null;
                     tableCompradores.getSelectionModel().clearSelection();
                     limpiarCamposAnunciantes();
-                    registrarAcciones("Comprador eliminado",1, "Comprador eliminado, acción realizada por ");
+                    registrarAcciones("Comprador eliminado",1, "Comprador eliminado, acción realizada por " + usuarioLogeado);
                     mostrarMensaje("Notificación comprador", "Comprador eliminado", "El comprador se ha eliminado con éxito.", Alert.AlertType.INFORMATION);
                 }else{
                     mostrarMensaje("Notificación comprador", "Comprador no eliminado", "El comprador no se puede eliminar", Alert.AlertType.ERROR);
@@ -218,7 +217,7 @@ public class CompradorViewController {
                     tableCompradores.refresh();
                     mostrarMensaje("Notificación comprador", "Comprador actualizado", "El comprador se ha actualizado con éxito.", Alert.AlertType.INFORMATION);
                     limpiarCamposAnunciantes();
-                    registrarAcciones("Comprador actualizado",1, "Comprador actualizado, acción realizada por ");
+                    registrarAcciones("Comprador actualizado",1, "Comprador actualizado, acción realizada por " + usuarioLogeado);
                 }else{
                     mostrarMensaje("Notificación comprador", "Comprador no actualizado", "El comprador no se ha actualizado con éxito", Alert.AlertType.INFORMATION);
                     registrarAcciones("Comprador no actualizado",1, "Actualizar anunciante");
@@ -250,14 +249,14 @@ public class CompradorViewController {
         cmbUsuario.setItems(listaUsuarios);
     }
 
-    private void obtenerAnunciantes() {
+    private void obtenerCompradores() {
         listaCompradores.addAll(compradorControllerService.obtenerCompradores());
     }
 
     private void mostrarInformacionComprador(CompradorDto anuncianteSeleccionado) {
         if(anuncianteSeleccionado != null){
-            txfNombreAnunciante.setText(anuncianteSeleccionado.nombre());
-            txfApellidoAnunciante.setText(anuncianteSeleccionado.apellido());
+            txfNombreComprador.setText(anuncianteSeleccionado.nombre());
+            txfApellidosComprador.setText(anuncianteSeleccionado.apellido());
             txfCedula.setText(anuncianteSeleccionado.cedula());
             txfTelefono.setText(anuncianteSeleccionado.telefono());
             txfDireccion.setText(anuncianteSeleccionado.direccion());
@@ -268,8 +267,8 @@ public class CompradorViewController {
     }
 
     private CompradorDto construirCompradorDto() {
-        String nombre = txfNombreAnunciante.getText();
-        String apellido = txfApellidoAnunciante.getText();
+        String nombre = txfNombreComprador.getText();
+        String apellido = txfApellidosComprador.getText();
         String cedula = txfCedula.getText();
         String telefono = txfTelefono.getText();
         String direccion = txfDireccion.getText();
@@ -280,8 +279,8 @@ public class CompradorViewController {
     }
 
     private void limpiarCamposAnunciantes() {
-        txfNombreAnunciante.setText("");
-        txfApellidoAnunciante.setText("");
+        txfNombreComprador.setText("");
+        txfApellidosComprador.setText("");
         txfCedula.setText("");
         txfTelefono.setText("");
         txfDireccion.setText("");

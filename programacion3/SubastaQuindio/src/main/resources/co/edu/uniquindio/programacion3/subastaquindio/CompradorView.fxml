@@ -33,13 +33,13 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Label text="Nombre Anunciante:">
+            <Label text="Nombre Comprador:">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <TextField prefHeight="46.0" prefWidth="150.0" promptText="Ingrese el nombre ..." GridPane.rowIndex="2" />
-            <Label text="Apellido Anunciante:" GridPane.columnIndex="2">
+            <TextField fx:id="txfNombreComprador" prefHeight="46.0" prefWidth="150.0" promptText="Ingrese el nombre ..." GridPane.rowIndex="2" />
+            <Label text="Apellido Comprador:" GridPane.columnIndex="2">
                <font>
                   <Font size="14.0" />
                </font>
@@ -49,9 +49,9 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <TextField prefHeight="50.0" prefWidth="150.0" promptText="Ingrese el apellido ..." GridPane.columnIndex="2" GridPane.rowIndex="2" />
-            <TextField promptText="Ingrese la cédula ..." GridPane.columnIndex="4" GridPane.rowIndex="2" />
-            <TextField promptText="Ingrese un teléfono ..." GridPane.columnIndex="6" GridPane.rowIndex="2" />
+            <TextField fx:id="txfApellidosComprador" prefHeight="50.0" prefWidth="150.0" promptText="Ingrese el apellido ..." GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <TextField fx:id="txfCedula" promptText="Ingrese la cédula ..." GridPane.columnIndex="4" GridPane.rowIndex="2" />
+            <TextField fx:id="txfTelefono" promptText="Ingrese un teléfono ..." GridPane.columnIndex="6" GridPane.rowIndex="2" />
             <Label text="Teléfono:" GridPane.columnIndex="6">
                <font>
                   <Font size="14.0" />
@@ -80,7 +80,7 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <TextField prefHeight="46.0" prefWidth="150.0" promptText="Ingrese la dirección ..." GridPane.rowIndex="2" />
+            <TextField fx:id="txfDireccion" prefHeight="46.0" prefWidth="150.0" promptText="Ingrese la dirección ..." GridPane.rowIndex="2" />
             <Label text="Correo:" GridPane.columnIndex="2">
                <font>
                   <Font size="14.0" />
@@ -91,14 +91,14 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <TextField prefHeight="50.0" prefWidth="150.0" promptText="Ingrese el correo ..." GridPane.columnIndex="2" GridPane.rowIndex="2" />
+            <TextField fx:id="txfCorreo" prefHeight="50.0" prefWidth="150.0" promptText="Ingrese el correo ..." GridPane.columnIndex="2" GridPane.rowIndex="2" />
             <Label text="Usuario Asociado:" GridPane.columnIndex="6">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <ComboBox prefHeight="58.0" prefWidth="169.0" promptText="Usuario ..." GridPane.columnIndex="6" GridPane.rowIndex="2" />
-            <TextField fx:id="txfFechaNacimirento" prefHeight="42.0" prefWidth="145.0" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+            <ComboBox fx:id="cmbUsuario" prefHeight="58.0" prefWidth="169.0" promptText="Usuario ..." GridPane.columnIndex="6" GridPane.rowIndex="2" />
+            <TextField fx:id="txfFechaNacimiento" prefHeight="42.0" prefWidth="145.0" promptText="Ingrese la fecha de nacimiento" GridPane.columnIndex="4" GridPane.rowIndex="2" />
          </children>
       </GridPane>
       <GridPane layoutX="61.0" layoutY="185.0">
