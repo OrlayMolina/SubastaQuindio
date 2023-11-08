@@ -1,12 +1,14 @@
 package co.edu.uniquindio.programacion3.subastaquindio.controller;
 
 import co.edu.uniquindio.programacion3.subastaquindio.controller.service.IModelFactoryService;
+import co.edu.uniquindio.programacion3.subastaquindio.exceptions.AnuncianteException;
 import co.edu.uniquindio.programacion3.subastaquindio.exceptions.ProductoException;
 import co.edu.uniquindio.programacion3.subastaquindio.exceptions.UsuarioException;
 import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.AnuncianteDto;
 import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.ProductoDto;
 import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.UsuarioDto;
 import co.edu.uniquindio.programacion3.subastaquindio.mapping.mappers.SubastaMapper;
+import co.edu.uniquindio.programacion3.subastaquindio.model.Anunciante;
 import co.edu.uniquindio.programacion3.subastaquindio.model.Producto;
 import co.edu.uniquindio.programacion3.subastaquindio.model.SubastaQuindio;
 import co.edu.uniquindio.programacion3.subastaquindio.model.Usuario;
@@ -192,6 +194,47 @@ public class ModelFactoryController implements IModelFactoryService {
             guardarResourceXML(); //Pendiente verificar si este método es adecuado
             return true;
         } catch (UsuarioException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public boolean agregarAnunciante(AnuncianteDto anuncianteDto) {
+        try{
+            if(!subasta.verificarAnuncianteExistente(anuncianteDto.cedula())) {
+                Anunciante anunciante = mapper.anuncianteDtoToAnunciante(anuncianteDto);
+                getSubasta().agregarAnunciante(anunciante);
+                guardarResourceXML();
+            }
+            return true;
+        }catch (AnuncianteException e){
+            e.getMessage();
+            return false;
+        }
+    }
+
+    @Override
+    public boolean eliminarAnunciante(String cedula) {
+        boolean flagExiste = false;
+        try {
+            flagExiste = getSubasta().eliminarAnunciante(cedula);
+            guardarResourceXML(); //Pendiente verificar si este método es adecuado
+        } catch (AnuncianteException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return flagExiste;
+    }
+
+    @Override
+    public boolean actualizarAnunciante(String cedula, AnuncianteDto anuncianteDto) {
+        try {
+            Anunciante anunciante = mapper.anuncianteDtoToAnunciante(anuncianteDto);
+            getSubasta().actualizarAnunciante(cedula, anunciante);
+            guardarResourceXML(); //Pendiente verificar si este método es adecuado
+            return true;
+        } catch (AnuncianteException e) {
             e.printStackTrace();
             return false;
         }

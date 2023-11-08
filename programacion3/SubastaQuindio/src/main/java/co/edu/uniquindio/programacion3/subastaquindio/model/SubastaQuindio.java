@@ -1,8 +1,8 @@
 package co.edu.uniquindio.programacion3.subastaquindio.model;
 
+import co.edu.uniquindio.programacion3.subastaquindio.exceptions.AnuncianteException;
 import co.edu.uniquindio.programacion3.subastaquindio.exceptions.ProductoException;
 import co.edu.uniquindio.programacion3.subastaquindio.exceptions.UsuarioException;
-import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.AnuncianteDto;
 import co.edu.uniquindio.programacion3.subastaquindio.model.service.ISubastaQuindioService;
 
 import java.io.Serializable;
@@ -101,6 +101,20 @@ public class SubastaQuindio implements ISubastaQuindioService, Serializable {
     }
 
     @Override
+    public Boolean eliminarAnunciante(String cedula) throws AnuncianteException {
+        Anunciante anunciante = null;
+        boolean flagExiste = false;
+        anunciante = obtenerAnunciante(cedula);
+        if(anunciante == null)
+            throw new AnuncianteException("El anunciante a eliminar no existe");
+        else{
+            getListaAnunciantes().remove(anunciante);
+            flagExiste = true;
+        }
+        return flagExiste;
+    }
+
+    @Override
     public boolean actualizarProducto(String codigoUnico, Producto producto) throws ProductoException {
         Producto productoActual = obtenerProducto(codigoUnico);
         if(productoActual == null)
@@ -132,12 +146,34 @@ public class SubastaQuindio implements ISubastaQuindioService, Serializable {
         }
     }
 
+    @Override
+    public boolean actualizarAnunciante(String cedula, Anunciante anunciante) throws AnuncianteException {
+        Anunciante anuncianteActual = obtenerAnunciante(cedula);
+        if(anuncianteActual == null)
+            throw new AnuncianteException("El anunciante a actualizar no existe");
+        else{
+            anuncianteActual.setCedula(anunciante.getCedula());
+            anuncianteActual.setNombre(anunciante.getNombre());
+            anuncianteActual.setApellido(anunciante.getApellido());
+            anuncianteActual.setTelefono(anunciante.getTelefono());
+            anuncianteActual.setCorreo(anunciante.getCorreo());
+            anuncianteActual.setDireccion(anunciante.getDireccion());
+            anuncianteActual.setFechaNacimiento(anunciante.getFechaNacimiento());
+            anuncianteActual.setUsuarioAsociado(anunciante.getUsuarioAsociado());
+            return true;
+        }
+    }
+
     public void agregarProducto(Producto nuevoProducto) throws ProductoException{
         getListaProductos().add(nuevoProducto);
     }
 
     public void agregarUsuario(Usuario nuevoUsuario) throws UsuarioException{
         getListaUsuarios().add(nuevoUsuario);
+    }
+
+    public void agregarAnunciante(Anunciante nuevoAnunciante) throws AnuncianteException{
+        getListaAnunciantes().add(nuevoAnunciante);
     }
 
     @Override
@@ -153,6 +189,15 @@ public class SubastaQuindio implements ISubastaQuindioService, Serializable {
     public boolean verificarUsuarioExistente(String nombreUsuario) throws UsuarioException {
         if(usuarioExiste(nombreUsuario)){
             throw new UsuarioException("El usuario con nombre: "+nombreUsuario+" ya existe");
+        }else{
+            return false;
+        }
+    }
+
+    @Override
+    public boolean verificarAnuncianteExistente(String cedula) throws AnuncianteException {
+        if(anuncianteExiste(cedula)){
+            throw new AnuncianteException("El anunciante con cédula: "+cedula+" ya existe");
         }else{
             return false;
         }
@@ -178,6 +223,17 @@ public class SubastaQuindio implements ISubastaQuindioService, Serializable {
             }
         }
         return usuarioEncontrado;
+    }
+
+    public boolean anuncianteExiste(String cedula) {
+        boolean anuncianteEncontrado = false;
+        for (Anunciante anunciante : getListaAnunciantes()) {
+            if(anunciante.getCedula().equalsIgnoreCase(cedula)){
+                anuncianteEncontrado = true;
+                break;
+            }
+        }
+        return anuncianteEncontrado;
     }
 
     @Override
@@ -215,6 +271,18 @@ public class SubastaQuindio implements ISubastaQuindioService, Serializable {
             }
         }
         return usuarioEncontrado;
+    }
+
+    @Override
+    public Anunciante obtenerAnunciante(String cedula) {
+        Anunciante anuncianteEncontrado = null;
+        for (Anunciante anunciante : getListaAnunciantes()) {
+            if(anunciante.getCedula().equalsIgnoreCase(cedula)){
+                anuncianteEncontrado = anunciante;
+                break;
+            }
+        }
+        return anuncianteEncontrado;
     }
 
     @Override

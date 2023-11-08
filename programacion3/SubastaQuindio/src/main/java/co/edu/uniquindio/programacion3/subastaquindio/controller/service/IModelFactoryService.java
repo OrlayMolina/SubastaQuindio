@@ -17,7 +17,11 @@ public interface IModelFactoryService {
 
     boolean agregarProducto(ProductoDto productoDto);
 
+    boolean agregarAnunciante(AnuncianteDto anuncianteDto);
+
     boolean eliminarProducto(String codigoUnico);
+
+    boolean eliminarAnunciante(String cedula);
 
     boolean actualizarProducto(String cedulaActual, ProductoDto productoDto);
 
@@ -26,6 +30,8 @@ public interface IModelFactoryService {
     boolean eliminarUsuario(String nombreUsuario);
 
     boolean actualizarUsuario(String nombreUsuario, UsuarioDto usuarioDto);
+
+    boolean actualizarAnunciante(String cedula, AnuncianteDto anuncianteDto);
 
     boolean inicioSesion(String usuario, String password) throws Exception;
 }
