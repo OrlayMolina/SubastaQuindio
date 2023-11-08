@@ -3,6 +3,7 @@ package co.edu.uniquindio.programacion3.subastaquindio.controller;
 import co.edu.uniquindio.programacion3.subastaquindio.controller.service.IModelFactoryService;
 import co.edu.uniquindio.programacion3.subastaquindio.exceptions.ProductoException;
 import co.edu.uniquindio.programacion3.subastaquindio.exceptions.UsuarioException;
+import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.AnuncianteDto;
 import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.ProductoDto;
 import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.UsuarioDto;
 import co.edu.uniquindio.programacion3.subastaquindio.mapping.mappers.SubastaMapper;
@@ -107,6 +108,11 @@ public class ModelFactoryController implements IModelFactoryService {
     @Override
     public List<UsuarioDto> obtenerUsuarios() {
         return  mapper.getUsuarioDto(subasta.getListaUsuarios());
+    }
+
+    @Override
+    public List<AnuncianteDto> obtenerAnunciantes() {
+        return  mapper.getAnuncianteDto(subasta.getListaAnunciantes());
     }
 
     @Override

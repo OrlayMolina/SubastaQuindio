@@ -2,6 +2,7 @@ package co.edu.uniquindio.programacion3.subastaquindio.model;
 
 import co.edu.uniquindio.programacion3.subastaquindio.exceptions.ProductoException;
 import co.edu.uniquindio.programacion3.subastaquindio.exceptions.UsuarioException;
+import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.AnuncianteDto;
 import co.edu.uniquindio.programacion3.subastaquindio.model.service.ISubastaQuindioService;
 
 import java.io.Serializable;
@@ -12,6 +13,7 @@ public class SubastaQuindio implements ISubastaQuindioService, Serializable {
     private static final long serialVersionUID = 1L;
     private ArrayList<Producto> listaProductos = new ArrayList<>();
     private ArrayList<Usuario> listaUsuarios = new ArrayList<>();
+    private ArrayList<Anunciante> listaAnunciantes = new ArrayList<>();
 
     public SubastaQuindio() {
 
@@ -31,6 +33,14 @@ public class SubastaQuindio implements ISubastaQuindioService, Serializable {
 
     public void setListaUsuarios(ArrayList<Usuario> listaUsuarios) {
         this.listaUsuarios = listaUsuarios;
+    }
+
+    public ArrayList<Anunciante> getListaAnunciantes() {
+        return listaAnunciantes;
+    }
+
+    public void setListaAnunciantes(ArrayList<Anunciante> listaAnunciantes) {
+        this.listaAnunciantes = listaAnunciantes;
     }
 
 

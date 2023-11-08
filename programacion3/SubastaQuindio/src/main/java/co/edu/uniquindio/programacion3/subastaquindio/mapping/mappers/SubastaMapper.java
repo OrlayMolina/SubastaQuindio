@@ -42,7 +42,7 @@ public interface SubastaMapper {
     Anunciante anuncianteDtoToAnunciante(AnuncianteDto anuncianteDto);
 
     @IterableMapping(qualifiedByName = "anuncianteToAnuncianteDto")
-    List<AnuncianteDto> getAnuncianteDto(List<Usuario> listaAnunciantes);
+    List<AnuncianteDto> getAnuncianteDto(List<Anunciante> listaAnunciantes);
 
 
 }
