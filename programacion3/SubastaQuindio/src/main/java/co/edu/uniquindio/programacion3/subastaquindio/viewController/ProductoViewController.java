@@ -1,8 +1,7 @@
 package co.edu.uniquindio.programacion3.subastaquindio.viewController;
 
 import co.edu.uniquindio.programacion3.subastaquindio.controller.ProductoController;
-import co.edu.uniquindio.programacion3.subastaquindio.enumm.TipoProducto;
-import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.ProductoDTO;
+import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.ProductoDto;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,14 +10,13 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.shape.Rectangle;
 
-import java.time.LocalDate;
 import java.util.Optional;
 
 public class ProductoViewController {
 
     ProductoController productoControllerService;
-    ObservableList<ProductoDTO> listaProductosDto = FXCollections.observableArrayList();
-    ProductoDTO productoSeleccionado;
+    ObservableList<ProductoDto> listaProductosDto = FXCollections.observableArrayList();
+    ProductoDto productoSeleccionado;
 
     @FXML
     private Rectangle ImageView;
@@ -36,28 +34,28 @@ public class ProductoViewController {
     private TextField txfTipoProducto;
 
     @FXML
-    private TableColumn<ProductoDTO, String> colAnunciante;
+    private TableColumn<ProductoDto, String> colAnunciante;
 
     @FXML
-    private TableColumn<ProductoDTO, String> colDescripcion;
+    private TableColumn<ProductoDto, String> colDescripcion;
 
     @FXML
-    private TableColumn<ProductoDTO, String> colFechaFinPuja;
+    private TableColumn<ProductoDto, String> colFechaFinPuja;
 
     @FXML
-    private TableColumn<ProductoDTO, String> colCodigoUnico;
+    private TableColumn<ProductoDto, String> colCodigoUnico;
 
     @FXML
-    private TableColumn<ProductoDTO, String> colFechaPublicacion;
+    private TableColumn<ProductoDto, String> colFechaPublicacion;
 
     @FXML
-    private TableColumn<ProductoDTO, String> colNombreProducto;
+    private TableColumn<ProductoDto, String> colNombreProducto;
 
     @FXML
-    private TableColumn<ProductoDTO, String> colTipoProducto;
+    private TableColumn<ProductoDto, String> colTipoProducto;
 
     @FXML
-    private TableColumn<ProductoDTO, String> colValorInicial;
+    private TableColumn<ProductoDto, String> colValorInicial;
 
     @FXML
     private TextField txfFechaFinPublicacion;
@@ -66,7 +64,7 @@ public class ProductoViewController {
     private TextField txfFechaPublicacion;
 
     @FXML
-    private TableView<ProductoDTO> tableProductos;
+    private TableView<ProductoDto> tableProductos;
 
     @FXML
     private TextArea txaDescripcion;
@@ -126,7 +124,7 @@ public class ProductoViewController {
      *
      * @param productoSeleccionado
      */
-    private void mostrarInformacionProducto(ProductoDTO productoSeleccionado) {
+    private void mostrarInformacionProducto(ProductoDto productoSeleccionado) {
         if(productoSeleccionado != null){
             txfCodigoUnico.setText(productoSeleccionado.codigoUnico());
             txfNombreProducto.setText(productoSeleccionado.nombreProducto());
@@ -156,7 +154,7 @@ public class ProductoViewController {
 
     private void crearProducto() {
         //1. Capturar los datos
-        ProductoDTO productoDto = construirProductoDto();
+        ProductoDto productoDto = construirProductoDto();
         //2. Validar la información
         if(datosValidos(productoDto)){
             if(productoControllerService.agregarProducto(productoDto)){
@@ -176,7 +174,7 @@ public class ProductoViewController {
     private void eliminarProducto() {
         boolean productoEliminado = false;
         if(productoSeleccionado != null){
-            if(mostrarMensajeConfirmacion("¿Estas seguro de elmininar al empleado?")){
+            if(mostrarMensajeConfirmacion("¿Estas seguro de elmininar al producto?")){
                 productoEliminado = productoControllerService.eliminarProducto(productoSeleccionado.codigoUnico());
                 if(productoEliminado == true){
                     listaProductosDto.remove(productoSeleccionado);
@@ -198,7 +196,7 @@ public class ProductoViewController {
         boolean clienteActualizado = false;
         //1. Capturar los datos
         String codigoUnico = productoSeleccionado.codigoUnico();
-        ProductoDTO productoDto = construirProductoDto();
+        ProductoDto productoDto = construirProductoDto();
         //2. verificar el empleado seleccionado
         if(productoSeleccionado != null){
             //3. Validar la información
@@ -213,6 +211,7 @@ public class ProductoViewController {
                     registrarAcciones("Producto actualizado",1, "Actualizar producto");
                 }else{
                     mostrarMensaje("Notificación producto", "Producto no actualizado", "El producto no se ha actualizado con éxito", Alert.AlertType.INFORMATION);
+                    registrarAcciones("Producto no actualizado",1, "Actualizar producto");
                 }
             }else{
                 mostrarMensaje("Notificación producto", "Producto no creado", "Los datos ingresados son invalidos", Alert.AlertType.ERROR);
@@ -221,8 +220,8 @@ public class ProductoViewController {
         }
     }
 
-    private ProductoDTO construirProductoDto() {
-        return new ProductoDTO(
+    private ProductoDto construirProductoDto() {
+        return new ProductoDto(
                 txfCodigoUnico.getText(),
                 txfNombreProducto.getText(),
                 txaDescripcion.getText(),
@@ -251,7 +250,7 @@ public class ProductoViewController {
         productoControllerService.registrarAcciones(mensaje, nivel, accion);
     }
 
-    private boolean datosValidos(ProductoDTO productoDto) {
+    private boolean datosValidos(ProductoDto productoDto) {
         String mensaje = "";
         if(productoDto.nombreProducto() == null || productoDto.nombreProducto().equals(""))
             mensaje += "El nombre del Producto es invalido \n" ;

@@ -61,8 +61,7 @@ public  class ArchivoUtil {
     }
 
 
-    public static void guardarRegistroLog(String mensajeLog, int nivel, String accion, String rutaArchivo)
-    {
+    public static void guardarRegistroLog(String mensajeLog, int nivel, String accion, String rutaArchivo) {
         String log = "";
         Logger LOGGER = Logger.getLogger(accion);
         FileHandler fileHandler =  null;
@@ -179,6 +178,20 @@ public  class ArchivoUtil {
 
         return fechaRespaldo = "_"+ diaN + mesN + año+"_"+horaN+"_"+minutoN+"_"+segundoN;
 
+
+    }
+
+    public static void copiarArchivoRespaldo(String urlArchivo, String urlDestino){
+        File archivo = new File(urlArchivo);
+        File archivoRespaldo = new File(urlDestino);
+
+
+        try{
+            Files.copy(archivo.toPath(), archivoRespaldo.toPath(),REPLACE_EXISTING);
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
 
     }
 
