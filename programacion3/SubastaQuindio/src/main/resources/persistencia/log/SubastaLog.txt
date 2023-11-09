@@ -330,3 +330,17 @@ nov. 08, 2023 3:27:00 P. M. co.edu.uniquindio.programacion3.subastaquindio.util
 INFORMACIÓN: Inicio Sesión,Inicio de sesión, usuario: Miguel,2023-11-08
 nov. 08, 2023 3:28:03 P. M. co.edu.uniquindio.programacion3.subastaquindio.utils.ArchivoUtil guardarRegistroLog
 INFORMACIÓN: Creación de un comprador, acción realizada por ,Comprador creado,2023-11-08
+nov. 09, 2023 8:39:06 A. M. co.edu.uniquindio.programacion3.subastaquindio.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioSesión,Inicio de sesión,2023-11-09
+nov. 09, 2023 8:39:21 A. M. co.edu.uniquindio.programacion3.subastaquindio.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: Inicio Sesión,Inicio de sesión, usuario: Miguel,2023-11-09
+nov. 09, 2023 8:44:13 A. M. co.edu.uniquindio.programacion3.subastaquindio.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioSesión,Inicio de sesión,2023-11-09
+nov. 09, 2023 8:44:25 A. M. co.edu.uniquindio.programacion3.subastaquindio.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: Inicio Sesión,Inicio de sesión, usuario: Miguel,2023-11-09
+nov. 09, 2023 8:44:56 A. M. co.edu.uniquindio.programacion3.subastaquindio.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: Actualizar producto,Producto actualizado,2023-11-09
+nov. 09, 2023 8:45:56 A. M. co.edu.uniquindio.programacion3.subastaquindio.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioSesión,Inicio de sesión,2023-11-09
+nov. 09, 2023 8:46:22 A. M. co.edu.uniquindio.programacion3.subastaquindio.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: Inicio Sesión,Inicio de sesión, usuario: Miguel,2023-11-09

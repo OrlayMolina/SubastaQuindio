@@ -1,7 +1,9 @@
 package co.edu.uniquindio.programacion3.subastaquindio.viewController;
 
 import co.edu.uniquindio.programacion3.subastaquindio.controller.ProductoController;
+import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.AnuncianteDto;
 import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.ProductoDto;
+import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.UsuarioDto;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,6 +18,8 @@ public class ProductoViewController {
 
     ProductoController productoControllerService;
     ObservableList<ProductoDto> listaProductosDto = FXCollections.observableArrayList();
+    ObservableList<AnuncianteDto> listaAnunciantesDto = FXCollections.observableArrayList();
+    AnuncianteDto anuncianteDto;
     ProductoDto productoSeleccionado;
 
     @FXML
@@ -29,6 +33,12 @@ public class ProductoViewController {
 
     @FXML
     private Button btnEliminar;
+
+    @FXML
+    private Button btnBuscar;
+
+    @FXML
+    private Button btnLimpiarCampos;
 
     @FXML
     private TextField txfTipoProducto;
@@ -70,7 +80,7 @@ public class ProductoViewController {
     private TextArea txaDescripcion;
 
     @FXML
-    private TextField txfAnunciante;
+    private ComboBox<AnuncianteDto> cmbAnunciante;
 
     @FXML
     private TextField txfNombreProducto;
@@ -82,6 +92,36 @@ public class ProductoViewController {
     private TextField txfCodigoUnico;
 
     @FXML
+    void actualizarProducto(ActionEvent event) {
+        actualizarProducto();
+    }
+
+    @FXML
+    void agregarProducto(ActionEvent event) {
+        crearProducto();
+    }
+
+    @FXML
+    void eliminarProducto(ActionEvent event) {
+        eliminarProducto();
+    }
+
+    @FXML
+    void seleccionarImagen(ActionEvent event) {
+
+    }
+
+    @FXML
+    void busquedaProducto(ActionEvent event) {
+
+    }
+
+    @FXML
+    void limpiarBusqueda(ActionEvent event) {
+
+    }
+
+    @FXML
     void initialize() {
         productoControllerService = new ProductoController();
         intiView();
@@ -90,6 +130,8 @@ public class ProductoViewController {
     private void intiView() {
         initDataBinding();
         obtenerProductos();
+        mostrarAnunciantes();
+        getListaAnunciantes();
         tableProductos.getItems().clear();
         tableProductos.setItems(listaProductosDto);
         listenerSelection();
@@ -98,7 +140,7 @@ public class ProductoViewController {
     private void initDataBinding() {
         colCodigoUnico.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().codigoUnico()));
         colNombreProducto.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().nombreProducto()));
-        colAnunciante.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().nombreAnunciante()));
+        colAnunciante.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getAnunciante().toString()));
         colValorInicial.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().valorInicial())));
         colDescripcion.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().descripcion()));
         colFechaPublicacion.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().fechaPublicacion()));
@@ -120,6 +162,11 @@ public class ProductoViewController {
         });
     }
 
+    public void mostrarAnunciantes(){
+        listaAnunciantesDto.add(anuncianteDto);
+        cmbAnunciante.setItems(listaAnunciantesDto);
+    }
+
     /**
      *
      * @param productoSeleccionado
@@ -128,7 +175,7 @@ public class ProductoViewController {
         if(productoSeleccionado != null){
             txfCodigoUnico.setText(productoSeleccionado.codigoUnico());
             txfNombreProducto.setText(productoSeleccionado.nombreProducto());
-            txfAnunciante.setText(productoSeleccionado.nombreAnunciante());
+            cmbAnunciante.setValue(productoSeleccionado.getAnunciante());
             txaDescripcion.setText(productoSeleccionado.descripcion());
             txfValorInicial.setText(String.valueOf(productoSeleccionado.valorInicial()));
             txfFechaPublicacion.setText(productoSeleccionado.fechaPublicacion());
@@ -137,20 +184,7 @@ public class ProductoViewController {
         }
     }
 
-    @FXML
-    void actualizarProducto(ActionEvent event) {
-        actualizarProducto();
-    }
 
-    @FXML
-    void agregarProducto(ActionEvent event) {
-        crearProducto();
-    }
-
-    @FXML
-    void eliminarProducto(ActionEvent event) {
-        eliminarProducto();
-    }
 
     private void crearProducto() {
         //1. Capturar los datos
@@ -227,7 +261,7 @@ public class ProductoViewController {
                 txaDescripcion.getText(),
                 txfTipoProducto.getText(),
                 "",
-                txfAnunciante.getText(),
+                String.valueOf(cmbAnunciante.getValue()),
                 txfFechaPublicacion.getText(),
                 txfFechaFinPublicacion.getText(),
                 Double.valueOf(txfValorInicial.getText())
@@ -238,7 +272,7 @@ public class ProductoViewController {
     private void limpiarCamposProductos() {
         txfCodigoUnico.setText("");
         txfNombreProducto.setText("");
-        txfAnunciante.setText("");
+        cmbAnunciante.setValue(null);
         txfValorInicial.setText("");
         txaDescripcion.setText("");
         txfFechaPublicacion.setText("");
@@ -274,6 +308,11 @@ public class ProductoViewController {
             mostrarMensaje("Notificación producto", "Producto no creado", mensaje, Alert.AlertType.ERROR);
             return false;
         }
+    }
+
+    public ObservableList<AnuncianteDto> getListaAnunciantes() {
+        listaAnunciantesDto.addAll(productoControllerService.obtenerAnunciantes());
+        return listaAnunciantesDto;
     }
 
     private void mostrarMensaje(String titulo, String header, String contenido, Alert.AlertType alertType) {

@@ -12,5 +12,9 @@ public record ProductoDto(
     String fechaFinPublicacion,
     Double valorInicial){
 
+    public AnuncianteDto getAnunciante(){
+        return new AnuncianteDto(nombreAnunciante, "","", "", "", "", "", "");
+    }
+
 }
 
