@@ -53,8 +53,8 @@ public class Persistencia {
         // TODO Auto-generated method stub
         String contenido = "";
         for (Producto producto : listaProductos) {
-            contenido += producto.getCodigoUnico() + "@@" + producto.getNombreProducto() + "@@" + producto.getDescripcion() + "@@" + producto.getNombreAnunciante()
-                    + "@@" + producto.getTipoProducto() + "@@" + producto.getFechaPublicacion() + "@@" + producto.getFechaFinPublicacion() + "@@" + producto.getValorInicial() + "\n";
+            contenido += producto.getCodigoUnico() + "@@" + producto.getNombreProducto() +  "@@" + producto.getNombreAnunciante()
+                    + "@@" + producto.getTipoProducto() + "\n";
         }
         ArchivoUtil.guardarArchivo(RUTA_ARCHIVO_PRODUCTOS, contenido, false);
     }
@@ -78,12 +78,8 @@ public class Persistencia {
             Producto producto = new Producto();
             producto.setCodigoUnico(linea.split("@@")[0]);
             producto.setNombreProducto(linea.split("@@")[1]);
-            producto.setDescripcion(linea.split("@@")[2]);
-            producto.setNombreAnunciante(linea.split("@@")[3]);
-            producto.setTipoProducto(linea.split("@@")[4]);
-            producto.setFechaPublicacion(linea.split("@@")[5]);
-            producto.setFechaFinPublicacion(linea.split("@@")[6]);
-            producto.setValorInicial(Double.parseDouble(linea.split("@@")[7]));
+            producto.setNombreAnunciante(linea.split("@@")[2]);
+            producto.setTipoProducto(linea.split("@@")[3]);
             productos.add(producto);
         }
         return productos;

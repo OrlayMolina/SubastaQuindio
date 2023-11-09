@@ -60,9 +60,8 @@ public class SubastaQuindio implements ISubastaQuindioService, Serializable {
         return encontrado;
     }
     @Override
-    public Producto crearProducto(String codigoUnico, String nombreProducto, String descripcion, String tipoProducto,
-                                  String foto, String nombreAnunciante, String fechaPublicacion, String fechaFinPublicacion,
-                                  Double valorInicial) throws ProductoException{
+    public Producto crearProducto(String codigoUnico, String nombreProducto, String tipoProducto,
+                                  String foto, String nombreAnunciante) throws ProductoException{
         Producto nuevoProducto = null;
         boolean productoExiste = verificarProductoExistente(codigoUnico);
         if(productoExiste){
@@ -71,13 +70,9 @@ public class SubastaQuindio implements ISubastaQuindioService, Serializable {
             nuevoProducto = new Producto();
             nuevoProducto.setCodigoUnico(codigoUnico);
             nuevoProducto.setNombreProducto(nombreProducto);
-            nuevoProducto.setDescripcion(descripcion);
             nuevoProducto.setTipoProducto(tipoProducto);
-            nuevoProducto.setPhoto(foto);
+            nuevoProducto.setFoto(foto);
             nuevoProducto.setNombreAnunciante(nombreAnunciante);
-            nuevoProducto.setFechaPublicacion(fechaPublicacion);
-            nuevoProducto.setFechaPublicacion(fechaFinPublicacion);
-            nuevoProducto.setValorInicial(valorInicial);
             getListaProductos().add(nuevoProducto);
         }
         return nuevoProducto;
@@ -147,13 +142,9 @@ public class SubastaQuindio implements ISubastaQuindioService, Serializable {
         else{
             productoActual.setCodigoUnico(producto.getCodigoUnico());
             productoActual.setNombreProducto(producto.getNombreProducto());
-            productoActual.setDescripcion(producto.getDescripcion());
             productoActual.setTipoProducto(producto.getTipoProducto());
-            productoActual.setPhoto(producto.getPhoto());
+            productoActual.setFoto(producto.getFoto());
             productoActual.setNombreAnunciante(producto.getNombreAnunciante());
-            productoActual.setFechaPublicacion(producto.getFechaPublicacion());
-            productoActual.setFechaFinPublicacion(producto.getFechaFinPublicacion());
-            productoActual.setValorInicial(producto.getValorInicial());
             return true;
         }
     }

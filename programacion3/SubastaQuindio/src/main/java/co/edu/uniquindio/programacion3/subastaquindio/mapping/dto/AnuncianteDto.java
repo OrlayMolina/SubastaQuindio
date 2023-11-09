@@ -15,4 +15,9 @@ public record AnuncianteDto(
     public UsuarioDto getUsuarioAsociado(){
         return new UsuarioDto(usuarioAsociado, "","");
     }
+
+    @Override
+    public String toString() {
+        return cedula + " -- " +nombre + " " + apellido;
+    }
 }

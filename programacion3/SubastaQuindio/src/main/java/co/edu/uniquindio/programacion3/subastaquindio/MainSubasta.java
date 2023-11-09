@@ -14,13 +14,9 @@ public class MainSubasta {
         ProductoDto productoDto = new ProductoDto(
                 "1",
                 "Renault Logan",
-                "Carro nuevo",
                 "TECNOLOGIA",
                 "",
-                "Yarley Camilo Mejía",
-                "2023-08-12",
-                "2023-08-21",
-                1223.00
+                "Yarley Camilo Mejía"
         );
 
         if(modelFactoryController.agregarProducto(productoDto)){
