@@ -165,14 +165,18 @@ public class CompradorViewController {
         CompradorDto compradorDto = construirCompradorDto();
 
         if(datosValidos(compradorDto)){
-            if(compradorControllerService.agregarComprador(compradorDto)){
-                listaCompradores.add(compradorDto);
-                mostrarMensaje("Notificación comprador", "Comprador creado", "El comprador se ha creado con éxito", Alert.AlertType.INFORMATION);
-                registrarAcciones("Comprador creado",1, "Creación de un comprador, acción realizada por " + usuarioLogeado );
-                limpiarCamposAnunciantes();
+            if(validarEdadComprador(compradorDto)){
+                if(compradorControllerService.agregarComprador(compradorDto)){
+                    listaCompradores.add(compradorDto);
+                    mostrarMensaje("Notificación comprador", "Comprador creado", "El comprador se ha creado con éxito", Alert.AlertType.INFORMATION);
+                    registrarAcciones("Comprador creado",1, "Creación de un comprador, acción realizada por " + usuarioLogeado );
+                    limpiarCamposAnunciantes();
 
-            }else{
-                mostrarMensaje("Notificación comprador", "Comprador no creado", "El comprador no se ha creado", Alert.AlertType.ERROR);
+                }else{
+                    mostrarMensaje("Notificación comprador", "Comprador no creado", "El comprador no se ha creado", Alert.AlertType.ERROR);
+                }
+            }else {
+                mostrarMensaje("Notificación comprador", "Comprador no creado", "El comprador es menor de edad", Alert.AlertType.ERROR);
             }
         }else{
             mostrarMensaje("Notificación comprador", "Comprador no creado", "Los datos ingresados son invalidos", Alert.AlertType.ERROR);
@@ -210,17 +214,21 @@ public class CompradorViewController {
         if(compradorSeleccionado != null){
 
             if(datosValidos(compradorSeleccionado)){
-                compradorActualizado = compradorControllerService.actualizarAnunciante(cedula, compradorDto);
-                if(compradorActualizado){
-                    listaCompradores.remove(compradorSeleccionado);
-                    listaCompradores.add(compradorDto);
-                    tableCompradores.refresh();
-                    mostrarMensaje("Notificación comprador", "Comprador actualizado", "El comprador se ha actualizado con éxito.", Alert.AlertType.INFORMATION);
-                    limpiarCamposAnunciantes();
-                    registrarAcciones("Comprador actualizado",1, "Comprador actualizado, acción realizada por " + usuarioLogeado);
-                }else{
-                    mostrarMensaje("Notificación comprador", "Comprador no actualizado", "El comprador no se ha actualizado con éxito", Alert.AlertType.INFORMATION);
-                    registrarAcciones("Comprador no actualizado",1, "Actualizar anunciante");
+                if(validarEdadComprador(compradorDto)){
+                    compradorActualizado = compradorControllerService.actualizarAnunciante(cedula, compradorDto);
+                    if(compradorActualizado){
+                        listaCompradores.remove(compradorSeleccionado);
+                        listaCompradores.add(compradorDto);
+                        tableCompradores.refresh();
+                        mostrarMensaje("Notificación comprador", "Comprador actualizado", "El comprador se ha actualizado con éxito.", Alert.AlertType.INFORMATION);
+                        limpiarCamposAnunciantes();
+                        registrarAcciones("Comprador actualizado",1, "Comprador actualizado, acción realizada por " + usuarioLogeado);
+                    }else{
+                        mostrarMensaje("Notificación comprador", "Comprador no actualizado", "El comprador no se ha actualizado con éxito", Alert.AlertType.INFORMATION);
+                        registrarAcciones("Comprador no actualizado",1, "Actualizar anunciante");
+                    }
+                }else {
+                    mostrarMensaje("Notificación comprador", "Comprador no creado", "El comprador es menor de edad", Alert.AlertType.ERROR);
                 }
             }else{
                 mostrarMensaje("Notificación comprador", "Comprador no creado", "Los datos ingresados son invalidos", Alert.AlertType.ERROR);
@@ -296,6 +304,10 @@ public class CompradorViewController {
 
     private void registrarAcciones(String mensaje, int nivel, String accion) {
         compradorControllerService.registrarAcciones(mensaje, nivel, accion);
+    }
+
+    public boolean validarEdadComprador(CompradorDto compradorDto){
+        return compradorControllerService.validarEdadComprador(compradorDto);
     }
 
     private boolean datosValidos(CompradorDto compradorDto) {

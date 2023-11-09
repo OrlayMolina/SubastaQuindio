@@ -26,6 +26,10 @@ public interface IModelFactoryService {
 
     boolean eliminarProducto(String codigoUnico);
 
+    boolean validarEdadAnunciante(AnuncianteDto anuncianteDto);
+
+    boolean validarEdadComprador(CompradorDto compradorDto);
+
     boolean eliminarAnunciante(String cedula);
 
     boolean eliminarComprador(String cedula);

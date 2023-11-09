@@ -21,6 +21,10 @@ public class AnuncianteController {
         return modelFactoryController.obtenerUsuarios();
     }
 
+    public boolean validarEdadAnunciante(AnuncianteDto anuncianteDto){
+        return modelFactoryController.validarEdadAnunciante(anuncianteDto);
+    }
+
     public boolean agregarAnunciante(AnuncianteDto anuncianteDto) {
         return modelFactoryController.agregarAnunciante(anuncianteDto);
     }

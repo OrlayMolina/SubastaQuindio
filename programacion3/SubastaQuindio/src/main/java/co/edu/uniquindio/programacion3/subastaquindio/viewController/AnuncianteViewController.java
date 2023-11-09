@@ -166,19 +166,27 @@ public class AnuncianteViewController {
         AnuncianteDto anuncianteDto = construirAnuncianteDto();
 
         if(datosValidos(anuncianteDto)){
-            if(anuncianteControllerService.agregarAnunciante(anuncianteDto)){
-                listaAnunciantes.add(anuncianteDto);
-                mostrarMensaje("Notificación anunciante", "Anunciante creado", "El anunciante se ha creado con éxito", Alert.AlertType.INFORMATION);
-                registrarAcciones("Anunciante creado",1, "Creación de un anunciante, acción realizada por "  + usuarioLogeado);
-                limpiarCamposAnunciantes();
+            if(validarEdadAnunciante(anuncianteDto)){
+                if(anuncianteControllerService.agregarAnunciante(anuncianteDto)){
+                    listaAnunciantes.add(anuncianteDto);
+                    mostrarMensaje("Notificación anunciante", "Anunciante creado", "El anunciante se ha creado con éxito", Alert.AlertType.INFORMATION);
+                    registrarAcciones("Anunciante creado",1, "Creación de un anunciante, acción realizada por "  + usuarioLogeado);
+                    limpiarCamposAnunciantes();
 
-            }else{
-                mostrarMensaje("Notificación anunciante", "Anunciante no creado", "El anunciante no se ha creado", Alert.AlertType.ERROR);
+                }else{
+                    mostrarMensaje("Notificación anunciante", "Anunciante no creado", "El anunciante no se ha creado", Alert.AlertType.ERROR);
+                }
+            }else {
+                mostrarMensaje("Notificación anunciante", "Anunciante no creado", "El Anunciante es menor de edad", Alert.AlertType.ERROR);
             }
         }else{
             mostrarMensaje("Notificación anunciante", "Anunciante no creado", "Los datos ingresados son invalidos", Alert.AlertType.ERROR);
         }
 
+    }
+
+    public boolean validarEdadAnunciante(AnuncianteDto anuncianteDto){
+        return anuncianteControllerService.validarEdadAnunciante(anuncianteDto);
     }
 
     private void eliminarAnunciante() {
@@ -211,17 +219,21 @@ public class AnuncianteViewController {
         if(anuncianteSeleccionado != null){
 
             if(datosValidos(anuncianteSeleccionado)){
-                anuncianteActualizado = anuncianteControllerService.actualizarAnunciante(cedula, anuncianteDto);
-                if(anuncianteActualizado){
-                    listaAnunciantes.remove(anuncianteSeleccionado);
-                    listaAnunciantes.add(anuncianteDto);
-                    tableAnunciantes.refresh();
-                    mostrarMensaje("Notificación anunciante", "Anunciante actualizado", "El anunciante se ha actualizado con éxito.", Alert.AlertType.INFORMATION);
-                    limpiarCamposAnunciantes();
-                    registrarAcciones("Anunciante actualizado",1, "Anunciante actualizado, acción realizada por " + usuarioLogeado);
-                }else{
-                    mostrarMensaje("Notificación anunciante", "Anunciante no actualizado", "El anunciante no se ha actualizado con éxito", Alert.AlertType.INFORMATION);
-                    registrarAcciones("Anunciante no actualizado",1, "Actualizar anunciante");
+                if(validarEdadAnunciante(anuncianteDto)){
+                    anuncianteActualizado = anuncianteControllerService.actualizarAnunciante(cedula, anuncianteDto);
+                    if(anuncianteActualizado){
+                        listaAnunciantes.remove(anuncianteSeleccionado);
+                        listaAnunciantes.add(anuncianteDto);
+                        tableAnunciantes.refresh();
+                        mostrarMensaje("Notificación anunciante", "Anunciante actualizado", "El anunciante se ha actualizado con éxito.", Alert.AlertType.INFORMATION);
+                        limpiarCamposAnunciantes();
+                        registrarAcciones("Anunciante actualizado",1, "Anunciante actualizado, acción realizada por " + usuarioLogeado);
+                    }else{
+                        mostrarMensaje("Notificación anunciante", "Anunciante no actualizado", "El anunciante no se ha actualizado con éxito", Alert.AlertType.INFORMATION);
+                        registrarAcciones("Anunciante no actualizado",1, "Actualizar anunciante");
+                    }
+                }else {
+                    mostrarMensaje("Notificación anunciante", "Anunciante no creado", "El Anunciante es menor de edad", Alert.AlertType.ERROR);
                 }
             }else{
                 mostrarMensaje("Notificación anunciante", "Anunciante no creado", "Los datos ingresados son invalidos", Alert.AlertType.ERROR);

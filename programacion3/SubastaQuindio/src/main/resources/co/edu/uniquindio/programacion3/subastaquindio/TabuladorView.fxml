@@ -7,7 +7,7 @@
 
 <AnchorPane prefHeight="520.0" prefWidth="788.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.programacion3.subastaquindio.viewController.TabuladorViewController">
    <children>
-      <TabPane prefHeight="513.0" prefWidth="782.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane fx:id="tabPane" prefHeight="513.0" prefWidth="782.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab text="Anunciante">
             <content>
@@ -100,6 +100,11 @@
               </content>
             </Tab>
             <Tab text="Historial de Pujas">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              </content>
+            </Tab>
+            <Tab text="Mensajes">
               <content>
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
               </content>

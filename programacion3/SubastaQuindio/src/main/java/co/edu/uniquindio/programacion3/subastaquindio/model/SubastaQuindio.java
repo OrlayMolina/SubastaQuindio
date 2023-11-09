@@ -1,12 +1,11 @@
 package co.edu.uniquindio.programacion3.subastaquindio.model;
 
-import co.edu.uniquindio.programacion3.subastaquindio.exceptions.AnuncianteException;
-import co.edu.uniquindio.programacion3.subastaquindio.exceptions.CompradorException;
-import co.edu.uniquindio.programacion3.subastaquindio.exceptions.ProductoException;
-import co.edu.uniquindio.programacion3.subastaquindio.exceptions.UsuarioException;
+import co.edu.uniquindio.programacion3.subastaquindio.exceptions.*;
 import co.edu.uniquindio.programacion3.subastaquindio.model.service.ISubastaQuindioService;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
 
 public class SubastaQuindio implements ISubastaQuindioService, Serializable {
@@ -59,6 +58,24 @@ public class SubastaQuindio implements ISubastaQuindioService, Serializable {
         boolean encontrado = usuarioExiste(usuario, password);
         return encontrado;
     }
+
+    public boolean esMayor(Persona persona) throws PersonaException {
+        boolean mayor = false;
+        LocalDate fechaNacimiento = LocalDate.parse(persona.getFechaNacimiento());
+        LocalDate fechaActual = LocalDate.now();
+        Period periodo = Period.between(fechaNacimiento, fechaActual);
+        int edad = periodo.getYears();
+
+        int edadMinima = 18;
+
+        if (edad >= edadMinima) {
+            mayor = true;
+        } else {
+            throw new PersonaException("No se puede crear el registro porque es menor de edad");
+        }
+        return mayor;
+    }
+
     @Override
     public Producto crearProducto(String codigoUnico, String nombreProducto, String tipoProducto,
                                   String foto, String nombreAnunciante) throws ProductoException{

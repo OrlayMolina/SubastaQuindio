@@ -1,10 +1,7 @@
 package co.edu.uniquindio.programacion3.subastaquindio.controller;
 
 import co.edu.uniquindio.programacion3.subastaquindio.controller.service.IModelFactoryService;
-import co.edu.uniquindio.programacion3.subastaquindio.exceptions.AnuncianteException;
-import co.edu.uniquindio.programacion3.subastaquindio.exceptions.CompradorException;
-import co.edu.uniquindio.programacion3.subastaquindio.exceptions.ProductoException;
-import co.edu.uniquindio.programacion3.subastaquindio.exceptions.UsuarioException;
+import co.edu.uniquindio.programacion3.subastaquindio.exceptions.*;
 import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.AnuncianteDto;
 import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.CompradorDto;
 import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.ProductoDto;
@@ -213,6 +210,32 @@ public class ModelFactoryController implements IModelFactoryService {
             }
             return true;
         }catch (AnuncianteException e){
+            e.getMessage();
+            return false;
+        }
+    }
+
+    @Override
+    public boolean validarEdadAnunciante(AnuncianteDto anuncianteDto){
+        try {
+            Anunciante anunciante = mapper.anuncianteDtoToAnunciante(anuncianteDto);
+            getSubasta().esMayor(anunciante);
+            return true;
+
+        }catch(PersonaException e){
+            e.getMessage();
+            return false;
+        }
+    }
+
+    @Override
+    public boolean validarEdadComprador(CompradorDto compradorDto){
+        try {
+            Comprador comprador = mapper.compradorDtoToComprador(compradorDto);
+            getSubasta().esMayor(comprador);
+            return true;
+
+        }catch(PersonaException e){
             e.getMessage();
             return false;
         }

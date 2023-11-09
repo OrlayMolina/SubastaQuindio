@@ -30,34 +30,6 @@
      </void>
     </object>
    </void>
-   <void method="add">
-    <object class="co.edu.uniquindio.programacion3.subastaquindio.model.Anunciante">
-     <void property="apellido">
-      <string>Bedoya</string>
-     </void>
-     <void property="cedula">
-      <string>1044896352</string>
-     </void>
-     <void property="correo">
-      <string>correo</string>
-     </void>
-     <void property="direccion">
-      <string>universidad</string>
-     </void>
-     <void property="fechaNacimiento">
-      <string>2001-01-01</string>
-     </void>
-     <void property="nombre">
-      <string>Camilo</string>
-     </void>
-     <void property="telefono">
-      <string>3104653325</string>
-     </void>
-     <void property="usuarioAsociado">
-      <string>Miguel rol -- Anunciante</string>
-     </void>
-    </object>
-   </void>
   </void>
   <void property="listaCompradores">
    <void method="add">
@@ -82,34 +54,6 @@
      </void>
      <void property="telefono">
       <string>3124589632</string>
-     </void>
-     <void property="usuarioAsociado">
-      <string>Laura rol -- Comprador</string>
-     </void>
-    </object>
-   </void>
-   <void method="add">
-    <object class="co.edu.uniquindio.programacion3.subastaquindio.model.Comprador">
-     <void property="apellido">
-      <string>Rodriguez</string>
-     </void>
-     <void property="cedula">
-      <string>1094956332</string>
-     </void>
-     <void property="correo">
-      <string>correo</string>
-     </void>
-     <void property="direccion">
-      <string>direccion</string>
-     </void>
-     <void property="fechaNacimiento">
-      <string>2002-10-10</string>
-     </void>
-     <void property="nombre">
-      <string>Tomas</string>
-     </void>
-     <void property="telefono">
-      <string>3114663233</string>
      </void>
      <void property="usuarioAsociado">
       <string>Laura rol -- Comprador</string>
