@@ -22,6 +22,10 @@ public class CompradorController {
         return modelFactoryController.obtenerUsuarios();
     }
 
+    public boolean validarEdadComprador(CompradorDto compradorDto){
+        return modelFactoryController.validarEdadComprador(compradorDto);
+    }
+
     public boolean agregarComprador(CompradorDto compradorDto) {
         return modelFactoryController.agregarComprador(compradorDto);
     }
