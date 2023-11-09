@@ -6,7 +6,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
@@ -17,28 +16,25 @@
 
 <AnchorPane prefHeight="477.0" prefWidth="788.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.programacion3.subastaquindio.viewController.ProductoViewController">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ecf1f5" height="48.0" layoutX="7.0" layoutY="284.0" stroke="#b5aeae" strokeType="INSIDE" width="763.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f3f4f5" height="265.0" layoutX="7.0" layoutY="14.0" stroke="#c3b6b6" strokeType="INSIDE" width="763.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="154.0" layoutX="11.0" layoutY="22.0" stroke="#bca8a8" strokeType="INSIDE" width="214.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ecf1f5" height="48.0" layoutX="7.0" layoutY="205.0" stroke="#b5aeae" strokeType="INSIDE" width="763.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f3f4f5" height="182.0" layoutX="7.0" layoutY="14.0" stroke="#c3b6b6" strokeType="INSIDE" width="763.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="135.0" layoutX="11.0" layoutY="22.0" stroke="#bca8a8" strokeType="INSIDE" width="203.0" />
       <Label layoutX="95.0" layoutY="80.0" text="Foto">
          <font>
             <Font size="24.0" />
          </font>
       </Label>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fdfeff" height="186.0" layoutX="228.0" layoutY="22.0" stroke="#cdc2c2" strokeType="INSIDE" width="533.0" />
-      <GridPane layoutX="240.0" layoutY="25.0" prefHeight="171.0" prefWidth="510.0">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fdfeff" height="166.0" layoutX="222.0" layoutY="22.0" stroke="#cdc2c2" strokeType="INSIDE" width="540.0" />
+      <GridPane layoutX="237.0" layoutY="35.0" prefHeight="135.0" prefWidth="510.0">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="230.0" />
-            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="60.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="230.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="228.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="68.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="228.0" />
         </columnConstraints>
         <rowConstraints>
           <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
@@ -53,55 +49,32 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label text="Fecha de Publicación:" GridPane.rowIndex="3">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-            <Label text="Fecha Fin Publicación:" GridPane.columnIndex="2" GridPane.rowIndex="3">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
             <TextField fx:id="txfNombreProducto" prefHeight="34.0" prefWidth="230.0" promptText="Nombre del Producto ..." GridPane.rowIndex="1" />
-            <Label text="Valor Inicial:" GridPane.rowIndex="6">
+            <Label text="Tipo Producto:" GridPane.columnIndex="2" GridPane.rowIndex="3">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <TextField fx:id="txfValorInicial" prefHeight="35.0" prefWidth="199.0" promptText="Ingrese el valor Inicial ..." GridPane.rowIndex="7" />
-            <Label text="Tipo Producto:" GridPane.columnIndex="2" GridPane.rowIndex="6">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-            <TextField fx:id="txfFechaPublicacion" promptText="Fecha de Publicación ..." GridPane.rowIndex="4" />
-            <TextField fx:id="txfFechaFinPublicacion" promptText="Fecha Fin de Publicacion ..." GridPane.columnIndex="2" GridPane.rowIndex="4" />
-            <TextField fx:id="txfTipoProducto" promptText="Tipo de Producto ..." GridPane.columnIndex="2" GridPane.rowIndex="7" />
             <ComboBox fx:id="cmbAnunciante" prefWidth="258.0" promptText="Elegir Anunciante" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <ComboBox fx:id="cmbTipoProducto" prefWidth="291.0" promptText="Eligir el Tipo de Producto" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+            <Label text="Código Único:" GridPane.rowIndex="3">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <TextField fx:id="txfCodigoUnico" prefWidth="214.0" promptText="Código se genera automaticamente" GridPane.rowIndex="4" />
          </children>
       </GridPane>
-      <TextArea fx:id="txaDescripcion" layoutX="228.0" layoutY="217.0" prefHeight="57.0" prefWidth="533.0" promptText="Descripción del Producto ..." />
-      <TableView fx:id="tableProductos" layoutX="7.0" layoutY="335.0" prefHeight="135.0" prefWidth="763.0">
+      <TableView fx:id="tableProductos" layoutX="7.0" layoutY="261.0" prefHeight="209.0" prefWidth="763.0">
         <columns>
-            <TableColumn fx:id="colCodigoUnico" prefWidth="87.0" text="Código Único" />
-          <TableColumn fx:id="colNombreProducto" prefWidth="112.0" text="Nombre Producto" />
-          <TableColumn fx:id="colDescripcion" prefWidth="106.0" text="Descripción" />
-            <TableColumn fx:id="colAnunciante" prefWidth="79.0" text="Anunciante" />
-            <TableColumn fx:id="colTipoProducto" prefWidth="102.0" text="Tipo Producto" />
-            <TableColumn fx:id="colFechaPublicacion" prefWidth="106.0" text="Fecha Publicación" />
-            <TableColumn fx:id="colFechaFinPuja" prefWidth="92.0" text="Fecha Fin Puja" />
-            <TableColumn fx:id="colValorInicial" prefWidth="78.0" text="Valor Inicial" />
+            <TableColumn fx:id="colCodigoUnico" prefWidth="117.0" text="Código Único" />
+          <TableColumn fx:id="colNombreProducto" prefWidth="214.0" text="Nombre Producto" />
+            <TableColumn fx:id="colAnunciante" prefWidth="255.0" text="Anunciante" />
+            <TableColumn fx:id="colTipoProducto" prefWidth="176.0" text="Tipo Producto" />
         </columns>
       </TableView>
-      <Label layoutX="74.0" layoutY="216.0" text="Código Único:">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <TextField fx:id="txfCodigoUnico" layoutX="11.0" layoutY="243.0" prefWidth="214.0" promptText="Código se genera automaticamente" />
-      <Button layoutX="11.0" layoutY="176.0" mnemonicParsing="false" onAction="#seleccionarImagen" prefHeight="32.0" prefWidth="214.0" styleClass="primary" text="Eligir Imagen" />
-      <GridPane layoutX="58.0" layoutY="293.0">
+      <Button fx:id="btnAgregarImagen" layoutX="11.0" layoutY="157.0" mnemonicParsing="false" onAction="#seleccionarImagen" prefHeight="32.0" prefWidth="203.0" styleClass="primary" text="Eligir Imagen" />
+      <GridPane layoutX="58.0" layoutY="215.0">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="88.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="50.0" />

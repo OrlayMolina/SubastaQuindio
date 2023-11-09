@@ -31,7 +31,7 @@
                     <children>
                         <SplitPane layoutX="6.0" layoutY="6.0" orientation="VERTICAL" prefHeight="542.0" prefWidth="790.0">
                             <items>
-                                <fx:include source="PaginaPrincipalView.fxml" />
+                                <fx:include source="AnuncioView.fxml" />
                             </items>
                         </SplitPane>
                     </children>
@@ -71,7 +71,17 @@
             </Tab>
             <Tab text="Pujas">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+
+                      <children>
+                          <SplitPane layoutX="6.0" layoutY="6.0" orientation="VERTICAL" prefHeight="478.0" prefWidth="790.0">
+                              <items>
+                                  <fx:include source="PujaView.fxml" />
+                              </items>
+                          </SplitPane>
+                      </children>
+
+                  </AnchorPane>
               </content>
             </Tab>
             <Tab text="Usuarios">
@@ -87,6 +97,11 @@
                       </children>
 
                   </AnchorPane>
+              </content>
+            </Tab>
+            <Tab text="Historial de Pujas">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
               </content>
             </Tab>
         </tabs>

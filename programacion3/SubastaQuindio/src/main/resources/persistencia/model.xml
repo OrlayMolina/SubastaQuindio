@@ -65,28 +65,19 @@
    <void method="add">
     <object class="co.edu.uniquindio.programacion3.subastaquindio.model.Producto">
      <void property="codigoUnico">
-      <string>1243</string>
+      <string>001</string>
      </void>
-     <void property="descripcion">
-      <string>Lavadora casi nueva</string>
-     </void>
-     <void property="fechaFinPublicacion">
-      <string>29-09-2023</string>
-     </void>
-     <void property="fechaPublicacion">
-      <string>29-09-2023</string>
+     <void property="foto">
+      <string></string>
      </void>
      <void property="nombreAnunciante">
       <string>1094587625 -- Miguel Angel Arias Rincon</string>
      </void>
      <void property="nombreProducto">
-      <string>Lavadora  actualizada</string>
+      <string>Lavadora</string>
      </void>
      <void property="tipoProducto">
       <string>HOGAR</string>
-     </void>
-     <void property="valorInicial">
-      <double>1520000.0</double>
      </void>
     </object>
    </void>
