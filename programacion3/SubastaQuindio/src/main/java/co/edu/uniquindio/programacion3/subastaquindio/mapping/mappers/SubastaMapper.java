@@ -1,14 +1,8 @@
 package co.edu.uniquindio.programacion3.subastaquindio.mapping.mappers;
 
 
-import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.AnuncianteDto;
-import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.CompradorDto;
-import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.ProductoDto;
-import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.UsuarioDto;
-import co.edu.uniquindio.programacion3.subastaquindio.model.Anunciante;
-import co.edu.uniquindio.programacion3.subastaquindio.model.Comprador;
-import co.edu.uniquindio.programacion3.subastaquindio.model.Producto;
-import co.edu.uniquindio.programacion3.subastaquindio.model.Usuario;
+import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.*;
+import co.edu.uniquindio.programacion3.subastaquindio.model.*;
 import org.mapstruct.IterableMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.Named;
@@ -25,6 +19,7 @@ public interface SubastaMapper {
     @Named("productoToProductoDto")
     ProductoDto productoToProductoDto(Producto producto);
 
+    //@Mappiing(target ="producto", source="productoToProductoDto")
     Producto productoDtoToProducto(ProductoDto productoDto);
 
     @IterableMapping(qualifiedByName = "productoToProductoDto")
@@ -54,5 +49,12 @@ public interface SubastaMapper {
     @IterableMapping(qualifiedByName = "compradorToCompradorDto")
     List<CompradorDto> getCompradorDto(List<Comprador> listaCompradores);
 
+    @Named("anuncioToAnuncioDto")
+    AnuncioDto anuncioToAnuncioDto(Anuncio anuncio);
+
+    Anuncio anuncioDtoToAnuncio(AnuncioDto anuncioDto);
+
+    @IterableMapping(qualifiedByName = "anuncioToAnuncioDto")
+    List<AnuncioDto> getAnuncioDto(List<Anuncio> listaAnuncios);
 
 }

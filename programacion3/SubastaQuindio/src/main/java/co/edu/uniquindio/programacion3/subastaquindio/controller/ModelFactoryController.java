@@ -2,10 +2,7 @@ package co.edu.uniquindio.programacion3.subastaquindio.controller;
 
 import co.edu.uniquindio.programacion3.subastaquindio.controller.service.IModelFactoryService;
 import co.edu.uniquindio.programacion3.subastaquindio.exceptions.*;
-import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.AnuncianteDto;
-import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.CompradorDto;
-import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.ProductoDto;
-import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.UsuarioDto;
+import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.*;
 import co.edu.uniquindio.programacion3.subastaquindio.mapping.mappers.SubastaMapper;
 import co.edu.uniquindio.programacion3.subastaquindio.model.*;
 import co.edu.uniquindio.programacion3.subastaquindio.utils.Persistencia;
@@ -119,6 +116,11 @@ public class ModelFactoryController implements IModelFactoryService {
     }
 
     @Override
+    public List<AnuncioDto> obtenerAnuncios() {
+        return  mapper.getAnuncioDto(subasta.getListaAnuncios());
+    }
+
+    @Override
     public boolean agregarProducto(ProductoDto productoDto) {
         try{
             if(!subasta.verificarProductoExistente(productoDto.codigoUnico())) {
@@ -211,6 +213,47 @@ public class ModelFactoryController implements IModelFactoryService {
             return true;
         }catch (AnuncianteException e){
             e.getMessage();
+            return false;
+        }
+    }
+
+    @Override
+    public boolean agregarAnuncio(AnuncioDto anuncioDto) {
+        try{
+            if(!subasta.verificarAnuncioExistente(anuncioDto.codigo())) {
+                Anuncio anuncio = mapper.anuncioDtoToAnuncio(anuncioDto);
+                getSubasta().agregarAnuncio(anuncio);
+                guardarResourceXML();
+            }
+            return true;
+        }catch (AnuncioException e){
+            e.getMessage();
+            return false;
+        }
+    }
+
+    @Override
+    public boolean eliminarAnuncio(String codigo) {
+        boolean flagExiste = false;
+        try {
+            flagExiste = getSubasta().eliminarAnuncio(codigo);
+            guardarResourceXML(); //Pendiente verificar si este método es adecuado
+        } catch (AnuncioException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return flagExiste;
+    }
+
+    @Override
+    public boolean actualizarAnuncio(String codigoActual, AnuncioDto anuncioDto) {
+        try {
+            Anuncio anuncio = mapper.anuncioDtoToAnuncio(anuncioDto);
+            getSubasta().actualizarAnuncio(codigoActual, anuncio);
+            guardarResourceXML(); //Pendiente verificar si este método es adecuado
+            return true;
+        } catch (AnuncioException e) {
+            e.printStackTrace();
             return false;
         }
     }

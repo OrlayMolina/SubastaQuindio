@@ -19,4 +19,6 @@ public class Anunciante extends Persona implements Serializable {
     public void setUsuarioAsociado(String usuarioAsociado) {
         this.usuarioAsociado = usuarioAsociado;
     }
+
+
 }

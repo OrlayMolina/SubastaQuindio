@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 public class Comprador extends Persona implements Serializable {
 
+    private static final long serialVersionUID = 1L;
     String usuarioAsociado;
 
     public Comprador(){

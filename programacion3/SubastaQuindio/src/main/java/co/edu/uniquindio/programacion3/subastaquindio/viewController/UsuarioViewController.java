@@ -161,7 +161,7 @@ public class UsuarioViewController {
                 }
             }
         }else{
-            mostrarMensaje("Notificación usuario", "Estudiante no seleccionado", "Seleccionado un usuario de la lista", Alert.AlertType.WARNING);
+            mostrarMensaje("Notificación usuario", "Usuario no seleccionado", "Seleccionado un usuario de la lista", Alert.AlertType.WARNING);
         }
     }
 

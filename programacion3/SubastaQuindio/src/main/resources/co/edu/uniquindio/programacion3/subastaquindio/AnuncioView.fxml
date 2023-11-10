@@ -2,7 +2,6 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
-<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -40,45 +39,45 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <ComboBox prefWidth="150.0" promptText="Productos" GridPane.columnIndex="4" />
+            <ComboBox fx:id="cmbProducto" prefWidth="150.0" promptText="Productos ..." GridPane.columnIndex="4" />
             <Label text="Anunciante:" GridPane.rowIndex="2">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <ComboBox prefHeight="64.0" prefWidth="135.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <ComboBox fx:id="cmbAnunciante" prefHeight="64.0" prefWidth="135.0" promptText="Anunciantes ..." GridPane.columnIndex="1" GridPane.rowIndex="2" />
             <Label text="Hora Fin del Anuncio:" GridPane.rowIndex="4">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <DatePicker GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <Label text="Código Anuncio:">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <TextField GridPane.columnIndex="1" />
+            <TextField fx:id="txfCodigoAnuncio" promptText="Código" GridPane.columnIndex="1" />
             <Label text="Fecha de publicación:" GridPane.columnIndex="3" GridPane.rowIndex="2">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <DatePicker GridPane.columnIndex="4" GridPane.rowIndex="2" />
             <Label text="Valor Incial Subasta:" GridPane.columnIndex="3" GridPane.rowIndex="4">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </Label>
-            <TextField GridPane.columnIndex="4" GridPane.rowIndex="4" />
+            <TextField fx:id="txfValorInicial" promptText="Ingrese el valor" GridPane.columnIndex="4" GridPane.rowIndex="4" />
+            <TextField fx:id="txfFechaPublicacion" promptText="Fecha Publicacion" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+            <TextField fx:id="txfFechaFinPublicacion" promptText="Fecha Fin" GridPane.columnIndex="1" GridPane.rowIndex="4" />
          </children>
       </GridPane>
-      <Label layoutX="86.0" layoutY="85.0" text="Foto">
+      <Label layoutX="80.0" layoutY="83.0" text="Foto">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
-      <TextArea layoutX="212.0" layoutY="127.0" prefHeight="52.0" prefWidth="550.0" promptText="Descripción del Anuncio ...." />
+      <TextArea fx:id="txaDescripcion" layoutX="212.0" layoutY="127.0" prefHeight="52.0" prefWidth="412.0" promptText="Descripción del Anuncio ...." />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ecf1f5" height="52.0" layoutX="14.0" layoutY="186.0" stroke="#b5aeae" strokeType="INSIDE" width="748.0" />
       <GridPane layoutX="57.0" layoutY="197.0">
          <columnConstraints>
@@ -96,31 +95,38 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Button fx:id="btnAgregar" mnemonicParsing="false" onAction="#agregarUsuario" prefHeight="31.0" prefWidth="100.0" styleClass="primary" text="Agregar">
+            <Button fx:id="btnAgregar" mnemonicParsing="false" onAction="#agregarAnuncio" prefHeight="31.0" prefWidth="100.0" styleClass="primary" text="Agregar">
                <font>
                   <Font size="11.0" />
                </font>
             </Button>
-            <Button fx:id="btnActualizar" mnemonicParsing="false" onAction="#actualizarUsuario" prefHeight="38.0" prefWidth="100.0" styleClass="primary" text="Actualizar" GridPane.columnIndex="2">
+            <Button fx:id="btnActualizar" mnemonicParsing="false" onAction="#actualizarAnuncio" prefHeight="38.0" prefWidth="100.0" styleClass="primary" text="Actualizar" GridPane.columnIndex="2">
                <font>
                   <Font size="11.0" />
                </font>
             </Button>
-            <Button fx:id="btnEliminar" mnemonicParsing="false" onAction="#eliminarUsuario" prefHeight="52.0" prefWidth="100.0" styleClass="primary" text="Eliminar" GridPane.columnIndex="4" />
-            <Button fx:id="btnBuscar" mnemonicParsing="false" onAction="#busquedaUsuario" prefHeight="52.0" prefWidth="100.0" styleClass="primary" text="Buscar" GridPane.columnIndex="6" />
+            <Button fx:id="btnEliminar" mnemonicParsing="false" onAction="#eliminarAnuncio" prefHeight="52.0" prefWidth="100.0" styleClass="primary" text="Eliminar" GridPane.columnIndex="4" />
+            <Button fx:id="btnBuscar" mnemonicParsing="false" onAction="#busquedaAnuncio" prefHeight="52.0" prefWidth="100.0" styleClass="primary" text="Buscar" GridPane.columnIndex="6" />
             <Button fx:id="btnLimpiarCampos" mnemonicParsing="false" onAction="#limpiarBusqueda" prefHeight="32.0" prefWidth="145.0" styleClass="primary" text="Limpiar Campos" GridPane.columnIndex="8" />
          </children>
       </GridPane>
-      <TableView layoutX="14.0" layoutY="246.0" prefHeight="217.0" prefWidth="748.0">
+      <TableView fx:id="tableAnuncios" layoutX="14.0" layoutY="246.0" prefHeight="217.0" prefWidth="748.0">
         <columns>
-          <TableColumn prefWidth="56.0" text="Código" />
-          <TableColumn prefWidth="109.0" text="Producto" />
-            <TableColumn prefWidth="129.0" text="Anunciante" />
-            <TableColumn prefWidth="87.0" text="Fecha Inicio" />
-            <TableColumn prefWidth="89.0" text="Fecha Fin" />
-            <TableColumn prefWidth="128.0" text="Valor Subasta" />
-            <TableColumn prefWidth="149.0" text="Descripción" />
+          <TableColumn fx:id="colCodigo" prefWidth="51.0" text="Código" />
+          <TableColumn fx:id="colProducto" prefWidth="104.0" text="Producto" />
+            <TableColumn fx:id="colAnunciante" prefWidth="123.0" text="Anunciante" />
+            <TableColumn fx:id="colFechaPublicacion" text="Fecha Inicio" />
+            <TableColumn fx:id="colFechaFinPublicacion" prefWidth="83.0" text="Fecha Fin" />
+            <TableColumn fx:id="colValorInicial" prefWidth="112.0" text="Valor Subasta" />
+            <TableColumn fx:id="colDescripcion" prefWidth="119.0" text="Descripción" />
+            <TableColumn fx:id="colEstado" prefWidth="75.0" text="Estado" />
         </columns>
       </TableView>
+      <ComboBox fx:id="cmbEstadoAnuncio" layoutX="642.0" layoutY="145.0" prefHeight="52.0" prefWidth="120.0" promptText="Estados" />
+      <Label layoutX="642.0" layoutY="124.0" text="Estado del Anuncio: ">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

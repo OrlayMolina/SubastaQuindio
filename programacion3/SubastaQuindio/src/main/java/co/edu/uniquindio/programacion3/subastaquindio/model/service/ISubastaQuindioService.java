@@ -1,14 +1,8 @@
 package co.edu.uniquindio.programacion3.subastaquindio.model.service;
 
 import co.edu.uniquindio.programacion3.subastaquindio.enumm.TipoProducto;
-import co.edu.uniquindio.programacion3.subastaquindio.exceptions.AnuncianteException;
-import co.edu.uniquindio.programacion3.subastaquindio.exceptions.CompradorException;
-import co.edu.uniquindio.programacion3.subastaquindio.exceptions.ProductoException;
-import co.edu.uniquindio.programacion3.subastaquindio.exceptions.UsuarioException;
-import co.edu.uniquindio.programacion3.subastaquindio.model.Anunciante;
-import co.edu.uniquindio.programacion3.subastaquindio.model.Comprador;
-import co.edu.uniquindio.programacion3.subastaquindio.model.Producto;
-import co.edu.uniquindio.programacion3.subastaquindio.model.Usuario;
+import co.edu.uniquindio.programacion3.subastaquindio.exceptions.*;
+import co.edu.uniquindio.programacion3.subastaquindio.model.*;
 
 import java.util.ArrayList;
 
@@ -26,6 +20,8 @@ public interface ISubastaQuindioService {
 
     Boolean eliminarComprador(String cedula) throws CompradorException;
 
+    Boolean eliminarAnuncio(String cedula) throws AnuncioException;
+
     boolean actualizarProducto(String codigoUnico, Producto producto) throws ProductoException;
 
     boolean actualizarUsuario(String nombreUsuario, Usuario usuario) throws UsuarioException;
@@ -33,6 +29,8 @@ public interface ISubastaQuindioService {
     boolean actualizarAnunciante(String cedula, Anunciante anunciante) throws AnuncianteException;
 
     boolean actualizarComprador(String cedula, Comprador comprador) throws CompradorException;
+
+    boolean actualizarAnuncio(String codigo, Anuncio anuncio) throws AnuncioException;
 
     boolean verificarProductoExistente(String codigoUnico) throws ProductoException;
 
@@ -42,7 +40,11 @@ public interface ISubastaQuindioService {
 
     boolean verificarCompradorExistente(String cedula) throws CompradorException;
 
+    boolean verificarAnuncioExistente(String codigo) throws AnuncioException;
+
     boolean usuarioExiste(String nombreUsuario, String password);
+
+    boolean anuncioExiste(String cedula);
 
     Producto obtenerProducto(String cedula);
 
@@ -51,6 +53,8 @@ public interface ISubastaQuindioService {
     Anunciante obtenerAnunciante(String cedula);
 
     Comprador obtenerComprador(String cedula);
+
+    Anuncio obtenerAnuncio(String cedula);
 
     ArrayList<Producto> obtenerProductos();
 }

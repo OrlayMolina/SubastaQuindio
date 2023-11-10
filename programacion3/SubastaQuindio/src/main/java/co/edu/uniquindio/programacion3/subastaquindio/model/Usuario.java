@@ -12,7 +12,6 @@ public class Usuario implements Serializable {
 
     private String usuario;
     private String contrasenia;
-
     private Rol rol;
 
     public Usuario(){

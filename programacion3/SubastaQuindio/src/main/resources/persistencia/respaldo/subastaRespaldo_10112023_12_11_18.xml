@@ -17,7 +17,7 @@
       <string>Barrio Lindaraja Mza 2 casa 34</string>
      </void>
      <void property="fechaNacimiento">
-      <string>15/05/1989</string>
+      <string>1989-10-10</string>
      </void>
      <void property="nombre">
       <string>Miguel Angel</string>
@@ -26,7 +26,7 @@
       <string>3107845695</string>
      </void>
      <void property="usuarioAsociado">
-      <string>Miguel rol -- Anunciante rol -- </string>
+      <string>Miguel rol -- Anunciante</string>
      </void>
     </object>
    </void>
@@ -45,7 +45,7 @@
       <string>universidad</string>
      </void>
      <void property="fechaNacimiento">
-      <string>2000-01-01</string>
+      <string>2005-01-01</string>
      </void>
      <void property="nombre">
       <string>Camilo</string>
@@ -55,6 +55,43 @@
      </void>
      <void property="usuarioAsociado">
       <string>Miguel rol -- Anunciante</string>
+     </void>
+    </object>
+   </void>
+  </void>
+  <void property="listaAnuncios">
+   <void method="add">
+    <object class="co.edu.uniquindio.programacion3.subastaquindio.model.Anuncio">
+     <void property="codigo">
+      <string>001</string>
+     </void>
+     <void property="descripcion">
+      <string>Camioneta casi nueva 4X4</string>
+     </void>
+     <void property="estado">
+      <string>Publicado</string>
+     </void>
+     <void property="producto">
+      <object class="co.edu.uniquindio.programacion3.subastaquindio.model.Producto">
+       <void property="codigoUnico">
+        <string>001</string>
+       </void>
+       <void property="foto">
+        <string></string>
+       </void>
+       <void property="nombreAnunciante">
+        <string>1094587625 -- Miguel Angel Arias Rincon</string>
+       </void>
+       <void property="nombreProducto">
+        <string>Lavadora</string>
+       </void>
+       <void property="tipoProducto">
+        <string>HOGAR</string>
+       </void>
+      </object>
+     </void>
+     <void property="valorInicial">
+      <double>7500000.0</double>
      </void>
     </object>
    </void>
@@ -75,13 +112,41 @@
       <string>Los Naranjos casa29 b</string>
      </void>
      <void property="fechaNacimiento">
-      <string>10/10/2001</string>
+      <string>2000-01-20</string>
      </void>
      <void property="nombre">
       <string>Laura Sofia</string>
      </void>
      <void property="telefono">
       <string>3124589632</string>
+     </void>
+     <void property="usuarioAsociado">
+      <string>Laura rol -- Comprador rol -- </string>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.programacion3.subastaquindio.model.Comprador">
+     <void property="apellido">
+      <string>Rodriguez</string>
+     </void>
+     <void property="cedula">
+      <string>1094956332</string>
+     </void>
+     <void property="correo">
+      <string>correo</string>
+     </void>
+     <void property="direccion">
+      <string>direccion</string>
+     </void>
+     <void property="fechaNacimiento">
+      <string>2002-10-10</string>
+     </void>
+     <void property="nombre">
+      <string>Tomas</string>
+     </void>
+     <void property="telefono">
+      <string>3114663233</string>
      </void>
      <void property="usuarioAsociado">
       <string>Laura rol -- Comprador</string>

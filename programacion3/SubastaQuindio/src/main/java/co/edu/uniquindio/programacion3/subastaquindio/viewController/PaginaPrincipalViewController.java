@@ -6,7 +6,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
-public class AnunciosViewController {
+public class PaginaPrincipalViewController {
 
     InicioViewController inicioViewController = new InicioViewController();
 
