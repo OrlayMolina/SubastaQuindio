@@ -7,6 +7,6 @@ public record UsuarioDto(
 
     @Override
     public String toString(){
-        return usuario + " rol -- " + rol;
+        return usuario + " -- " + rol;
     }
 }

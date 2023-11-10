@@ -8,11 +8,10 @@ public class Anuncio implements Serializable {
 
     private static final long serialVersionUID = 1L;
     private String codigo;
-    private String nombreProducto;
-    private String documentoAnunciante;
-    private String nombreAnunciante;
-    private LocalDate fechaPublicacion;
-    private LocalDate fechaFinPublicacion;
+    private String producto;
+    private String anunciante;
+    private String fechaPublicacion;
+    private String fechaFinPublicacion;
     private double valorInicial;
     private String descripcion;
     private String estado;
@@ -29,43 +28,35 @@ public class Anuncio implements Serializable {
         this.codigo = codigo;
     }
 
-    public String getNombreProducto() {
-        return nombreProducto;
+    public String getProducto() {
+        return producto;
     }
 
-    public void setNombreProducto(String nombreProducto) {
-        this.nombreProducto = nombreProducto;
+    public void setProducto(String producto) {
+        this.producto = producto;
     }
 
-    public String getDocumentoAnunciante() {
-        return documentoAnunciante;
+    public String getAnunciante() {
+        return anunciante;
     }
 
-    public void setDocumentoAnunciante(String documentoAnunciante) {
-        this.documentoAnunciante = documentoAnunciante;
+    public void setAnunciante(String anunciante) {
+        this.anunciante = anunciante;
     }
 
-    public String getNombreAnunciante() {
-        return nombreAnunciante;
-    }
-
-    public void setNombreAnunciante(String nombreAnunciante) {
-        this.nombreAnunciante = nombreAnunciante;
-    }
-
-    public LocalDate getFechaPublicacion() {
+    public String getFechaPublicacion() {
         return fechaPublicacion;
     }
 
-    public void setFechaPublicacion(LocalDate fechaPublicacion) {
+    public void setFechaPublicacion(String fechaPublicacion) {
         this.fechaPublicacion = fechaPublicacion;
     }
 
-    public LocalDate getFechaFinPublicacion() {
+    public String getFechaFinPublicacion() {
         return fechaFinPublicacion;
     }
 
-    public void setFechaFinPublicacion(LocalDate fechaFinPublicacion) {
+    public void setFechaFinPublicacion(String fechaFinPublicacion) {
         this.fechaFinPublicacion = fechaFinPublicacion;
     }
 

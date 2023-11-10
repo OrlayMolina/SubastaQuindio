@@ -21,11 +21,11 @@ public class AnuncioUtil {
         return anuncioDto -> anuncioDto.getAnuncianteDto().toString().contains(nombreProducto);
     }
 
-    public static Predicate<AnuncioDto> buscarPorFechaPublicacion(LocalDate fechaPublicacion){
+    public static Predicate<AnuncioDto> buscarPorFechaPublicacion(String fechaPublicacion){
         return anuncioDto -> anuncioDto.fechaPublicacion().equals(fechaPublicacion);
     }
 
-    public static Predicate<AnuncioDto> buscarPorFechaFinPublicacion(LocalDate fechaFinPublicacion){
+    public static Predicate<AnuncioDto> buscarPorFechaFinPublicacion(String fechaFinPublicacion){
         return anuncioDto -> anuncioDto.fechaFinPublicacion().equals(fechaFinPublicacion);
     }
 
@@ -42,7 +42,7 @@ public class AnuncioUtil {
     }
 
     public static Predicate<AnuncioDto> buscarPorTodo(String codigo, ProductoDto productoDto, AnuncianteDto anuncianteDto,
-                                                      LocalDate fechaPublicacion, LocalDate fechaFinPublicacion, double valorInicial,
+                                                      String fechaPublicacion, String fechaFinPublicacion, double valorInicial,
                                                       String descripcion, String estado) {
 
         Predicate<AnuncioDto> predicado = anuncioDto -> true;
@@ -56,10 +56,10 @@ public class AnuncioUtil {
         if(!anuncianteDto.toString().isEmpty() && !anuncianteDto.toString().equals("null")){
             predicado = predicado.and(buscarPorAnunciante(anuncianteDto.toString()));
         }
-        if( fechaPublicacion != null ){
+        if( fechaPublicacion != null && !fechaPublicacion.isEmpty()){
             predicado = predicado.and(buscarPorFechaPublicacion(fechaPublicacion));
         }
-        if( fechaFinPublicacion != null){
+        if( fechaFinPublicacion != null && !fechaFinPublicacion.isEmpty()){
             predicado = predicado.and(buscarPorFechaFinPublicacion(fechaFinPublicacion));
         }
         if( valorInicial != 0){

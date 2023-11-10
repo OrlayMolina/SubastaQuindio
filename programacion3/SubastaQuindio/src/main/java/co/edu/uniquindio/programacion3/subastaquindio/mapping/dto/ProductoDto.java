@@ -14,7 +14,7 @@ public record ProductoDto(
 
     @Override
     public String toString() {
-        return codigoUnico + ' '  + nombreProducto;
+        return codigoUnico + "  "  + nombreProducto;
     }
 }
 

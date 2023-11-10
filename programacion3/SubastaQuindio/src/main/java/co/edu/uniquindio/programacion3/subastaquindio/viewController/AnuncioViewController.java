@@ -59,7 +59,7 @@ public class AnuncioViewController {
     private ComboBox<ProductoDto> cmbProducto;
 
     @FXML
-    private TableColumn<AnuncianteDto, String> colAnunciante;
+    private TableColumn<AnuncioDto, String> colAnunciante;
 
     @FXML
     private TableColumn<AnuncioDto, String> colCodigo;
@@ -83,10 +83,10 @@ public class AnuncioViewController {
     private TableColumn<AnuncioDto, String> colValorInicial;
 
     @FXML
-    private DatePicker dateFechaFinAnuncio;
+    private TextField txfFechaFinPublicacion;
 
     @FXML
-    private DatePicker dateFechaPublicacion;
+    private TextField txfFechaPublicacion;
 
     @FXML
     private TableView<AnuncioDto> tableAnuncios;
@@ -115,8 +115,8 @@ public class AnuncioViewController {
         String codigo = txfCodigoAnuncio.getText();
         ProductoDto productoDto = cmbProducto.getValue();
         AnuncianteDto anuncianteDto = cmbAnunciante.getValue();
-        LocalDate fechaPublicacion = dateFechaPublicacion.getValue();
-        LocalDate fechaFinPublicacion = dateFechaFinAnuncio.getValue();
+        String fechaPublicacion = txfFechaPublicacion.getText();
+        String fechaFinPublicacion = txfFechaFinPublicacion.getText();
         double valorInicial = Double.parseDouble(txfValorInicial.getText());
         String descripcion = txaDescripcion.getText();
         String estado = cmbEstadoAnuncio.getValue();
@@ -156,9 +156,9 @@ public class AnuncioViewController {
     private void initDataBinding() {
         colCodigo.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().codigo()));
         colProducto.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getProductoDto().toString()));
-        colAnunciante.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getUsuarioAsociado().toString()));
-        colFechaPublicacion.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().fechaPublicacion())));
-        colFechaFinPublicacion.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().fechaFinPublicacion())));
+        colAnunciante.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getAnuncianteDto().toString()));
+        colFechaPublicacion.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().fechaPublicacion().toString()));
+        colFechaFinPublicacion.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().fechaFinPublicacion().toString()));
         colValorInicial.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().valorInicial())));
         colDescripcion.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().descripcion()));
         colEstado.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().estado()));
@@ -259,7 +259,7 @@ public class AnuncioViewController {
     }
 
     private void buscarAnuncio(String codigo, ProductoDto productoDto, AnuncianteDto anuncianteDto,
-                               LocalDate fechaPublicacion, LocalDate fechaFinPublicacion,
+                               String fechaPublicacion, String fechaFinPublicacion,
                                double valorInicial, String descripcion, String estado) {
 
         Predicate<AnuncioDto> predicado = AnuncioUtil.buscarPorTodo(codigo, productoDto, anuncianteDto,
@@ -288,8 +288,8 @@ public class AnuncioViewController {
             txfCodigoAnuncio.setText(anuncioSeleccionado.codigo());
             cmbProducto.setValue(anuncioSeleccionado.getProductoDto());
             cmbAnunciante.setValue(anuncioSeleccionado.getAnuncianteDto());
-            dateFechaPublicacion.setValue(anuncioSeleccionado.fechaPublicacion());
-            dateFechaFinAnuncio.setValue(anuncioSeleccionado.fechaFinPublicacion());
+            txfFechaPublicacion.setText(anuncioSeleccionado.fechaPublicacion());
+            txfFechaFinPublicacion.setText(anuncioSeleccionado.fechaFinPublicacion());
             txfValorInicial.setText(String.valueOf(anuncioSeleccionado.valorInicial()));
             txaDescripcion.setText(anuncioSeleccionado.descripcion());
             cmbEstadoAnuncio.setValue(anuncioSeleccionado.estado());
@@ -300,13 +300,13 @@ public class AnuncioViewController {
         String codigo = txfCodigoAnuncio.getText();
         String producto = String.valueOf(cmbProducto.getValue());
         String anunciante = String.valueOf(cmbAnunciante.getValue());
-        LocalDate fechaPublicacion = dateFechaPublicacion.getValue();
-        LocalDate fechaFinPublicacion = dateFechaFinAnuncio.getValue();
+        String fechaPublicacion = txfFechaPublicacion.getText();
+        String fechaFinPublicacion = txfFechaFinPublicacion.getText();
         double valorInicial = Double.parseDouble(txfValorInicial.getText());
         String descripcion = txaDescripcion.getText();
         String estado = cmbEstadoAnuncio.getValue();
 
-        return new AnuncioDto(codigo, producto, anunciante,"" ,fechaPublicacion,
+        return new AnuncioDto(codigo, producto, anunciante,fechaPublicacion,
                 fechaFinPublicacion, valorInicial, descripcion, estado);
     }
 
@@ -315,8 +315,8 @@ public class AnuncioViewController {
         txfCodigoAnuncio.setText("");
         cmbProducto.setValue(null);
         cmbAnunciante.setValue(null);
-        dateFechaPublicacion.setValue(null);
-        dateFechaFinAnuncio.setValue(null);
+        txfFechaPublicacion.setText("");
+        txfFechaFinPublicacion.setText("");
         txfValorInicial.setText("");
         txaDescripcion.setText("");
         cmbEstadoAnuncio.setValue(null);
@@ -333,8 +333,16 @@ public class AnuncioViewController {
             mensaje += "El código del Anuncio es invalido \n" ;
         if(anuncioDto.producto() == null || anuncioDto.producto() .equals(""))
             mensaje += "El producto del anuncio es invalido \n" ;
+        if(anuncioDto.fechaPublicacion() == null || anuncioDto.fechaPublicacion() .equals(""))
+            mensaje += "La fecha de Publicación del anuncio es invalido \n" ;
+        if(anuncioDto.fechaFinPublicacion() == null || anuncioDto.fechaFinPublicacion() .equals(""))
+            mensaje += "La fecha fin de Publicación  del anuncio es invalido \n" ;
         if(anuncioDto.valorInicial() == 0)
             mensaje += "El valor inicial del anuncio del  es invalido \n" ;
+        if(anuncioDto.descripcion() == null || anuncioDto.descripcion() .equals(""))
+            mensaje += "La descripción del anuncio es invalido \n" ;
+        if(anuncioDto.estado() == null || anuncioDto.estado() .equals(""))
+            mensaje += "El estado del anuncio es invalido \n" ;
 
         if(mensaje.equals("")){
             return true;

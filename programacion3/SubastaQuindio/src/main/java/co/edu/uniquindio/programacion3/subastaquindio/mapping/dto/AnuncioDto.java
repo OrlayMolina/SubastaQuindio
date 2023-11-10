@@ -5,10 +5,9 @@ import java.time.LocalDate;
 public record AnuncioDto(
         String codigo,
         String producto,
-        String documentoAnunciante,
-        String nombreAnunciante,
-        LocalDate fechaPublicacion,
-        LocalDate fechaFinPublicacion,
+        String anunciante,
+        String fechaPublicacion,
+        String fechaFinPublicacion,
         double valorInicial,
         String descripcion,
         String estado) {
@@ -18,11 +17,7 @@ public record AnuncioDto(
     }
 
     public AnuncianteDto getAnuncianteDto(){
-        return new AnuncianteDto(nombreAnunciante,"",documentoAnunciante, "", "","","","");
+        return new AnuncianteDto(anunciante,"", "", "","","","","");
     }
 
-    @Override
-    public String toString() {
-        return getAnuncianteDto().toString();
-    }
 }

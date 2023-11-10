@@ -244,8 +244,8 @@ public class SubastaQuindio implements ISubastaQuindioService, Serializable {
             throw new AnuncioException("El anuncio a actualizar no existe");
         else{
             anuncioActual.setCodigo(anuncio.getCodigo());
-            anuncioActual.setNombreProducto(anuncio.getNombreProducto());
-            anuncioActual.setNombreAnunciante(anuncio.getNombreAnunciante());
+            anuncioActual.setProducto(anuncio.getProducto());
+            anuncioActual.setAnunciante(anuncio.getAnunciante());
             anuncioActual.setFechaPublicacion(anuncio.getFechaPublicacion());
             anuncioActual.setFechaFinPublicacion(anuncio.getFechaFinPublicacion());
             anuncioActual.setValorInicial(anuncio.getValorInicial());
