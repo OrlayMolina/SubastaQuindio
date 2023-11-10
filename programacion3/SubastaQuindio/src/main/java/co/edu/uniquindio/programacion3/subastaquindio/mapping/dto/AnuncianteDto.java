@@ -18,6 +18,6 @@ public record AnuncianteDto(
 
     @Override
     public String toString() {
-        return cedula + " -- " +nombre + " " + apellido;
+        return cedula + " -- " + nombre + " " + apellido;
     }
 }

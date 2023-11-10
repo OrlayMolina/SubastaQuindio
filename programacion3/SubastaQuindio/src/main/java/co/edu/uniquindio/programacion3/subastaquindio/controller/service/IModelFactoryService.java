@@ -1,9 +1,6 @@
 package co.edu.uniquindio.programacion3.subastaquindio.controller.service;
 
-import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.AnuncianteDto;
-import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.CompradorDto;
-import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.ProductoDto;
-import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.UsuarioDto;
+import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.*;
 
 import java.util.List;
 
@@ -18,13 +15,19 @@ public interface IModelFactoryService {
 
     List<CompradorDto> obtenerCompradores();
 
+    List<AnuncioDto> obtenerAnuncios();
+
     boolean agregarProducto(ProductoDto productoDto);
 
     boolean agregarAnunciante(AnuncianteDto anuncianteDto);
 
     boolean agregarComprador(CompradorDto compradorDto);
 
+    boolean agregarAnuncio(AnuncioDto anuncioDto);
+
     boolean eliminarProducto(String codigoUnico);
+
+    boolean actualizarAnuncio(String codigoActual, AnuncioDto anuncioDto);
 
     boolean validarEdadAnunciante(AnuncianteDto anuncianteDto);
 
@@ -33,6 +36,8 @@ public interface IModelFactoryService {
     boolean eliminarAnunciante(String cedula);
 
     boolean eliminarComprador(String cedula);
+
+    boolean eliminarAnuncio(String codigo);
 
     boolean actualizarProducto(String cedulaActual, ProductoDto productoDto);
 

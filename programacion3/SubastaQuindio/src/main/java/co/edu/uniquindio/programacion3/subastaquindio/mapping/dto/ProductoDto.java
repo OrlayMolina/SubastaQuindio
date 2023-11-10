@@ -12,5 +12,9 @@ public record ProductoDto(
         return new AnuncianteDto(nombreAnunciante, "","", "", "", "", "", "");
     }
 
+    @Override
+    public String toString() {
+        return codigoUnico + ' '  + nombreProducto;
+    }
 }
 

@@ -82,4 +82,8 @@ public abstract class Persona implements Serializable {
         this.fechaNacimiento = fechaNacimiento;
     }
 
+    @Override
+    public String toString() {
+        return cedula +' ' + nombre + ' ' + apellido;
+    }
 }
