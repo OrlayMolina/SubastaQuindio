@@ -59,36 +59,6 @@
     </object>
    </void>
   </void>
-  <void property="listaAnuncios">
-   <void method="add">
-    <object class="co.edu.uniquindio.programacion3.subastaquindio.model.Anuncio">
-     <void property="anunciante">
-      <string>1044896352 Camilo Bedoya</string>
-     </void>
-     <void property="codigo">
-      <string>001</string>
-     </void>
-     <void property="descripcion">
-      <string>barato</string>
-     </void>
-     <void property="estado">
-      <string>Publicado</string>
-     </void>
-     <void property="fechaFinPublicacion">
-      <string>2023-11-12</string>
-     </void>
-     <void property="fechaPublicacion">
-      <string>2023-11-10</string>
-     </void>
-     <void property="producto">
-      <string>001  Lavadora</string>
-     </void>
-     <void property="valorInicial">
-      <double>850000.0</double>
-     </void>
-    </object>
-   </void>
-  </void>
   <void property="listaCompradores">
    <void method="add">
     <object class="co.edu.uniquindio.programacion3.subastaquindio.model.Comprador">
