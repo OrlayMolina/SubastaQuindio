@@ -144,6 +144,7 @@ public class AnuncioViewController {
         initDataBinding();
         obtenerAnunciantes();
         obtenerProductos();
+        obtenerAnuncios();
         mostrarProducto();
         mostrarAnunciantes();
         mostrarEstados();
@@ -282,6 +283,9 @@ public class AnuncioViewController {
         listaProductosDto.addAll(anuncioControllerService.obtenerProductos());
     }
 
+    private void obtenerAnuncios() {
+        listaAnuncioDto.addAll(anuncioControllerService.obtenerAnuncios());
+    }
     private void mostrarInformacionAnuncio(AnuncioDto anuncioSeleccionado) {
         if(anuncioSeleccionado != null){
             txfCodigoAnuncio.setText(anuncioSeleccionado.codigo());

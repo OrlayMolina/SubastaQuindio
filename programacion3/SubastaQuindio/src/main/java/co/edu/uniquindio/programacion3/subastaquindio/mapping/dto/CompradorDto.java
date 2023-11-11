@@ -13,4 +13,9 @@ public record CompradorDto(
     public UsuarioDto getUsuarioAsociado(){
         return new UsuarioDto(usuarioAsociado, "","");
     }
+
+    @Override
+    public String toString() {
+        return cedula + " " + nombre + " " + apellido;
+    }
 }

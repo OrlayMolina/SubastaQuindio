@@ -14,6 +14,14 @@ public class Puja implements Serializable {
     public Puja() {
     }
 
+    public Puja(String codigo, String producto, String anuncio, String comprador, double oferta) {
+        this.codigo = codigo;
+        this.producto = producto;
+        this.anuncio = anuncio;
+        this.comprador = comprador;
+        this.oferta = oferta;
+    }
+
     public String getCodigo() {
         return codigo;
     }

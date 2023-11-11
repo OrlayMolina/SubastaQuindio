@@ -17,6 +17,8 @@ public interface IModelFactoryService {
 
     List<AnuncioDto> obtenerAnuncios();
 
+    List<PujaDto> obtenerPujas();
+
     boolean agregarProducto(ProductoDto productoDto);
 
     boolean agregarAnunciante(AnuncianteDto anuncianteDto);

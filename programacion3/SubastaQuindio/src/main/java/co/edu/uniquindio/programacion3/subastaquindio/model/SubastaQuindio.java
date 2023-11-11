@@ -16,6 +16,7 @@ public class SubastaQuindio implements ISubastaQuindioService, Serializable {
     private ArrayList<Anunciante> listaAnunciantes = new ArrayList<>();
     private ArrayList<Comprador> listaCompradores = new ArrayList<>();
     private ArrayList<Anuncio> listaAnuncios = new ArrayList<>();
+    private ArrayList<Puja> listaPujas = new ArrayList<>();
 
     public SubastaQuindio() {
 
@@ -38,12 +39,14 @@ public class SubastaQuindio implements ISubastaQuindioService, Serializable {
     }
 
     public ArrayList<Anunciante> getListaAnunciantes() {
+        listaPujas.add(new Puja("001","Lavadora","001","Juan",450000));
         return listaAnunciantes;
     }
 
     public void setListaAnunciantes(ArrayList<Anunciante> listaAnunciantes) {
         this.listaAnunciantes = listaAnunciantes;
     }
+
 
     public ArrayList<Comprador> getListaCompradores() {
         return listaCompradores;
@@ -58,6 +61,14 @@ public class SubastaQuindio implements ISubastaQuindioService, Serializable {
 
     public void setListaAnuncios(ArrayList<Anuncio> listaAnuncios) {
         this.listaAnuncios = listaAnuncios;
+    }
+
+    public ArrayList<Puja> getListaOfertas() {
+        return listaPujas;
+    }
+
+    public void setListaOfertas(ArrayList<Puja> listaPujas) {
+        this.listaPujas = listaPujas;
     }
 
 

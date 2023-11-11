@@ -121,6 +121,11 @@ public class ModelFactoryController implements IModelFactoryService {
     }
 
     @Override
+    public List<PujaDto> obtenerPujas() {
+        return  mapper.getPujaDto(subasta.getListaOfertas());
+    }
+
+    @Override
     public boolean agregarProducto(ProductoDto productoDto) {
         try{
             if(!subasta.verificarProductoExistente(productoDto.codigoUnico())) {
