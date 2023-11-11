@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<java version="17.0.8.1" class="java.beans.XMLDecoder">
+<java version="20.0.2" class="java.beans.XMLDecoder">
  <object class="co.edu.uniquindio.programacion3.subastaquindio.model.SubastaQuindio" id="SubastaQuindio0">
   <void property="listaAnunciantes">
    <void method="add">
@@ -85,6 +85,34 @@
      </void>
      <void property="valorInicial">
       <double>850000.0</double>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.programacion3.subastaquindio.model.Anuncio">
+     <void property="anunciante">
+      <string>1094587625 Miguel Angel Arias Rincon</string>
+     </void>
+     <void property="codigo">
+      <string>002</string>
+     </void>
+     <void property="descripcion">
+      <string>caro</string>
+     </void>
+     <void property="estado">
+      <string>Publicado</string>
+     </void>
+     <void property="fechaFinPublicacion">
+      <string>2022-11-12</string>
+     </void>
+     <void property="fechaPublicacion">
+      <string>2022-11-11</string>
+     </void>
+     <void property="producto">
+      <string>001  Lavadora</string>
+     </void>
+     <void property="valorInicial">
+      <double>950000.0</double>
      </void>
     </object>
    </void>

@@ -12,10 +12,57 @@ import java.io.IOException;
 import java.util.List;
 
 
-public class ModelFactoryController implements IModelFactoryService {
+public class ModelFactoryController implements IModelFactoryService, Runnable {
 
     SubastaQuindio subasta;
     SubastaMapper mapper = SubastaMapper.INSTANCE;
+    Thread hiloServicio1_guardarResourceXml;
+    Thread hiloServicio2_guardarRegistroLog;
+    Thread hiloServicio3_guardarCopiaXml;
+    BoundedSemaphore semaphore = new BoundedSemaphore(1);
+    String mensaje;
+    int nivel;
+    String accion;
+
+    @Override
+    public void run() {
+        Thread hiloActual = Thread.currentThread();
+        ocuparSemaforo();
+        if(hiloActual == hiloServicio1_guardarResourceXml){
+            guardarResourceXML();
+            liberarSemaforo();
+        }
+
+        if(hiloActual == hiloServicio2_guardarRegistroLog){
+            Persistencia.guardaRegistroLog(mensaje, nivel, accion);
+            liberarSemaforo();
+
+        }
+
+        if(hiloActual == hiloServicio3_guardarCopiaXml){
+            guardarRespaldosXml();
+            liberarSemaforo();
+
+        }
+    }
+
+    private void ocuparSemaforo() {
+        try {
+            semaphore.ocupar();
+
+        }catch (InterruptedException e){
+            e.printStackTrace();
+        }
+    }
+
+    private void liberarSemaforo() {
+        try {
+            semaphore.liberar();
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
 
     //------------------------------  Singleton ------------------------------------------------
     // Clase estatica oculta. Tan solo se instanciara el singleton una vez
@@ -47,14 +94,14 @@ public class ModelFactoryController implements IModelFactoryService {
         //guardarResourceXML();
         //guardarRespaldoXML();
         cargarResourceXML();
-        guardarRespaldosArchivos();
+        guardarRespaldosXml();
 
         //Siempre se debe verificar si la raiz del recurso es null
 
         if(subasta == null){
             cargarDatosBase();
             guardarResourceXML();
-            guardarRespaldosArchivos();
+            guardarRespaldosXml();
         }
         registrarAccionesSistema("Inicio de sesión", 1, "inicioSesión");
 
@@ -69,7 +116,7 @@ public class ModelFactoryController implements IModelFactoryService {
         }
     }
 
-    public void guardarRespaldosArchivos(){
+    public void guardarRespaldosXml(){
         Persistencia.copiarArchivoRespaldoXml();
     }
 

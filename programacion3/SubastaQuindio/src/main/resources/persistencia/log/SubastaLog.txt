@@ -680,3 +680,7 @@ nov 11, 2023 2:38:30 P. M. co.edu.uniquindio.programacion3.subastaquindio.util
 INFO: inicioSesión,Inicio de sesión,2023-11-11
 nov 11, 2023 2:38:45 P. M. co.edu.uniquindio.programacion3.subastaquindio.utils.ArchivoUtil guardarRegistroLog
 INFO: Inicio Sesión,Inicio de sesión, usuario: Miguel,2023-11-11
+nov. 11, 2023 4:24:29 P. M. co.edu.uniquindio.programacion3.subastaquindio.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioSesión,Inicio de sesión,2023-11-11
+nov. 11, 2023 4:24:41 P. M. co.edu.uniquindio.programacion3.subastaquindio.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: Inicio Sesión,Inicio de sesión, usuario: Miguel,2023-11-11
