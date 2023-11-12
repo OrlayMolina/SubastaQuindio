@@ -10,30 +10,22 @@ public class Producto implements Serializable {
     private static final long serialVersionUID = 1L;
     private String codigoUnico;
     private String nombreProducto;
-    private String descripcion;
     private String tipoProducto;
-    private String photo;
+    private String foto;
     private String nombreAnunciante;
-    private String fechaPublicacion;
-    private String fechaFinPublicacion;
-    private double valorInicial;
     public Producto(){
 
     }
 
     public Producto(String codigoUnico, String nombreProducto, String descripcion,
-                    String tipoProducto, String photo, String nombreAnunciante,
+                    String tipoProducto, String foto, String nombreAnunciante,
                     String fechaPublicacion, String fechaFinPublicacion,
                     double valorInicial) {
         this.codigoUnico = codigoUnico;
         this.nombreProducto = nombreProducto;
-        this.descripcion = descripcion;
         this.tipoProducto = tipoProducto;
-        this.photo = photo;
+        this.foto = foto;
         this.nombreAnunciante = nombreAnunciante;
-        this.fechaPublicacion = fechaPublicacion;
-        this.fechaFinPublicacion = fechaFinPublicacion;
-        this.valorInicial = valorInicial;
     }
 
     public String getNombreProducto() {
@@ -44,14 +36,6 @@ public class Producto implements Serializable {
         this.nombreProducto = nombreProducto;
     }
 
-    public String getDescripcion() {
-        return descripcion;
-    }
-
-    public void setDescripcion(String descripcion) {
-        this.descripcion = descripcion;
-    }
-
     public String getTipoProducto() {
         return tipoProducto;
     }
@@ -60,12 +44,12 @@ public class Producto implements Serializable {
         this.tipoProducto = tipoProducto;
     }
 
-    public String getPhoto() {
-        return photo;
+    public String getFoto() {
+        return foto;
     }
 
-    public void setPhoto(String photo) {
-        this.photo = photo;
+    public void setFoto(String foto) {
+        this.foto = foto;
     }
 
     public String getNombreAnunciante() {
@@ -74,30 +58,6 @@ public class Producto implements Serializable {
 
     public void setNombreAnunciante(String nombreAnunciante) {
         this.nombreAnunciante = nombreAnunciante;
-    }
-
-    public String getFechaPublicacion() {
-        return fechaPublicacion;
-    }
-
-    public void setFechaPublicacion(String fechaPublicacion) {
-        this.fechaPublicacion = fechaPublicacion;
-    }
-
-    public String getFechaFinPublicacion() {
-        return fechaFinPublicacion;
-    }
-
-    public void setFechaFinPublicacion(String fechaFinPublicacion) {
-        this.fechaFinPublicacion = fechaFinPublicacion;
-    }
-
-    public double getValorInicial() {
-        return valorInicial;
-    }
-
-    public void setValorInicial(double valorInicial) {
-        this.valorInicial = valorInicial;
     }
 
     public String getCodigoUnico() {

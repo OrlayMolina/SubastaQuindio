@@ -15,25 +15,12 @@ public class Persistencia {
 
     static String fechaRespaldo = cargarFechaSistemaFormatoRespaldo();
 
-    public static final String RUTA_ARCHIVO_PRODUCTOS = "archivoProductos.txt";
-    public static final String RUTA_ARCHIVO_PRODUCTOS_RESPALDO_XML = "archivoProductos" + fechaRespaldo +".xml";
-    public static final String RUTA_ARCHIVO_USUARIOS = "archivoUsuarios.txt";
-    public static final String RUTA_ARCHIVO_LOG = "SubastaLog.txt";
-    public static final String RUTA_ARCHIVO_RESPALDO_XML = "subastaRespaldo" + fechaRespaldo +".xml";
-    public static final String RUTA_ARCHIVO_OBJETOS = "archivoObjetos.txt";
-    public static final String RUTA_ARCHIVO_MODELO_SUBASTA_BINARIO = "model.dat";
-    public static final String RUTA_ARCHIVO_MODELO_SUBASTA_XML = "src/main/resources/persistencia/model.xml";
-
-    //static String fechaRespaldo = cargarFechaSistemaFormatoRespaldo();
-
-    //public static final String RUTA_ARCHIVO_PRODUCTOS = "src/main/resources/persistencia/archivos/archivoProductos.txt";
-    //public static final String RUTA_ARCHIVO_PRODUCTOS_RESPALDO_XML = "src/main/resources/persistencia/respaldo/archivoProductos" + fechaRespaldo +".xml";
-    //public static final String RUTA_ARCHIVO_USUARIOS = "src/main/resources/persistencia/archivos/archivoUsuarios.txt";
-    //public static final String RUTA_ARCHIVO_LOG = "src/main/resources/persistencia/log/SubastaLog.txt";
-    //public static final String RUTA_ARCHIVO_RESPALDO_XML = "src/main/resources/persistencia/respaldo/subastaRespaldo" + fechaRespaldo +".xml";
-   // public static final String RUTA_ARCHIVO_OBJETOS = "src/main/resources/persistencia/archivos/archivoObjetos.txt";
-   // public static final String RUTA_ARCHIVO_MODELO_SUBASTA_BINARIO = "src/main/resources/persistencia/model.dat";
-   // public static final String RUTA_ARCHIVO_MODELO_SUBASTA_XML = "src/main/resources/persistencia/model.xml";
+    public static final String RUTA_ARCHIVO_PRODUCTOS = "src/main/resources/persistencia/archivos/archivoProductos.txt";
+    public static final String RUTA_ARCHIVO_USUARIOS = "src/main/resources/persistencia/archivos/archivoUsuarios.txt";
+    public static final String RUTA_ARCHIVO_LOG = "C:/Users/Orlay.molina/Desktop/programacion3/programacion3/SubastaQuindio/src/main/resources/persistencia/log/SubastaLog.txt";
+    public static final String RUTA_ARCHIVO_RESPALDO_XML = "C:/Users/Orlay.molina/Desktop/programacion3/programacion3/SubastaQuindio/src/main/resources/persistencia/respaldo/subastaRespaldo" + fechaRespaldo +".xml";
+    public static final String RUTA_ARCHIVO_MODELO_SUBASTA_BINARIO = "src/main/resources/persistencia/model.dat";
+    public static final String RUTA_ARCHIVO_MODELO_SUBASTA_XML = "C:/Users/Orlay.molina/Desktop/programacion3/programacion3/SubastaQuindio/src/main/resources/persistencia/model.xml";
 //	C:\td\persistencia
 
 
@@ -64,8 +51,8 @@ public class Persistencia {
         // TODO Auto-generated method stub
         String contenido = "";
         for (Producto producto : listaProductos) {
-            contenido += producto.getCodigoUnico() + "@@" + producto.getNombreProducto() + "@@" + producto.getDescripcion() + "@@" + producto.getNombreAnunciante()
-                    + "@@" + producto.getTipoProducto() + "@@" + producto.getFechaPublicacion() + "@@" + producto.getFechaFinPublicacion() + "@@" + producto.getValorInicial() + "\n";
+            contenido += producto.getCodigoUnico() + "@@" + producto.getNombreProducto() +  "@@" + producto.getNombreAnunciante()
+                    + "@@" + producto.getTipoProducto() + "\n";
         }
         ArchivoUtil.guardarArchivo(RUTA_ARCHIVO_PRODUCTOS, contenido, false);
     }
@@ -89,12 +76,8 @@ public class Persistencia {
             Producto producto = new Producto();
             producto.setCodigoUnico(linea.split("@@")[0]);
             producto.setNombreProducto(linea.split("@@")[1]);
-            producto.setDescripcion(linea.split("@@")[2]);
-            producto.setNombreAnunciante(linea.split("@@")[3]);
-            producto.setTipoProducto(linea.split("@@")[4]);
-            producto.setFechaPublicacion(linea.split("@@")[5]);
-            producto.setFechaFinPublicacion(linea.split("@@")[6]);
-            producto.setValorInicial(Double.parseDouble(linea.split("@@")[7]));
+            producto.setNombreAnunciante(linea.split("@@")[2]);
+            producto.setTipoProducto(linea.split("@@")[3]);
             productos.add(producto);
         }
         return productos;
@@ -219,24 +202,9 @@ public class Persistencia {
         }
     }
 
-    public static void guardarRespaldoSubastaXML(Object objeto) {
+    public static void copiarArchivoRespaldoXml(){
+        ArchivoUtil.copiarArchivoRespaldo(RUTA_ARCHIVO_MODELO_SUBASTA_XML,RUTA_ARCHIVO_RESPALDO_XML);
 
-        try {
-            ArchivoUtil.salvarRecursoSerializadoXML(RUTA_ARCHIVO_RESPALDO_XML, objeto);
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
-    }
-
-    public static void guardarRespaldoProductoXML(Object objeto) {
-
-        try {
-            ArchivoUtil.salvarRecursoSerializadoXML(RUTA_ARCHIVO_PRODUCTOS_RESPALDO_XML, objeto);
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        }
     }
 
 }

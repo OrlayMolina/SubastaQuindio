@@ -6,31 +6,19 @@ import java.util.ArrayList;
 public class Anunciante extends Persona implements Serializable {
 
     private static final long serialVersionUID = 1L;
-    Usuario usuarioAsociado;
-    ArrayList<Producto> listProductos = new ArrayList<Producto>();
+    private String usuarioAsociado;
 
     public Anunciante(){
 
     }
 
-    public Anunciante(Usuario usuarioAsociado, ArrayList<Producto> listProductos) {
-        this.usuarioAsociado = usuarioAsociado;
-        this.listProductos = listProductos;
-    }
-
-    public Usuario getUsuarioAsociado() {
+    public String getUsuarioAsociado() {
         return usuarioAsociado;
     }
 
-    public void setUsuarioAsociado(Usuario usuarioAsociado) {
+    public void setUsuarioAsociado(String usuarioAsociado) {
         this.usuarioAsociado = usuarioAsociado;
     }
 
-    public ArrayList<Producto> getListProductos() {
-        return listProductos;
-    }
 
-    public void setListProductos(ArrayList<Producto> listProductos) {
-        this.listProductos = listProductos;
-    }
 }

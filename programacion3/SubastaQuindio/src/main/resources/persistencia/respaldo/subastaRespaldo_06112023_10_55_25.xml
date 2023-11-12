@@ -20,13 +20,13 @@
       <string>Carlos Montes</string>
      </void>
      <void property="nombreProducto">
-      <string>Lavadora Haceb</string>
+      <string>Lavadora  actualizada</string>
      </void>
      <void property="tipoProducto">
       <string>HOGAR</string>
      </void>
      <void property="valorInicial">
-      <double>45200.0</double>
+      <double>1520000.0</double>
      </void>
     </object>
    </void>

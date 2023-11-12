@@ -7,21 +7,51 @@
 
 <AnchorPane prefHeight="520.0" prefWidth="788.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.programacion3.subastaquindio.viewController.TabuladorViewController">
    <children>
-      <TabPane prefHeight="515.0" prefWidth="780.0" tabClosingPolicy="UNAVAILABLE">
+      <TabPane fx:id="tabPane" prefHeight="513.0" prefWidth="782.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab text="Anunciante">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="486.0" prefWidth="789.0">
+
+                    <children>
+                        <SplitPane layoutX="6.0" layoutY="6.0" orientation="VERTICAL" prefHeight="476.0" prefWidth="775.0">
+                            <items>
+                                <fx:include source="AnuncianteView.fxml" />
+                            </items>
+                        </SplitPane>
+                    </children>
+
+                </AnchorPane>
             </content>
           </Tab>
           <Tab text="Anuncios">
             <content>
-              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+
+                    <children>
+                        <SplitPane layoutX="6.0" layoutY="6.0" orientation="VERTICAL" prefHeight="542.0" prefWidth="790.0">
+                            <items>
+                                <fx:include source="AnuncioView.fxml" />
+                            </items>
+                        </SplitPane>
+                    </children>
+
+                </AnchorPane>
             </content>
           </Tab>
             <Tab text="Compradores">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+
+                      <children>
+                          <SplitPane layoutX="6.0" layoutY="6.0" orientation="VERTICAL" prefHeight="542.0" prefWidth="790.0">
+                              <items>
+                                  <fx:include source="CompradorView.fxml" />
+                              </items>
+                          </SplitPane>
+                      </children>
+
+                  </AnchorPane>
               </content>
             </Tab>
             <Tab text="Productos">
@@ -29,7 +59,7 @@
                 <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
 
                     <children>
-                        <SplitPane layoutX="6.0" layoutY="6.0" orientation="VERTICAL" prefHeight="542.0" prefWidth="790.0">
+                        <SplitPane layoutX="6.0" layoutY="6.0" orientation="VERTICAL" prefHeight="476.0" prefWidth="776.0">
                             <items>
                                 <fx:include source="ProductoView.fxml" />
                             </items>
@@ -41,12 +71,62 @@
             </Tab>
             <Tab text="Pujas">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+
+                      <children>
+                          <SplitPane layoutX="6.0" layoutY="6.0" orientation="VERTICAL" prefHeight="478.0" prefWidth="790.0">
+                              <items>
+                                  <fx:include source="PujaView.fxml" />
+                              </items>
+                          </SplitPane>
+                      </children>
+
+                  </AnchorPane>
               </content>
             </Tab>
             <Tab text="Usuarios">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+
+                      <children>
+                          <SplitPane layoutX="6.0" layoutY="6.0" orientation="VERTICAL" prefHeight="478.0" prefWidth="790.0">
+                              <items>
+                                  <fx:include source="UsuarioView.fxml" />
+                              </items>
+                          </SplitPane>
+                      </children>
+
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab text="Historial de Pujas">
+              <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+
+                      <children>
+                          <SplitPane layoutX="6.0" layoutY="6.0" orientation="VERTICAL" prefHeight="478.0" prefWidth="790.0">
+                              <items>
+                                  <fx:include source="HistorialView.fxml" />
+                              </items>
+                          </SplitPane>
+                      </children>
+
+                  </AnchorPane>
+              </content>
+            </Tab>
+            <Tab text="Mensajes">
+              <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+
+                      <children>
+                          <SplitPane layoutX="6.0" layoutY="6.0" orientation="VERTICAL" prefHeight="478.0" prefWidth="790.0">
+                              <items>
+                                  <fx:include source="ChatView.fxml" />
+                              </items>
+                          </SplitPane>
+                      </children>
+
+                  </AnchorPane>
               </content>
             </Tab>
         </tabs>

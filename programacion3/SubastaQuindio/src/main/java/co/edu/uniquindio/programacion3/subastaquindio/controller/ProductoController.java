@@ -1,7 +1,9 @@
 package co.edu.uniquindio.programacion3.subastaquindio.controller;
 
 import co.edu.uniquindio.programacion3.subastaquindio.controller.service.IProductoControllerService;
-import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.ProductoDTO;
+import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.AnuncianteDto;
+import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.ProductoDto;
+import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.UsuarioDto;
 
 import java.util.List;
 
@@ -14,12 +16,16 @@ public class ProductoController implements IProductoControllerService {
     }
 
     @Override
-    public List<ProductoDTO> obtenerProductos() {
+    public List<ProductoDto> obtenerProductos() {
         return modelFactoryController.obtenerProductos();
     }
 
+    public List<AnuncianteDto> obtenerAnunciantes(){
+        return modelFactoryController.obtenerAnunciantes();
+    }
+
     @Override
-    public boolean agregarProducto(ProductoDTO productoDTO) {
+    public boolean agregarProducto(ProductoDto productoDTO) {
         return modelFactoryController.agregarProducto(productoDTO);
     }
 
@@ -29,7 +35,7 @@ public class ProductoController implements IProductoControllerService {
     }
 
     @Override
-    public boolean actualizarProducto(String codigoUnico, ProductoDTO productoDto) {
+    public boolean actualizarProducto(String codigoUnico, ProductoDto productoDto) {
         return modelFactoryController.actualizarProducto(codigoUnico, productoDto);
     }
 

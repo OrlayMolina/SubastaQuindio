@@ -1,16 +1,25 @@
 package co.edu.uniquindio.programacion3.subastaquindio.model;
 
-import co.edu.uniquindio.programacion3.subastaquindio.exceptions.ProductoException;
+import co.edu.uniquindio.programacion3.subastaquindio.exceptions.*;
 import co.edu.uniquindio.programacion3.subastaquindio.model.service.ISubastaQuindioService;
 
 import java.io.Serializable;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.ArrayList;
+
+import static co.edu.uniquindio.programacion3.subastaquindio.viewController.InicioViewController.usuarioLogeado;
 
 public class SubastaQuindio implements ISubastaQuindioService, Serializable {
 
     private static final long serialVersionUID = 1L;
     private ArrayList<Producto> listaProductos = new ArrayList<>();
     private ArrayList<Usuario> listaUsuarios = new ArrayList<>();
+    private ArrayList<Anunciante> listaAnunciantes = new ArrayList<>();
+    private ArrayList<Comprador> listaCompradores = new ArrayList<>();
+    private ArrayList<Anuncio> listaAnuncios = new ArrayList<>();
+    private ArrayList<Puja> listaPujas = new ArrayList<>();
+    private ArrayList<Chat> listaMensajes = new ArrayList<>();
 
     public SubastaQuindio() {
 
@@ -32,15 +41,80 @@ public class SubastaQuindio implements ISubastaQuindioService, Serializable {
         this.listaUsuarios = listaUsuarios;
     }
 
+    public ArrayList<Anunciante> getListaAnunciantes() {
+        listaPujas.add(new Puja("001","Lavadora","001","Juan",450000));
+        return listaAnunciantes;
+    }
+
+    public void setListaAnunciantes(ArrayList<Anunciante> listaAnunciantes) {
+        this.listaAnunciantes = listaAnunciantes;
+    }
+
+
+    public ArrayList<Comprador> getListaCompradores() {
+        return listaCompradores;
+    }
+
+    public void setListaCompradores(ArrayList<Comprador> listaCompradores) {
+        this.listaCompradores = listaCompradores;
+    }
+    public ArrayList<Anuncio> getListaAnuncios() {
+        return listaAnuncios;
+    }
+
+    public void setListaAnuncios(ArrayList<Anuncio> listaAnuncios) {
+        this.listaAnuncios = listaAnuncios;
+    }
+
+    public ArrayList<Puja> getListaOfertas() {
+        return listaPujas;
+    }
+
+    public void setListaOfertas(ArrayList<Puja> listaPujas) {
+        this.listaPujas = listaPujas;
+    }
+
+    public ArrayList<Chat> getListaMensajes() {
+        return listaMensajes;
+    }
+
+    public void setListaMensajes(ArrayList<Chat> listaMensajes) {
+        this.listaMensajes = listaMensajes;
+    }
+
+
 
     public boolean inicioSesion(String usuario, String password){
         boolean encontrado = usuarioExiste(usuario, password);
         return encontrado;
     }
+
+    public void iniciarChat(String texto) {
+        Chat chatAnunciantes = new Chat();
+        chatAnunciantes.setMiChat(texto);
+        getListaMensajes().add(chatAnunciantes);
+    }
+
+    public boolean esMayor(Persona persona) throws PersonaException {
+        boolean mayor = false;
+        LocalDate fechaNacimiento = LocalDate.parse(persona.getFechaNacimiento());
+        LocalDate fechaActual = LocalDate.now();
+        Period periodo = Period.between(fechaNacimiento, fechaActual);
+        int edad = periodo.getYears();
+
+        int edadMinima = 18;
+
+        if (edad >= edadMinima) {
+            mayor = true;
+        } else {
+            throw new PersonaException("No se puede crear el registro porque es menor de edad");
+        }
+        return mayor;
+    }
+
     @Override
-    public Producto crearProducto(String codigoUnico, String nombreProducto, String descripcion, String tipoProducto,
-                                  String foto, String nombreAnunciante, String fechaPublicacion, String fechaFinPublicacion,
-                                  Double valorInicial) throws ProductoException{
+    public Producto crearProducto(String codigoUnico, String nombreProducto, String tipoProducto,
+                                  String foto, String nombreAnunciante) throws ProductoException{
         Producto nuevoProducto = null;
         boolean productoExiste = verificarProductoExistente(codigoUnico);
         if(productoExiste){
@@ -49,13 +123,9 @@ public class SubastaQuindio implements ISubastaQuindioService, Serializable {
             nuevoProducto = new Producto();
             nuevoProducto.setCodigoUnico(codigoUnico);
             nuevoProducto.setNombreProducto(nombreProducto);
-            nuevoProducto.setDescripcion(descripcion);
             nuevoProducto.setTipoProducto(tipoProducto);
-            nuevoProducto.setPhoto(foto);
+            nuevoProducto.setFoto(foto);
             nuevoProducto.setNombreAnunciante(nombreAnunciante);
-            nuevoProducto.setFechaPublicacion(fechaPublicacion);
-            nuevoProducto.setFechaPublicacion(fechaFinPublicacion);
-            nuevoProducto.setValorInicial(valorInicial);
             getListaProductos().add(nuevoProducto);
         }
         return nuevoProducto;
@@ -67,7 +137,7 @@ public class SubastaQuindio implements ISubastaQuindioService, Serializable {
         boolean flagExiste = false;
         producto = obtenerProducto(codigoUnico);
         if(producto == null)
-            throw new ProductoException("El empleado a eliminar no existe");
+            throw new ProductoException("El producto a eliminar no existe");
         else{
             getListaProductos().remove(producto);
             flagExiste = true;
@@ -76,32 +146,203 @@ public class SubastaQuindio implements ISubastaQuindioService, Serializable {
     }
 
     @Override
-        public boolean actualizarProducto(String codigoUnico, Producto producto) throws ProductoException {
-            Producto productoActual = obtenerProducto(codigoUnico);
-            if(productoActual == null)
-                throw new ProductoException("El producto a actualizar no existe");
-            else{
-                productoActual.setCodigoUnico(producto.getCodigoUnico());
-                productoActual.setNombreProducto(producto.getNombreProducto());
-                productoActual.setDescripcion(producto.getDescripcion());
-                productoActual.setTipoProducto(producto.getTipoProducto());
-                productoActual.setPhoto(producto.getPhoto());
-                productoActual.setNombreAnunciante(producto.getNombreAnunciante());
-                productoActual.setFechaPublicacion(producto.getFechaPublicacion());
-                productoActual.setFechaFinPublicacion(producto.getFechaFinPublicacion());
-                productoActual.setValorInicial(producto.getValorInicial());
-                return true;
-            }
+    public Boolean eliminarUsuario(String nombreUsuario) throws UsuarioException {
+        Usuario usuario = null;
+        boolean flagExiste = false;
+        usuario = obtenerUsuario(nombreUsuario);
+        if(usuario == null)
+            throw new UsuarioException("El usuario a eliminar no existe");
+        else{
+            getListaUsuarios().remove(usuario);
+            flagExiste = true;
         }
+        return flagExiste;
+    }
+
+    @Override
+    public Boolean eliminarAnunciante(String cedula) throws AnuncianteException {
+        Anunciante anunciante = null;
+        boolean flagExiste = false;
+        anunciante = obtenerAnunciante(cedula);
+        if(anunciante == null)
+            throw new AnuncianteException("El anunciante a eliminar no existe");
+        else{
+            getListaAnunciantes().remove(anunciante);
+            flagExiste = true;
+        }
+        return flagExiste;
+    }
+
+    @Override
+    public Boolean eliminarComprador(String cedula) throws CompradorException {
+        Comprador comprador = null;
+        boolean flagExiste = false;
+        comprador = obtenerComprador(cedula);
+        if(comprador == null)
+            throw new CompradorException("El comprador a eliminar no existe");
+        else{
+            getListaCompradores().remove(comprador);
+            flagExiste = true;
+        }
+        return flagExiste;
+    }
+
+    @Override
+    public Boolean eliminarAnuncio(String cedula) throws AnuncioException {
+        Anuncio anuncio = null;
+        boolean flagExiste = false;
+        anuncio = obtenerAnuncio(cedula);
+        if(anuncio == null)
+            throw new AnuncioException("El anuncio a eliminar no existe");
+        else{
+            getListaAnuncios().remove(anuncio);
+            flagExiste = true;
+        }
+        return flagExiste;
+    }
+
+    @Override
+    public boolean actualizarProducto(String codigoUnico, Producto producto) throws ProductoException {
+        Producto productoActual = obtenerProducto(codigoUnico);
+        if(productoActual == null)
+            throw new ProductoException("El producto a actualizar no existe");
+        else{
+            productoActual.setCodigoUnico(producto.getCodigoUnico());
+            productoActual.setNombreProducto(producto.getNombreProducto());
+            productoActual.setTipoProducto(producto.getTipoProducto());
+            productoActual.setFoto(producto.getFoto());
+            productoActual.setNombreAnunciante(producto.getNombreAnunciante());
+            return true;
+        }
+    }
+
+    @Override
+    public boolean actualizarUsuario(String nombreUsuario, Usuario usuario) throws UsuarioException {
+        Usuario usuarioActual = obtenerUsuario(nombreUsuario);
+        if(usuarioActual == null)
+            throw new UsuarioException("El usuario a actualizar no existe");
+        else{
+            usuarioActual.setUsuario(usuario.getUsuario());
+            usuarioActual.setContrasenia(usuario.getContrasenia());
+
+            return true;
+        }
+    }
+
+    @Override
+    public boolean actualizarAnunciante(String cedula, Anunciante anunciante) throws AnuncianteException {
+        Anunciante anuncianteActual = obtenerAnunciante(cedula);
+        if(anuncianteActual == null)
+            throw new AnuncianteException("El anunciante a actualizar no existe");
+        else{
+            anuncianteActual.setCedula(anunciante.getCedula());
+            anuncianteActual.setNombre(anunciante.getNombre());
+            anuncianteActual.setApellido(anunciante.getApellido());
+            anuncianteActual.setTelefono(anunciante.getTelefono());
+            anuncianteActual.setCorreo(anunciante.getCorreo());
+            anuncianteActual.setDireccion(anunciante.getDireccion());
+            anuncianteActual.setFechaNacimiento(anunciante.getFechaNacimiento());
+            anuncianteActual.setUsuarioAsociado(anunciante.getUsuarioAsociado());
+            return true;
+        }
+    }
+
+    @Override
+    public boolean actualizarComprador(String cedula, Comprador comprador) throws CompradorException {
+        Comprador compradorActual = obtenerComprador(cedula);
+        if(compradorActual == null)
+            throw new CompradorException("El comprador a actualizar no existe");
+        else{
+            compradorActual.setCedula(comprador.getCedula());
+            compradorActual.setNombre(comprador.getNombre());
+            compradorActual.setApellido(comprador.getApellido());
+            compradorActual.setTelefono(comprador.getTelefono());
+            compradorActual.setCorreo(comprador.getCorreo());
+            compradorActual.setDireccion(comprador.getDireccion());
+            compradorActual.setFechaNacimiento(comprador.getFechaNacimiento());
+            compradorActual.setUsuarioAsociado(comprador.getUsuarioAsociado());
+            return true;
+        }
+    }
+
+    @Override
+    public boolean actualizarAnuncio(String codigo, Anuncio anuncio) throws AnuncioException {
+        Anuncio anuncioActual = obtenerAnuncio(codigo);
+        if(anuncioActual == null)
+            throw new AnuncioException("El anuncio a actualizar no existe");
+        else{
+            anuncioActual.setCodigo(anuncio.getCodigo());
+            anuncioActual.setProducto(anuncio.getProducto());
+            anuncioActual.setAnunciante(anuncio.getAnunciante());
+            anuncioActual.setFechaPublicacion(anuncio.getFechaPublicacion());
+            anuncioActual.setFechaFinPublicacion(anuncio.getFechaFinPublicacion());
+            anuncioActual.setValorInicial(anuncio.getValorInicial());
+            anuncioActual.setDescripcion(anuncio.getDescripcion());
+            anuncioActual.setEstado(anuncio.getEstado());
+            return true;
+        }
+    }
 
     public void agregarProducto(Producto nuevoProducto) throws ProductoException{
         getListaProductos().add(nuevoProducto);
+    }
+
+    public void agregarUsuario(Usuario nuevoUsuario) throws UsuarioException{
+        getListaUsuarios().add(nuevoUsuario);
+    }
+
+    public void agregarAnunciante(Anunciante nuevoAnunciante) throws AnuncianteException{
+        getListaAnunciantes().add(nuevoAnunciante);
+    }
+
+    public void agregarComprador(Comprador nuevoComprador) throws CompradorException{
+        getListaCompradores().add(nuevoComprador);
+    }
+
+    public void agregarAnuncio(Anuncio nuevoAnuncio) throws AnuncioException{
+        getListaAnuncios().add(nuevoAnuncio);
     }
 
     @Override
     public boolean verificarProductoExistente(String codigoUnico) throws ProductoException {
         if(productoExiste(codigoUnico)){
             throw new ProductoException("El producto con código único: "+codigoUnico+" ya existe");
+        }else{
+            return false;
+        }
+    }
+
+    @Override
+    public boolean verificarUsuarioExistente(String nombreUsuario) throws UsuarioException {
+        if(usuarioExiste(nombreUsuario)){
+            throw new UsuarioException("El usuario con nombre: "+nombreUsuario+" ya existe");
+        }else{
+            return false;
+        }
+    }
+
+    @Override
+    public boolean verificarAnuncianteExistente(String cedula) throws AnuncianteException {
+        if(anuncianteExiste(cedula)){
+            throw new AnuncianteException("El anunciante con cédula: "+cedula+" ya existe");
+        }else{
+            return false;
+        }
+    }
+
+    @Override
+    public boolean verificarCompradorExistente(String cedula) throws CompradorException {
+        if(compradorExiste(cedula)){
+            throw new CompradorException("El comprador con cédula: "+cedula+" ya existe");
+        }else{
+            return false;
+        }
+    }
+
+    @Override
+    public boolean verificarAnuncioExistente(String codigo) throws AnuncioException {
+        if(anuncioExiste(codigo)){
+            throw new AnuncioException("El anuncio con cédula: "+codigo+" ya existe");
         }else{
             return false;
         }
@@ -118,6 +359,39 @@ public class SubastaQuindio implements ISubastaQuindioService, Serializable {
         return productoEncontrado;
     }
 
+    public boolean usuarioExiste(String nombreUsuario) {
+        boolean usuarioEncontrado = false;
+        for (Usuario usuario : getListaUsuarios()) {
+            if(usuario.getUsuario().equalsIgnoreCase(nombreUsuario)){
+                usuarioEncontrado = true;
+                break;
+            }
+        }
+        return usuarioEncontrado;
+    }
+
+    public boolean anuncianteExiste(String cedula) {
+        boolean anuncianteEncontrado = false;
+        for (Anunciante anunciante : getListaAnunciantes()) {
+            if(anunciante.getCedula().equalsIgnoreCase(cedula)){
+                anuncianteEncontrado = true;
+                break;
+            }
+        }
+        return anuncianteEncontrado;
+    }
+
+    public boolean compradorExiste(String cedula) {
+        boolean compradorEncontrado = false;
+        for (Comprador comprador : getListaCompradores()) {
+            if(comprador.getCedula().equalsIgnoreCase(cedula)){
+                compradorEncontrado = true;
+                break;
+            }
+        }
+        return compradorEncontrado;
+    }
+
     @Override
     public boolean usuarioExiste(String nombreUsuario, String password){
         boolean usuarioExiste = false;
@@ -132,15 +406,75 @@ public class SubastaQuindio implements ISubastaQuindioService, Serializable {
     }
 
     @Override
-    public Producto obtenerProducto(String cedula) {
-        Producto empleadoEncontrado = null;
-        for (Producto empleado : getListaProductos()) {
-            if(empleado.getCodigoUnico().equalsIgnoreCase(cedula)){
-                empleadoEncontrado = empleado;
+    public boolean anuncioExiste(String cedula) {
+        boolean anuncioEncontrado = false;
+        for (Anuncio anuncio : getListaAnuncios()) {
+            if(anuncio.getCodigo().equalsIgnoreCase(cedula)){
+                anuncioEncontrado = true;
                 break;
             }
         }
-        return empleadoEncontrado;
+        return anuncioEncontrado;
+    }
+
+    @Override
+    public Producto obtenerProducto(String codigoUnico) {
+        Producto productoEncontrado = null;
+        for (Producto producto : getListaProductos()) {
+            if(producto.getCodigoUnico().equalsIgnoreCase(codigoUnico)){
+                productoEncontrado = producto;
+                break;
+            }
+        }
+        return productoEncontrado;
+    }
+
+    @Override
+    public Usuario obtenerUsuario(String nombreUsuario) {
+        Usuario usuarioEncontrado = null;
+        for (Usuario usuario : getListaUsuarios()) {
+            if(usuario.getUsuario().equalsIgnoreCase(nombreUsuario)){
+                usuarioEncontrado = usuario;
+                break;
+            }
+        }
+        return usuarioEncontrado;
+    }
+
+    @Override
+    public Anunciante obtenerAnunciante(String cedula) {
+        Anunciante anuncianteEncontrado = null;
+        for (Anunciante anunciante : getListaAnunciantes()) {
+            if(anunciante.getCedula().equalsIgnoreCase(cedula)){
+                anuncianteEncontrado = anunciante;
+                break;
+            }
+        }
+        return anuncianteEncontrado;
+    }
+
+    @Override
+    public Comprador obtenerComprador(String cedula) {
+        Comprador compradorEncontrado = null;
+        for (Comprador comprador : getListaCompradores()) {
+            if(comprador.getCedula().equalsIgnoreCase(cedula)){
+                compradorEncontrado = comprador;
+                break;
+            }
+        }
+        return compradorEncontrado;
+    }
+
+    @Override
+    public Anuncio obtenerAnuncio(String cedula) {
+        Anuncio anuncioEncontrado = null;
+        for (Anuncio anuncio : getListaAnuncios()) {
+            if(anuncio.getCodigo().equalsIgnoreCase(cedula)){
+                anuncioEncontrado = anuncio;
+                break;
+            }
+        }
+        return anuncioEncontrado;
     }
 
     @Override
@@ -148,6 +482,8 @@ public class SubastaQuindio implements ISubastaQuindioService, Serializable {
         // TODO Auto-generated method stub
         return getListaProductos();
     }
+
+
 
 
 }

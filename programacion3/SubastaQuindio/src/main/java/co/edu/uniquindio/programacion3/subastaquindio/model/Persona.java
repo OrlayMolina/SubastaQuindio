@@ -1,5 +1,7 @@
 package co.edu.uniquindio.programacion3.subastaquindio.model;
 
+import co.edu.uniquindio.programacion3.subastaquindio.enumm.Rol;
+
 import java.io.Serializable;
 public abstract class Persona implements Serializable {
 
@@ -80,6 +82,8 @@ public abstract class Persona implements Serializable {
         this.fechaNacimiento = fechaNacimiento;
     }
 
-
-
+    @Override
+    public String toString() {
+        return cedula +' ' + nombre + ' ' + apellido;
+    }
 }

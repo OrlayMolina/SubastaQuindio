@@ -1,5 +1,6 @@
 package co.edu.uniquindio.programacion3.subastaquindio.utils;
 
+import co.edu.uniquindio.programacion3.subastaquindio.enumm.Rol;
 import co.edu.uniquindio.programacion3.subastaquindio.model.*;
 
 public class SubastaUtils {
@@ -11,22 +12,20 @@ public class SubastaUtils {
         Producto producto = new Producto();
         producto.setCodigoUnico("1243");
         producto.setNombreProducto("Lavadora Haceb");
-        producto.setDescripcion("Lavadora casi nueva");
         producto.setNombreAnunciante("Carlos Montes");
         producto.setTipoProducto("HOGAR");
-        producto.setFechaPublicacion("29-09-2023");
-        producto.setFechaFinPublicacion("29-09-2023");
-        producto.setValorInicial(45200);
         subasta.getListaProductos().add(producto);
 
         Usuario usuario = new Usuario();
         usuario.setUsuario("Matias");
         usuario.setContrasenia("2019");
+        usuario.setRol(Rol.Comprador);
         subasta.getListaUsuarios().add(usuario);
 
         Usuario usuario2 = new Usuario();
         usuario2.setUsuario("Jorge");
-        usuario2.setContrasenia("2019");
+        usuario2.setContrasenia("2022");
+        usuario2.setRol(Rol.Anunciante);
         subasta.getListaUsuarios().add(usuario2);
 
         Comprador comprador = new Comprador();
