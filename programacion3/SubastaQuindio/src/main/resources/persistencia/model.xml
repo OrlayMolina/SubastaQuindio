@@ -88,6 +88,34 @@
      </void>
     </object>
    </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.programacion3.subastaquindio.model.Anuncio">
+     <void property="anunciante">
+      <string>1094587625 Miguel Angel Arias Rincon</string>
+     </void>
+     <void property="codigo">
+      <string>002</string>
+     </void>
+     <void property="descripcion">
+      <string>caro</string>
+     </void>
+     <void property="estado">
+      <string>Publicado</string>
+     </void>
+     <void property="fechaFinPublicacion">
+      <string>2022-11-12</string>
+     </void>
+     <void property="fechaPublicacion">
+      <string>2022-11-11</string>
+     </void>
+     <void property="producto">
+      <string>001  Lavadora</string>
+     </void>
+     <void property="valorInicial">
+      <double>950000.0</double>
+     </void>
+    </object>
+   </void>
   </void>
   <void property="listaCompradores">
    <void method="add">
@@ -143,6 +171,632 @@
      </void>
      <void property="usuarioAsociado">
       <string>Laura rol -- Comprador</string>
+     </void>
+    </object>
+   </void>
+  </void>
+  <void property="listaOfertas">
+   <void method="add">
+    <object class="co.edu.uniquindio.programacion3.subastaquindio.model.Puja">
+     <void property="codigo">
+      <string>001</string>
+     </void>
+     <void property="comprador">
+      <string>Juan</string>
+     </void>
+     <void property="oferta">
+      <double>450000.0</double>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.programacion3.subastaquindio.model.Puja">
+     <void property="codigo">
+      <string>001</string>
+     </void>
+     <void property="comprador">
+      <string>Juan</string>
+     </void>
+     <void property="oferta">
+      <double>450000.0</double>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.programacion3.subastaquindio.model.Puja">
+     <void property="codigo">
+      <string>001</string>
+     </void>
+     <void property="comprador">
+      <string>Juan</string>
+     </void>
+     <void property="oferta">
+      <double>450000.0</double>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.programacion3.subastaquindio.model.Puja">
+     <void property="codigo">
+      <string>001</string>
+     </void>
+     <void property="comprador">
+      <string>Juan</string>
+     </void>
+     <void property="oferta">
+      <double>450000.0</double>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.programacion3.subastaquindio.model.Puja">
+     <void property="codigo">
+      <string>001</string>
+     </void>
+     <void property="comprador">
+      <string>Juan</string>
+     </void>
+     <void property="oferta">
+      <double>450000.0</double>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.programacion3.subastaquindio.model.Puja">
+     <void property="codigo">
+      <string>001</string>
+     </void>
+     <void property="comprador">
+      <string>Juan</string>
+     </void>
+     <void property="oferta">
+      <double>450000.0</double>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.programacion3.subastaquindio.model.Puja">
+     <void property="codigo">
+      <string>001</string>
+     </void>
+     <void property="comprador">
+      <string>Juan</string>
+     </void>
+     <void property="oferta">
+      <double>450000.0</double>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.programacion3.subastaquindio.model.Puja">
+     <void property="codigo">
+      <string>001</string>
+     </void>
+     <void property="comprador">
+      <string>Juan</string>
+     </void>
+     <void property="oferta">
+      <double>450000.0</double>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.programacion3.subastaquindio.model.Puja">
+     <void property="codigo">
+      <string>001</string>
+     </void>
+     <void property="comprador">
+      <string>Juan</string>
+     </void>
+     <void property="oferta">
+      <double>450000.0</double>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.programacion3.subastaquindio.model.Puja">
+     <void property="codigo">
+      <string>001</string>
+     </void>
+     <void property="comprador">
+      <string>Juan</string>
+     </void>
+     <void property="oferta">
+      <double>450000.0</double>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.programacion3.subastaquindio.model.Puja">
+     <void property="codigo">
+      <string>001</string>
+     </void>
+     <void property="comprador">
+      <string>Juan</string>
+     </void>
+     <void property="oferta">
+      <double>450000.0</double>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.programacion3.subastaquindio.model.Puja">
+     <void property="codigo">
+      <string>001</string>
+     </void>
+     <void property="comprador">
+      <string>Juan</string>
+     </void>
+     <void property="oferta">
+      <double>450000.0</double>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.programacion3.subastaquindio.model.Puja">
+     <void property="codigo">
+      <string>001</string>
+     </void>
+     <void property="comprador">
+      <string>Juan</string>
+     </void>
+     <void property="oferta">
+      <double>450000.0</double>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.programacion3.subastaquindio.model.Puja">
+     <void property="codigo">
+      <string>001</string>
+     </void>
+     <void property="comprador">
+      <string>Juan</string>
+     </void>
+     <void property="oferta">
+      <double>450000.0</double>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.programacion3.subastaquindio.model.Puja">
+     <void property="codigo">
+      <string>001</string>
+     </void>
+     <void property="comprador">
+      <string>Juan</string>
+     </void>
+     <void property="oferta">
+      <double>450000.0</double>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.programacion3.subastaquindio.model.Puja">
+     <void property="codigo">
+      <string>001</string>
+     </void>
+     <void property="comprador">
+      <string>Juan</string>
+     </void>
+     <void property="oferta">
+      <double>450000.0</double>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.programacion3.subastaquindio.model.Puja">
+     <void property="codigo">
+      <string>001</string>
+     </void>
+     <void property="comprador">
+      <string>Juan</string>
+     </void>
+     <void property="oferta">
+      <double>450000.0</double>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.programacion3.subastaquindio.model.Puja">
+     <void property="codigo">
+      <string>001</string>
+     </void>
+     <void property="comprador">
+      <string>Juan</string>
+     </void>
+     <void property="oferta">
+      <double>450000.0</double>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.programacion3.subastaquindio.model.Puja">
+     <void property="codigo">
+      <string>001</string>
+     </void>
+     <void property="comprador">
+      <string>Juan</string>
+     </void>
+     <void property="oferta">
+      <double>450000.0</double>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.programacion3.subastaquindio.model.Puja">
+     <void property="codigo">
+      <string>001</string>
+     </void>
+     <void property="comprador">
+      <string>Juan</string>
+     </void>
+     <void property="oferta">
+      <double>450000.0</double>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.programacion3.subastaquindio.model.Puja">
+     <void property="codigo">
+      <string>001</string>
+     </void>
+     <void property="comprador">
+      <string>Juan</string>
+     </void>
+     <void property="oferta">
+      <double>450000.0</double>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.programacion3.subastaquindio.model.Puja">
+     <void property="codigo">
+      <string>001</string>
+     </void>
+     <void property="comprador">
+      <string>Juan</string>
+     </void>
+     <void property="oferta">
+      <double>450000.0</double>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.programacion3.subastaquindio.model.Puja">
+     <void property="codigo">
+      <string>001</string>
+     </void>
+     <void property="comprador">
+      <string>Juan</string>
+     </void>
+     <void property="oferta">
+      <double>450000.0</double>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.programacion3.subastaquindio.model.Puja">
+     <void property="codigo">
+      <string>001</string>
+     </void>
+     <void property="comprador">
+      <string>Juan</string>
+     </void>
+     <void property="oferta">
+      <double>450000.0</double>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.programacion3.subastaquindio.model.Puja">
+     <void property="codigo">
+      <string>001</string>
+     </void>
+     <void property="comprador">
+      <string>Juan</string>
+     </void>
+     <void property="oferta">
+      <double>450000.0</double>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.programacion3.subastaquindio.model.Puja">
+     <void property="codigo">
+      <string>001</string>
+     </void>
+     <void property="comprador">
+      <string>Juan</string>
+     </void>
+     <void property="oferta">
+      <double>450000.0</double>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.programacion3.subastaquindio.model.Puja">
+     <void property="codigo">
+      <string>001</string>
+     </void>
+     <void property="comprador">
+      <string>Juan</string>
+     </void>
+     <void property="oferta">
+      <double>450000.0</double>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.programacion3.subastaquindio.model.Puja">
+     <void property="codigo">
+      <string>001</string>
+     </void>
+     <void property="comprador">
+      <string>Juan</string>
+     </void>
+     <void property="oferta">
+      <double>450000.0</double>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.programacion3.subastaquindio.model.Puja">
+     <void property="codigo">
+      <string>001</string>
+     </void>
+     <void property="comprador">
+      <string>Juan</string>
+     </void>
+     <void property="oferta">
+      <double>450000.0</double>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.programacion3.subastaquindio.model.Puja">
+     <void property="codigo">
+      <string>001</string>
+     </void>
+     <void property="comprador">
+      <string>Juan</string>
+     </void>
+     <void property="oferta">
+      <double>450000.0</double>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.programacion3.subastaquindio.model.Puja">
+     <void property="codigo">
+      <string>001</string>
+     </void>
+     <void property="comprador">
+      <string>Juan</string>
+     </void>
+     <void property="oferta">
+      <double>450000.0</double>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.programacion3.subastaquindio.model.Puja">
+     <void property="codigo">
+      <string>001</string>
+     </void>
+     <void property="comprador">
+      <string>Juan</string>
+     </void>
+     <void property="oferta">
+      <double>450000.0</double>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.programacion3.subastaquindio.model.Puja">
+     <void property="codigo">
+      <string>001</string>
+     </void>
+     <void property="comprador">
+      <string>Juan</string>
+     </void>
+     <void property="oferta">
+      <double>450000.0</double>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.programacion3.subastaquindio.model.Puja">
+     <void property="codigo">
+      <string>001</string>
+     </void>
+     <void property="comprador">
+      <string>Juan</string>
+     </void>
+     <void property="oferta">
+      <double>450000.0</double>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.programacion3.subastaquindio.model.Puja">
+     <void property="codigo">
+      <string>001</string>
+     </void>
+     <void property="comprador">
+      <string>Juan</string>
+     </void>
+     <void property="oferta">
+      <double>450000.0</double>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.programacion3.subastaquindio.model.Puja">
+     <void property="codigo">
+      <string>001</string>
+     </void>
+     <void property="comprador">
+      <string>Juan</string>
+     </void>
+     <void property="oferta">
+      <double>450000.0</double>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.programacion3.subastaquindio.model.Puja">
+     <void property="codigo">
+      <string>001</string>
+     </void>
+     <void property="comprador">
+      <string>Juan</string>
+     </void>
+     <void property="oferta">
+      <double>450000.0</double>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.programacion3.subastaquindio.model.Puja">
+     <void property="codigo">
+      <string>001</string>
+     </void>
+     <void property="comprador">
+      <string>Juan</string>
+     </void>
+     <void property="oferta">
+      <double>450000.0</double>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.programacion3.subastaquindio.model.Puja">
+     <void property="codigo">
+      <string>001</string>
+     </void>
+     <void property="comprador">
+      <string>Juan</string>
+     </void>
+     <void property="oferta">
+      <double>450000.0</double>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.programacion3.subastaquindio.model.Puja">
+     <void property="codigo">
+      <string>001</string>
+     </void>
+     <void property="comprador">
+      <string>Juan</string>
+     </void>
+     <void property="oferta">
+      <double>450000.0</double>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.programacion3.subastaquindio.model.Puja">
+     <void property="codigo">
+      <string>001</string>
+     </void>
+     <void property="comprador">
+      <string>Juan</string>
+     </void>
+     <void property="oferta">
+      <double>450000.0</double>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.programacion3.subastaquindio.model.Puja">
+     <void property="codigo">
+      <string>001</string>
+     </void>
+     <void property="comprador">
+      <string>Juan</string>
+     </void>
+     <void property="oferta">
+      <double>450000.0</double>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.programacion3.subastaquindio.model.Puja">
+     <void property="codigo">
+      <string>001</string>
+     </void>
+     <void property="comprador">
+      <string>Juan</string>
+     </void>
+     <void property="oferta">
+      <double>450000.0</double>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.programacion3.subastaquindio.model.Puja">
+     <void property="codigo">
+      <string>001</string>
+     </void>
+     <void property="comprador">
+      <string>Juan</string>
+     </void>
+     <void property="oferta">
+      <double>450000.0</double>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.programacion3.subastaquindio.model.Puja">
+     <void property="codigo">
+      <string>001</string>
+     </void>
+     <void property="comprador">
+      <string>Juan</string>
+     </void>
+     <void property="oferta">
+      <double>450000.0</double>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.programacion3.subastaquindio.model.Puja">
+     <void property="codigo">
+      <string>001</string>
+     </void>
+     <void property="comprador">
+      <string>Juan</string>
+     </void>
+     <void property="oferta">
+      <double>450000.0</double>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.programacion3.subastaquindio.model.Puja">
+     <void property="codigo">
+      <string>001</string>
+     </void>
+     <void property="comprador">
+      <string>Juan</string>
+     </void>
+     <void property="oferta">
+      <double>450000.0</double>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.programacion3.subastaquindio.model.Puja">
+     <void property="codigo">
+      <string>001</string>
+     </void>
+     <void property="comprador">
+      <string>Juan</string>
+     </void>
+     <void property="oferta">
+      <double>450000.0</double>
      </void>
     </object>
    </void>

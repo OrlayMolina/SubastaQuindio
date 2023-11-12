@@ -3,10 +3,12 @@ package co.edu.uniquindio.programacion3.subastaquindio.viewController;
 import co.edu.uniquindio.programacion3.subastaquindio.controller.AnuncioController;
 import co.edu.uniquindio.programacion3.subastaquindio.controller.PujaController;
 import co.edu.uniquindio.programacion3.subastaquindio.enumm.EstadoAnuncios;
+import co.edu.uniquindio.programacion3.subastaquindio.enumm.TipoProducto;
 import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.AnuncianteDto;
 import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.AnuncioDto;
 import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.ProductoDto;
 import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.PujaDto;
+import co.edu.uniquindio.programacion3.subastaquindio.model.Puja;
 import co.edu.uniquindio.programacion3.subastaquindio.model.SubastaQuindio;
 import co.edu.uniquindio.programacion3.subastaquindio.utils.AnuncioUtil;
 import co.edu.uniquindio.programacion3.subastaquindio.utils.ListaAnuncioUtil;
@@ -27,12 +29,15 @@ public class PujaViewController {
     PujaController pujaControllerService;
     ObservableList<ProductoDto> listaProductosDto = FXCollections.observableArrayList();
     ObservableList<AnuncianteDto> listaAnunciantesDto = FXCollections.observableArrayList();
+    ObservableList<PujaDto> listaOfertasDto = FXCollections.observableArrayList();
+    ObservableList<String> listaTipoProducto = FXCollections.observableArrayList();
     ObservableList<AnuncioDto> listaAnunciosDto = FXCollections.observableArrayList();
     AnuncianteDto anuncianteDto;
     ProductoDto productoDto;
     AnuncioDto anuncioDto;
     SubastaQuindio subastaQuindio;
     AnuncioDto anuncioSeleccionado;
+    PujaDto ofertaSeleccionada;
 
     @FXML
     private Button btnHacerOferta;
@@ -93,6 +98,11 @@ public class PujaViewController {
         String codigo = txfCodigoAnuncio.getText();
         buscarListaAnuncio(codigo);
     }
+
+    @FXML
+    void cancelarFiltro(ActionEvent event) {
+        cancelarBusqueda();
+    }
     @FXML
     void hacerOferta(ActionEvent event) {
 
@@ -107,13 +117,19 @@ public class PujaViewController {
 
     private void initView() {
         initDataBinding();
+        initDataBindingOferta();
         obtenerAnunciantes();
         obtenerProductos();
         obtenerAnuncios();
+        obtenerOfertas();
         mostrarProducto();
         mostrarAnunciantes();
+        mostrarProducto();
+        mostrarTipoProducto();
         tableAnuncios.getItems().clear();
         tableAnuncios.setItems(listaAnunciosDto);
+        tableOfertas.getItems().clear();
+        tableOfertas.setItems(listaOfertasDto);
         listenerSelection();
     }
 
@@ -126,12 +142,20 @@ public class PujaViewController {
 
     }
 
+    private void initDataBindingOferta() {
+        colCodigoOferta.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().codigo()));
+        colComprador.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCompradorDto().toString()));
+        colOferta.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().oferta())));
+
+    }
+
     private void listenerSelection() {
         tableAnuncios.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             anuncioSeleccionado = newSelection;
             mostrarInformacionAnuncio(anuncioSeleccionado);
         });
     }
+
 
     public void mostrarProducto(){
         listaProductosDto.add(productoDto);
@@ -141,6 +165,15 @@ public class PujaViewController {
     public void mostrarAnunciantes(){
         listaAnunciantesDto.add(anuncianteDto);
         cmbAnunciante.setItems(listaAnunciantesDto);
+    }
+
+    public void mostrarTipoProducto(){
+        listaTipoProducto.add(String.valueOf(TipoProducto.TECNOLOGIA));
+        listaTipoProducto.add(String.valueOf(TipoProducto.HOGAR));
+        listaTipoProducto.add(String.valueOf(TipoProducto.DEPORTES));
+        listaTipoProducto.add(String.valueOf(TipoProducto.VEHICULOS));
+        listaTipoProducto.add(String.valueOf(TipoProducto.BIEN_RAIZ));
+        cmbTipoProducto.setItems(listaTipoProducto);
     }
 
     private void buscarListaAnuncio(String codigo) {
@@ -169,6 +202,12 @@ public class PujaViewController {
         listaAnunciosDto.addAll(pujaControllerService.obtenerAnuncios());
     }
 
+    private void obtenerOfertas() {
+        listaOfertasDto.addAll(pujaControllerService.obtenerPujas());
+    }
+
+
+
     private void mostrarInformacionAnuncio(AnuncioDto anuncioSeleccionado) {
         if(anuncioSeleccionado != null){
             txfCodigoAnuncio.setText(anuncioSeleccionado.codigo());
@@ -178,6 +217,8 @@ public class PujaViewController {
             txfValorInicial.setText(String.valueOf(anuncioSeleccionado.valorInicial()));
         }
     }
+
+
 
     private void limpiarCamposAnuncios() {
         txfCodigoAnuncio.setText("");

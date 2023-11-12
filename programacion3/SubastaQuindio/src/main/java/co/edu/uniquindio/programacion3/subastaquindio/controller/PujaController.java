@@ -3,6 +3,7 @@ package co.edu.uniquindio.programacion3.subastaquindio.controller;
 import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.AnuncianteDto;
 import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.AnuncioDto;
 import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.ProductoDto;
+import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.PujaDto;
 
 import java.util.List;
 
@@ -16,6 +17,10 @@ public class PujaController {
 
     public List<AnuncioDto> obtenerAnuncios() {
         return modelFactoryController.obtenerAnuncios();
+    }
+
+    public List<PujaDto> obtenerPujas() {
+        return modelFactoryController.obtenerPujas();
     }
 
     public List<ProductoDto> obtenerProductos(){

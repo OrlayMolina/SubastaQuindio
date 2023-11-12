@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="473.0" prefWidth="774.0" stylesheets="@tema.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.programacion3.subastaquindio.viewController.ChatViewController">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ecf1f5" height="446.0" layoutX="7.0" layoutY="14.0" stroke="#b5aeae" strokeType="INSIDE" width="761.0" />
+      <TextArea fx:id="txtAreaChat_chat" editable="false" layoutX="15.0" layoutY="82.0" prefHeight="142.0" prefWidth="743.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </TextArea>
+      <TextArea fx:id="txtAreaComen_chat" layoutX="15.0" layoutY="276.0" prefHeight="99.0" prefWidth="743.0" promptText="Escriba su mensaje ...">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </TextArea>
+      <Button fx:id="btnEnviarComen_chat" layoutX="323.0" layoutY="402.0" mnemonicParsing="false" onAction="#enviarComentarioAction" styleClass="primary" text="Enviar Mensaje" />
+      <Label layoutX="362.0" layoutY="12.0" text="Chat" textFill="#1d2d5e">
+         <font>
+            <Font size="40.0" />
+         </font>
+      </Label>
+      <Label layoutX="328.0" layoutY="237.0" text="Comentario" textFill="#1d2d5e">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label layoutX="14.0" layoutY="57.0" text="Mensajes Anteriores ...">
+         <font>
+            <Font size="14.0" />
+         </font></Label>
+      <ImageView fitHeight="35.0" fitWidth="33.0" layoutX="452.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@img/mensajes.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
