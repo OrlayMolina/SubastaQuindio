@@ -106,7 +106,17 @@
             </Tab>
             <Tab text="Mensajes">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+
+                      <children>
+                          <SplitPane layoutX="6.0" layoutY="6.0" orientation="VERTICAL" prefHeight="478.0" prefWidth="790.0">
+                              <items>
+                                  <fx:include source="ChatView.fxml" />
+                              </items>
+                          </SplitPane>
+                      </children>
+
+                  </AnchorPane>
               </content>
             </Tab>
         </tabs>

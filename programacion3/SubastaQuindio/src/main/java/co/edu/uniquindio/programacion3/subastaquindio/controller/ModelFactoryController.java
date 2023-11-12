@@ -16,6 +16,7 @@ public class ModelFactoryController implements IModelFactoryService, Runnable {
 
     SubastaQuindio subasta;
     SubastaMapper mapper = SubastaMapper.INSTANCE;
+    Anunciante anuncianteActual;
     Thread hiloServicio1_guardarResourceXml;
     Thread hiloServicio2_guardarRegistroLog;
     Thread hiloServicio3_guardarCopiaXml;
@@ -170,6 +171,11 @@ public class ModelFactoryController implements IModelFactoryService, Runnable {
     @Override
     public List<PujaDto> obtenerPujas() {
         return  mapper.getPujaDto(subasta.getListaOfertas());
+    }
+
+    @Override
+    public List<Chat> obtenerChats() {
+        return  subasta.getListaMensajes();
     }
 
     @Override
@@ -401,6 +407,11 @@ public class ModelFactoryController implements IModelFactoryService, Runnable {
             e.printStackTrace();
             return false;
         }
+    }
+
+    public void iniciarChat(String texto) {
+        getSubasta().iniciarChat(texto);
+        guardarResourceXML();
     }
 
     @Override

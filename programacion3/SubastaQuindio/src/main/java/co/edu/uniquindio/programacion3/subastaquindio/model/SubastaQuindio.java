@@ -8,6 +8,8 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 
+import static co.edu.uniquindio.programacion3.subastaquindio.viewController.InicioViewController.usuarioLogeado;
+
 public class SubastaQuindio implements ISubastaQuindioService, Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -17,6 +19,7 @@ public class SubastaQuindio implements ISubastaQuindioService, Serializable {
     private ArrayList<Comprador> listaCompradores = new ArrayList<>();
     private ArrayList<Anuncio> listaAnuncios = new ArrayList<>();
     private ArrayList<Puja> listaPujas = new ArrayList<>();
+    private ArrayList<Chat> listaMensajes = new ArrayList<>();
 
     public SubastaQuindio() {
 
@@ -71,11 +74,25 @@ public class SubastaQuindio implements ISubastaQuindioService, Serializable {
         this.listaPujas = listaPujas;
     }
 
+    public ArrayList<Chat> getListaMensajes() {
+        return listaMensajes;
+    }
+
+    public void setListaMensajes(ArrayList<Chat> listaMensajes) {
+        this.listaMensajes = listaMensajes;
+    }
+
 
 
     public boolean inicioSesion(String usuario, String password){
         boolean encontrado = usuarioExiste(usuario, password);
         return encontrado;
+    }
+
+    public void iniciarChat(String texto) {
+        Chat chatAnunciantes = new Chat();
+        chatAnunciantes.setMiChat(texto);
+        getListaMensajes().add(chatAnunciantes);
     }
 
     public boolean esMayor(Persona persona) throws PersonaException {

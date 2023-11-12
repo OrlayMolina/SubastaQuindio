@@ -1,6 +1,7 @@
 package co.edu.uniquindio.programacion3.subastaquindio.controller.service;
 
 import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.*;
+import co.edu.uniquindio.programacion3.subastaquindio.model.Chat;
 
 import java.util.List;
 
@@ -18,6 +19,8 @@ public interface IModelFactoryService {
     List<AnuncioDto> obtenerAnuncios();
 
     List<PujaDto> obtenerPujas();
+
+    List<Chat> obtenerChats();
 
     boolean agregarProducto(ProductoDto productoDto);
 
