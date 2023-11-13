@@ -1,5 +1,6 @@
 package co.edu.uniquindio.programacion3.subastaquindio.controller;
 
+import co.edu.uniquindio.programacion3.subastaquindio.config.RabbitFactory;
 import co.edu.uniquindio.programacion3.subastaquindio.controller.service.IModelFactoryService;
 import co.edu.uniquindio.programacion3.subastaquindio.exceptions.*;
 import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.*;
@@ -7,19 +8,28 @@ import co.edu.uniquindio.programacion3.subastaquindio.mapping.mappers.SubastaMap
 import co.edu.uniquindio.programacion3.subastaquindio.model.*;
 import co.edu.uniquindio.programacion3.subastaquindio.utils.Persistencia;
 import co.edu.uniquindio.programacion3.subastaquindio.utils.SubastaUtils;
+import com.rabbitmq.client.Channel;
+import com.rabbitmq.client.Connection;
+import com.rabbitmq.client.ConnectionFactory;
+import com.rabbitmq.client.DeliverCallback;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
+
+import static co.edu.uniquindio.programacion3.subastaquindio.utils.Constantes.QUEUE_NUEV0_MENSAJE;
 
 
 public class ModelFactoryController implements IModelFactoryService, Runnable {
 
     SubastaQuindio subasta;
     SubastaMapper mapper = SubastaMapper.INSTANCE;
-    Anunciante anuncianteActual;
+    RabbitFactory rabbitFactory;
+    ConnectionFactory connectionFactory;
     Thread hiloServicio1_guardarResourceXml;
     Thread hiloServicio2_guardarRegistroLog;
     Thread hiloServicio3_guardarCopiaXml;
+    Thread hiloServicio4_nuevoMensajeConsumer;
     BoundedSemaphore semaphore = new BoundedSemaphore(1);
     String mensaje;
     int nivel;
@@ -44,6 +54,9 @@ public class ModelFactoryController implements IModelFactoryService, Runnable {
             Persistencia.copiarArchivoRespaldoXml();
             liberarSemaforo();
 
+        }
+        if(hiloActual == hiloServicio4_nuevoMensajeConsumer){
+            consumirMensajes();
         }
     }
 
@@ -79,6 +92,7 @@ public class ModelFactoryController implements IModelFactoryService, Runnable {
     public ModelFactoryController() {
         //1. inicializar datos y luego guardarlo en archivos
         System.out.println("invocación clase singleton");
+        initRabbitConnection();
 
         //cargarDatosBase();
         //salvarDatosPrueba();
@@ -106,6 +120,48 @@ public class ModelFactoryController implements IModelFactoryService, Runnable {
         }
         registrarAccionesSistema("Inicio de sesión", 1, "inicioSesión");
 
+    }
+
+    private void initRabbitConnection() {
+        rabbitFactory = new RabbitFactory();
+        connectionFactory = rabbitFactory.getConnectionFactory();
+        System.out.println("conexion establecidad");
+    }
+
+    public void consumirMensajesServicio4(){
+        hiloServicio4_nuevoMensajeConsumer = new Thread(this);
+        hiloServicio4_nuevoMensajeConsumer.start();
+    }
+
+    private void consumirMensajes() {
+        try {
+            Connection connection = connectionFactory.newConnection();
+            Channel channel = connection.createChannel();
+            channel.queueDeclare(QUEUE_NUEV0_MENSAJE, false, false, false, null);
+
+            DeliverCallback deliverCallback = (consumerTag, delivery) -> {
+                String message = new String(delivery.getBody());
+                System.out.println("Mensaje recibido: " + message);
+                //actualizarEstado(message);
+            };
+            while (true) {
+                channel.basicConsume(QUEUE_NUEV0_MENSAJE, true, deliverCallback, consumerTag -> { });
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void producirMensaje(String queue, String message) {
+        try (Connection connection = connectionFactory.newConnection();
+             Channel channel = connection.createChannel()) {
+            channel.queueDeclare(queue, false, false, false, null);
+            channel.basicPublish("", queue, null, message.getBytes(StandardCharsets.UTF_8));
+            System.out.println(" [x] Sent '" + message + "'");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void cargarDatosDesdeArchivos() {
@@ -185,6 +241,8 @@ public class ModelFactoryController implements IModelFactoryService, Runnable {
 
     @Override
     public List<Chat> obtenerChats() {
+        consumirMensajesServicio4();
+        guardarResourceXML();
         return  subasta.getListaMensajes();
     }
 
@@ -422,6 +480,7 @@ public class ModelFactoryController implements IModelFactoryService, Runnable {
     public void iniciarChat(String texto) {
         getSubasta().iniciarChat(texto);
         guardarResourceXML();
+        producirMensaje(QUEUE_NUEV0_MENSAJE, texto);
     }
 
     @Override

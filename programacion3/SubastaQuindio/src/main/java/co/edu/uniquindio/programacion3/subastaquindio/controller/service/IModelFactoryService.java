@@ -8,6 +8,8 @@ import java.util.List;
 public interface IModelFactoryService {
 
 
+    void producirMensaje(String queue, String message);
+
     List<ProductoDto> obtenerProductos();
 
     List<UsuarioDto> obtenerUsuarios();
