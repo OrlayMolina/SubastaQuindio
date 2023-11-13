@@ -790,3 +790,11 @@ nov. 11, 2023 8:49:11 P. M. co.edu.uniquindio.programacion3.subastaquindio.util
 INFORMACIÓN: inicioSesión,Inicio de sesión,2023-11-11
 nov. 11, 2023 8:50:51 P. M. co.edu.uniquindio.programacion3.subastaquindio.utils.ArchivoUtil guardarRegistroLog
 INFORMACIÓN: Inicio Sesión,Inicio de sesión, usuario: Miguel,2023-11-11
+nov. 12, 2023 11:51:26 P. M. co.edu.uniquindio.programacion3.subastaquindio.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioSesión,Inicio de sesión,2023-11-12
+nov. 12, 2023 11:51:39 P. M. co.edu.uniquindio.programacion3.subastaquindio.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: Inicio Sesión,Inicio de sesión, usuario: Miguel,2023-11-12
+nov. 12, 2023 11:55:36 P. M. co.edu.uniquindio.programacion3.subastaquindio.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: inicioSesión,Inicio de sesión,2023-11-12
+nov. 12, 2023 11:56:51 P. M. co.edu.uniquindio.programacion3.subastaquindio.utils.ArchivoUtil guardarRegistroLog
+INFORMACIÓN: Inicio Sesión,Inicio de sesión, usuario: Miguel,2023-11-12
