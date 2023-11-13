@@ -30,7 +30,7 @@ public class ModelFactoryController implements IModelFactoryService, Runnable {
         Thread hiloActual = Thread.currentThread();
         ocuparSemaforo();
         if(hiloActual == hiloServicio1_guardarResourceXml){
-            guardarResourceXML();
+            Persistencia.guardarRecursoSubastaXML(subasta);
             liberarSemaforo();
         }
 
@@ -41,7 +41,7 @@ public class ModelFactoryController implements IModelFactoryService, Runnable {
         }
 
         if(hiloActual == hiloServicio3_guardarCopiaXml){
-            guardarRespaldosXml();
+            Persistencia.copiarArchivoRespaldoXml();
             liberarSemaforo();
 
         }
@@ -118,7 +118,17 @@ public class ModelFactoryController implements IModelFactoryService, Runnable {
     }
 
     public void guardarRespaldosXml(){
-        Persistencia.copiarArchivoRespaldoXml();
+        hiloServicio3_guardarCopiaXml = new Thread(this);
+        hiloServicio3_guardarCopiaXml.start();
+    }
+
+    public void registrarAccionesSistema(String mensaje, int nivel, String accion){
+        this.mensaje=mensaje;
+        this.nivel=nivel;
+        this.accion=accion;
+
+        hiloServicio2_guardarRegistroLog = new Thread(this);
+        hiloServicio2_guardarRegistroLog.start();
     }
 
     private void salvarDatosPrueba() {
@@ -424,7 +434,8 @@ public class ModelFactoryController implements IModelFactoryService, Runnable {
     }
 
     private void guardarResourceXML() {
-        Persistencia.guardarRecursoSubastaXML(subasta);
+        hiloServicio1_guardarResourceXml = new Thread(this);
+        hiloServicio1_guardarResourceXml.start();
     }
 
 
@@ -436,7 +447,4 @@ public class ModelFactoryController implements IModelFactoryService, Runnable {
         Persistencia.guardarRecursoSubastaBinario(subasta);
     }
 
-    public void registrarAccionesSistema(String mensaje, int nivel, String accion) {
-        Persistencia.guardaRegistroLog(mensaje, nivel, accion);
-    }
 }
