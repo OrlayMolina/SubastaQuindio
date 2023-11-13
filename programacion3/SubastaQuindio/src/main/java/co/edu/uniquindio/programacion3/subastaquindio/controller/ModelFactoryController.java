@@ -241,7 +241,7 @@ public class ModelFactoryController implements IModelFactoryService, Runnable {
 
     @Override
     public List<Chat> obtenerChats() {
-        consumirMensajes();
+        consumirMensajesServicio4();
         guardarResourceXML();
         return  subasta.getListaMensajes();
     }
