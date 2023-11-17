@@ -182,10 +182,10 @@
       <string>001</string>
      </void>
      <void property="foto">
-      <string></string>
+      <string>src/main/resources/co/edu/uniquindio/programacion3/subastaquindio/img/lavadora.jpg</string>
      </void>
      <void property="nombreAnunciante">
-      <string>1094587625 -- Miguel Angel Arias Rincon</string>
+      <string> 1094587625 -- Miguel Angel Arias Rincon </string>
      </void>
      <void property="nombreProducto">
       <string>Lavadora</string>

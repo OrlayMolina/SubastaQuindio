@@ -4,7 +4,6 @@ import co.edu.uniquindio.programacion3.subastaquindio.controller.HistorialContro
 import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.CompradorDto;
 import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.ProductoDto;
 import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.PujaDto;
-import co.edu.uniquindio.programacion3.subastaquindio.utils.ProductoUtil;
 import co.edu.uniquindio.programacion3.subastaquindio.utils.PujaUtil;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
