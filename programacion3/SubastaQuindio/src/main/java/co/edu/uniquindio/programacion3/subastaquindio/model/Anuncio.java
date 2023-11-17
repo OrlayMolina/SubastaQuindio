@@ -14,6 +14,7 @@ public class Anuncio implements Serializable {
     private String fechaFinPublicacion;
     private double valorInicial;
     private String descripcion;
+    private String foto;
     private String estado;
 
     public Anuncio(){
@@ -74,6 +75,14 @@ public class Anuncio implements Serializable {
 
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
+    }
+
+    public String getFoto() {
+        return foto;
+    }
+
+    public void setFoto(String foto) {
+        this.foto = foto;
     }
 
     public String getEstado() {

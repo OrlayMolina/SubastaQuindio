@@ -63,13 +63,13 @@
    <void method="add">
     <object class="co.edu.uniquindio.programacion3.subastaquindio.model.Anuncio">
      <void property="anunciante">
-      <string>1094587625 Miguel Angel Arias Rincon</string>
+      <string>1044896352 Camilo Bedoya</string>
      </void>
      <void property="codigo">
       <string>001</string>
      </void>
      <void property="descripcion">
-      <string>Lavadora en un muy buen estado.</string>
+      <string>barato</string>
      </void>
      <void property="estado">
       <string>Publicado</string>
@@ -78,16 +78,41 @@
       <string>2023-11-12</string>
      </void>
      <void property="fechaPublicacion">
-      <string>2023-11-11</string>
-     </void>
-     <void property="foto">
-      <string>src/main/resources/co/edu/uniquindio/programacion3/subastaquindio/img/lavadora.jpg</string>
+      <string>2023-11-10</string>
      </void>
      <void property="producto">
       <string>001  Lavadora</string>
      </void>
      <void property="valorInicial">
       <double>850000.0</double>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.programacion3.subastaquindio.model.Anuncio">
+     <void property="anunciante">
+      <string>1094587625 Miguel Angel Arias Rincon</string>
+     </void>
+     <void property="codigo">
+      <string>002</string>
+     </void>
+     <void property="descripcion">
+      <string>caro</string>
+     </void>
+     <void property="estado">
+      <string>Publicado</string>
+     </void>
+     <void property="fechaFinPublicacion">
+      <string>2022-11-12</string>
+     </void>
+     <void property="fechaPublicacion">
+      <string>2022-11-11</string>
+     </void>
+     <void property="producto">
+      <string>001  Lavadora</string>
+     </void>
+     <void property="valorInicial">
+      <double>950000.0</double>
      </void>
     </object>
    </void>
@@ -157,40 +182,16 @@
       <string>001</string>
      </void>
      <void property="foto">
-      <string>src/main/resources/co/edu/uniquindio/programacion3/subastaquindio/img/lavadora.jpg</string>
+      <string></string>
      </void>
      <void property="nombreAnunciante">
-      <string> 1094587625 -- Miguel Angel Arias Rincon </string>
+      <string>1094587625 -- Miguel Angel Arias Rincon</string>
      </void>
      <void property="nombreProducto">
       <string>Lavadora</string>
      </void>
      <void property="tipoProducto">
       <string>HOGAR</string>
-     </void>
-    </object>
-   </void>
-  </void>
-  <void property="listaPujas">
-   <void method="add">
-    <object class="co.edu.uniquindio.programacion3.subastaquindio.model.Puja">
-     <void property="anuncio">
-      <string>001</string>
-     </void>
-     <void property="codigo">
-      <string>2cfd3b08-b1f5-4e6c-9d71-ca93ac4029dc</string>
-     </void>
-     <void property="comprador">
-      <string>10447859632  Laura Sofia Maldonado</string>
-     </void>
-     <void property="estadoAnuncio">
-      <string>Publicado</string>
-     </void>
-     <void property="oferta">
-      <double>900000.0</double>
-     </void>
-     <void property="producto">
-      <string>  001  Lavadora</string>
      </void>
     </object>
    </void>

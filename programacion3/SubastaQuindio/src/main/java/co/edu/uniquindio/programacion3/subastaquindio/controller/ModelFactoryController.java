@@ -125,7 +125,7 @@ public class ModelFactoryController implements IModelFactoryService, Runnable {
     private void initRabbitConnection() {
         rabbitFactory = new RabbitFactory();
         connectionFactory = rabbitFactory.getConnectionFactory();
-        System.out.println("conexion establecidad");
+        System.out.println("conexion establecida");
     }
 
     public void consumirMensajesServicio4(){
@@ -220,6 +220,27 @@ public class ModelFactoryController implements IModelFactoryService, Runnable {
     }
 
     @Override
+    public CompradorDto obtenerComprador(String nombre) {
+        return  mapper.compradorToCompradorDto(getSubasta().obtenerCompradorPorUsuario(nombre));
+    }
+
+        @Override
+        public String obtenerProducto(String nombre) {
+            Producto producto = getSubasta().obtenerProducto(nombre);
+
+            if (producto != null) {
+                ProductoDto productoDto = mapper.productoToProductoDto(producto);
+                if (productoDto != null) {
+                    return productoDto.foto();
+                } else {
+                    return "";
+                }
+            } else {
+                return "";
+            }
+        }
+
+    @Override
     public List<AnuncianteDto> obtenerAnunciantes() {
         return  mapper.getAnuncianteDto(subasta.getListaAnunciantes());
     }
@@ -235,14 +256,19 @@ public class ModelFactoryController implements IModelFactoryService, Runnable {
     }
 
     @Override
+    public String obtenerEstadoAnuncio(String codigo) {
+        return getSubasta().obtenerEstadoAnuncio(codigo);
+    }
+
+    @Override
     public List<PujaDto> obtenerPujas() {
-        return  mapper.getPujaDto(subasta.getListaOfertas());
+        return  mapper.getPujaDto(subasta.getListaPujas());
     }
 
     @Override
     public List<Chat> obtenerChats() {
-        consumirMensajesServicio4();
-        guardarResourceXML();
+        //consumirMensajesServicio4();
+        //guardarResourceXML();
         return  subasta.getListaMensajes();
     }
 
@@ -353,6 +379,19 @@ public class ModelFactoryController implements IModelFactoryService, Runnable {
             }
             return true;
         }catch (AnuncioException e){
+            e.getMessage();
+            return false;
+        }
+    }
+
+    @Override
+    public boolean agregarPuja(PujaDto pujaDto) {
+        try{
+            Puja puja = mapper.pujaDtoToPuja(pujaDto);
+            getSubasta().agregarPuja(puja);
+            guardarResourceXML();
+            return true;
+        }catch (PujaException e){
             e.getMessage();
             return false;
         }

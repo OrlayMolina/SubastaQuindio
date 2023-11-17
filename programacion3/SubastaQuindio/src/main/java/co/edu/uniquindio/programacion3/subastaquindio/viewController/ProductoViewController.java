@@ -11,11 +11,13 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
-import java.io.File;
+import java.io.*;
 import java.util.Optional;
 import java.util.function.Predicate;
 
@@ -27,9 +29,10 @@ public class ProductoViewController {
     ObservableList<String> listaTipoProducto = FXCollections.observableArrayList();
     AnuncianteDto anuncianteDto;
     ProductoDto productoSeleccionado;
+    String foto;
 
     @FXML
-    private Rectangle ImageView;
+    private ImageView imagen;
 
     @FXML
     private Button btnActualizar;
@@ -93,10 +96,9 @@ public class ProductoViewController {
 
     @FXML
     void seleccionarImagen(ActionEvent event) {
-        FileChooser chooser = new FileChooser();
-        chooser.setTitle("Abrir Archivo");
-        File file = chooser.showOpenDialog(new Stage());
+        seleccionarImagen();
     }
+
 
     @FXML
     void busquedaProducto(ActionEvent event) {
@@ -151,7 +153,6 @@ public class ProductoViewController {
     }
 
     public void mostrarAnunciantes(){
-        listaAnunciantesDto.add(anuncianteDto);
         cmbAnunciante.setItems(listaAnunciantesDto);
     }
 
@@ -174,10 +175,22 @@ public class ProductoViewController {
             txfNombreProducto.setText(productoSeleccionado.nombreProducto());
             cmbAnunciante.setValue(productoSeleccionado.getAnunciante());
             cmbTipoProducto.setValue(productoSeleccionado.tipoProducto());
+
+            String rutaImagen = productoSeleccionado.foto();
+            if (rutaImagen != null && !rutaImagen.isEmpty()) {
+                File file = new File(rutaImagen);
+                if (file.exists()) {
+                    Image image = new Image(file.toURI().toString());
+                    imagen.setImage(image);
+                } else {
+                    System.out.println("La imagen no existe en la ruta especificada.");
+                }
+            } else {
+                System.out.println("La ruta de la imagen está vacía o es nula.");
+            }
         }
+
     }
-
-
 
     private void crearProducto() {
         //1. Capturar los datos
@@ -248,11 +261,12 @@ public class ProductoViewController {
     }
 
     private ProductoDto construirProductoDto() {
+
         return new ProductoDto(
                 txfCodigoUnico.getText(),
                 txfNombreProducto.getText(),
                 cmbTipoProducto.getValue(),
-                "",
+                foto,
                 String.valueOf(cmbAnunciante.getValue())
         );
     }
@@ -262,6 +276,7 @@ public class ProductoViewController {
         txfNombreProducto.setText("");
         cmbAnunciante.setValue(null);
         cmbTipoProducto.setValue(null);
+        imagen.setImage(null);
     }
 
     private void cancelarBusqueda(){
@@ -278,6 +293,53 @@ public class ProductoViewController {
                 tipoProducto);
         ObservableList<ProductoDto> productosFiltrados = listaProductosDto.filtered(predicado);
         tableProductos.setItems(productosFiltrados);
+    }
+
+    private void seleccionarImagen(){
+        FileChooser chooser = new FileChooser();
+        chooser.setTitle("Abrir Archivo");
+        File file = chooser.showOpenDialog(new Stage());
+
+        if (file != null) { // Verificar si se seleccionó un archivo
+            String rutaOrigen = file.getPath();
+            String rutaDestino = "src/main/resources/co/edu/uniquindio/programacion3/subastaquindio/img/" + file.getName();
+
+            try (InputStream inputStream = new FileInputStream(rutaOrigen);
+                 OutputStream outputStream = new FileOutputStream(rutaDestino)) {
+
+                byte[] buffer = new byte[1024];
+                int length;
+                while ((length = inputStream.read(buffer)) > 0) {
+                    outputStream.write(buffer, 0, length);
+                }
+
+                mostrarImagen(rutaDestino);
+                foto = rutaDestino;
+                System.out.println("Archivo copiado con éxito!");
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+
+                e.printStackTrace();
+            }
+        } else {
+            System.out.println("No se seleccionó ningún archivo.");
+        }
+    }
+
+    private void mostrarImagen(String rutaImagen) {
+        try {
+            File file = new File(rutaImagen);
+            if (file.exists()) {
+                Image image = new Image(file.toURI().toString());
+
+                imagen.setImage(image);
+            } else {
+                System.out.println("La imagen no existe en la ruta especificada.");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void registrarAcciones(String mensaje, int nivel, String accion) {

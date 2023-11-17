@@ -10,6 +10,7 @@ public record AnuncioDto(
         String fechaFinPublicacion,
         double valorInicial,
         String descripcion,
+        String foto,
         String estado) {
 
     public ProductoDto getProductoDto(){

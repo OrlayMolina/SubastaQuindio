@@ -1,16 +1,8 @@
 package co.edu.uniquindio.programacion3.subastaquindio.viewController;
 
-import co.edu.uniquindio.programacion3.subastaquindio.controller.AnuncioController;
 import co.edu.uniquindio.programacion3.subastaquindio.controller.PujaController;
-import co.edu.uniquindio.programacion3.subastaquindio.enumm.EstadoAnuncios;
-import co.edu.uniquindio.programacion3.subastaquindio.enumm.TipoProducto;
-import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.AnuncianteDto;
-import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.AnuncioDto;
-import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.ProductoDto;
-import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.PujaDto;
-import co.edu.uniquindio.programacion3.subastaquindio.model.Puja;
+import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.*;
 import co.edu.uniquindio.programacion3.subastaquindio.model.SubastaQuindio;
-import co.edu.uniquindio.programacion3.subastaquindio.utils.AnuncioUtil;
 import co.edu.uniquindio.programacion3.subastaquindio.utils.ListaAnuncioUtil;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -18,8 +10,12 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
+import java.io.File;
 import java.util.Optional;
+import java.util.UUID;
 import java.util.function.Predicate;
 
 import static co.edu.uniquindio.programacion3.subastaquindio.viewController.InicioViewController.usuarioLogeado;
@@ -29,27 +25,32 @@ public class PujaViewController {
     PujaController pujaControllerService;
     ObservableList<ProductoDto> listaProductosDto = FXCollections.observableArrayList();
     ObservableList<AnuncianteDto> listaAnunciantesDto = FXCollections.observableArrayList();
-    ObservableList<PujaDto> listaOfertasDto = FXCollections.observableArrayList();
+    ObservableList<PujaDto> listPujaDto = FXCollections.observableArrayList();
     ObservableList<String> listaTipoProducto = FXCollections.observableArrayList();
     ObservableList<AnuncioDto> listaAnunciosDto = FXCollections.observableArrayList();
     AnuncianteDto anuncianteDto;
+    CompradorDto compradorDto;
     ProductoDto productoDto;
     AnuncioDto anuncioDto;
     SubastaQuindio subastaQuindio;
     AnuncioDto anuncioSeleccionado;
     PujaDto ofertaSeleccionada;
+    String foto;
 
     @FXML
     private Button btnHacerOferta;
 
     @FXML
+    private ImageView imagen;
+
+    @FXML
     private ComboBox<AnuncianteDto> cmbAnunciante;
 
     @FXML
-    private ComboBox<ProductoDto> cmbProducto;
+    private TextArea txaDescripcion;
 
     @FXML
-    private ComboBox<String> cmbTipoProducto;
+    private ComboBox<ProductoDto> cmbProducto;
 
     @FXML
     private TableColumn<AnuncioDto, String> colCodigoAnuncio;
@@ -96,7 +97,13 @@ public class PujaViewController {
     @FXML
     void busquedaPersonalizada(ActionEvent event) {
         String codigo = txfCodigoAnuncio.getText();
-        buscarListaAnuncio(codigo);
+        String descripcion = txaDescripcion.getText();
+        buscarListaAnuncio(codigo, descripcion);
+
+        String producto = String.valueOf(cmbProducto.getValue());
+        String traerImagen = producto.split("  ")[0];
+        foto = pujaControllerService.obtenerProducto(traerImagen);
+        mostrarImagen(foto);
     }
 
     @FXML
@@ -105,7 +112,7 @@ public class PujaViewController {
     }
     @FXML
     void hacerOferta(ActionEvent event) {
-
+        crearOferta();
     }
 
     @FXML
@@ -125,11 +132,10 @@ public class PujaViewController {
         mostrarProducto();
         mostrarAnunciantes();
         mostrarProducto();
-        mostrarTipoProducto();
         tableAnuncios.getItems().clear();
         tableAnuncios.setItems(listaAnunciosDto);
         tableOfertas.getItems().clear();
-        tableOfertas.setItems(listaOfertasDto);
+        tableOfertas.setItems(listPujaDto);
         listenerSelection();
     }
 
@@ -156,29 +162,40 @@ public class PujaViewController {
         });
     }
 
+    private void crearOferta() {
+        //1. Capturar los datos
+        PujaDto pujaDto = construirPujaDto();
+        //2. Validar la información
+        if(datosValidos(pujaDto)){
+            if(mostrarMensajeConfirmacion("¿Estas seguro que desea realizar una Puja por este producto?")){
+                if(pujaControllerService.agregarPuja(pujaDto)){
+                    listPujaDto.add(pujaDto);
+                    mostrarMensaje("Notificación puja", "Puja creado", "El puja se ha creado con éxito", Alert.AlertType.INFORMATION);
+
+                    registrarAcciones("Puja agregado",1, "Agregar puja");
+                }else{
+                    mostrarMensaje("Notificación puja", "Puja no creado", "El puja no se ha creado", Alert.AlertType.ERROR);
+                }
+            }else{
+                mostrarMensaje("Notificación puja", "Puja no seleccionado", "No fue posible realizar la Puja", Alert.AlertType.WARNING);
+            }
+        }else{
+            mostrarMensaje("Notificación puja", "Puja no creado", "Los datos ingresados son invalidos", Alert.AlertType.ERROR);
+        }
+
+    }
 
     public void mostrarProducto(){
-        listaProductosDto.add(productoDto);
         cmbProducto.setItems(listaProductosDto);
     }
 
     public void mostrarAnunciantes(){
-        listaAnunciantesDto.add(anuncianteDto);
         cmbAnunciante.setItems(listaAnunciantesDto);
     }
 
-    public void mostrarTipoProducto(){
-        listaTipoProducto.add(String.valueOf(TipoProducto.TECNOLOGIA));
-        listaTipoProducto.add(String.valueOf(TipoProducto.HOGAR));
-        listaTipoProducto.add(String.valueOf(TipoProducto.DEPORTES));
-        listaTipoProducto.add(String.valueOf(TipoProducto.VEHICULOS));
-        listaTipoProducto.add(String.valueOf(TipoProducto.BIEN_RAIZ));
-        cmbTipoProducto.setItems(listaTipoProducto);
-    }
+    private void buscarListaAnuncio(String codigo, String descripcion) {
 
-    private void buscarListaAnuncio(String codigo) {
-
-        Predicate<AnuncioDto> predicado = ListaAnuncioUtil.buscarPorTodo(codigo);
+        Predicate<AnuncioDto> predicado = ListaAnuncioUtil.buscarPorTodo(codigo, descripcion);
         ObservableList<AnuncioDto> anunciosFiltrados = listaAnunciosDto.filtered(predicado);
         tableAnuncios.setItems(anunciosFiltrados);
     }
@@ -203,18 +220,78 @@ public class PujaViewController {
     }
 
     private void obtenerOfertas() {
-        listaOfertasDto.addAll(pujaControllerService.obtenerPujas());
+        listPujaDto.addAll(pujaControllerService.obtenerPujas());
     }
 
+    private PujaDto construirPujaDto() {
+        UUID uuid = UUID.randomUUID();
+        String codigoPuja = uuid.toString();
+        String producto = String.valueOf(cmbProducto.getValue());
+        String codigoAnuncio = txfCodigoAnuncio.getText();
+        String comprador = obtenerUsuarioComprador();
+        Double oferta = Double.valueOf(txfOferta.getText());
+        String estadoAnuncio = obtenerEstadoAnuncio();
+        return new PujaDto(codigoPuja,producto,codigoAnuncio,comprador, oferta, estadoAnuncio);
+    }
 
+    private String obtenerEstadoAnuncio(){
+        return pujaControllerService.obtenerEstadoAnuncio(txfCodigoAnuncio.getText());
+    }
 
+    private String obtenerUsuarioComprador(){
+        CompradorDto compradorDto = pujaControllerService.obtenerComprador(usuarioLogeado);
+        if(compradorDto != null){
+            if(compradorDto.usuarioAsociado().contains("Comprador")){
+                return compradorDto.cedula() + "  " + compradorDto.nombre() + " " + compradorDto.apellido();
+            }else{
+                mostrarMensaje("Notificación puja", "Puja no creada", "El usuario debe tener el rol 'Comprador' para hacer una Puja.", Alert.AlertType.ERROR);
+                return "";
+            }
+
+        }
+        mostrarMensaje("Notificación puja", "Puja no creada", "El usuario debe tener el rol 'Comprador' para hacer una Puja.", Alert.AlertType.ERROR);
+        return "";
+    }
+
+    private boolean datosValidos(PujaDto pujaDto) {
+        String mensaje = "";
+        if(pujaDto.codigo() == null || pujaDto.codigo().equals(""))
+            mensaje += "El código de la puja es invalido \n" ;
+        if(pujaDto.producto() == null || pujaDto.producto() .equals(""))
+            mensaje += "El producto de la puja es invalido \n" ;
+        if(pujaDto.anuncio()== null || pujaDto.anuncio() .equals(""))
+            mensaje += "El código del anuncio de la puja es invalido \n" ;
+        if(pujaDto.comprador() == null || pujaDto.comprador().equals(""))
+            mensaje += "El comprador de la puja es invalida \n" ;
+        if(pujaDto.oferta() == 0 )
+            mensaje += "la oferta de la puja es invalida \n" ;
+        if(pujaDto.estadoAnuncio() == null || pujaDto.estadoAnuncio().equals(""))
+            mensaje += "El estado del anuncio de la puja es invalida \n" ;
+        if(mensaje.equals("")){
+            return true;
+        }else{
+            mostrarMensaje("Notificación producto", "Producto no creado", mensaje, Alert.AlertType.ERROR);
+            return false;
+        }
+    }
     private void mostrarInformacionAnuncio(AnuncioDto anuncioSeleccionado) {
         if(anuncioSeleccionado != null){
             txfCodigoAnuncio.setText(anuncioSeleccionado.codigo());
+            txaDescripcion.setText(anuncioSeleccionado.descripcion());
             cmbProducto.setValue(anuncioSeleccionado.getProductoDto());
             cmbAnunciante.setValue(anuncioSeleccionado.getAnuncianteDto());
             txfFechaFinPuja.setText(anuncioSeleccionado.fechaPublicacion());
             txfValorInicial.setText(String.valueOf(anuncioSeleccionado.valorInicial()));
+
+            String rutaImagen = anuncioSeleccionado.foto();
+
+            if (rutaImagen != null && !rutaImagen.isEmpty()) {
+                File file = new File(rutaImagen);
+                Image image = new Image(file.toURI().toString());
+                imagen.setImage(image);
+            }else{
+                imagen.setImage(null);
+            }
         }
     }
 
@@ -222,10 +299,27 @@ public class PujaViewController {
 
     private void limpiarCamposAnuncios() {
         txfCodigoAnuncio.setText("");
+        txaDescripcion.setText("");
         cmbProducto.setValue(null);
         cmbAnunciante.setValue(null);
         txfFechaFinPuja.setText("");
         txfValorInicial.setText("");
+        imagen.setImage(null);
+    }
+
+    private void mostrarImagen(String rutaImagen) {
+        try {
+            File file = new File(rutaImagen);
+            if (file.exists()) {
+                Image image = new Image(file.toURI().toString());
+
+                imagen.setImage(image);
+            } else {
+                imagen.setImage(null);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void registrarAcciones(String mensaje, int nivel, String accion) {

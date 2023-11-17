@@ -5,17 +5,18 @@ public record PujaDto(
         String producto,
         String anuncio,
         String comprador,
-        double oferta) {
+        double oferta,
+        String estadoAnuncio) {
 
     public ProductoDto getProductoDto(){
         return new ProductoDto("", producto, "", "", "");
     }
 
-    public AnuncianteDto getCompradorDto(){
-        return new AnuncianteDto(comprador,"", "", "","","","","");
+    public CompradorDto getCompradorDto(){
+        return new CompradorDto(comprador,"", "", "","","","","");
     }
 
     public AnuncioDto getAnuncioDto(){
-        return new AnuncioDto("","", "", "","",0,"","");
+        return new AnuncioDto(anuncio,"", "", "","",0,"","", "");
     }
 }

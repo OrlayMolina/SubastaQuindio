@@ -8,8 +8,6 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 
-import static co.edu.uniquindio.programacion3.subastaquindio.viewController.InicioViewController.usuarioLogeado;
-
 public class SubastaQuindio implements ISubastaQuindioService, Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -42,14 +40,12 @@ public class SubastaQuindio implements ISubastaQuindioService, Serializable {
     }
 
     public ArrayList<Anunciante> getListaAnunciantes() {
-        listaPujas.add(new Puja("001","Lavadora","001","Juan",450000));
         return listaAnunciantes;
     }
 
     public void setListaAnunciantes(ArrayList<Anunciante> listaAnunciantes) {
         this.listaAnunciantes = listaAnunciantes;
     }
-
 
     public ArrayList<Comprador> getListaCompradores() {
         return listaCompradores;
@@ -66,11 +62,11 @@ public class SubastaQuindio implements ISubastaQuindioService, Serializable {
         this.listaAnuncios = listaAnuncios;
     }
 
-    public ArrayList<Puja> getListaOfertas() {
+    public ArrayList<Puja> getListaPujas() {
         return listaPujas;
     }
 
-    public void setListaOfertas(ArrayList<Puja> listaPujas) {
+    public void setListaPujas(ArrayList<Puja> listaPujas) {
         this.listaPujas = listaPujas;
     }
 
@@ -303,6 +299,10 @@ public class SubastaQuindio implements ISubastaQuindioService, Serializable {
         getListaAnuncios().add(nuevoAnuncio);
     }
 
+    public void agregarPuja(Puja nuevaPuja) throws PujaException{
+        getListaPujas().add(nuevaPuja);
+    }
+
     @Override
     public boolean verificarProductoExistente(String codigoUnico) throws ProductoException {
         if(productoExiste(codigoUnico)){
@@ -406,15 +406,27 @@ public class SubastaQuindio implements ISubastaQuindioService, Serializable {
     }
 
     @Override
-    public boolean anuncioExiste(String cedula) {
+    public boolean anuncioExiste(String codigo) {
         boolean anuncioEncontrado = false;
         for (Anuncio anuncio : getListaAnuncios()) {
-            if(anuncio.getCodigo().equalsIgnoreCase(cedula)){
+            if(anuncio.getCodigo().equalsIgnoreCase(codigo)){
                 anuncioEncontrado = true;
                 break;
             }
         }
         return anuncioEncontrado;
+    }
+
+    @Override
+    public String obtenerEstadoAnuncio(String codigo) {
+        String estado = "";
+        for (Anuncio anuncio : getListaAnuncios()) {
+            if(anuncio.getCodigo().equalsIgnoreCase(codigo)){
+                estado = anuncio.getEstado();
+                break;
+            }
+        }
+        return estado;
     }
 
     @Override
@@ -458,6 +470,18 @@ public class SubastaQuindio implements ISubastaQuindioService, Serializable {
         Comprador compradorEncontrado = null;
         for (Comprador comprador : getListaCompradores()) {
             if(comprador.getCedula().equalsIgnoreCase(cedula)){
+                compradorEncontrado = comprador;
+                break;
+            }
+        }
+        return compradorEncontrado;
+    }
+
+    @Override
+    public Comprador obtenerCompradorPorUsuario(String nombreUsuario) {
+        Comprador compradorEncontrado = null;
+        for (Comprador comprador : getListaCompradores()) {
+            if(comprador.getUsuarioAsociado().contains(nombreUsuario)){
                 compradorEncontrado = comprador;
                 break;
             }
