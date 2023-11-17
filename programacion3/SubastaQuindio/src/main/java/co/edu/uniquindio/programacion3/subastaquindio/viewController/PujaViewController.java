@@ -1,16 +1,12 @@
 package co.edu.uniquindio.programacion3.subastaquindio.viewController;
 
-import co.edu.uniquindio.programacion3.subastaquindio.controller.AnuncioController;
 import co.edu.uniquindio.programacion3.subastaquindio.controller.PujaController;
-import co.edu.uniquindio.programacion3.subastaquindio.enumm.EstadoAnuncios;
 import co.edu.uniquindio.programacion3.subastaquindio.enumm.TipoProducto;
 import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.AnuncianteDto;
 import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.AnuncioDto;
 import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.ProductoDto;
 import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.PujaDto;
-import co.edu.uniquindio.programacion3.subastaquindio.model.Puja;
 import co.edu.uniquindio.programacion3.subastaquindio.model.SubastaQuindio;
-import co.edu.uniquindio.programacion3.subastaquindio.utils.AnuncioUtil;
 import co.edu.uniquindio.programacion3.subastaquindio.utils.ListaAnuncioUtil;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -21,8 +17,6 @@ import javafx.scene.control.*;
 
 import java.util.Optional;
 import java.util.function.Predicate;
-
-import static co.edu.uniquindio.programacion3.subastaquindio.viewController.InicioViewController.usuarioLogeado;
 
 public class PujaViewController {
 
@@ -47,9 +41,6 @@ public class PujaViewController {
 
     @FXML
     private ComboBox<ProductoDto> cmbProducto;
-
-    @FXML
-    private ComboBox<String> cmbTipoProducto;
 
     @FXML
     private TableColumn<AnuncioDto, String> colCodigoAnuncio;
@@ -125,7 +116,6 @@ public class PujaViewController {
         mostrarProducto();
         mostrarAnunciantes();
         mostrarProducto();
-        mostrarTipoProducto();
         tableAnuncios.getItems().clear();
         tableAnuncios.setItems(listaAnunciosDto);
         tableOfertas.getItems().clear();
@@ -158,22 +148,11 @@ public class PujaViewController {
 
 
     public void mostrarProducto(){
-        listaProductosDto.add(productoDto);
         cmbProducto.setItems(listaProductosDto);
     }
 
     public void mostrarAnunciantes(){
-        listaAnunciantesDto.add(anuncianteDto);
         cmbAnunciante.setItems(listaAnunciantesDto);
-    }
-
-    public void mostrarTipoProducto(){
-        listaTipoProducto.add(String.valueOf(TipoProducto.TECNOLOGIA));
-        listaTipoProducto.add(String.valueOf(TipoProducto.HOGAR));
-        listaTipoProducto.add(String.valueOf(TipoProducto.DEPORTES));
-        listaTipoProducto.add(String.valueOf(TipoProducto.VEHICULOS));
-        listaTipoProducto.add(String.valueOf(TipoProducto.BIEN_RAIZ));
-        cmbTipoProducto.setItems(listaTipoProducto);
     }
 
     private void buscarListaAnuncio(String codigo) {

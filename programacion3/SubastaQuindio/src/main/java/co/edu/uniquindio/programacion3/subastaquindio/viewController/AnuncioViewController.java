@@ -173,12 +173,10 @@ public class AnuncioViewController {
     }
 
     public void mostrarProducto(){
-        listaProductosDto.add(productoDto);
         cmbProducto.setItems(listaProductosDto);
     }
 
     public void mostrarAnunciantes(){
-        listaAnunciantesDto.add(anuncianteDto);
         cmbAnunciante.setItems(listaAnunciantesDto);
     }
 

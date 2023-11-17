@@ -55,7 +55,7 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <ComboBox fx:id="cmbAnunciante" prefWidth="258.0" promptText="Elegir Anunciante" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <ComboBox fx:id="cmbAnunciante" prefWidth="258.0" promptText="Anunciantes ..." GridPane.columnIndex="2" GridPane.rowIndex="1" />
             <ComboBox fx:id="cmbTipoProducto" prefWidth="291.0" promptText="Eligir el Tipo de Producto" GridPane.columnIndex="2" GridPane.rowIndex="4" />
             <Label text="Código Único:" GridPane.rowIndex="3">
                <font>

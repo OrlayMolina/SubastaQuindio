@@ -151,7 +151,6 @@ public class ProductoViewController {
     }
 
     public void mostrarAnunciantes(){
-        listaAnunciantesDto.add(anuncianteDto);
         cmbAnunciante.setItems(listaAnunciantesDto);
     }
 
