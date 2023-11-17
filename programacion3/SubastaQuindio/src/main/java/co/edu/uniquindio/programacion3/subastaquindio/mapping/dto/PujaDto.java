@@ -12,11 +12,11 @@ public record PujaDto(
         return new ProductoDto("", producto, "", "", "");
     }
 
-    public AnuncianteDto getCompradorDto(){
-        return new AnuncianteDto(comprador,"", "", "","","","","");
+    public CompradorDto getCompradorDto(){
+        return new CompradorDto(comprador,"", "", "","","","","");
     }
 
     public AnuncioDto getAnuncioDto(){
-        return new AnuncioDto("","", "", "","",0,"","");
+        return new AnuncioDto(anuncio,"", "", "","",0,"","");
     }
 }

@@ -92,7 +92,7 @@
           <TableColumn fx:id="colPuja" prefWidth="106.0" text="Código de la Puja" />
           <TableColumn fx:id="colProducto" prefWidth="144.0" text="Producto" />
             <TableColumn fx:id="colCodigoAnuncio" prefWidth="138.0" text="Código del Anuncio" />
-            <TableColumn prefWidth="126.0" text="Comprador" />
+            <TableColumn fx:id="colComprador" prefWidth="126.0" text="Comprador" />
             <TableColumn fx:id="colValorOferta" prefWidth="132.0" text="Valor Oferta" />
             <TableColumn fx:id="colEstado" prefWidth="116.0" text="Estado del Anuncio" />
         </columns>
