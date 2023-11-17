@@ -196,30 +196,6 @@
     </object>
    </void>
   </void>
-  <void property="listaPujas">
-   <void method="add">
-    <object class="co.edu.uniquindio.programacion3.subastaquindio.model.Puja">
-     <void property="anuncio">
-      <string>001</string>
-     </void>
-     <void property="codigo">
-      <string>926e2484-b008-4c25-9e55-5e14208151e4</string>
-     </void>
-     <void property="comprador">
-      <string>10447859632  Laura Sofia Maldonado</string>
-     </void>
-     <void property="estadoAnuncio">
-      <string>Publicado</string>
-     </void>
-     <void property="oferta">
-      <double>900000.0</double>
-     </void>
-     <void property="producto">
-      <string>  001  Lavadora</string>
-     </void>
-    </object>
-   </void>
-  </void>
   <void property="listaUsuarios">
    <void method="add">
     <object class="co.edu.uniquindio.programacion3.subastaquindio.model.Usuario">

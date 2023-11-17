@@ -14,11 +14,15 @@ public interface IModelFactoryService {
 
     List<UsuarioDto> obtenerUsuarios();
 
+    CompradorDto obtenerComprador(String nombre);
+
     List<AnuncianteDto> obtenerAnunciantes();
 
     List<CompradorDto> obtenerCompradores();
 
     List<AnuncioDto> obtenerAnuncios();
+
+    String obtenerEstadoAnuncio(String codigo);
 
     List<PujaDto> obtenerPujas();
 
@@ -43,6 +47,8 @@ public interface IModelFactoryService {
     boolean eliminarAnunciante(String cedula);
 
     boolean eliminarComprador(String cedula);
+
+    boolean agregarPuja(PujaDto pujaDto);
 
     boolean eliminarAnuncio(String codigo);
 

@@ -13,7 +13,6 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="473.0" prefWidth="774.0" styleClass="primary" stylesheets="@tema.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.programacion3.subastaquindio.viewController.HistorialViewController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ecf1f5" height="48.0" layoutX="6.0" layoutY="163.0" stroke="#b5aeae" strokeType="INSIDE" width="763.0" />
@@ -41,7 +40,7 @@
                   <Font size="13.0" />
                </font>
             </Label>
-            <TextField fx:id="txfCodigoPuja" promptText="Código de la puja ..." GridPane.rowIndex="2" />
+            <TextField fx:id="txfCodigoPuja" disable="true" editable="false" promptText="Código de la puja ..." GridPane.rowIndex="2" />
             <Label text="Producto:" GridPane.columnIndex="2">
                <font>
                   <Font size="13.0" />

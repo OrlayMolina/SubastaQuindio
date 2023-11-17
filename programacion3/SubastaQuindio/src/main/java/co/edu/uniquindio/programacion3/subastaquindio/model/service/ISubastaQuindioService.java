@@ -46,6 +46,8 @@ public interface ISubastaQuindioService {
 
     boolean anuncioExiste(String cedula);
 
+    String obtenerEstadoAnuncio(String codigo);
+
     Producto obtenerProducto(String cedula);
 
     Usuario obtenerUsuario(String nombreUsuario);
@@ -53,6 +55,8 @@ public interface ISubastaQuindioService {
     Anunciante obtenerAnunciante(String cedula);
 
     Comprador obtenerComprador(String cedula);
+
+    Comprador obtenerCompradorPorUsuario(String nombreUsuario);
 
     Anuncio obtenerAnuncio(String cedula);
 
