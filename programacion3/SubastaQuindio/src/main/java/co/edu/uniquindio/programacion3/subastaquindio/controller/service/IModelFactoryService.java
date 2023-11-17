@@ -16,6 +16,8 @@ public interface IModelFactoryService {
 
     CompradorDto obtenerComprador(String nombre);
 
+    String obtenerProducto(String nombre);
+
     List<AnuncianteDto> obtenerAnunciantes();
 
     List<CompradorDto> obtenerCompradores();

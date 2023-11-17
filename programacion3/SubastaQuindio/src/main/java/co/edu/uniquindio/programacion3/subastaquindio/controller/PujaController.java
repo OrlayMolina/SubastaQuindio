@@ -16,6 +16,10 @@ public class PujaController {
         return modelFactoryController.agregarPuja(pujaDto);
     }
 
+    public String obtenerProducto(String codigo){
+        return modelFactoryController.obtenerProducto(codigo);
+    }
+
     public List<AnuncioDto> obtenerAnuncios() {
         return modelFactoryController.obtenerAnuncios();
     }

@@ -10,7 +10,10 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
+import java.io.File;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.function.Predicate;
@@ -32,12 +35,19 @@ public class PujaViewController {
     SubastaQuindio subastaQuindio;
     AnuncioDto anuncioSeleccionado;
     PujaDto ofertaSeleccionada;
+    String foto;
 
     @FXML
     private Button btnHacerOferta;
 
     @FXML
+    private ImageView imagen;
+
+    @FXML
     private ComboBox<AnuncianteDto> cmbAnunciante;
+
+    @FXML
+    private TextArea txaDescripcion;
 
     @FXML
     private ComboBox<ProductoDto> cmbProducto;
@@ -87,7 +97,13 @@ public class PujaViewController {
     @FXML
     void busquedaPersonalizada(ActionEvent event) {
         String codigo = txfCodigoAnuncio.getText();
-        buscarListaAnuncio(codigo);
+        String descripcion = txaDescripcion.getText();
+        buscarListaAnuncio(codigo, descripcion);
+
+        String producto = String.valueOf(cmbProducto.getValue());
+        String traerImagen = producto.split("  ")[0];
+        foto = pujaControllerService.obtenerProducto(traerImagen);
+        mostrarImagen(foto);
     }
 
     @FXML
@@ -177,9 +193,9 @@ public class PujaViewController {
         cmbAnunciante.setItems(listaAnunciantesDto);
     }
 
-    private void buscarListaAnuncio(String codigo) {
+    private void buscarListaAnuncio(String codigo, String descripcion) {
 
-        Predicate<AnuncioDto> predicado = ListaAnuncioUtil.buscarPorTodo(codigo);
+        Predicate<AnuncioDto> predicado = ListaAnuncioUtil.buscarPorTodo(codigo, descripcion);
         ObservableList<AnuncioDto> anunciosFiltrados = listaAnunciosDto.filtered(predicado);
         tableAnuncios.setItems(anunciosFiltrados);
     }
@@ -261,10 +277,21 @@ public class PujaViewController {
     private void mostrarInformacionAnuncio(AnuncioDto anuncioSeleccionado) {
         if(anuncioSeleccionado != null){
             txfCodigoAnuncio.setText(anuncioSeleccionado.codigo());
+            txaDescripcion.setText(anuncioSeleccionado.descripcion());
             cmbProducto.setValue(anuncioSeleccionado.getProductoDto());
             cmbAnunciante.setValue(anuncioSeleccionado.getAnuncianteDto());
             txfFechaFinPuja.setText(anuncioSeleccionado.fechaPublicacion());
             txfValorInicial.setText(String.valueOf(anuncioSeleccionado.valorInicial()));
+
+            String rutaImagen = anuncioSeleccionado.foto();
+
+            if (rutaImagen != null && !rutaImagen.isEmpty()) {
+                File file = new File(rutaImagen);
+                Image image = new Image(file.toURI().toString());
+                imagen.setImage(image);
+            }else{
+                imagen.setImage(null);
+            }
         }
     }
 
@@ -272,10 +299,27 @@ public class PujaViewController {
 
     private void limpiarCamposAnuncios() {
         txfCodigoAnuncio.setText("");
+        txaDescripcion.setText("");
         cmbProducto.setValue(null);
         cmbAnunciante.setValue(null);
         txfFechaFinPuja.setText("");
         txfValorInicial.setText("");
+        imagen.setImage(null);
+    }
+
+    private void mostrarImagen(String rutaImagen) {
+        try {
+            File file = new File(rutaImagen);
+            if (file.exists()) {
+                Image image = new Image(file.toURI().toString());
+
+                imagen.setImage(image);
+            } else {
+                imagen.setImage(null);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void registrarAcciones(String mensaje, int nivel, String accion) {

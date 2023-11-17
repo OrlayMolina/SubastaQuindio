@@ -125,7 +125,7 @@ public class ModelFactoryController implements IModelFactoryService, Runnable {
     private void initRabbitConnection() {
         rabbitFactory = new RabbitFactory();
         connectionFactory = rabbitFactory.getConnectionFactory();
-        System.out.println("conexion establecidad");
+        System.out.println("conexion establecida");
     }
 
     public void consumirMensajesServicio4(){
@@ -223,6 +223,22 @@ public class ModelFactoryController implements IModelFactoryService, Runnable {
     public CompradorDto obtenerComprador(String nombre) {
         return  mapper.compradorToCompradorDto(getSubasta().obtenerCompradorPorUsuario(nombre));
     }
+
+        @Override
+        public String obtenerProducto(String nombre) {
+            Producto producto = getSubasta().obtenerProducto(nombre);
+
+            if (producto != null) {
+                ProductoDto productoDto = mapper.productoToProductoDto(producto);
+                if (productoDto != null) {
+                    return productoDto.foto();
+                } else {
+                    return "";
+                }
+            } else {
+                return "";
+            }
+        }
 
     @Override
     public List<AnuncianteDto> obtenerAnunciantes() {

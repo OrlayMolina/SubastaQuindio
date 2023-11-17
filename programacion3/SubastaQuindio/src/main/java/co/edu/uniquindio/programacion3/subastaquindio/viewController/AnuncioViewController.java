@@ -13,7 +13,10 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
+import java.io.File;
 import java.util.Optional;
 import java.util.function.Predicate;
 
@@ -31,7 +34,7 @@ public class AnuncioViewController {
     SubastaQuindio subastaQuindio;
     AnuncioDto anuncioSeleccionado;
 
-
+    String foto;
 
     @FXML
     private Button btnActualizar;
@@ -47,6 +50,9 @@ public class AnuncioViewController {
 
     @FXML
     private Button btnLimpiarCampos;
+
+    @FXML
+    private ImageView imagen;
 
     @FXML
     private ComboBox<AnuncianteDto> cmbAnunciante;
@@ -131,6 +137,14 @@ public class AnuncioViewController {
     @FXML
     void limpiarBusqueda(ActionEvent event) {
         cancelarBusqueda();
+    }
+
+    @FXML
+    void seleccionImagen(ActionEvent event) {
+        String producto = String.valueOf(cmbProducto.getValue());
+        String traerImagen = producto.split("  ")[0];
+        foto = anuncioControllerService.obtenerProducto(traerImagen);
+        mostrarImagen(foto);
     }
 
     @FXML
@@ -285,7 +299,7 @@ public class AnuncioViewController {
         listaAnuncioDto.addAll(anuncioControllerService.obtenerAnuncios());
     }
     private void mostrarInformacionAnuncio(AnuncioDto anuncioSeleccionado) {
-        if(anuncioSeleccionado != null){
+        if (anuncioSeleccionado != null) {
             txfCodigoAnuncio.setText(anuncioSeleccionado.codigo());
             cmbProducto.setValue(anuncioSeleccionado.getProductoDto());
             cmbAnunciante.setValue(anuncioSeleccionado.getAnuncianteDto());
@@ -294,8 +308,20 @@ public class AnuncioViewController {
             txfValorInicial.setText(String.valueOf(anuncioSeleccionado.valorInicial()));
             txaDescripcion.setText(anuncioSeleccionado.descripcion());
             cmbEstadoAnuncio.setValue(anuncioSeleccionado.estado());
+
+            String rutaImagen = anuncioSeleccionado.foto();
+
+            if (rutaImagen != null && !rutaImagen.isEmpty()) {
+                File file = new File(rutaImagen);
+                Image image = new Image(file.toURI().toString());
+                imagen.setImage(image);
+            }else{
+                imagen.setImage(null);
+            }
+
         }
     }
+
 
     private AnuncioDto construirAnuncioDto() {
         String codigo = txfCodigoAnuncio.getText();
@@ -305,10 +331,14 @@ public class AnuncioViewController {
         String fechaFinPublicacion = txfFechaFinPublicacion.getText();
         double valorInicial = Double.parseDouble(txfValorInicial.getText());
         String descripcion = txaDescripcion.getText();
+
+        String traerImagen = producto.split("  ")[0];
+        foto = anuncioControllerService.obtenerProducto(traerImagen);
+
         String estado = cmbEstadoAnuncio.getValue();
 
         return new AnuncioDto(codigo, producto, anunciante,fechaPublicacion,
-                fechaFinPublicacion, valorInicial, descripcion, estado);
+                fechaFinPublicacion, valorInicial, descripcion, foto, estado);
     }
 
 
@@ -321,6 +351,22 @@ public class AnuncioViewController {
         txfValorInicial.setText("");
         txaDescripcion.setText("");
         cmbEstadoAnuncio.setValue(null);
+        imagen.setImage(null);
+    }
+
+    private void mostrarImagen(String rutaImagen) {
+        try {
+            File file = new File(rutaImagen);
+            if (file.exists()) {
+                Image image = new Image(file.toURI().toString());
+
+                imagen.setImage(image);
+            } else {
+                imagen.setImage(null);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     private void registrarAcciones(String mensaje, int nivel, String accion) {

@@ -17,6 +17,6 @@ public record PujaDto(
     }
 
     public AnuncioDto getAnuncioDto(){
-        return new AnuncioDto(anuncio,"", "", "","",0,"","");
+        return new AnuncioDto(anuncio,"", "", "","",0,"","", "");
     }
 }
