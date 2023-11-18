@@ -32,6 +32,8 @@ public interface ISubastaQuindioService {
 
     boolean actualizarAnuncio(String codigo, Anuncio anuncio) throws AnuncioException;
 
+    boolean actualizarPuja(String codigo, Puja puja) throws PujaException;
+
     boolean verificarProductoExistente(String codigoUnico) throws ProductoException;
 
     boolean verificarUsuarioExistente(String nombreUsuario) throws UsuarioException;
@@ -59,6 +61,8 @@ public interface ISubastaQuindioService {
     Comprador obtenerCompradorPorUsuario(String nombreUsuario);
 
     Anuncio obtenerAnuncio(String cedula);
+
+    Puja obtenerPuja(String codigo);
 
     ArrayList<Producto> obtenerProductos();
 }

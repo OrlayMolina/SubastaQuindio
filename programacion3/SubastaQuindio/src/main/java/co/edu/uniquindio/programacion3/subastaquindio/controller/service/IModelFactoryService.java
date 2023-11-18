@@ -28,9 +28,11 @@ public interface IModelFactoryService {
 
     List<PujaDto> obtenerPujas();
 
-    List<Chat> obtenerChats();
+    List<ChatDto> obtenerChats();
 
     boolean agregarProducto(ProductoDto productoDto);
+
+    boolean actualizarPuja(String codigo, PujaDto pujaDto);
 
     boolean agregarAnunciante(AnuncianteDto anuncianteDto);
 

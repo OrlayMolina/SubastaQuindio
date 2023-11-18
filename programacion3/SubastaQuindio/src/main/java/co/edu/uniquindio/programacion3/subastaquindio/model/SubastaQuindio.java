@@ -279,6 +279,22 @@ public class SubastaQuindio implements ISubastaQuindioService, Serializable {
         }
     }
 
+    @Override
+    public boolean actualizarPuja(String codigo, Puja puja) throws PujaException {
+        Puja pujaActual = obtenerPuja(codigo);
+        if(pujaActual == null)
+            throw new PujaException("No se pudo actualizar la puja");
+        else{
+            pujaActual.setCodigo(puja.getCodigo());
+            pujaActual.setProducto(puja.getProducto());
+            pujaActual.setAnuncio(puja.getAnuncio());
+            pujaActual.setComprador(puja.getComprador());
+            pujaActual.setOferta(puja.getOferta());
+            pujaActual.setEstadoAnuncio(puja.getEstadoAnuncio());
+            return true;
+        }
+    }
+
     public void agregarProducto(Producto nuevoProducto) throws ProductoException{
         getListaProductos().add(nuevoProducto);
     }
@@ -499,6 +515,18 @@ public class SubastaQuindio implements ISubastaQuindioService, Serializable {
             }
         }
         return anuncioEncontrado;
+    }
+
+    @Override
+    public Puja obtenerPuja(String codigo) {
+        Puja pujaEncontrada = null;
+        for (Puja puja : getListaPujas()) {
+            if(puja.getCodigo().equalsIgnoreCase(codigo)){
+                pujaEncontrada = puja;
+                break;
+            }
+        }
+        return pujaEncontrada;
     }
 
     @Override

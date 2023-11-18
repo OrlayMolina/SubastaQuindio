@@ -1,6 +1,8 @@
 package co.edu.uniquindio.programacion3.subastaquindio.viewController;
 
 import co.edu.uniquindio.programacion3.subastaquindio.controller.HistorialController;
+import co.edu.uniquindio.programacion3.subastaquindio.enumm.EstadoAnuncios;
+import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.AnuncioDto;
 import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.CompradorDto;
 import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.ProductoDto;
 import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.PujaDto;
@@ -13,7 +15,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 
 import java.util.Optional;
+import java.util.UUID;
 import java.util.function.Predicate;
+
+import static co.edu.uniquindio.programacion3.subastaquindio.viewController.InicioViewController.usuarioLogeado;
 
 public class HistorialViewController {
 
@@ -88,6 +93,11 @@ public class HistorialViewController {
     }
 
     @FXML
+    void elegirPuja(ActionEvent event) {
+        elegirOferta();
+    }
+
+    @FXML
     void initialize() {
         historialControllerService = new HistorialController();
         intiView();
@@ -129,6 +139,84 @@ public class HistorialViewController {
             pujaSeleccionada = newSelection;
             mostrarInformacionPuja(pujaSeleccionada);
         });
+    }
+
+    private void elegirOferta() {
+        boolean anuncioActualizado = false;
+
+        String codigo = pujaSeleccionada.codigo();
+        PujaDto pujaDto = construirPujaDto();
+
+        if(pujaSeleccionada != null){
+
+            if(datosValidos(pujaSeleccionada)){
+                anuncioActualizado = historialControllerService.elegirPuja(codigo, pujaDto);
+                if(anuncioActualizado){
+                    listaPujasDto.remove(pujaSeleccionada);
+                    listaPujasDto.add(pujaDto);
+                    tableHistorial.refresh();
+                    mostrarMensaje("Notificación puja", "Puja actualizado", "La puja se ha actualizado con éxito.", Alert.AlertType.INFORMATION);
+                    limpiarCamposPuja();
+                    registrarAcciones("Puja actualizado",1, "Puja actualizado, acción realizada por " + usuarioLogeado);
+                }else{
+                    mostrarMensaje("Notificación puja", "Puja no actualizado", "La puja no se ha actualizado con éxito", Alert.AlertType.INFORMATION);
+                    registrarAcciones("Puja no actualizado",1, "Actualizar puja");
+                }
+            }else{
+                mostrarMensaje("Notificación puja", "Puja no creado", "Los datos ingresados son invalidos", Alert.AlertType.ERROR);
+            }
+
+        }
+
+    }
+
+    private PujaDto construirPujaDto() {
+        UUID uuid = UUID.randomUUID();
+        String codigoPuja = uuid.toString();
+        String producto = String.valueOf(cmbProducto.getValue());
+        String codigoAnuncio = txfCodigoAnuncio.getText();
+        String comprador = obtenerUsuarioComprador();
+        Double oferta = Double.valueOf(txfValorOferta.getText());
+        String estadoAnuncio = String.valueOf(EstadoAnuncios.Cerrado_pagado_con_exito);
+        return new PujaDto(codigoPuja,producto,codigoAnuncio,comprador, oferta, estadoAnuncio);
+    }
+
+
+    private String obtenerUsuarioComprador(){
+        CompradorDto compradorDto = historialControllerService.obtenerComprador(usuarioLogeado);
+        if(compradorDto != null){
+            if(compradorDto.usuarioAsociado().contains("Comprador")){
+                return compradorDto.cedula() + "  " + compradorDto.nombre() + " " + compradorDto.apellido();
+            }else{
+                mostrarMensaje("Notificación puja", "Puja no creada", "El usuario debe tener el rol 'Comprador' para hacer una Puja.", Alert.AlertType.ERROR);
+                return "";
+            }
+
+        }
+        mostrarMensaje("Notificación puja", "Puja no creada", "El usuario debe tener el rol 'Comprador' para hacer una Puja.", Alert.AlertType.ERROR);
+        return "";
+    }
+
+    private boolean datosValidos(PujaDto pujaDto) {
+        String mensaje = "";
+        if(pujaDto.codigo() == null || pujaDto.codigo().equals(""))
+            mensaje += "El código de la puja es invalido \n" ;
+        if(pujaDto.producto() == null || pujaDto.producto() .equals(""))
+            mensaje += "El producto de la puja es invalido \n" ;
+        if(pujaDto.anuncio()== null || pujaDto.anuncio() .equals(""))
+            mensaje += "El código del anuncio de la puja es invalido \n" ;
+        if(pujaDto.comprador() == null || pujaDto.comprador().equals(""))
+            mensaje += "El comprador de la puja es invalida \n" ;
+        if(pujaDto.oferta() == 0 )
+            mensaje += "la oferta de la puja es invalida \n" ;
+        if(pujaDto.estadoAnuncio() == null || pujaDto.estadoAnuncio().equals(""))
+            mensaje += "El estado del anuncio de la puja es invalida \n" ;
+        if(mensaje.equals("")){
+            return true;
+        }else{
+            mostrarMensaje("Notificación producto", "Producto no creado", mensaje, Alert.AlertType.ERROR);
+            return false;
+        }
     }
 
     public void mostrarCompradores(){

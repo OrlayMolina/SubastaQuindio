@@ -3,6 +3,7 @@ package co.edu.uniquindio.programacion3.subastaquindio.viewController;
 import co.edu.uniquindio.programacion3.subastaquindio.controller.ChatController;
 import co.edu.uniquindio.programacion3.subastaquindio.controller.ModelFactoryController;
 import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.AnuncianteDto;
+import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.ChatDto;
 import co.edu.uniquindio.programacion3.subastaquindio.model.Chat;
 import co.edu.uniquindio.programacion3.subastaquindio.model.SubastaQuindio;
 import javafx.collections.FXCollections;
@@ -19,7 +20,7 @@ public class ChatViewController {
 
     SubastaQuindio subastaQuindio;
     ChatController chatControllerService;
-    ObservableList<Chat> listaChats = FXCollections.observableArrayList();
+    ObservableList<ChatDto> listaChats = FXCollections.observableArrayList();
     Chat chatSelecionado;
 
     @FXML
@@ -39,10 +40,10 @@ public class ChatViewController {
         obtenerChatsAnteriores();
 
         // Agregar un Listener para actualizar automáticamente el txtAreaChat_chat cuando se agreguen nuevos chats
-        listaChats.addListener((ListChangeListener<Chat>) change -> {
+        listaChats.addListener((ListChangeListener<ChatDto>) change -> {
             while (change.next()) {
                 if (change.wasAdded()) {
-                    for (Chat nuevoChat : change.getAddedSubList()) {
+                    for (ChatDto nuevoChat : change.getAddedSubList()) {
                         mostrarMensajeAnterior(nuevoChat);
                     }
                 }
@@ -70,17 +71,17 @@ public class ChatViewController {
 
     private void obtenerChatsAnteriores() {
         listaChats.addAll(chatControllerService.obtenerChats());
-        for (Chat chat : listaChats) {
-            mostrarMensajeAnterior(chat);
+        for (ChatDto chatDto : listaChats) {
+            mostrarMensajeAnterior(chatDto);
         }
     }
 
-    private void mostrarMensajeAnterior(Chat chat) {
+    private void mostrarMensajeAnterior(ChatDto chatDto) {
         String mensajeAnterior = txtAreaChat_chat.getText();
         if (!mensajeAnterior.isEmpty()) {
             mensajeAnterior += "\n";
         }
-        txtAreaChat_chat.setText(mensajeAnterior + chat.getMiChat());
+        txtAreaChat_chat.setText(mensajeAnterior + chatDto.miChat());
     }
 
 

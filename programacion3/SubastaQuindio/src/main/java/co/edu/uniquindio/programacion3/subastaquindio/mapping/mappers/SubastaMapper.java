@@ -65,4 +65,12 @@ public interface SubastaMapper {
     @IterableMapping(qualifiedByName = "pujaToPujaDto")
     List<PujaDto> getPujaDto(List<Puja> listaPujas);
 
+    @Named("chatToChatDto")
+    ChatDto chatToChatDto(Chat chat);
+
+    Chat chatDtoToChat(ChatDto chatDto);
+
+    @IterableMapping(qualifiedByName = "chatToChatDto")
+    List<ChatDto> getChatDto(List<Chat> listaChats);
+
 }

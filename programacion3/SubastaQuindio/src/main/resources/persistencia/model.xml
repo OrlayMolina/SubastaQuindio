@@ -72,7 +72,7 @@
       <string>Lavadora en un muy buen estado.</string>
      </void>
      <void property="estado">
-      <string>Publicado</string>
+      <string>Cerrado_pagado_con_exito</string>
      </void>
      <void property="fechaFinPublicacion">
       <string>2023-11-12</string>
@@ -178,19 +178,19 @@
       <string>001</string>
      </void>
      <void property="codigo">
-      <string>2cfd3b08-b1f5-4e6c-9d71-ca93ac4029dc</string>
+      <string>d37e5726-bdee-4676-a271-c212bf3ba9b2</string>
      </void>
      <void property="comprador">
-      <string>10447859632  Laura Sofia Maldonado</string>
+      <string>1094587625 Miguel Angel Arias Rincon</string>
      </void>
      <void property="estadoAnuncio">
-      <string>Publicado</string>
+      <string>Cerrado_pagado_con_exito</string>
      </void>
      <void property="oferta">
       <double>900000.0</double>
      </void>
      <void property="producto">
-      <string>  001  Lavadora</string>
+      <string>    001  Lavadora</string>
      </void>
     </object>
    </void>

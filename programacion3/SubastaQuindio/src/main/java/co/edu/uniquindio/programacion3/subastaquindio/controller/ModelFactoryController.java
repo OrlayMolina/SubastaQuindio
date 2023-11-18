@@ -266,10 +266,10 @@ public class ModelFactoryController implements IModelFactoryService, Runnable {
     }
 
     @Override
-    public List<Chat> obtenerChats() {
+    public List<ChatDto> obtenerChats() {
         //consumirMensajesServicio4();
         //guardarResourceXML();
-        return  subasta.getListaMensajes();
+        return  mapper.getChatDto(subasta.getListaMensajes());
     }
 
     @Override
@@ -349,6 +349,19 @@ public class ModelFactoryController implements IModelFactoryService, Runnable {
             guardarResourceXML(); //Pendiente verificar si este método es adecuado
             return true;
         } catch (UsuarioException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public boolean actualizarPuja(String codigo, PujaDto pujaDto) {
+        try {
+            Puja puja = mapper.pujaDtoToPuja(pujaDto);
+            getSubasta().actualizarPuja(codigo, puja);
+            guardarResourceXML();
+            return true;
+        } catch (PujaException e) {
             e.printStackTrace();
             return false;
         }
