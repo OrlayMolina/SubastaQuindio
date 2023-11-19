@@ -122,10 +122,10 @@ public class SubastaQuindio implements ISubastaQuindioService, Serializable {
         return !horaActual.isAfter(horaFin);
     }
 
-    public boolean validarValorPuja(String codigoAnuncio, Double puja) throws PujaMenorValorInicialException {
+    public boolean validarValorPuja(String codigoAnuncio, Double puja) {
         boolean respuesta = false;
-        if(valorMenorPujado(codigoAnuncio, puja)){
-            throw new PujaMenorValorInicialException("El valor de la puja es menor al valor inicial del anuncio");
+        if(!valorMenorPujado(codigoAnuncio, puja)){
+            return respuesta;
         }else {
             respuesta = true;
         }
@@ -134,9 +134,13 @@ public class SubastaQuindio implements ISubastaQuindioService, Serializable {
 
     public boolean valorMenorPujado(String codigoAnuncio, Double puja) {
         boolean respuesta = false;
-        Anuncio anuncio = obtenerAnuncio(codigoAnuncio);
-        if (anuncio.getValorInicial() < puja) {
-            respuesta = true;
+        try {
+            Anuncio anuncio = obtenerAnuncio(codigoAnuncio);
+            if (anuncio.getValorInicial() < puja) {
+                respuesta = true;
+            }
+        }catch(AnuncioException e){
+            e.printStackTrace();
         }
 
         return respuesta;
@@ -541,7 +545,7 @@ public class SubastaQuindio implements ISubastaQuindioService, Serializable {
     }
 
     @Override
-    public Anuncio obtenerAnuncio(String cedula) {
+    public Anuncio obtenerAnuncio(String cedula) throws AnuncioException{
         Anuncio anuncioEncontrado = null;
         for (Anuncio anuncio : getListaAnuncios()) {
             if(anuncio.getCodigo().equalsIgnoreCase(cedula)){
@@ -549,6 +553,11 @@ public class SubastaQuindio implements ISubastaQuindioService, Serializable {
                 break;
             }
         }
+
+        if (anuncioEncontrado == null) {
+            throw new AnuncioException("El anuncio con código " + cedula + " no existe.");
+        }
+
         return anuncioEncontrado;
     }
 

@@ -2,7 +2,6 @@ package co.edu.uniquindio.programacion3.subastaquindio.viewController;
 
 import co.edu.uniquindio.programacion3.subastaquindio.controller.PujaController;
 import co.edu.uniquindio.programacion3.subastaquindio.exceptions.AnuncioException;
-import co.edu.uniquindio.programacion3.subastaquindio.exceptions.PujaMenorValorInicialException;
 import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.*;
 import co.edu.uniquindio.programacion3.subastaquindio.model.SubastaQuindio;
 import co.edu.uniquindio.programacion3.subastaquindio.utils.ListaAnuncioUtil;
@@ -119,7 +118,7 @@ public class PujaViewController extends Frame {
         cancelarBusqueda();
     }
     @FXML
-    void hacerOferta(ActionEvent event) throws AnuncioException, PujaMenorValorInicialException {
+    void hacerOferta(ActionEvent event) throws AnuncioException {
         crearOferta();
     }
 
@@ -170,10 +169,10 @@ public class PujaViewController extends Frame {
         });
     }
 
-    private void crearOferta() throws AnuncioException, PujaMenorValorInicialException {
+    private void crearOferta() throws AnuncioException{
         PujaDto pujaDto = construirPujaDto();
-        dato = pujaControllerService.actualizarTiempoRestante(pujaDto.codigo());
-        boolean valorPermitido = pujaControllerService.validarValorPuja(pujaDto.codigo(), pujaDto.oferta());
+        dato = pujaControllerService.actualizarTiempoRestante(pujaDto.anuncio());
+        boolean valorPermitido = pujaControllerService.validarValorPuja(pujaDto.anuncio(), pujaDto.oferta());
 
         if (!valorPermitido) {
             mostrarMensaje("Notificación puja", "Valor puja no permitido",

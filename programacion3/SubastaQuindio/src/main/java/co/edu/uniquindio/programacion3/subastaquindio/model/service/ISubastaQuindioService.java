@@ -60,7 +60,8 @@ public interface ISubastaQuindioService {
 
     Comprador obtenerCompradorPorUsuario(String nombreUsuario);
 
-    Anuncio obtenerAnuncio(String cedula);
+
+    Anuncio obtenerAnuncio(String cedula) throws AnuncioException;
 
     Puja obtenerPuja(String codigo);
 

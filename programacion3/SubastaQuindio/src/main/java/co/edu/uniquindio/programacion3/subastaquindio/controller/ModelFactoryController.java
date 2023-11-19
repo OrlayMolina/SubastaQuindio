@@ -135,12 +135,13 @@ public class ModelFactoryController implements IModelFactoryService, Runnable {
         hiloServicio4_nuevoMensajeConsumer.start();
     }
 
-    public boolean actualizarTiempoRestante(String codigo) throws AnuncioException {
-        AnuncioDto anuncioDto = mapper.anuncioToAnuncioDto(obtenerAnuncio(codigo));
+    public boolean actualizarTiempoRestante(String codigo) {
+        AnuncioDto anuncioDto;
+        anuncioDto = mapper.anuncioToAnuncioDto(obtenerAnuncio(codigo));
         return getSubasta().verificarHoraFin(anuncioDto.fechaFinPublicacion());
     }
 
-    public boolean validarValorPuja(String codigo, Double puja) throws PujaMenorValorInicialException {
+    public boolean validarValorPuja(String codigo, Double puja){
         return getSubasta().validarValorPuja(codigo, puja);
     }
 
@@ -252,11 +253,15 @@ public class ModelFactoryController implements IModelFactoryService, Runnable {
     }
 
     @Override
-    public Anuncio obtenerAnuncio(String codigo) throws AnuncioException{
-        Anuncio anuncio = getSubasta().obtenerAnuncio(codigo);
-        if (anuncio == null) {
-            throw new AnuncioException("El anuncio con código " + codigo + " no existe.");
+    public Anuncio obtenerAnuncio(String codigo) {
+        Anuncio anuncio = null;
+
+        try {
+            anuncio = getSubasta().obtenerAnuncio(codigo);
+        } catch (AnuncioException e) {
+            e.printStackTrace();
         }
+
         return anuncio;
     }
 
