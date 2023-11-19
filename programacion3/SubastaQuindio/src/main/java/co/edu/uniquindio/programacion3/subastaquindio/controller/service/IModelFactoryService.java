@@ -1,6 +1,8 @@
 package co.edu.uniquindio.programacion3.subastaquindio.controller.service;
 
+import co.edu.uniquindio.programacion3.subastaquindio.exceptions.AnuncioException;
 import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.*;
+import co.edu.uniquindio.programacion3.subastaquindio.model.Anuncio;
 import co.edu.uniquindio.programacion3.subastaquindio.model.Chat;
 
 import java.util.List;
@@ -17,6 +19,8 @@ public interface IModelFactoryService {
     CompradorDto obtenerComprador(String nombre);
 
     String obtenerProducto(String nombre);
+
+    Anuncio obtenerAnuncio(String codigo) throws AnuncioException;
 
     List<AnuncianteDto> obtenerAnunciantes();
 

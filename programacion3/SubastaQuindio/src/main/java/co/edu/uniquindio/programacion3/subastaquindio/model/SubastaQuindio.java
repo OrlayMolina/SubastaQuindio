@@ -5,6 +5,7 @@ import co.edu.uniquindio.programacion3.subastaquindio.model.service.ISubastaQuin
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.Period;
 import java.util.ArrayList;
 
@@ -107,6 +108,40 @@ public class SubastaQuindio implements ISubastaQuindioService, Serializable {
         }
         return mayor;
     }
+
+    /**
+     * Función para que se encarga de cambiar el estado del anuncio a Finalizado
+     * @param hora
+     * @return
+     */
+    public boolean verificarHoraFin(String hora) {
+
+        LocalTime horaActual = LocalTime.now();
+        LocalTime horaFin = LocalTime.parse(hora);
+
+        return !horaActual.isAfter(horaFin);
+    }
+
+    public boolean validarValorPuja(String codigoAnuncio, Double puja) throws PujaMenorValorInicialException {
+        boolean respuesta = false;
+        if(valorMenorPujado(codigoAnuncio, puja)){
+            throw new PujaMenorValorInicialException("El valor de la puja es menor al valor inicial del anuncio");
+        }else {
+            respuesta = true;
+        }
+        return respuesta;
+    }
+
+    public boolean valorMenorPujado(String codigoAnuncio, Double puja) {
+        boolean respuesta = false;
+        Anuncio anuncio = obtenerAnuncio(codigoAnuncio);
+        if (anuncio.getValorInicial() < puja) {
+            respuesta = true;
+        }
+
+        return respuesta;
+    }
+
 
     @Override
     public Producto crearProducto(String codigoUnico, String nombreProducto, String tipoProducto,

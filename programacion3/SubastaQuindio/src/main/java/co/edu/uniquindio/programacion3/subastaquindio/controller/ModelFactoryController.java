@@ -30,6 +30,7 @@ public class ModelFactoryController implements IModelFactoryService, Runnable {
     Thread hiloServicio2_guardarRegistroLog;
     Thread hiloServicio3_guardarCopiaXml;
     Thread hiloServicio4_nuevoMensajeConsumer;
+    Thread hiloServicio5_actualizarTiempoRestante;
     BoundedSemaphore semaphore = new BoundedSemaphore(1);
     String mensaje;
     int nivel;
@@ -58,6 +59,7 @@ public class ModelFactoryController implements IModelFactoryService, Runnable {
         if(hiloActual == hiloServicio4_nuevoMensajeConsumer){
             consumirMensajes();
         }
+
     }
 
     private void ocuparSemaforo() {
@@ -131,6 +133,15 @@ public class ModelFactoryController implements IModelFactoryService, Runnable {
     public void consumirMensajesServicio4(){
         hiloServicio4_nuevoMensajeConsumer = new Thread(this);
         hiloServicio4_nuevoMensajeConsumer.start();
+    }
+
+    public boolean actualizarTiempoRestante(String codigo) throws AnuncioException {
+        AnuncioDto anuncioDto = mapper.anuncioToAnuncioDto(obtenerAnuncio(codigo));
+        return getSubasta().verificarHoraFin(anuncioDto.fechaFinPublicacion());
+    }
+
+    public boolean validarValorPuja(String codigo, Double puja) throws PujaMenorValorInicialException {
+        return getSubasta().validarValorPuja(codigo, puja);
     }
 
     private void consumirMensajes() {
@@ -224,21 +235,31 @@ public class ModelFactoryController implements IModelFactoryService, Runnable {
         return  mapper.compradorToCompradorDto(getSubasta().obtenerCompradorPorUsuario(nombre));
     }
 
-        @Override
-        public String obtenerProducto(String nombre) {
-            Producto producto = getSubasta().obtenerProducto(nombre);
+    @Override
+    public String obtenerProducto(String nombre) {
+        Producto producto = getSubasta().obtenerProducto(nombre);
 
-            if (producto != null) {
-                ProductoDto productoDto = mapper.productoToProductoDto(producto);
-                if (productoDto != null) {
-                    return productoDto.foto();
-                } else {
-                    return "";
-                }
+        if (producto != null) {
+            ProductoDto productoDto = mapper.productoToProductoDto(producto);
+            if (productoDto != null) {
+                return productoDto.foto();
             } else {
                 return "";
             }
+        } else {
+            return "";
         }
+    }
+
+    @Override
+    public Anuncio obtenerAnuncio(String codigo) throws AnuncioException{
+        Anuncio anuncio = getSubasta().obtenerAnuncio(codigo);
+        if (anuncio == null) {
+            throw new AnuncioException("El anuncio con código " + codigo + " no existe.");
+        }
+        return anuncio;
+    }
+
 
     @Override
     public List<AnuncianteDto> obtenerAnunciantes() {

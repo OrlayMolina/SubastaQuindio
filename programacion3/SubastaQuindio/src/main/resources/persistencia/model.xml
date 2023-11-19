@@ -69,16 +69,16 @@
       <string>001</string>
      </void>
      <void property="descripcion">
-      <string>Lavadora en un muy buen estado.</string>
+      <string>casi nueva</string>
      </void>
      <void property="estado">
-      <string>Cerrado_pagado_con_exito</string>
+      <string>Publicado</string>
      </void>
      <void property="fechaFinPublicacion">
-      <string>2023-11-12</string>
+      <string>12:00:00</string>
      </void>
      <void property="fechaPublicacion">
-      <string>2023-11-11</string>
+      <string>2023-11-18</string>
      </void>
      <void property="foto">
       <string>src/main/resources/co/edu/uniquindio/programacion3/subastaquindio/img/lavadora.jpg</string>
@@ -178,19 +178,19 @@
       <string>001</string>
      </void>
      <void property="codigo">
-      <string>d37e5726-bdee-4676-a271-c212bf3ba9b2</string>
+      <string>b7a66ea9-0369-44c3-a2dc-2df56fb1184d</string>
      </void>
      <void property="comprador">
-      <string>1094587625 Miguel Angel Arias Rincon</string>
+      <string>10447859632  Laura Sofia Maldonado</string>
      </void>
      <void property="estadoAnuncio">
-      <string>Cerrado_pagado_con_exito</string>
+      <string>Publicado</string>
      </void>
      <void property="oferta">
       <double>900000.0</double>
      </void>
      <void property="producto">
-      <string>    001  Lavadora</string>
+      <string>  001  Lavadora</string>
      </void>
     </object>
    </void>

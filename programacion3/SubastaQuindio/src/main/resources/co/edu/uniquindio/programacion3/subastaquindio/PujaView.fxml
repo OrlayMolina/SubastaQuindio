@@ -17,7 +17,7 @@
 
 <AnchorPane prefHeight="473.0" prefWidth="774.0" stylesheets="@tema.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.programacion3.subastaquindio.viewController.PujaViewController">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ebebeb" height="140.0" layoutX="533.0" layoutY="3.0" stroke="#978f8f" strokeType="INSIDE" width="235.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ebebeb" height="135.0" layoutX="533.0" layoutY="3.0" stroke="#978f8f" strokeType="INSIDE" width="235.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ebebeb" height="461.0" layoutX="4.0" layoutY="3.0" stroke="#978f8f" strokeType="INSIDE" width="522.0" />
       <Label layoutX="191.0" layoutY="11.0" text="Lista de Anuncios">
          <font>
@@ -51,7 +51,7 @@
         </columns>
       </TableView>
       <Label layoutX="200.0" layoutY="51.0" text="Busqueda personalizada" />
-      <GridPane layoutX="541.0" layoutY="11.0" prefHeight="122.0" prefWidth="221.0">
+      <GridPane layoutX="541.0" layoutY="11.0" prefHeight="117.0" prefWidth="221.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="68.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="86.0" />
@@ -92,7 +92,7 @@
             <TextField fx:id="txfFechaFinPuja" GridPane.columnIndex="1" GridPane.rowIndex="4" />
          </children>
       </GridPane>
-      <GridPane layoutX="534.0" layoutY="156.0">
+      <GridPane layoutX="534.0" layoutY="147.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="10.0" />
@@ -110,8 +110,8 @@
             <TextField fx:id="txfOferta" prefHeight="27.0" prefWidth="134.0" GridPane.columnIndex="2" />
          </children>
       </GridPane>
-      <Button fx:id="btnHacerOferta" layoutX="535.0" layoutY="193.0" mnemonicParsing="false" onAction="#hacerOferta" prefHeight="32.0" prefWidth="230.0" styleClass="primary" text="Hacer Oferta" />
-      <TableView fx:id="tableOfertas" layoutX="534.0" layoutY="234.0" prefHeight="229.0" prefWidth="230.0">
+      <Button fx:id="btnHacerOferta" layoutX="535.0" layoutY="185.0" mnemonicParsing="false" onAction="#hacerOferta" prefHeight="32.0" prefWidth="230.0" styleClass="primary" text="Hacer Oferta" />
+      <TableView fx:id="tableOfertas" layoutX="534.0" layoutY="229.0" prefHeight="234.0" prefWidth="230.0">
         <columns>
           <TableColumn fx:id="colCodigoOferta" prefWidth="62.0" text="Código" />
           <TableColumn fx:id="colComprador" prefWidth="83.0" text="Comprador" />

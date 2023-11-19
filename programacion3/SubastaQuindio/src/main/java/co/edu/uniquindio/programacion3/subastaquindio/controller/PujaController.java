@@ -1,5 +1,7 @@
 package co.edu.uniquindio.programacion3.subastaquindio.controller;
 
+import co.edu.uniquindio.programacion3.subastaquindio.exceptions.AnuncioException;
+import co.edu.uniquindio.programacion3.subastaquindio.exceptions.PujaMenorValorInicialException;
 import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.*;
 
 import java.util.List;
@@ -42,6 +44,14 @@ public class PujaController {
 
     public String obtenerEstadoAnuncio(String codigo) {
         return modelFactoryController.obtenerEstadoAnuncio(codigo);
+    }
+
+    public boolean actualizarTiempoRestante(String codigo) throws AnuncioException {
+        return modelFactoryController.actualizarTiempoRestante(codigo);
+    }
+
+    public boolean validarValorPuja(String codigo, Double puja) throws PujaMenorValorInicialException {
+        return modelFactoryController.validarValorPuja(codigo, puja);
     }
     public void registrarAcciones(String mensaje, int nivel, String accion) {
         modelFactoryController.registrarAccionesSistema(mensaje, nivel, accion);
