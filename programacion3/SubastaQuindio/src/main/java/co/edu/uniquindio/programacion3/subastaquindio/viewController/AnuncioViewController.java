@@ -139,6 +139,7 @@ public class AnuncioViewController {
         cancelarBusqueda();
     }
 
+
     @FXML
     void seleccionImagen(ActionEvent event) {
         String producto = String.valueOf(cmbProducto.getValue());
@@ -152,6 +153,7 @@ public class AnuncioViewController {
         anuncioControllerService = new AnuncioController();
         subastaQuindio = new SubastaQuindio();
         initView();
+        cmbEstadoAnuncio.setValue(String.valueOf(EstadoAnuncios.Publicado));
     }
 
     private void initView() {

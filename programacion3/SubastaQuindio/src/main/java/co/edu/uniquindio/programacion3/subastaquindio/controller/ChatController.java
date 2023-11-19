@@ -1,6 +1,7 @@
 package co.edu.uniquindio.programacion3.subastaquindio.controller;
 
 import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.AnuncianteDto;
+import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.ChatDto;
 import co.edu.uniquindio.programacion3.subastaquindio.model.Chat;
 
 import java.util.List;
@@ -18,7 +19,7 @@ public class ChatController {
         modelFactoryController.iniciarChat(texto);
     }
 
-    public List<Chat> obtenerChats() {
+    public List<ChatDto> obtenerChats() {
         return modelFactoryController.obtenerChats();
     }
 

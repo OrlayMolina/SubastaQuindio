@@ -8,10 +8,12 @@ import co.edu.uniquindio.programacion3.subastaquindio.mapping.mappers.SubastaMap
 import co.edu.uniquindio.programacion3.subastaquindio.model.*;
 import co.edu.uniquindio.programacion3.subastaquindio.utils.Persistencia;
 import co.edu.uniquindio.programacion3.subastaquindio.utils.SubastaUtils;
+import co.edu.uniquindio.programacion3.subastaquindio.viewController.PujaViewController;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.DeliverCallback;
+import javafx.scene.control.Alert;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -31,6 +33,7 @@ public class ModelFactoryController implements IModelFactoryService, Runnable {
     Thread hiloServicio3_guardarCopiaXml;
     Thread hiloServicio4_nuevoMensajeConsumer;
     BoundedSemaphore semaphore = new BoundedSemaphore(1);
+    PujaViewController pujaView = new PujaViewController();
     String mensaje;
     int nivel;
     String accion;
@@ -58,6 +61,7 @@ public class ModelFactoryController implements IModelFactoryService, Runnable {
         if(hiloActual == hiloServicio4_nuevoMensajeConsumer){
             consumirMensajes();
         }
+
     }
 
     private void ocuparSemaforo() {
@@ -131,6 +135,25 @@ public class ModelFactoryController implements IModelFactoryService, Runnable {
     public void consumirMensajesServicio4(){
         hiloServicio4_nuevoMensajeConsumer = new Thread(this);
         hiloServicio4_nuevoMensajeConsumer.start();
+    }
+
+    public boolean actualizarTiempoRestante(String codigo) {
+        AnuncioDto anuncioDto;
+        Anuncio anuncio = obtenerAnuncio(codigo);
+
+        if (anuncio != null) {
+            anuncioDto = mapper.anuncioToAnuncioDto(anuncio);
+            return getSubasta().verificarHoraFin(anuncioDto.fechaFinPublicacion());
+        } else {
+            pujaView.mostrarMensaje("Notificación puja", "Puja no creada", "No se pudo encontrar la fecha fin del anuncio", Alert.AlertType.ERROR);
+
+            return false;
+        }
+    }
+
+
+    public boolean validarValorPuja(String codigo, Double puja){
+        return getSubasta().validarValorPuja(codigo, puja);
     }
 
     private void consumirMensajes() {
@@ -224,21 +247,31 @@ public class ModelFactoryController implements IModelFactoryService, Runnable {
         return  mapper.compradorToCompradorDto(getSubasta().obtenerCompradorPorUsuario(nombre));
     }
 
-        @Override
-        public String obtenerProducto(String nombre) {
-            Producto producto = getSubasta().obtenerProducto(nombre);
+    @Override
+    public String obtenerProducto(String nombre) {
+        Producto producto = getSubasta().obtenerProducto(nombre);
 
-            if (producto != null) {
-                ProductoDto productoDto = mapper.productoToProductoDto(producto);
-                if (productoDto != null) {
-                    return productoDto.foto();
-                } else {
-                    return "";
-                }
+        if (producto != null) {
+            ProductoDto productoDto = mapper.productoToProductoDto(producto);
+            if (productoDto != null) {
+                return productoDto.foto();
             } else {
                 return "";
             }
+        } else {
+            return "";
         }
+    }
+
+    @Override
+    public Anuncio obtenerAnuncio(String codigo) {
+        Anuncio anuncio = null;
+
+        anuncio = getSubasta().obtenerAnuncio(codigo);
+
+        return anuncio;
+    }
+
 
     @Override
     public List<AnuncianteDto> obtenerAnunciantes() {
@@ -266,10 +299,10 @@ public class ModelFactoryController implements IModelFactoryService, Runnable {
     }
 
     @Override
-    public List<Chat> obtenerChats() {
+    public List<ChatDto> obtenerChats() {
         //consumirMensajesServicio4();
         //guardarResourceXML();
-        return  subasta.getListaMensajes();
+        return  mapper.getChatDto(subasta.getListaMensajes());
     }
 
     @Override
@@ -349,6 +382,19 @@ public class ModelFactoryController implements IModelFactoryService, Runnable {
             guardarResourceXML(); //Pendiente verificar si este método es adecuado
             return true;
         } catch (UsuarioException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
+    public boolean actualizarPuja(String codigo, PujaDto pujaDto) {
+        try {
+            Puja puja = mapper.pujaDtoToPuja(pujaDto);
+            getSubasta().actualizarPuja(codigo, puja);
+            guardarResourceXML();
+            return true;
+        } catch (PujaException e) {
             e.printStackTrace();
             return false;
         }

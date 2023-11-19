@@ -70,7 +70,7 @@
             </Label>
             <TextField fx:id="txfValorInicial" promptText="Ingrese el valor" GridPane.columnIndex="4" GridPane.rowIndex="4" />
             <TextField fx:id="txfFechaPublicacion" promptText="Fecha Publicacion" GridPane.columnIndex="4" GridPane.rowIndex="2" />
-            <TextField fx:id="txfFechaFinPublicacion" promptText="Fecha Fin" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <TextField fx:id="txfFechaFinPublicacion" promptText="Ejemplo &quot;18:00:00&quot;" GridPane.columnIndex="1" GridPane.rowIndex="4" />
          </children>
       </GridPane>
       <TextArea fx:id="txaDescripcion" layoutX="212.0" layoutY="127.0" prefHeight="52.0" prefWidth="412.0" promptText="Descripción del Anuncio ...." />

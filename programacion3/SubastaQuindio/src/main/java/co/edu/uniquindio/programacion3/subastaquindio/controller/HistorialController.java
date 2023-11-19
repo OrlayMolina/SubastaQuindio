@@ -14,6 +14,10 @@ public class HistorialController {
         modelFactoryController = ModelFactoryController.getInstance();
     }
 
+    public boolean elegirPuja(String codigo, PujaDto pujaDto) {
+        return modelFactoryController.actualizarPuja(codigo, pujaDto);
+    }
+
     public List<PujaDto> obtenerPujas() {
         return modelFactoryController.obtenerPujas();
     }
@@ -24,6 +28,10 @@ public class HistorialController {
 
     public List<CompradorDto> obtenerCompradores() {
         return modelFactoryController.obtenerCompradores();
+    }
+
+    public CompradorDto obtenerComprador(String nombre){
+        return modelFactoryController.obtenerComprador(nombre);
     }
 
     public void registrarAcciones(String mensaje, int nivel, String accion) {
