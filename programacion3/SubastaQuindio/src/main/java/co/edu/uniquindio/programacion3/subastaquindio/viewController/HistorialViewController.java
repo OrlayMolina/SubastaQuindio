@@ -26,6 +26,7 @@ public class HistorialViewController {
     ObservableList<PujaDto> listaPujasDto = FXCollections.observableArrayList();
     ObservableList<ProductoDto> listaProductosDto = FXCollections.observableArrayList();
     ObservableList<CompradorDto> listaCompradoresDto = FXCollections.observableArrayList();
+    ObservableList<String> listaEstadosAnuncio = FXCollections.observableArrayList();
     CompradorDto compradorDto;
     ProductoDto productoDto;
     PujaDto pujaSeleccionada;
@@ -108,6 +109,8 @@ public class HistorialViewController {
         obtenerProductos();
         obtenerOfertas();
         mostrarCompradores();
+        mostrarProducto();
+        mostrarEstadoAnuncios();
         getListaCompradores();
         tableHistorial.getItems().clear();
         tableHistorial.setItems(listaPujasDto);
@@ -221,6 +224,17 @@ public class HistorialViewController {
 
     public void mostrarCompradores(){
         cmbComprador.setItems(listaCompradoresDto);
+    }
+
+    public void mostrarProducto(){
+        cmbProducto.setItems(listaProductosDto);
+    }
+
+    public void mostrarEstadoAnuncios(){
+        listaEstadosAnuncio.add(String.valueOf(EstadoAnuncios.Publicado));
+        listaEstadosAnuncio.add(String.valueOf(EstadoAnuncios.Finalizado));
+        listaEstadosAnuncio.add(String.valueOf(EstadoAnuncios.Cerrado_pagado_con_exito));
+        cmbEstado.setItems(listaEstadosAnuncio);
     }
 
     /**

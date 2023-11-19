@@ -8,10 +8,12 @@ import co.edu.uniquindio.programacion3.subastaquindio.mapping.mappers.SubastaMap
 import co.edu.uniquindio.programacion3.subastaquindio.model.*;
 import co.edu.uniquindio.programacion3.subastaquindio.utils.Persistencia;
 import co.edu.uniquindio.programacion3.subastaquindio.utils.SubastaUtils;
+import co.edu.uniquindio.programacion3.subastaquindio.viewController.PujaViewController;
 import com.rabbitmq.client.Channel;
 import com.rabbitmq.client.Connection;
 import com.rabbitmq.client.ConnectionFactory;
 import com.rabbitmq.client.DeliverCallback;
+import javafx.scene.control.Alert;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -30,8 +32,8 @@ public class ModelFactoryController implements IModelFactoryService, Runnable {
     Thread hiloServicio2_guardarRegistroLog;
     Thread hiloServicio3_guardarCopiaXml;
     Thread hiloServicio4_nuevoMensajeConsumer;
-    Thread hiloServicio5_actualizarTiempoRestante;
     BoundedSemaphore semaphore = new BoundedSemaphore(1);
+    PujaViewController pujaView = new PujaViewController();
     String mensaje;
     int nivel;
     String accion;
@@ -137,9 +139,18 @@ public class ModelFactoryController implements IModelFactoryService, Runnable {
 
     public boolean actualizarTiempoRestante(String codigo) {
         AnuncioDto anuncioDto;
-        anuncioDto = mapper.anuncioToAnuncioDto(obtenerAnuncio(codigo));
-        return getSubasta().verificarHoraFin(anuncioDto.fechaFinPublicacion());
+        Anuncio anuncio = obtenerAnuncio(codigo);
+
+        if (anuncio != null) {
+            anuncioDto = mapper.anuncioToAnuncioDto(anuncio);
+            return getSubasta().verificarHoraFin(anuncioDto.fechaFinPublicacion());
+        } else {
+            pujaView.mostrarMensaje("Notificación puja", "Puja no creada", "No se pudo encontrar la fecha fin del anuncio", Alert.AlertType.ERROR);
+
+            return false;
+        }
     }
+
 
     public boolean validarValorPuja(String codigo, Double puja){
         return getSubasta().validarValorPuja(codigo, puja);
@@ -256,11 +267,7 @@ public class ModelFactoryController implements IModelFactoryService, Runnable {
     public Anuncio obtenerAnuncio(String codigo) {
         Anuncio anuncio = null;
 
-        try {
-            anuncio = getSubasta().obtenerAnuncio(codigo);
-        } catch (AnuncioException e) {
-            e.printStackTrace();
-        }
+        anuncio = getSubasta().obtenerAnuncio(codigo);
 
         return anuncio;
     }

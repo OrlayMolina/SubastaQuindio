@@ -118,7 +118,7 @@ public class PujaViewController extends Frame {
         cancelarBusqueda();
     }
     @FXML
-    void hacerOferta(ActionEvent event) throws AnuncioException {
+    void hacerOferta(ActionEvent event) {
         crearOferta();
     }
 
@@ -169,50 +169,38 @@ public class PujaViewController extends Frame {
         });
     }
 
-    private void crearOferta() throws AnuncioException{
+    private void crearOferta(){
+
         PujaDto pujaDto = construirPujaDto();
         dato = pujaControllerService.actualizarTiempoRestante(pujaDto.anuncio());
         boolean valorPermitido = pujaControllerService.validarValorPuja(pujaDto.anuncio(), pujaDto.oferta());
+        if(datosValidos(pujaDto)){
+            if(valorPermitido){
+                if(dato){
+                    if(mostrarMensajeConfirmacion("¿Estas seguro que desea realizar una Puja por este producto?")){
+                        if(pujaControllerService.agregarPuja(pujaDto)){
+                            listPujaDto.add(pujaDto);
+                            mostrarMensaje("Notificación puja", "Puja creado", "El puja se ha creado con éxito", Alert.AlertType.INFORMATION);
 
-        if (!valorPermitido) {
-            mostrarMensaje("Notificación puja", "Valor puja no permitido",
-                    "El valor pujado es menor al valor Inicial para pujar del anuncio",
-                    Alert.AlertType.ERROR);
-            return;
+                            registrarAcciones("Puja agregado",1, "Agregar puja");
+                        }else{
+                            mostrarMensaje("Notificación puja", "Puja no creado", "El puja no se ha creado", Alert.AlertType.ERROR);
+                        }
+                    }else{
+                        mostrarMensaje("Notificación puja", "Puja no seleccionado", "No fue posible realizar la Puja", Alert.AlertType.WARNING);
+                    }
+
+                }else {
+                    mostrarMensaje("Notificación puja", "Anuncio Finalizado", "El Anuncio ha finalizado, no se puede pujar por este producto", Alert.AlertType.ERROR);
+                }
+            }else {
+                mostrarMensaje("Notificación puja", "Valor puja no permitido", "El valor pujado es menor al valor Inicial para pujar del anuncio", Alert.AlertType.ERROR);
+            }
+
+        }else{
+            mostrarMensaje("Notificación puja", "Puja no creado", "Los datos ingresados son invalidos", Alert.AlertType.ERROR);
         }
 
-        if (!dato) {
-            mostrarMensaje("Notificación puja", "Anuncio Finalizado",
-                    "El Anuncio ha finalizado, no se puede pujar por este producto",
-                    Alert.AlertType.ERROR);
-            return;
-        }
-
-        if (!datosValidos(pujaDto)) {
-            mostrarMensaje("Notificación puja", "Puja no creado",
-                    "Los datos ingresados son inválidos",
-                    Alert.AlertType.ERROR);
-            return;
-        }
-
-        if (!mostrarMensajeConfirmacion("¿Estás seguro que desea realizar una Puja por este producto?")) {
-            mostrarMensaje("Notificación puja", "Puja no seleccionado",
-                    "No fue posible realizar la Puja",
-                    Alert.AlertType.WARNING);
-            return;
-        }
-
-        if (pujaControllerService.agregarPuja(pujaDto)) {
-            listPujaDto.add(pujaDto);
-            mostrarMensaje("Notificación puja", "Puja creado",
-                    "El puja se ha creado con éxito",
-                    Alert.AlertType.INFORMATION);
-            registrarAcciones("Puja agregado", 1, "Agregar puja");
-        } else {
-            mostrarMensaje("Notificación puja", "Puja no creado",
-                    "El puja no se ha creado",
-                    Alert.AlertType.ERROR);
-        }
     }
 
 
@@ -260,10 +248,20 @@ public class PujaViewController extends Frame {
         String producto = String.valueOf(cmbProducto.getValue());
         String codigoAnuncio = txfCodigoAnuncio.getText();
         String comprador = obtenerUsuarioComprador();
-        Double oferta = Double.valueOf(txfOferta.getText());
+        Double oferta;
+
+        String textoOferta = txfOferta.getText();
+
+        if (textoOferta == null || textoOferta.isEmpty()) {
+            oferta = 0.0;
+        } else {
+            oferta = Double.valueOf(textoOferta);
+        }
+
         String estadoAnuncio = obtenerEstadoAnuncio();
-        return new PujaDto(codigoPuja,producto,codigoAnuncio,comprador, oferta, estadoAnuncio);
+        return new PujaDto(codigoPuja, producto, codigoAnuncio, comprador, oferta, estadoAnuncio);
     }
+
 
     private String obtenerEstadoAnuncio(){
         return pujaControllerService.obtenerEstadoAnuncio(txfCodigoAnuncio.getText());
@@ -284,6 +282,7 @@ public class PujaViewController extends Frame {
         return "";
     }
 
+
     private boolean datosValidos(PujaDto pujaDto) {
         String mensaje = "";
         if(pujaDto.codigo() == null || pujaDto.codigo().equals(""))
@@ -294,14 +293,14 @@ public class PujaViewController extends Frame {
             mensaje += "El código del anuncio de la puja es invalido \n" ;
         if(pujaDto.comprador() == null || pujaDto.comprador().equals(""))
             mensaje += "El comprador de la puja es invalida \n" ;
-        if(pujaDto.oferta() == 0 )
-            mensaje += "la oferta de la puja es invalida \n" ;
+        if(pujaDto.oferta() == 0.0 )
+            mensaje += "la oferta de la puja es invalida, debe agregar un valor de oferta \n" ;
         if(pujaDto.estadoAnuncio() == null || pujaDto.estadoAnuncio().equals(""))
             mensaje += "El estado del anuncio de la puja es invalida \n" ;
         if(mensaje.equals("")){
             return true;
         }else{
-            mostrarMensaje("Notificación producto", "Producto no creado", mensaje, Alert.AlertType.ERROR);
+            mostrarMensaje("Notificación puja", "Puja no creada", mensaje, Alert.AlertType.ERROR);
             return false;
         }
     }
@@ -371,7 +370,7 @@ public class PujaViewController extends Frame {
         }
     }
 
-    private void mostrarMensaje(String titulo, String header, String contenido, Alert.AlertType alertType) {
+    public void mostrarMensaje(String titulo, String header, String contenido, Alert.AlertType alertType) {
         Alert aler = new Alert(alertType);
         aler.setTitle(titulo);
         aler.setHeaderText(header);

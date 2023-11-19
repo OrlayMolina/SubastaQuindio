@@ -45,7 +45,7 @@ public class PujaController {
         return modelFactoryController.obtenerEstadoAnuncio(codigo);
     }
 
-    public boolean actualizarTiempoRestante(String codigo) throws AnuncioException {
+    public boolean actualizarTiempoRestante(String codigo) {
         return modelFactoryController.actualizarTiempoRestante(codigo);
     }
 

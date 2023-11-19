@@ -2,6 +2,8 @@ package co.edu.uniquindio.programacion3.subastaquindio.model;
 
 import co.edu.uniquindio.programacion3.subastaquindio.exceptions.*;
 import co.edu.uniquindio.programacion3.subastaquindio.model.service.ISubastaQuindioService;
+import co.edu.uniquindio.programacion3.subastaquindio.viewController.PujaViewController;
+import javafx.scene.control.Alert;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -12,6 +14,8 @@ import java.util.ArrayList;
 public class SubastaQuindio implements ISubastaQuindioService, Serializable {
 
     private static final long serialVersionUID = 1L;
+
+    private PujaViewController pujaView = new PujaViewController();
     private ArrayList<Producto> listaProductos = new ArrayList<>();
     private ArrayList<Usuario> listaUsuarios = new ArrayList<>();
     private ArrayList<Anunciante> listaAnunciantes = new ArrayList<>();
@@ -134,13 +138,14 @@ public class SubastaQuindio implements ISubastaQuindioService, Serializable {
 
     public boolean valorMenorPujado(String codigoAnuncio, Double puja) {
         boolean respuesta = false;
-        try {
-            Anuncio anuncio = obtenerAnuncio(codigoAnuncio);
+        Anuncio anuncio = obtenerAnuncio(codigoAnuncio);
+        if(anuncio != null){
             if (anuncio.getValorInicial() < puja) {
                 respuesta = true;
             }
-        }catch(AnuncioException e){
-            e.printStackTrace();
+        }else{
+            pujaView.mostrarMensaje("Notificación puja", "Puja no creada", "No se pudo encontrar el valor inicial del anuncio", Alert.AlertType.ERROR);
+
         }
 
         return respuesta;
@@ -545,7 +550,7 @@ public class SubastaQuindio implements ISubastaQuindioService, Serializable {
     }
 
     @Override
-    public Anuncio obtenerAnuncio(String cedula) throws AnuncioException{
+    public Anuncio obtenerAnuncio(String cedula){
         Anuncio anuncioEncontrado = null;
         for (Anuncio anuncio : getListaAnuncios()) {
             if(anuncio.getCodigo().equalsIgnoreCase(cedula)){
@@ -555,7 +560,8 @@ public class SubastaQuindio implements ISubastaQuindioService, Serializable {
         }
 
         if (anuncioEncontrado == null) {
-            throw new AnuncioException("El anuncio con código " + cedula + " no existe.");
+            pujaView.mostrarMensaje("Notificación puja", "Puja no se pudo crear", "La Puja no contiene la información suficiente, por favor seleccione un anuncio", Alert.AlertType.ERROR);
+
         }
 
         return anuncioEncontrado;
