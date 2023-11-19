@@ -12,12 +12,19 @@ public class ListaAnuncioUtil {
         return anuncioDto -> anuncioDto.codigo().contains(codigo);
     }
 
-    public static Predicate<AnuncioDto> buscarPorTodo(String codigo) {
+    public static Predicate<AnuncioDto> buscarPorDescripcion(String descripcion){
+        return anuncioDto -> anuncioDto.descripcion().contains(descripcion);
+    }
+
+    public static Predicate<AnuncioDto> buscarPorTodo(String codigo, String descripcion) {
 
         Predicate<AnuncioDto> predicado = anuncioDto -> true;
 
         if( codigo != null && !codigo.isEmpty() ){
             predicado = predicado.and(buscarPorCodigo(codigo));
+        }
+        if( descripcion != null && !descripcion.isEmpty() ){
+            predicado = predicado.and(buscarPorDescripcion(descripcion));
         }
 
         return predicado;

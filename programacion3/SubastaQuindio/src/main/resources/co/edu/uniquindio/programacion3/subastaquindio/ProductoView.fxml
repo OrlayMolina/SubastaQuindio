@@ -7,6 +7,7 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
@@ -17,14 +18,9 @@
 <AnchorPane prefHeight="477.0" prefWidth="788.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.programacion3.subastaquindio.viewController.ProductoViewController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ecf1f5" height="48.0" layoutX="7.0" layoutY="205.0" stroke="#b5aeae" strokeType="INSIDE" width="763.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f3f4f5" height="182.0" layoutX="7.0" layoutY="14.0" stroke="#c3b6b6" strokeType="INSIDE" width="763.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="135.0" layoutX="11.0" layoutY="22.0" stroke="#bca8a8" strokeType="INSIDE" width="203.0" />
-      <Label layoutX="89.0" layoutY="72.0" text="Foto">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </Label>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fdfeff" height="166.0" layoutX="222.0" layoutY="22.0" stroke="#cdc2c2" strokeType="INSIDE" width="540.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f3f4f5" height="185.0" layoutX="7.0" layoutY="14.0" stroke="#c3b6b6" strokeType="INSIDE" width="763.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="140.0" layoutX="11.0" layoutY="19.0" stroke="#bca8a8" strokeType="INSIDE" width="203.0" />
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fdfeff" height="172.0" layoutX="222.0" layoutY="20.0" stroke="#cdc2c2" strokeType="INSIDE" width="540.0" />
       <GridPane layoutX="237.0" layoutY="35.0" prefHeight="135.0" prefWidth="510.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="228.0" />
@@ -55,7 +51,7 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <ComboBox fx:id="cmbAnunciante" prefWidth="258.0" promptText="Elegir Anunciante" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <ComboBox fx:id="cmbAnunciante" prefWidth="258.0" promptText="Anunciantes ..." GridPane.columnIndex="2" GridPane.rowIndex="1" />
             <ComboBox fx:id="cmbTipoProducto" prefWidth="291.0" promptText="Eligir el Tipo de Producto" GridPane.columnIndex="2" GridPane.rowIndex="4" />
             <Label text="Código Único:" GridPane.rowIndex="3">
                <font>
@@ -73,7 +69,7 @@
             <TableColumn fx:id="colTipoProducto" prefWidth="176.0" text="Tipo Producto" />
         </columns>
       </TableView>
-      <Button fx:id="btnAgregarImagen" layoutX="11.0" layoutY="157.0" mnemonicParsing="false" onAction="#seleccionarImagen" prefHeight="32.0" prefWidth="203.0" styleClass="primary" text="Eligir Imagen" />
+      <Button fx:id="btnAgregarImagen" layoutX="11.0" layoutY="160.0" mnemonicParsing="false" onAction="#seleccionarImagen" prefHeight="32.0" prefWidth="203.0" styleClass="primary" text="Eligir Imagen" />
       <GridPane layoutX="58.0" layoutY="215.0">
          <columnConstraints>
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="88.0" />
@@ -97,6 +93,7 @@
             <Button fx:id="btnLimpiarCampos" mnemonicParsing="false" onAction="#limpiarBusqueda" prefHeight="32.0" prefWidth="145.0" styleClass="primary" text="Limpiar Campos" GridPane.columnIndex="8" />
          </children>
       </GridPane>
+      <ImageView fx:id="imagen" fitHeight="136.0" fitWidth="136.0" layoutX="43.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true" />
    </children>
    <stylesheets>
       <URL value="@tema.css" />

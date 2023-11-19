@@ -258,7 +258,6 @@ public class AnuncianteViewController {
     }
 
     public void mostrarUsuarios(){
-        listaUsuarios.add(usuarioDto);
         cmbUsuario.setItems(listaUsuarios);
     }
 

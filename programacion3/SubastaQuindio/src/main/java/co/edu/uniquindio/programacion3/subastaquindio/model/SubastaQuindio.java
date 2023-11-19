@@ -2,17 +2,20 @@ package co.edu.uniquindio.programacion3.subastaquindio.model;
 
 import co.edu.uniquindio.programacion3.subastaquindio.exceptions.*;
 import co.edu.uniquindio.programacion3.subastaquindio.model.service.ISubastaQuindioService;
+import co.edu.uniquindio.programacion3.subastaquindio.viewController.PujaViewController;
+import javafx.scene.control.Alert;
 
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.Period;
 import java.util.ArrayList;
-
-import static co.edu.uniquindio.programacion3.subastaquindio.viewController.InicioViewController.usuarioLogeado;
 
 public class SubastaQuindio implements ISubastaQuindioService, Serializable {
 
     private static final long serialVersionUID = 1L;
+
+    private PujaViewController pujaView = new PujaViewController();
     private ArrayList<Producto> listaProductos = new ArrayList<>();
     private ArrayList<Usuario> listaUsuarios = new ArrayList<>();
     private ArrayList<Anunciante> listaAnunciantes = new ArrayList<>();
@@ -42,14 +45,12 @@ public class SubastaQuindio implements ISubastaQuindioService, Serializable {
     }
 
     public ArrayList<Anunciante> getListaAnunciantes() {
-        listaPujas.add(new Puja("001","Lavadora","001","Juan",450000));
         return listaAnunciantes;
     }
 
     public void setListaAnunciantes(ArrayList<Anunciante> listaAnunciantes) {
         this.listaAnunciantes = listaAnunciantes;
     }
-
 
     public ArrayList<Comprador> getListaCompradores() {
         return listaCompradores;
@@ -66,11 +67,11 @@ public class SubastaQuindio implements ISubastaQuindioService, Serializable {
         this.listaAnuncios = listaAnuncios;
     }
 
-    public ArrayList<Puja> getListaOfertas() {
+    public ArrayList<Puja> getListaPujas() {
         return listaPujas;
     }
 
-    public void setListaOfertas(ArrayList<Puja> listaPujas) {
+    public void setListaPujas(ArrayList<Puja> listaPujas) {
         this.listaPujas = listaPujas;
     }
 
@@ -111,6 +112,45 @@ public class SubastaQuindio implements ISubastaQuindioService, Serializable {
         }
         return mayor;
     }
+
+    /**
+     * Función para que se encarga de cambiar el estado del anuncio a Finalizado
+     * @param hora
+     * @return
+     */
+    public boolean verificarHoraFin(String hora) {
+
+        LocalTime horaActual = LocalTime.now();
+        LocalTime horaFin = LocalTime.parse(hora);
+
+        return !horaActual.isAfter(horaFin);
+    }
+
+    public boolean validarValorPuja(String codigoAnuncio, Double puja) {
+        boolean respuesta = false;
+        if(!valorMenorPujado(codigoAnuncio, puja)){
+            return respuesta;
+        }else {
+            respuesta = true;
+        }
+        return respuesta;
+    }
+
+    public boolean valorMenorPujado(String codigoAnuncio, Double puja) {
+        boolean respuesta = false;
+        Anuncio anuncio = obtenerAnuncio(codigoAnuncio);
+        if(anuncio != null){
+            if (anuncio.getValorInicial() < puja) {
+                respuesta = true;
+            }
+        }else{
+            pujaView.mostrarMensaje("Notificación puja", "Puja no creada", "No se pudo encontrar el valor inicial del anuncio", Alert.AlertType.ERROR);
+
+        }
+
+        return respuesta;
+    }
+
 
     @Override
     public Producto crearProducto(String codigoUnico, String nombreProducto, String tipoProducto,
@@ -283,6 +323,22 @@ public class SubastaQuindio implements ISubastaQuindioService, Serializable {
         }
     }
 
+    @Override
+    public boolean actualizarPuja(String codigo, Puja puja) throws PujaException {
+        Puja pujaActual = obtenerPuja(codigo);
+        if(pujaActual == null)
+            throw new PujaException("No se pudo actualizar la puja");
+        else{
+            pujaActual.setCodigo(puja.getCodigo());
+            pujaActual.setProducto(puja.getProducto());
+            pujaActual.setAnuncio(puja.getAnuncio());
+            pujaActual.setComprador(puja.getComprador());
+            pujaActual.setOferta(puja.getOferta());
+            pujaActual.setEstadoAnuncio(puja.getEstadoAnuncio());
+            return true;
+        }
+    }
+
     public void agregarProducto(Producto nuevoProducto) throws ProductoException{
         getListaProductos().add(nuevoProducto);
     }
@@ -301,6 +357,10 @@ public class SubastaQuindio implements ISubastaQuindioService, Serializable {
 
     public void agregarAnuncio(Anuncio nuevoAnuncio) throws AnuncioException{
         getListaAnuncios().add(nuevoAnuncio);
+    }
+
+    public void agregarPuja(Puja nuevaPuja) throws PujaException{
+        getListaPujas().add(nuevaPuja);
     }
 
     @Override
@@ -406,15 +466,27 @@ public class SubastaQuindio implements ISubastaQuindioService, Serializable {
     }
 
     @Override
-    public boolean anuncioExiste(String cedula) {
+    public boolean anuncioExiste(String codigo) {
         boolean anuncioEncontrado = false;
         for (Anuncio anuncio : getListaAnuncios()) {
-            if(anuncio.getCodigo().equalsIgnoreCase(cedula)){
+            if(anuncio.getCodigo().equalsIgnoreCase(codigo)){
                 anuncioEncontrado = true;
                 break;
             }
         }
         return anuncioEncontrado;
+    }
+
+    @Override
+    public String obtenerEstadoAnuncio(String codigo) {
+        String estado = "";
+        for (Anuncio anuncio : getListaAnuncios()) {
+            if(anuncio.getCodigo().equalsIgnoreCase(codigo)){
+                estado = anuncio.getEstado();
+                break;
+            }
+        }
+        return estado;
     }
 
     @Override
@@ -466,7 +538,19 @@ public class SubastaQuindio implements ISubastaQuindioService, Serializable {
     }
 
     @Override
-    public Anuncio obtenerAnuncio(String cedula) {
+    public Comprador obtenerCompradorPorUsuario(String nombreUsuario) {
+        Comprador compradorEncontrado = null;
+        for (Comprador comprador : getListaCompradores()) {
+            if(comprador.getUsuarioAsociado().contains(nombreUsuario)){
+                compradorEncontrado = comprador;
+                break;
+            }
+        }
+        return compradorEncontrado;
+    }
+
+    @Override
+    public Anuncio obtenerAnuncio(String cedula){
         Anuncio anuncioEncontrado = null;
         for (Anuncio anuncio : getListaAnuncios()) {
             if(anuncio.getCodigo().equalsIgnoreCase(cedula)){
@@ -474,7 +558,25 @@ public class SubastaQuindio implements ISubastaQuindioService, Serializable {
                 break;
             }
         }
+
+        if (anuncioEncontrado == null) {
+            pujaView.mostrarMensaje("Notificación puja", "Puja no se pudo crear", "La Puja no contiene la información suficiente, por favor seleccione un anuncio", Alert.AlertType.ERROR);
+
+        }
+
         return anuncioEncontrado;
+    }
+
+    @Override
+    public Puja obtenerPuja(String codigo) {
+        Puja pujaEncontrada = null;
+        for (Puja puja : getListaPujas()) {
+            if(puja.getCodigo().equalsIgnoreCase(codigo)){
+                pujaEncontrada = puja;
+                break;
+            }
+        }
+        return pujaEncontrada;
     }
 
     @Override

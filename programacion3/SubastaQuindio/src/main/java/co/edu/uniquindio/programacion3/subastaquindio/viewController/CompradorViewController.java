@@ -23,7 +23,6 @@ public class CompradorViewController {
     SubastaQuindio subastaQuindio;
     UsuarioDto usuarioDto;
     ObservableList<CompradorDto> listaCompradores = FXCollections.observableArrayList();
-
     ObservableList<UsuarioDto> listaUsuarios = FXCollections.observableArrayList();
     CompradorDto compradorSeleccionado;
 
@@ -253,7 +252,6 @@ public class CompradorViewController {
     }
 
     public void mostrarUsuarios(){
-        listaUsuarios.add(usuarioDto);
         cmbUsuario.setItems(listaUsuarios);
     }
 

@@ -1,5 +1,6 @@
 package co.edu.uniquindio.programacion3.subastaquindio.controller;
 
+import co.edu.uniquindio.programacion3.subastaquindio.config.RabbitFactory;
 import co.edu.uniquindio.programacion3.subastaquindio.controller.service.IModelFactoryService;
 import co.edu.uniquindio.programacion3.subastaquindio.exceptions.*;
 import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.*;
@@ -7,20 +8,32 @@ import co.edu.uniquindio.programacion3.subastaquindio.mapping.mappers.SubastaMap
 import co.edu.uniquindio.programacion3.subastaquindio.model.*;
 import co.edu.uniquindio.programacion3.subastaquindio.utils.Persistencia;
 import co.edu.uniquindio.programacion3.subastaquindio.utils.SubastaUtils;
+import co.edu.uniquindio.programacion3.subastaquindio.viewController.PujaViewController;
+import com.rabbitmq.client.Channel;
+import com.rabbitmq.client.Connection;
+import com.rabbitmq.client.ConnectionFactory;
+import com.rabbitmq.client.DeliverCallback;
+import javafx.scene.control.Alert;
 
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
+
+import static co.edu.uniquindio.programacion3.subastaquindio.utils.Constantes.QUEUE_NUEV0_MENSAJE;
 
 
 public class ModelFactoryController implements IModelFactoryService, Runnable {
 
     SubastaQuindio subasta;
     SubastaMapper mapper = SubastaMapper.INSTANCE;
-    Anunciante anuncianteActual;
+    RabbitFactory rabbitFactory;
+    ConnectionFactory connectionFactory;
     Thread hiloServicio1_guardarResourceXml;
     Thread hiloServicio2_guardarRegistroLog;
     Thread hiloServicio3_guardarCopiaXml;
+    Thread hiloServicio4_nuevoMensajeConsumer;
     BoundedSemaphore semaphore = new BoundedSemaphore(1);
+    PujaViewController pujaView = new PujaViewController();
     String mensaje;
     int nivel;
     String accion;
@@ -30,7 +43,7 @@ public class ModelFactoryController implements IModelFactoryService, Runnable {
         Thread hiloActual = Thread.currentThread();
         ocuparSemaforo();
         if(hiloActual == hiloServicio1_guardarResourceXml){
-            guardarResourceXML();
+            Persistencia.guardarRecursoSubastaXML(subasta);
             liberarSemaforo();
         }
 
@@ -41,10 +54,14 @@ public class ModelFactoryController implements IModelFactoryService, Runnable {
         }
 
         if(hiloActual == hiloServicio3_guardarCopiaXml){
-            guardarRespaldosXml();
+            Persistencia.copiarArchivoRespaldoXml();
             liberarSemaforo();
 
         }
+        if(hiloActual == hiloServicio4_nuevoMensajeConsumer){
+            consumirMensajes();
+        }
+
     }
 
     private void ocuparSemaforo() {
@@ -79,6 +96,7 @@ public class ModelFactoryController implements IModelFactoryService, Runnable {
     public ModelFactoryController() {
         //1. inicializar datos y luego guardarlo en archivos
         System.out.println("invocación clase singleton");
+        initRabbitConnection();
 
         //cargarDatosBase();
         //salvarDatosPrueba();
@@ -108,6 +126,67 @@ public class ModelFactoryController implements IModelFactoryService, Runnable {
 
     }
 
+    private void initRabbitConnection() {
+        rabbitFactory = new RabbitFactory();
+        connectionFactory = rabbitFactory.getConnectionFactory();
+        System.out.println("conexion establecida");
+    }
+
+    public void consumirMensajesServicio4(){
+        hiloServicio4_nuevoMensajeConsumer = new Thread(this);
+        hiloServicio4_nuevoMensajeConsumer.start();
+    }
+
+    public boolean actualizarTiempoRestante(String codigo) {
+        AnuncioDto anuncioDto;
+        Anuncio anuncio = obtenerAnuncio(codigo);
+
+        if (anuncio != null) {
+            anuncioDto = mapper.anuncioToAnuncioDto(anuncio);
+            return getSubasta().verificarHoraFin(anuncioDto.fechaFinPublicacion());
+        } else {
+            pujaView.mostrarMensaje("Notificación puja", "Puja no creada", "No se pudo encontrar la fecha fin del anuncio", Alert.AlertType.ERROR);
+
+            return false;
+        }
+    }
+
+
+    public boolean validarValorPuja(String codigo, Double puja){
+        return getSubasta().validarValorPuja(codigo, puja);
+    }
+
+    private void consumirMensajes() {
+        try {
+            Connection connection = connectionFactory.newConnection();
+            Channel channel = connection.createChannel();
+            channel.queueDeclare(QUEUE_NUEV0_MENSAJE, false, false, false, null);
+
+            DeliverCallback deliverCallback = (consumerTag, delivery) -> {
+                String message = new String(delivery.getBody());
+                System.out.println("Mensaje recibido: " + message);
+                //actualizarEstado(message);
+            };
+            while (true) {
+                channel.basicConsume(QUEUE_NUEV0_MENSAJE, true, deliverCallback, consumerTag -> { });
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Override
+    public void producirMensaje(String queue, String message) {
+        try (Connection connection = connectionFactory.newConnection();
+             Channel channel = connection.createChannel()) {
+            channel.queueDeclare(queue, false, false, false, null);
+            channel.basicPublish("", queue, null, message.getBytes(StandardCharsets.UTF_8));
+            System.out.println(" [x] Sent '" + message + "'");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     private void cargarDatosDesdeArchivos() {
         subasta = new SubastaQuindio();
         try {
@@ -118,7 +197,17 @@ public class ModelFactoryController implements IModelFactoryService, Runnable {
     }
 
     public void guardarRespaldosXml(){
-        Persistencia.copiarArchivoRespaldoXml();
+        hiloServicio3_guardarCopiaXml = new Thread(this);
+        hiloServicio3_guardarCopiaXml.start();
+    }
+
+    public void registrarAccionesSistema(String mensaje, int nivel, String accion){
+        this.mensaje=mensaje;
+        this.nivel=nivel;
+        this.accion=accion;
+
+        hiloServicio2_guardarRegistroLog = new Thread(this);
+        hiloServicio2_guardarRegistroLog.start();
     }
 
     private void salvarDatosPrueba() {
@@ -154,6 +243,37 @@ public class ModelFactoryController implements IModelFactoryService, Runnable {
     }
 
     @Override
+    public CompradorDto obtenerComprador(String nombre) {
+        return  mapper.compradorToCompradorDto(getSubasta().obtenerCompradorPorUsuario(nombre));
+    }
+
+    @Override
+    public String obtenerProducto(String nombre) {
+        Producto producto = getSubasta().obtenerProducto(nombre);
+
+        if (producto != null) {
+            ProductoDto productoDto = mapper.productoToProductoDto(producto);
+            if (productoDto != null) {
+                return productoDto.foto();
+            } else {
+                return "";
+            }
+        } else {
+            return "";
+        }
+    }
+
+    @Override
+    public Anuncio obtenerAnuncio(String codigo) {
+        Anuncio anuncio = null;
+
+        anuncio = getSubasta().obtenerAnuncio(codigo);
+
+        return anuncio;
+    }
+
+
+    @Override
     public List<AnuncianteDto> obtenerAnunciantes() {
         return  mapper.getAnuncianteDto(subasta.getListaAnunciantes());
     }
@@ -169,13 +289,20 @@ public class ModelFactoryController implements IModelFactoryService, Runnable {
     }
 
     @Override
-    public List<PujaDto> obtenerPujas() {
-        return  mapper.getPujaDto(subasta.getListaOfertas());
+    public String obtenerEstadoAnuncio(String codigo) {
+        return getSubasta().obtenerEstadoAnuncio(codigo);
     }
 
     @Override
-    public List<Chat> obtenerChats() {
-        return  subasta.getListaMensajes();
+    public List<PujaDto> obtenerPujas() {
+        return  mapper.getPujaDto(subasta.getListaPujas());
+    }
+
+    @Override
+    public List<ChatDto> obtenerChats() {
+        //consumirMensajesServicio4();
+        //guardarResourceXML();
+        return  mapper.getChatDto(subasta.getListaMensajes());
     }
 
     @Override
@@ -261,6 +388,19 @@ public class ModelFactoryController implements IModelFactoryService, Runnable {
     }
 
     @Override
+    public boolean actualizarPuja(String codigo, PujaDto pujaDto) {
+        try {
+            Puja puja = mapper.pujaDtoToPuja(pujaDto);
+            getSubasta().actualizarPuja(codigo, puja);
+            guardarResourceXML();
+            return true;
+        } catch (PujaException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    @Override
     public boolean agregarAnunciante(AnuncianteDto anuncianteDto) {
         try{
             if(!subasta.verificarAnuncianteExistente(anuncianteDto.cedula())) {
@@ -285,6 +425,19 @@ public class ModelFactoryController implements IModelFactoryService, Runnable {
             }
             return true;
         }catch (AnuncioException e){
+            e.getMessage();
+            return false;
+        }
+    }
+
+    @Override
+    public boolean agregarPuja(PujaDto pujaDto) {
+        try{
+            Puja puja = mapper.pujaDtoToPuja(pujaDto);
+            getSubasta().agregarPuja(puja);
+            guardarResourceXML();
+            return true;
+        }catch (PujaException e){
             e.getMessage();
             return false;
         }
@@ -412,6 +565,7 @@ public class ModelFactoryController implements IModelFactoryService, Runnable {
     public void iniciarChat(String texto) {
         getSubasta().iniciarChat(texto);
         guardarResourceXML();
+        producirMensaje(QUEUE_NUEV0_MENSAJE, texto);
     }
 
     @Override
@@ -424,7 +578,8 @@ public class ModelFactoryController implements IModelFactoryService, Runnable {
     }
 
     private void guardarResourceXML() {
-        Persistencia.guardarRecursoSubastaXML(subasta);
+        hiloServicio1_guardarResourceXml = new Thread(this);
+        hiloServicio1_guardarResourceXml.start();
     }
 
 
@@ -436,7 +591,4 @@ public class ModelFactoryController implements IModelFactoryService, Runnable {
         Persistencia.guardarRecursoSubastaBinario(subasta);
     }
 
-    public void registrarAccionesSistema(String mensaje, int nivel, String accion) {
-        Persistencia.guardaRegistroLog(mensaje, nivel, accion);
-    }
 }

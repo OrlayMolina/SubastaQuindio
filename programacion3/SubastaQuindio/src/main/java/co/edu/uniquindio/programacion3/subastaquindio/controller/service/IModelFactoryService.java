@@ -1,6 +1,8 @@
 package co.edu.uniquindio.programacion3.subastaquindio.controller.service;
 
+import co.edu.uniquindio.programacion3.subastaquindio.exceptions.AnuncioException;
 import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.*;
+import co.edu.uniquindio.programacion3.subastaquindio.model.Anuncio;
 import co.edu.uniquindio.programacion3.subastaquindio.model.Chat;
 
 import java.util.List;
@@ -8,9 +10,17 @@ import java.util.List;
 public interface IModelFactoryService {
 
 
+    void producirMensaje(String queue, String message);
+
     List<ProductoDto> obtenerProductos();
 
     List<UsuarioDto> obtenerUsuarios();
+
+    CompradorDto obtenerComprador(String nombre);
+
+    String obtenerProducto(String nombre);
+
+    Anuncio obtenerAnuncio(String codigo) throws AnuncioException;
 
     List<AnuncianteDto> obtenerAnunciantes();
 
@@ -18,11 +28,15 @@ public interface IModelFactoryService {
 
     List<AnuncioDto> obtenerAnuncios();
 
+    String obtenerEstadoAnuncio(String codigo);
+
     List<PujaDto> obtenerPujas();
 
-    List<Chat> obtenerChats();
+    List<ChatDto> obtenerChats();
 
     boolean agregarProducto(ProductoDto productoDto);
+
+    boolean actualizarPuja(String codigo, PujaDto pujaDto);
 
     boolean agregarAnunciante(AnuncianteDto anuncianteDto);
 
@@ -41,6 +55,8 @@ public interface IModelFactoryService {
     boolean eliminarAnunciante(String cedula);
 
     boolean eliminarComprador(String cedula);
+
+    boolean agregarPuja(PujaDto pujaDto);
 
     boolean eliminarAnuncio(String codigo);
 
