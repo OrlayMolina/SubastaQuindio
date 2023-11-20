@@ -279,6 +279,7 @@ public class SubastaQuindio implements ISubastaQuindioService, Serializable {
             anuncianteActual.setNombre(anunciante.getNombre());
             anuncianteActual.setApellido(anunciante.getApellido());
             anuncianteActual.setTelefono(anunciante.getTelefono());
+            anuncianteActual.setContrasenia(anunciante.getContrasenia());
             anuncianteActual.setCorreo(anunciante.getCorreo());
             anuncianteActual.setDireccion(anunciante.getDireccion());
             anuncianteActual.setFechaNacimiento(anunciante.getFechaNacimiento());
@@ -297,6 +298,7 @@ public class SubastaQuindio implements ISubastaQuindioService, Serializable {
             compradorActual.setNombre(comprador.getNombre());
             compradorActual.setApellido(comprador.getApellido());
             compradorActual.setTelefono(comprador.getTelefono());
+            compradorActual.setContrasenia(comprador.getContrasenia());
             compradorActual.setCorreo(comprador.getCorreo());
             compradorActual.setDireccion(comprador.getDireccion());
             compradorActual.setFechaNacimiento(comprador.getFechaNacimiento());
@@ -462,6 +464,23 @@ public class SubastaQuindio implements ISubastaQuindioService, Serializable {
                 break;
             }
         }
+
+        for(Anunciante anunciante : getListaAnunciantes()){
+            if(anunciante.getCedula().equalsIgnoreCase(nombreUsuario) &&
+                    anunciante.getContrasenia().equalsIgnoreCase(password)){
+                usuarioExiste = true;
+                break;
+            }
+        }
+
+        for(Comprador comprador : getListaCompradores()){
+            if(comprador.getCedula().equalsIgnoreCase(nombreUsuario) &&
+                    comprador.getContrasenia().equalsIgnoreCase(password)){
+                usuarioExiste = true;
+                break;
+            }
+        }
+
         return usuarioExiste;
     }
 
@@ -538,10 +557,10 @@ public class SubastaQuindio implements ISubastaQuindioService, Serializable {
     }
 
     @Override
-    public Comprador obtenerCompradorPorUsuario(String nombreUsuario) {
+    public Comprador obtenerCompradorPorUsuario(String cedula) {
         Comprador compradorEncontrado = null;
         for (Comprador comprador : getListaCompradores()) {
-            if(comprador.getUsuarioAsociado().contains(nombreUsuario)){
+            if(comprador.getCedula().contains(cedula)){
                 compradorEncontrado = comprador;
                 break;
             }

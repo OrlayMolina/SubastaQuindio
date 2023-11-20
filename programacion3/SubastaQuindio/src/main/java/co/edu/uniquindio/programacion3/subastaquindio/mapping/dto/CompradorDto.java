@@ -5,13 +5,15 @@ public record CompradorDto(
         String apellido,
         String cedula,
         String telefono,
+        String contrasenia,
         String direccion,
+        String rol,
         String correo,
         String fechaNacimiento,
         String usuarioAsociado) {
 
     public UsuarioDto getUsuarioAsociado(){
-        return new UsuarioDto(usuarioAsociado, "","");
+        return new UsuarioDto(usuarioAsociado, "");
     }
 
     @Override

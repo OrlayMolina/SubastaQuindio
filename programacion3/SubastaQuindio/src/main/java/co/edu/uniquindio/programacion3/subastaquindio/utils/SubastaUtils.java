@@ -19,13 +19,11 @@ public class SubastaUtils {
         Usuario usuario = new Usuario();
         usuario.setUsuario("Matias");
         usuario.setContrasenia("2019");
-        usuario.setRol(Rol.Comprador);
         subasta.getListaUsuarios().add(usuario);
 
         Usuario usuario2 = new Usuario();
         usuario2.setUsuario("Jorge");
         usuario2.setContrasenia("2022");
-        usuario2.setRol(Rol.Anunciante);
         subasta.getListaUsuarios().add(usuario2);
 
         Comprador comprador = new Comprador();

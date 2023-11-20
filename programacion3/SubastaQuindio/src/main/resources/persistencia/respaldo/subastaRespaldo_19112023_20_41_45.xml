@@ -53,7 +53,7 @@
       <string>Publicado</string>
      </void>
      <void property="fechaFinPublicacion">
-      <string>20:50:00</string>
+      <string>20:44:00</string>
      </void>
      <void property="fechaPublicacion">
       <string>2023-11-19</string>
@@ -123,30 +123,6 @@
      </void>
      <void property="tipoProducto">
       <string>HOGAR</string>
-     </void>
-    </object>
-   </void>
-  </void>
-  <void property="listaPujas">
-   <void method="add">
-    <object class="co.edu.uniquindio.programacion3.subastaquindio.model.Puja">
-     <void property="anuncio">
-      <string>001</string>
-     </void>
-     <void property="codigo">
-      <string>a74cb61c-af96-44b9-8189-7985c3193aaa</string>
-     </void>
-     <void property="comprador">
-      <string>104455555  Yarley Camilo Mejia Bedoya</string>
-     </void>
-     <void property="estadoAnuncio">
-      <string>Publicado</string>
-     </void>
-     <void property="oferta">
-      <double>900000.0</double>
-     </void>
-     <void property="producto">
-      <string>  001  Lavadora</string>
      </void>
     </object>
    </void>

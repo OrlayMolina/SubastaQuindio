@@ -1,6 +1,7 @@
 package co.edu.uniquindio.programacion3.subastaquindio.viewController;
 
 import co.edu.uniquindio.programacion3.subastaquindio.controller.AnuncianteController;
+import co.edu.uniquindio.programacion3.subastaquindio.enumm.Rol;
 import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.AnuncianteDto;
 import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.UsuarioDto;
 import co.edu.uniquindio.programacion3.subastaquindio.model.SubastaQuindio;
@@ -45,6 +46,9 @@ public class AnuncianteViewController {
 
     @FXML
     private ComboBox<UsuarioDto> cmbUsuario;
+
+    @FXML
+    private PasswordField tpdContrasenia;
 
     @FXML
     private TableColumn<AnuncianteDto, String> colApellidos;
@@ -278,16 +282,18 @@ public class AnuncianteViewController {
         }
     }
 
-    private AnuncianteDto construirAnuncianteDto() {
+    public AnuncianteDto construirAnuncianteDto() {
         String nombre = txfNombreAnunciante.getText();
         String apellido = txfApellidoAnunciante.getText();
         String cedula = txfCedula.getText();
         String telefono = txfTelefono.getText();
+        String contrasenia = tpdContrasenia.getText();
         String direccion = txfDireccion.getText();
+        String rol = String.valueOf(Rol.Anunciante);
         String correo = txfCorreo.getText();
         String fechaNacimiento = txfFechaNacimiento.getText();
         String usuarioAsociado = String.valueOf(cmbUsuario.getValue());
-        return new AnuncianteDto(nombre, apellido, cedula, telefono,direccion, correo, fechaNacimiento, usuarioAsociado);
+        return new AnuncianteDto(nombre, apellido, cedula, telefono, contrasenia,direccion, rol,  correo, fechaNacimiento, usuarioAsociado);
     }
 
     private void limpiarCamposAnunciantes() {

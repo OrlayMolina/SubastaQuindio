@@ -24,6 +24,9 @@ public class InicioViewController {
     private Button btnIniciarSesion;
 
     @FXML
+    private Button btnRegistrarse;
+
+    @FXML
     private PasswordField pwfPassword;
 
     @FXML
@@ -32,6 +35,12 @@ public class InicioViewController {
     @FXML
     void siguienteVentana(ActionEvent event) {
         inicioSesion();
+    }
+
+    @FXML
+    void registrarCuenta(ActionEvent event) {
+        cerrarVentana(btnRegistrarse);
+        app.cargarVentanaRegistrarse();
     }
 
     private void inicioSesion(){
