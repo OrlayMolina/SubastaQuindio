@@ -28,12 +28,6 @@ public class CrearCuentaViewController {
     private TextField txfApellidos;
 
     @FXML
-    private PasswordField txfConfirmarContrasenia;
-
-    @FXML
-    private PasswordField txfContrasenia;
-
-    @FXML
     private TextField txfCorreo;
 
     @FXML

@@ -59,7 +59,7 @@ public class ModelFactoryController implements IModelFactoryService, Runnable {
 
         }
         if(hiloActual == hiloServicio4_nuevoMensajeConsumer){
-            consumirMensajes();
+            //consumirMensajes();
         }
 
     }
@@ -312,6 +312,7 @@ public class ModelFactoryController implements IModelFactoryService, Runnable {
                 Producto producto = mapper.productoDtoToProducto(productoDto);
                 getSubasta().agregarProducto(producto);
                 guardarResourceXML();
+
             }
             return true;
         }catch (ProductoException e){

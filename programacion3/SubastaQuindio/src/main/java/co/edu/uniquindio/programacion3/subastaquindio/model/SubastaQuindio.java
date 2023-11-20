@@ -3,7 +3,6 @@ package co.edu.uniquindio.programacion3.subastaquindio.model;
 import co.edu.uniquindio.programacion3.subastaquindio.exceptions.*;
 import co.edu.uniquindio.programacion3.subastaquindio.model.service.ISubastaQuindioService;
 import co.edu.uniquindio.programacion3.subastaquindio.viewController.PujaViewController;
-import javafx.scene.control.Alert;
 
 import java.io.Serializable;
 import java.time.LocalDate;
@@ -16,7 +15,6 @@ import static co.edu.uniquindio.programacion3.subastaquindio.viewController.Inic
 public class SubastaQuindio implements ISubastaQuindioService, Serializable {
 
     private static final long serialVersionUID = 1L;
-
     private PujaViewController pujaView = new PujaViewController();
     private ArrayList<Producto> listaProductos = new ArrayList<>();
     private ArrayList<Usuario> listaUsuarios = new ArrayList<>();
