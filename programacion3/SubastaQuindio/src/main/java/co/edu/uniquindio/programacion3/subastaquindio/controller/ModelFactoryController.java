@@ -248,6 +248,11 @@ public class ModelFactoryController implements IModelFactoryService, Runnable {
     }
 
     @Override
+    public int numeroPujasPorProducto(String cedula, String codigoAnuncio){
+        return getSubasta().numeroPujasPorProducto(cedula, codigoAnuncio);
+    }
+
+    @Override
     public String obtenerProducto(String nombre) {
         Producto producto = getSubasta().obtenerProducto(nombre);
 

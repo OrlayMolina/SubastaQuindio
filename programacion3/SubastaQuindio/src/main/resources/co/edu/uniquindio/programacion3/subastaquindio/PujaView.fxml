@@ -46,7 +46,7 @@
         <columns>
           <TableColumn fx:id="colCodigoAnuncio" prefWidth="65.0" text="Anuncio" />
           <TableColumn fx:id="colProducto" prefWidth="109.0" text="Producto" />
-            <TableColumn fx:id="colFechaFinAnuncio" prefWidth="105.0" text="Fecha fin Puja" />
+            <TableColumn fx:id="colFechaFinAnuncio" prefWidth="105.0" text="Hora Fin Puja" />
             <TableColumn fx:id="colDescripcion" prefWidth="101.0" text="Descripción" />
             <TableColumn fx:id="colValorInicial" prefWidth="122.0" text="Valor Inicial Subasta" />
         </columns>

@@ -3,7 +3,6 @@ package co.edu.uniquindio.programacion3.subastaquindio.controller;
 import co.edu.uniquindio.programacion3.subastaquindio.controller.service.IProductoControllerService;
 import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.AnuncianteDto;
 import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.ProductoDto;
-import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.UsuarioDto;
 
 import java.util.List;
 

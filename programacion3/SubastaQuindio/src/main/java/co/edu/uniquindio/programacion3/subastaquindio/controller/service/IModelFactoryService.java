@@ -18,6 +18,8 @@ public interface IModelFactoryService {
 
     CompradorDto obtenerComprador(String nombre);
 
+    int numeroPujasPorProducto(String cedula, String codigoAnuncio);
+
     String obtenerProducto(String nombre);
 
     Anuncio obtenerAnuncio(String codigo) throws AnuncioException;
