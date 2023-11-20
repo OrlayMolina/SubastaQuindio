@@ -9,7 +9,7 @@ public record ProductoDto(
     String nombreAnunciante){
 
     public AnuncianteDto getAnunciante(){
-        return new AnuncianteDto(nombreAnunciante, "","", "", "", "", "", "");
+        return new AnuncianteDto(nombreAnunciante, "","", "", "", "", "", "","", "");
     }
 
     @Override

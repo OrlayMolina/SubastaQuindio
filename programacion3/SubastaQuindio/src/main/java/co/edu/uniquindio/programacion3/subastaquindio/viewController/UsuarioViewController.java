@@ -47,12 +47,6 @@ public class UsuarioViewController {
     private TableColumn<UsuarioDto, String> colUsuario;
 
     @FXML
-    private TableColumn<UsuarioDto, String> colRol;
-
-    @FXML
-    private ComboBox<String> cmbRol;
-
-    @FXML
     private TableView<UsuarioDto> tableUsuarios;
 
     @FXML
@@ -75,8 +69,7 @@ public class UsuarioViewController {
     void busquedaUsuario(ActionEvent event) {
         String usuario = txfUsuario.getText();
         String contrasenia = pwdContrasenia.getText();
-        String rol = cmbRol.getValue();
-        buscarUsuario(usuario, contrasenia, rol);
+        buscarUsuario(usuario, contrasenia);
     }
 
     @FXML
@@ -99,7 +92,6 @@ public class UsuarioViewController {
     private void initView() {
         initDataBinding();
         obtenerUsuarios();
-        mostrarRoles();
         tableUsuarios.getItems().clear();
         tableUsuarios.setItems(listaUsuarios);
         listenerSelection();
@@ -108,7 +100,6 @@ public class UsuarioViewController {
     private void initDataBinding() {
         colUsuario.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().usuario()));
         colContrasenia.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().contrasenia()));
-        colRol.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().rol()));
     }
 
     private void listenerSelection() {
@@ -116,12 +107,6 @@ public class UsuarioViewController {
             usuarioSeleccionado = newSelection;
             mostrarInformacionUsuario(usuarioSeleccionado);
         });
-    }
-
-    public void mostrarRoles(){
-        listaRoles.add(String.valueOf(Rol.Anunciante));
-        listaRoles.add(String.valueOf(Rol.Comprador));
-        cmbRol.setItems(listaRoles);
     }
 
     private void crearUsuario() {
@@ -193,9 +178,9 @@ public class UsuarioViewController {
         }
     }
 
-    private void buscarUsuario(String usuario, String contrasenia, String rol) {
+    private void buscarUsuario(String usuario, String contrasenia) {
 
-        Predicate<UsuarioDto> predicado = UsuarioUtil.buscarPorTodo(usuario, contrasenia, rol);
+        Predicate<UsuarioDto> predicado = UsuarioUtil.buscarPorTodo(usuario, contrasenia);
         ObservableList<UsuarioDto> usuariosFiltrados = listaUsuarios.filtered(predicado);
         tableUsuarios.setItems(usuariosFiltrados);
     }
@@ -215,23 +200,19 @@ public class UsuarioViewController {
         if(usuarioSeleccionado != null){
             txfUsuario.setText(usuarioSeleccionado.usuario());
             pwdContrasenia.setText(usuarioSeleccionado.contrasenia());
-            cmbRol.setValue(usuarioSeleccionado.rol());
         }
     }
 
     private UsuarioDto construirUsuarioDto() {
         return new UsuarioDto(
                 txfUsuario.getText(),
-                pwdContrasenia.getText(),
-                cmbRol.getValue()
-
+                pwdContrasenia.getText()
         );
     }
 
     private void limpiarCamposUsuarios() {
         txfUsuario.setText("");
         pwdContrasenia.setText("");
-        cmbRol.setValue(null);// Ojo con el UsuarioUtil
     }
 
     private void registrarAcciones(String mensaje, int nivel, String accion) {
@@ -245,9 +226,6 @@ public class UsuarioViewController {
             mensaje += "El nombre Usuario es invalido \n" ;
         if(usuarioDto.contrasenia() == null || usuarioDto.contrasenia() .equals(""))
             mensaje += "La Contraseña del usuario es invalido \n" ;
-        if(usuarioDto.rol() == null || usuarioDto.rol() .equals(""))
-            mensaje += "El rol del usuario es invalido \n" ;
-
         if(mensaje.equals("")){
             return true;
         }else{

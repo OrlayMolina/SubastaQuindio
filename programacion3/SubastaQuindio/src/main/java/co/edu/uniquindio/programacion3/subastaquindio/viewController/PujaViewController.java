@@ -1,6 +1,7 @@
 package co.edu.uniquindio.programacion3.subastaquindio.viewController;
 
 import co.edu.uniquindio.programacion3.subastaquindio.controller.PujaController;
+import co.edu.uniquindio.programacion3.subastaquindio.enumm.Rol;
 import co.edu.uniquindio.programacion3.subastaquindio.exceptions.AnuncioException;
 import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.*;
 import co.edu.uniquindio.programacion3.subastaquindio.model.SubastaQuindio;
@@ -270,7 +271,7 @@ public class PujaViewController extends Frame {
     private String obtenerUsuarioComprador(){
         CompradorDto compradorDto = pujaControllerService.obtenerComprador(usuarioLogeado);
         if(compradorDto != null){
-            if(compradorDto.usuarioAsociado().contains("Comprador")){
+            if(compradorDto.rol().equals(String.valueOf(Rol.Comprador))){
                 return compradorDto.cedula() + "  " + compradorDto.nombre() + " " + compradorDto.apellido();
             }else{
                 mostrarMensaje("Notificación puja", "Puja no creada", "El usuario debe tener el rol 'Comprador' para hacer una Puja.", Alert.AlertType.ERROR);

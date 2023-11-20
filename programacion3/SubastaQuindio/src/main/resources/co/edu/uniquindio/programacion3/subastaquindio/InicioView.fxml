@@ -16,18 +16,13 @@
 
 <AnchorPane prefHeight="520.0" prefWidth="788.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.programacion3.subastaquindio.viewController.InicioViewController">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f8f8f8" height="115.0" layoutX="93.0" layoutY="299.0" stroke="#b9b1b1" strokeType="INSIDE" width="597.0" />
-      <ImageView fitHeight="278.0" fitWidth="534.0" layoutX="124.0" layoutY="70.0" pickOnBounds="true" preserveRatio="true">
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f8f8f8" height="115.0" layoutX="93.0" layoutY="255.0" stroke="#b9b1b1" strokeType="INSIDE" width="597.0" />
+      <ImageView fitHeight="278.0" fitWidth="534.0" layoutX="124.0" layoutY="31.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@img/logo.PNG" />
          </image>
       </ImageView>
-      <Button fx:id="btnIniciarSesion" layoutX="369.0" layoutY="447.0" mnemonicParsing="false" onAction="#siguienteVentana" styleClass="primary" text="Iniciar Sesión">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Button>
-      <GridPane layoutX="195.0" layoutY="329.0">
+      <GridPane layoutX="176.0" layoutY="285.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="200.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="50.0" />
@@ -39,7 +34,7 @@
           <RowConstraints minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="Nombre de Usuario: ">
+            <Label text="Usuario o Cédula: ">
                <font>
                   <Font size="18.0" />
                </font>
@@ -51,6 +46,24 @@
             </Label>
             <TextField fx:id="txfNombreUsuario" promptText="Nombre  de Usuario ..." GridPane.rowIndex="2" />
             <PasswordField fx:id="pwfPassword" promptText="Password" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+         </children>
+      </GridPane>
+      <GridPane layoutX="256.0" layoutY="418.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="120.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="50.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="120.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Button fx:id="btnIniciarSesion" mnemonicParsing="false" onAction="#siguienteVentana" prefHeight="32.0" prefWidth="160.0" styleClass="primary" text="Iniciar Sesión">
+               <font>
+                  <Font size="18.0" />
+               </font>
+            </Button>
+            <Button fx:id="btnRegistrarse" mnemonicParsing="false" onAction="#registrarCuenta" prefHeight="32.0" prefWidth="205.0" styleClass="primary" text="Registrarse" GridPane.columnIndex="2" />
          </children>
       </GridPane>
    </children>

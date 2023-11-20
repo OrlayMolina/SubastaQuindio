@@ -1,6 +1,7 @@
 package co.edu.uniquindio.programacion3.subastaquindio.viewController;
 
 import co.edu.uniquindio.programacion3.subastaquindio.controller.CompradorController;
+import co.edu.uniquindio.programacion3.subastaquindio.enumm.Rol;
 import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.CompradorDto;
 import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.UsuarioDto;
 import co.edu.uniquindio.programacion3.subastaquindio.model.SubastaQuindio;
@@ -46,6 +47,9 @@ public class CompradorViewController {
 
     @FXML
     private TableColumn<CompradorDto, String> colApellidos;
+
+    @FXML
+    private PasswordField tpdContrasenia;
 
     @FXML
     private TableColumn<CompradorDto, String> colCedula;
@@ -277,11 +281,13 @@ public class CompradorViewController {
         String apellido = txfApellidosComprador.getText();
         String cedula = txfCedula.getText();
         String telefono = txfTelefono.getText();
+        String contrasenia = tpdContrasenia.getText();
         String direccion = txfDireccion.getText();
+        String rol = String.valueOf(Rol.Comprador);
         String correo = txfCorreo.getText();
         String fechaNacimiento = txfFechaNacimiento.getText();
         String usuarioAsociado = String.valueOf(cmbUsuario.getValue());
-        return new CompradorDto(nombre, apellido, cedula, telefono,direccion, correo, fechaNacimiento, usuarioAsociado);
+        return new CompradorDto(nombre, apellido, cedula, telefono, contrasenia, direccion, rol,correo, fechaNacimiento, usuarioAsociado);
     }
 
     private void limpiarCamposAnunciantes() {

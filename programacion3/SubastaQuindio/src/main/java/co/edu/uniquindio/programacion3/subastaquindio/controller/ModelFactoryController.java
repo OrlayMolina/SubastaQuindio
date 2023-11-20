@@ -243,8 +243,8 @@ public class ModelFactoryController implements IModelFactoryService, Runnable {
     }
 
     @Override
-    public CompradorDto obtenerComprador(String nombre) {
-        return  mapper.compradorToCompradorDto(getSubasta().obtenerCompradorPorUsuario(nombre));
+    public CompradorDto obtenerComprador(String cedula) {
+        return  mapper.compradorToCompradorDto(getSubasta().obtenerCompradorPorUsuario(cedula));
     }
 
     @Override

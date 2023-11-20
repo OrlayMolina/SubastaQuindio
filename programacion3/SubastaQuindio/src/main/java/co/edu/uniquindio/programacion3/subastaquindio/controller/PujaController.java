@@ -33,8 +33,8 @@ public class PujaController {
         return modelFactoryController.obtenerProductos();
     }
 
-    public CompradorDto obtenerComprador(String nombre){
-        return modelFactoryController.obtenerComprador(nombre);
+    public CompradorDto obtenerComprador(String cedula){
+        return modelFactoryController.obtenerComprador(cedula);
     }
 
     public List<AnuncianteDto> obtenerAnunciantes(){
