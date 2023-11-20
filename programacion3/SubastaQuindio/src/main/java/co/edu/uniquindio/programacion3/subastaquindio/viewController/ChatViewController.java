@@ -1,8 +1,7 @@
 package co.edu.uniquindio.programacion3.subastaquindio.viewController;
 
 import co.edu.uniquindio.programacion3.subastaquindio.controller.ChatController;
-import co.edu.uniquindio.programacion3.subastaquindio.controller.ModelFactoryController;
-import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.AnuncianteDto;
+
 import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.ChatDto;
 import co.edu.uniquindio.programacion3.subastaquindio.model.Chat;
 import co.edu.uniquindio.programacion3.subastaquindio.model.SubastaQuindio;
@@ -14,8 +13,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 
-import static co.edu.uniquindio.programacion3.subastaquindio.viewController.InicioViewController.usuarioLogeado;
-
+import static co.edu.uniquindio.programacion3.subastaquindio.model.SubastaQuindio.usuarioChat;
 public class ChatViewController {
 
     SubastaQuindio subastaQuindio;
@@ -56,7 +54,7 @@ public class ChatViewController {
 
     @FXML
     void enviarComentarioAction(ActionEvent event) {
-        String texto = usuarioLogeado+": ";
+        String texto = usuarioChat+": ";
          texto += txtAreaComen_chat.getText();
         chatControllerService.iniciarChat(texto);
 

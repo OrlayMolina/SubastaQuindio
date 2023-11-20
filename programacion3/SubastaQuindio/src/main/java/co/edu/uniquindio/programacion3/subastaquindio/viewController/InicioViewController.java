@@ -19,6 +19,9 @@ public class InicioViewController {
     public static boolean sesionActiva = false;
 
     public static String usuarioLogeado = "";
+    public static String rolUsuarioLogeado = "";
+
+    public static String cedulaUsuario = "";
 
     @FXML
     private Button btnIniciarSesion;

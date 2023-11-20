@@ -53,7 +53,7 @@
       <string>Publicado</string>
      </void>
      <void property="fechaFinPublicacion">
-      <string>11:00:00</string>
+      <string>18:00:00</string>
      </void>
      <void property="fechaPublicacion">
       <string>2023-11-20</string>
@@ -66,6 +66,37 @@
      </void>
      <void property="valorInicial">
       <double>850000.0</double>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.programacion3.subastaquindio.model.Anuncio">
+     <void property="anunciante">
+      <string>74360360 Ramiro Rojas Bociga</string>
+     </void>
+     <void property="codigo">
+      <string>002</string>
+     </void>
+     <void property="descripcion">
+      <string>Juego de pesas</string>
+     </void>
+     <void property="estado">
+      <string>Publicado</string>
+     </void>
+     <void property="fechaFinPublicacion">
+      <string>13:00:00</string>
+     </void>
+     <void property="fechaPublicacion">
+      <string>2023-11-20</string>
+     </void>
+     <void property="foto">
+      <string>src/main/resources/co/edu/uniquindio/programacion3/subastaquindio/img/pesas2.png</string>
+     </void>
+     <void property="producto">
+      <string>002  Juego de Pesas</string>
+     </void>
+     <void property="valorInicial">
+      <double>150000.0</double>
      </void>
     </object>
    </void>
@@ -142,6 +173,25 @@
      </void>
      <void property="tipoProducto">
       <string>DEPORTES</string>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.programacion3.subastaquindio.model.Producto">
+     <void property="codigoUnico">
+      <string>003</string>
+     </void>
+     <void property="foto">
+      <string>src/main/resources/co/edu/uniquindio/programacion3/subastaquindio/img/carro2.jpeg</string>
+     </void>
+     <void property="nombreAnunciante">
+      <string>74360360 Ramiro Rojas Bociga</string>
+     </void>
+     <void property="nombreProducto">
+      <string>Camioneta</string>
+     </void>
+     <void property="tipoProducto">
+      <string>VEHICULOS</string>
      </void>
     </object>
    </void>

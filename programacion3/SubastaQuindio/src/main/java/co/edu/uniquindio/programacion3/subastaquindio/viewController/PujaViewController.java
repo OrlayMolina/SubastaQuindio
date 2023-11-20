@@ -28,7 +28,9 @@ import java.util.Optional;
 import java.util.UUID;
 import java.util.function.Predicate;
 
-import static co.edu.uniquindio.programacion3.subastaquindio.viewController.InicioViewController.usuarioLogeado;
+
+import static co.edu.uniquindio.programacion3.subastaquindio.viewController.InicioViewController.cedulaUsuario;
+import static co.edu.uniquindio.programacion3.subastaquindio.viewController.InicioViewController.rolUsuarioLogeado;
 
 public class PujaViewController extends JFrame {
 
@@ -182,20 +184,25 @@ public class PujaViewController extends JFrame {
         PujaDto pujaDto = construirPujaDto();
         dato = pujaControllerService.actualizarTiempoRestante(pujaDto.anuncio());
         boolean valorPermitido = pujaControllerService.validarValorPuja(pujaDto.anuncio(), pujaDto.oferta());
+        boolean numeroPujas = numeroPujasPorProducto();
         if(datosValidos(pujaDto)){
             if(valorPermitido){
                 if(dato){
-                    if(mostrarMensajeConfirmacion("¿Estas seguro que desea realizar una Puja por este producto?")){
-                        if(pujaControllerService.agregarPuja(pujaDto)){
-                            listPujaDto.add(pujaDto);
-                            mostrarMensaje("Notificación puja", "Puja creada", "El puja se ha creado con éxito", Alert.AlertType.INFORMATION);
+                    if(numeroPujas){
+                        if(mostrarMensajeConfirmacion("¿Estas seguro que desea realizar una Puja por este producto?")){
+                            if(pujaControllerService.agregarPuja(pujaDto)){
+                                listPujaDto.add(pujaDto);
+                                mostrarMensaje("Notificación puja", "Puja creada", "El puja se ha creado con éxito", Alert.AlertType.INFORMATION);
 
-                            registrarAcciones("Puja agregado",1, "Agregar puja");
+                                registrarAcciones("Puja agregado",1, "Agregar puja");
+                            }else{
+                                mostrarMensaje("Notificación puja", "Puja no creada", "El puja no se ha creado", Alert.AlertType.ERROR);
+                            }
                         }else{
-                            mostrarMensaje("Notificación puja", "Puja no creada", "El puja no se ha creado", Alert.AlertType.ERROR);
+                            mostrarMensaje("Notificación puja", "Puja no seleccionado", "No fue posible realizar la Puja", Alert.AlertType.WARNING);
                         }
-                    }else{
-                        mostrarMensaje("Notificación puja", "Puja no seleccionado", "No fue posible realizar la Puja", Alert.AlertType.WARNING);
+                    }else {
+                        mostrarMensaje("Notificación puja", "Puja no creada", "Número de pujas exceden el máximo permitido (3) por anuncio", Alert.AlertType.WARNING);
                     }
 
                 }else {
@@ -310,7 +317,7 @@ public class PujaViewController extends JFrame {
     }
 
     private String obtenerUsuarioComprador(){
-        CompradorDto compradorDto = pujaControllerService.obtenerComprador(usuarioLogeado);
+        CompradorDto compradorDto = pujaControllerService.obtenerComprador(cedulaUsuario);
         if(compradorDto != null){
             if(compradorDto.rol().equals(String.valueOf(Rol.Comprador))){
                 return compradorDto.cedula() + "  " + compradorDto.nombre() + " " + compradorDto.apellido();
@@ -322,6 +329,16 @@ public class PujaViewController extends JFrame {
         }
         mostrarMensaje("Notificación puja", "Puja no creada", "El usuario debe tener el rol 'Comprador' para hacer una Puja.", Alert.AlertType.ERROR);
         return "";
+    }
+
+    private boolean numeroPujasPorProducto(){
+        boolean respuesta = false;
+        int numeroPujas = pujaControllerService.numeroPujasPorProducto(cedulaUsuario, "001");
+        if(numeroPujas < 2){
+            return true;
+        }else {
+            return respuesta;
+        }
     }
 
 

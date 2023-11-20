@@ -10,7 +10,7 @@ import java.time.LocalTime;
 import java.time.Period;
 import java.util.ArrayList;
 
-import static co.edu.uniquindio.programacion3.subastaquindio.viewController.InicioViewController.usuarioLogeado;
+import static co.edu.uniquindio.programacion3.subastaquindio.viewController.InicioViewController.*;
 
 public class SubastaQuindio implements ISubastaQuindioService, Serializable {
 
@@ -23,8 +23,7 @@ public class SubastaQuindio implements ISubastaQuindioService, Serializable {
     private ArrayList<Anuncio> listaAnuncios = new ArrayList<>();
     private ArrayList<Puja> listaPujas = new ArrayList<>();
     private ArrayList<Chat> listaMensajes = new ArrayList<>();
-
-    public static String rolUsuarioLogeado = "";
+    public static String usuarioChat = "";
 
     public SubastaQuindio() {
 
@@ -453,6 +452,16 @@ public class SubastaQuindio implements ISubastaQuindioService, Serializable {
         return compradorEncontrado;
     }
 
+    public int numeroPujasPorProducto(String cedula, String codigoAnuncio){
+        int contador = 0;
+        for(Puja puja : getListaPujas()){
+            if(puja.getAnuncio().equals(codigoAnuncio) && puja.getComprador().contains(cedula)){
+                contador++;
+            }
+        }
+        return contador;
+    }
+
     @Override
     public boolean usuarioExiste(String cedula, String password){
         boolean usuarioExiste = false;
@@ -470,7 +479,9 @@ public class SubastaQuindio implements ISubastaQuindioService, Serializable {
                     anunciante.getContrasenia().equalsIgnoreCase(password)){
                 usuarioExiste = true;
                 rolUsuarioLogeado = anunciante.getRol();
+                cedulaUsuario = anunciante.getCedula();
                 usuarioLogeado = cedula + "  " + anunciante.getNombre() + " " + anunciante.getApellido();
+                usuarioChat = anunciante.getNombre() + " " + anunciante.getApellido();
                 break;
             }
         }
@@ -480,7 +491,9 @@ public class SubastaQuindio implements ISubastaQuindioService, Serializable {
                     comprador.getContrasenia().equalsIgnoreCase(password)){
                 usuarioExiste = true;
                 rolUsuarioLogeado = comprador.getRol();
+                cedulaUsuario = comprador.getCedula();
                 usuarioLogeado = cedula + "  " +comprador.getNombre() +" "+comprador.getApellido();
+                usuarioChat = comprador.getNombre() +" "+comprador.getApellido();
                 break;
             }
         }

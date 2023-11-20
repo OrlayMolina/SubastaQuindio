@@ -37,6 +37,10 @@ public class PujaController {
         return modelFactoryController.obtenerComprador(cedula);
     }
 
+    public int numeroPujasPorProducto(String cedula, String codigoAnuncio){
+        return modelFactoryController.numeroPujasPorProducto(cedula, codigoAnuncio);
+    }
+
     public List<AnuncianteDto> obtenerAnunciantes(){
         return modelFactoryController.obtenerAnunciantes();
     }
