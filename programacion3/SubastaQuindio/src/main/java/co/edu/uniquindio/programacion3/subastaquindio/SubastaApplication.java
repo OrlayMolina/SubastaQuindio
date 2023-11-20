@@ -42,6 +42,25 @@ public class SubastaApplication extends Application {
         }
     }
 
+    public void cargarVentanaRegistrarse() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(SubastaApplication.class.getResource("CrearCuentaView.fxml"));
+            Parent root = fxmlLoader.load();
+            Scene scene = new Scene(root);
+            Stage newStage = new Stage();
+            newStage.centerOnScreen();
+            Image iconImage = new Image("file:///resources/co/edu/uniquindio/programacion3/subastaquindio/img/logo.PNG");
+            newStage.getIcons().add(iconImage);
+            newStage.setTitle("Subastas Quindío | Registrase");
+            newStage.setResizable(false);
+            newStage.setScene(scene);
+            newStage.show();
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
     public void cargarTabuladores() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(SubastaApplication.class.getResource("TabuladorView.fxml"));

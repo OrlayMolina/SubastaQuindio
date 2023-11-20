@@ -1,6 +1,7 @@
 package co.edu.uniquindio.programacion3.subastaquindio.viewController;
 
 import co.edu.uniquindio.programacion3.subastaquindio.controller.PujaController;
+import co.edu.uniquindio.programacion3.subastaquindio.enumm.Rol;
 import co.edu.uniquindio.programacion3.subastaquindio.exceptions.AnuncioException;
 import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.*;
 import co.edu.uniquindio.programacion3.subastaquindio.model.SubastaQuindio;
@@ -180,11 +181,11 @@ public class PujaViewController extends Frame {
                     if(mostrarMensajeConfirmacion("¿Estas seguro que desea realizar una Puja por este producto?")){
                         if(pujaControllerService.agregarPuja(pujaDto)){
                             listPujaDto.add(pujaDto);
-                            mostrarMensaje("Notificación puja", "Puja creado", "El puja se ha creado con éxito", Alert.AlertType.INFORMATION);
+                            mostrarMensaje("Notificación puja", "Puja creada", "El puja se ha creado con éxito", Alert.AlertType.INFORMATION);
 
                             registrarAcciones("Puja agregado",1, "Agregar puja");
                         }else{
-                            mostrarMensaje("Notificación puja", "Puja no creado", "El puja no se ha creado", Alert.AlertType.ERROR);
+                            mostrarMensaje("Notificación puja", "Puja no creada", "El puja no se ha creado", Alert.AlertType.ERROR);
                         }
                     }else{
                         mostrarMensaje("Notificación puja", "Puja no seleccionado", "No fue posible realizar la Puja", Alert.AlertType.WARNING);
@@ -193,12 +194,8 @@ public class PujaViewController extends Frame {
                 }else {
                     mostrarMensaje("Notificación puja", "Anuncio Finalizado", "El Anuncio ha finalizado, no se puede pujar por este producto", Alert.AlertType.ERROR);
                 }
-            }else {
-                mostrarMensaje("Notificación puja", "Valor puja no permitido", "El valor pujado es menor al valor Inicial para pujar del anuncio", Alert.AlertType.ERROR);
             }
 
-        }else{
-            mostrarMensaje("Notificación puja", "Puja no creado", "Los datos ingresados son invalidos", Alert.AlertType.ERROR);
         }
 
     }
@@ -270,7 +267,7 @@ public class PujaViewController extends Frame {
     private String obtenerUsuarioComprador(){
         CompradorDto compradorDto = pujaControllerService.obtenerComprador(usuarioLogeado);
         if(compradorDto != null){
-            if(compradorDto.usuarioAsociado().contains("Comprador")){
+            if(compradorDto.rol().equals(String.valueOf(Rol.Comprador))){
                 return compradorDto.cedula() + "  " + compradorDto.nombre() + " " + compradorDto.apellido();
             }else{
                 mostrarMensaje("Notificación puja", "Puja no creada", "El usuario debe tener el rol 'Comprador' para hacer una Puja.", Alert.AlertType.ERROR);
@@ -290,13 +287,13 @@ public class PujaViewController extends Frame {
         if(pujaDto.producto() == null || pujaDto.producto() .equals(""))
             mensaje += "El producto de la puja es invalido \n" ;
         if(pujaDto.anuncio()== null || pujaDto.anuncio() .equals(""))
-            mensaje += "El código del anuncio de la puja es invalido \n" ;
+            mensaje += "El código del anuncio que desea pujar está vació \n" ;
         if(pujaDto.comprador() == null || pujaDto.comprador().equals(""))
             mensaje += "El comprador de la puja es invalida \n" ;
         if(pujaDto.oferta() == 0.0 )
-            mensaje += "la oferta de la puja es invalida, debe agregar un valor de oferta \n" ;
+            mensaje += "La oferta de la puja es invalida, debe agregar un valor de oferta \n" ;
         if(pujaDto.estadoAnuncio() == null || pujaDto.estadoAnuncio().equals(""))
-            mensaje += "El estado del anuncio de la puja es invalida \n" ;
+            mensaje += "El estado del anuncio de la puja es invalido \n" ;
         if(mensaje.equals("")){
             return true;
         }else{

@@ -11,6 +11,8 @@ import java.time.LocalTime;
 import java.time.Period;
 import java.util.ArrayList;
 
+import static co.edu.uniquindio.programacion3.subastaquindio.viewController.InicioViewController.usuarioLogeado;
+
 public class SubastaQuindio implements ISubastaQuindioService, Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -23,6 +25,8 @@ public class SubastaQuindio implements ISubastaQuindioService, Serializable {
     private ArrayList<Anuncio> listaAnuncios = new ArrayList<>();
     private ArrayList<Puja> listaPujas = new ArrayList<>();
     private ArrayList<Chat> listaMensajes = new ArrayList<>();
+
+    public static String rolUsuarioLogeado = "";
 
     public SubastaQuindio() {
 
@@ -143,9 +147,6 @@ public class SubastaQuindio implements ISubastaQuindioService, Serializable {
             if (anuncio.getValorInicial() < puja) {
                 respuesta = true;
             }
-        }else{
-            pujaView.mostrarMensaje("Notificación puja", "Puja no creada", "No se pudo encontrar el valor inicial del anuncio", Alert.AlertType.ERROR);
-
         }
 
         return respuesta;
@@ -279,6 +280,7 @@ public class SubastaQuindio implements ISubastaQuindioService, Serializable {
             anuncianteActual.setNombre(anunciante.getNombre());
             anuncianteActual.setApellido(anunciante.getApellido());
             anuncianteActual.setTelefono(anunciante.getTelefono());
+            anuncianteActual.setContrasenia(anunciante.getContrasenia());
             anuncianteActual.setCorreo(anunciante.getCorreo());
             anuncianteActual.setDireccion(anunciante.getDireccion());
             anuncianteActual.setFechaNacimiento(anunciante.getFechaNacimiento());
@@ -297,6 +299,7 @@ public class SubastaQuindio implements ISubastaQuindioService, Serializable {
             compradorActual.setNombre(comprador.getNombre());
             compradorActual.setApellido(comprador.getApellido());
             compradorActual.setTelefono(comprador.getTelefono());
+            compradorActual.setContrasenia(comprador.getContrasenia());
             compradorActual.setCorreo(comprador.getCorreo());
             compradorActual.setDireccion(comprador.getDireccion());
             compradorActual.setFechaNacimiento(comprador.getFechaNacimiento());
@@ -453,15 +456,37 @@ public class SubastaQuindio implements ISubastaQuindioService, Serializable {
     }
 
     @Override
-    public boolean usuarioExiste(String nombreUsuario, String password){
+    public boolean usuarioExiste(String cedula, String password){
         boolean usuarioExiste = false;
         for(Usuario usuario : getListaUsuarios()){
-            if(usuario.getUsuario().equalsIgnoreCase(nombreUsuario) &&
+            if(usuario.getUsuario().equalsIgnoreCase(cedula) &&
                     usuario.getContrasenia().equalsIgnoreCase(password)){
                 usuarioExiste = true;
+                usuarioLogeado = cedula;
                 break;
             }
         }
+
+        for(Anunciante anunciante : getListaAnunciantes()){
+            if(anunciante.getCedula().equalsIgnoreCase(cedula) &&
+                    anunciante.getContrasenia().equalsIgnoreCase(password)){
+                usuarioExiste = true;
+                rolUsuarioLogeado = anunciante.getRol();
+                usuarioLogeado = cedula + "  " + anunciante.getNombre() + " " + anunciante.getApellido();
+                break;
+            }
+        }
+
+        for(Comprador comprador : getListaCompradores()){
+            if(comprador.getCedula().equalsIgnoreCase(cedula) &&
+                    comprador.getContrasenia().equalsIgnoreCase(password)){
+                usuarioExiste = true;
+                rolUsuarioLogeado = comprador.getRol();
+                usuarioLogeado = cedula + "  " +comprador.getNombre() +" "+comprador.getApellido();
+                break;
+            }
+        }
+
         return usuarioExiste;
     }
 
@@ -538,10 +563,10 @@ public class SubastaQuindio implements ISubastaQuindioService, Serializable {
     }
 
     @Override
-    public Comprador obtenerCompradorPorUsuario(String nombreUsuario) {
+    public Comprador obtenerCompradorPorUsuario(String cedula) {
         Comprador compradorEncontrado = null;
         for (Comprador comprador : getListaCompradores()) {
-            if(comprador.getUsuarioAsociado().contains(nombreUsuario)){
+            if(comprador.getCedula().contains(cedula)){
                 compradorEncontrado = comprador;
                 break;
             }
@@ -557,11 +582,6 @@ public class SubastaQuindio implements ISubastaQuindioService, Serializable {
                 anuncioEncontrado = anuncio;
                 break;
             }
-        }
-
-        if (anuncioEncontrado == null) {
-            pujaView.mostrarMensaje("Notificación puja", "Puja no se pudo crear", "La Puja no contiene la información suficiente, por favor seleccione un anuncio", Alert.AlertType.ERROR);
-
         }
 
         return anuncioEncontrado;

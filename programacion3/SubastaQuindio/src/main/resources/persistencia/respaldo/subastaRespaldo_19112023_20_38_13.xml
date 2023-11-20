@@ -73,27 +73,6 @@
     </object>
    </void>
   </void>
-  <void property="listaProductos">
-   <void method="add">
-    <object class="co.edu.uniquindio.programacion3.subastaquindio.model.Producto">
-     <void property="codigoUnico">
-      <string>001</string>
-     </void>
-     <void property="foto">
-      <string>src/main/resources/co/edu/uniquindio/programacion3/subastaquindio/img/lavadora.jpg</string>
-     </void>
-     <void property="nombreAnunciante">
-      <string>74360360 Ramiro Rojas Bociga</string>
-     </void>
-     <void property="nombreProducto">
-      <string>Lavadora</string>
-     </void>
-     <void property="tipoProducto">
-      <string>HOGAR</string>
-     </void>
-    </object>
-   </void>
-  </void>
   <void property="listaUsuarios">
    <void method="add">
     <object class="co.edu.uniquindio.programacion3.subastaquindio.model.Usuario">

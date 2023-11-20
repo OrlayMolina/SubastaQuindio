@@ -13,7 +13,7 @@ public record PujaDto(
     }
 
     public CompradorDto getCompradorDto(){
-        return new CompradorDto(comprador,"", "", "","","","","");
+        return new CompradorDto(comprador,"", "", "","","","","", "", "");
     }
 
     public AnuncioDto getAnuncioDto(){

@@ -12,7 +12,6 @@ public class Usuario implements Serializable {
 
     private String usuario;
     private String contrasenia;
-    private Rol rol;
 
     public Usuario(){
 
@@ -21,7 +20,6 @@ public class Usuario implements Serializable {
     public Usuario(String usuario, String contrasenia, Rol rol) {
         this.usuario = usuario;
         this.contrasenia = contrasenia;
-        this.rol = rol;
     }
 
     public String getUsuario() {
@@ -38,11 +36,4 @@ public class Usuario implements Serializable {
         this.contrasenia = contrasenia;
     }
 
-    public Rol getRol() {
-        return rol;
-    }
-
-    public void setRol(Rol rol) {
-        this.rol = rol;
-    }
 }

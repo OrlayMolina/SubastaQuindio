@@ -18,7 +18,7 @@ public record AnuncioDto(
     }
 
     public AnuncianteDto getAnuncianteDto(){
-        return new AnuncianteDto(anunciante,"", "", "","","","","");
+        return new AnuncianteDto(anunciante,"", "", "","","","","", "", "");
     }
 
 }
