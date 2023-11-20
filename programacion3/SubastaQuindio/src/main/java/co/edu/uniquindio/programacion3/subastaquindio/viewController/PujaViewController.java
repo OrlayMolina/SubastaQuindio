@@ -44,6 +44,7 @@ public class PujaViewController extends JFrame {
     CompradorDto compradorDto;
     ProductoDto productoDto;
     AnuncioDto anuncioDto;
+    private Thread hiloActual;
     SubastaQuindio subastaQuindio;
     AnuncioDto anuncioSeleccionado;
     PujaDto ofertaSeleccionada;
@@ -161,15 +162,23 @@ public class PujaViewController extends JFrame {
         colProducto.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getProductoDto().toString()));
         colFechaFinAnuncio.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().fechaFinPublicacion()));
         colDescripcion.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().descripcion()));
-        colValorInicial.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().valorInicial())));
-
+        colValorInicial.setCellValueFactory(cellData -> {
+            Double valor = cellData.getValue().valorInicial();
+            if (valor != null) {
+                return new SimpleStringProperty(String.format("%.2f", valor));
+            } else {
+                return new SimpleStringProperty("");
+            }
+        });
     }
 
     private void initDataBindingOferta() {
         colCodigoOferta.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().codigo()));
         colComprador.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCompradorDto().toString()));
-        colOferta.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().oferta())));
-
+        colOferta.setCellValueFactory(cellData -> {
+            Double valor = cellData.getValue().oferta();
+            return new SimpleStringProperty(String.format("%.2f", valor));
+        });
     }
 
     private void listenerSelection() {
@@ -192,6 +201,7 @@ public class PujaViewController extends JFrame {
                         if(mostrarMensajeConfirmacion("¿Estas seguro que desea realizar una Puja por este producto?")){
                             if(pujaControllerService.agregarPuja(pujaDto)){
                                 listPujaDto.add(pujaDto);
+                                txfOferta.setText("");
                                 mostrarMensaje("Notificación puja", "Puja creada", "El puja se ha creado con éxito", Alert.AlertType.INFORMATION);
 
                                 registrarAcciones("Puja agregado",1, "Agregar puja");
@@ -202,12 +212,15 @@ public class PujaViewController extends JFrame {
                             mostrarMensaje("Notificación puja", "Puja no seleccionado", "No fue posible realizar la Puja", Alert.AlertType.WARNING);
                         }
                     }else {
-                        mostrarMensaje("Notificación puja", "Puja no creada", "Número de pujas exceden el máximo permitido (3) por anuncio", Alert.AlertType.WARNING);
+                        txfOferta.setText("");
+                        mostrarMensaje("Notificación puja", "Puja no creada", "Número de pujas exceden el máximo permitido (3) por anuncio.", Alert.AlertType.WARNING);
                     }
 
                 }else {
-                    mostrarMensaje("Notificación puja", "Anuncio Finalizado", "El Anuncio ha finalizado, no se puede pujar por este producto", Alert.AlertType.ERROR);
+                    mostrarMensaje("Notificación puja", "Anuncio Finalizado", "El Anuncio ha finalizado, no se puede pujar por este producto.", Alert.AlertType.ERROR);
                 }
+            }else {
+                mostrarMensaje("Notificación puja", "Puja no creada", "La oferta está por debajo del valor inicial para pujar por este producto.", Alert.AlertType.ERROR);
             }
 
         }
@@ -215,7 +228,11 @@ public class PujaViewController extends JFrame {
     }
 
     private void actualizarTiempoRestante(String horaFinAnuncio) {
-        Thread hilo = new Thread(() -> {
+        if (hiloActual != null && hiloActual.isAlive()) {
+            hiloActual.interrupt(); // Detener el hilo actual si está en ejecución
+        }
+
+        Thread nuevoHilo = new Thread(() -> {
             boolean tiempoCumplido = false;
 
             while (!tiempoCumplido) {
@@ -239,11 +256,14 @@ public class PujaViewController extends JFrame {
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    // Manejar la interrupción del hilo
+                    return;
                 }
             }
         });
-        hilo.start();
+
+        hiloActual = nuevoHilo; // Asignar el nuevo hilo como hilo actual
+        nuevoHilo.start(); // Iniciar el hilo para el nuevo anuncio
     }
 
 
@@ -304,7 +324,9 @@ public class PujaViewController extends JFrame {
         if (textoOferta == null || textoOferta.isEmpty()) {
             oferta = 0.0;
         } else {
-            oferta = Double.valueOf(textoOferta);
+            oferta = Double.parseDouble(textoOferta);
+            textoOferta = String.format("%.0f", oferta);
+            oferta = Double.parseDouble(textoOferta);
         }
 
         String estadoAnuncio = obtenerEstadoAnuncio();
@@ -333,8 +355,8 @@ public class PujaViewController extends JFrame {
 
     private boolean numeroPujasPorProducto(){
         boolean respuesta = false;
-        int numeroPujas = pujaControllerService.numeroPujasPorProducto(cedulaUsuario, "001");
-        if(numeroPujas < 2){
+        int numeroPujas = pujaControllerService.numeroPujasPorProducto(cedulaUsuario, anuncioSeleccionado.codigo());
+        if(numeroPujas <= 2){
             return true;
         }else {
             return respuesta;

@@ -122,8 +122,14 @@ public class HistorialViewController {
         colProducto.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getProductoDto().toString()));
         colCodigoAnuncio.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getAnuncioDto().codigo()));
         colComprador.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCompradorDto().toString()));
-        colValorOferta.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().oferta())));
-        colEstado.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().estadoAnuncio()));
+        colValorOferta.setCellValueFactory(cellData -> {
+            Double valor = cellData.getValue().oferta();
+            if (valor != null) {
+                return new SimpleStringProperty(String.format("%.2f", valor));
+            } else {
+                return new SimpleStringProperty("");
+            }
+        });colEstado.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().estadoAnuncio()));
     }
 
     private void obtenerProductos() {
