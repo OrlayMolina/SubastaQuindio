@@ -175,8 +175,14 @@ public class AnuncioViewController {
         colAnunciante.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getAnuncianteDto().toString()));
         colFechaPublicacion.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().fechaPublicacion().toString()));
         colFechaFinPublicacion.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().fechaFinPublicacion().toString()));
-        colValorInicial.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().valorInicial())));
-        colDescripcion.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().descripcion()));
+        colValorInicial.setCellValueFactory(cellData -> {
+            Double valor = cellData.getValue().valorInicial();
+            if (valor != null) {
+                return new SimpleStringProperty(String.format("%.2f", valor));
+            } else {
+                return new SimpleStringProperty("");
+            }
+        });colDescripcion.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().descripcion()));
         colEstado.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().estado()));
 
     }
