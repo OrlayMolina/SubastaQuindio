@@ -121,6 +121,7 @@ public class ProductoViewController {
     }
 
     private void intiView() {
+        System.out.println("Entró a ProductoView");
         initDataBinding();
         obtenerProductos();
         mostrarAnunciantes();

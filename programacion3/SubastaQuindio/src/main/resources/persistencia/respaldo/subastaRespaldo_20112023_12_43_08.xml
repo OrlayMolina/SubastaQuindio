@@ -53,10 +53,10 @@
       <string>Publicado</string>
      </void>
      <void property="fechaFinPublicacion">
-      <string>20:50:00</string>
+      <string>11:00:00</string>
      </void>
      <void property="fechaPublicacion">
-      <string>2023-11-19</string>
+      <string>2023-11-20</string>
      </void>
      <void property="foto">
       <string>src/main/resources/co/edu/uniquindio/programacion3/subastaquindio/img/lavadora.jpg</string>

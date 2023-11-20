@@ -2,15 +2,16 @@ package co.edu.uniquindio.programacion3.subastaquindio.viewController;
 
 import co.edu.uniquindio.programacion3.subastaquindio.controller.PujaController;
 import co.edu.uniquindio.programacion3.subastaquindio.enumm.Rol;
-import co.edu.uniquindio.programacion3.subastaquindio.exceptions.AnuncioException;
 import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.*;
 import co.edu.uniquindio.programacion3.subastaquindio.model.SubastaQuindio;
 import co.edu.uniquindio.programacion3.subastaquindio.utils.ListaAnuncioUtil;
+import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.Label;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
@@ -18,15 +19,18 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
+import javax.swing.*;
 import java.awt.*;
 import java.io.File;
+import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.function.Predicate;
 
 import static co.edu.uniquindio.programacion3.subastaquindio.viewController.InicioViewController.usuarioLogeado;
 
-public class PujaViewController extends Frame {
+public class PujaViewController extends JFrame {
 
     PujaController pujaControllerService;
     ObservableList<ProductoDto> listaProductosDto = FXCollections.observableArrayList();
@@ -50,6 +54,9 @@ public class PujaViewController extends Frame {
 
     @FXML
     private ImageView imagen;
+
+    @FXML
+    private Label txfTiempoRestante;
 
     @FXML
     private ComboBox<AnuncianteDto> cmbAnunciante;
@@ -150,7 +157,7 @@ public class PujaViewController extends Frame {
     private void initDataBinding() {
         colCodigoAnuncio.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().codigo()));
         colProducto.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getProductoDto().toString()));
-        colFechaFinAnuncio.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getAnuncianteDto().toString()));
+        colFechaFinAnuncio.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().fechaFinPublicacion()));
         colDescripcion.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().descripcion()));
         colValorInicial.setCellValueFactory(cellData -> new SimpleStringProperty(String.valueOf(cellData.getValue().valorInicial())));
 
@@ -181,11 +188,11 @@ public class PujaViewController extends Frame {
                     if(mostrarMensajeConfirmacion("¿Estas seguro que desea realizar una Puja por este producto?")){
                         if(pujaControllerService.agregarPuja(pujaDto)){
                             listPujaDto.add(pujaDto);
-                            mostrarMensaje("Notificación puja", "Puja creado", "El puja se ha creado con éxito", Alert.AlertType.INFORMATION);
+                            mostrarMensaje("Notificación puja", "Puja creada", "El puja se ha creado con éxito", Alert.AlertType.INFORMATION);
 
                             registrarAcciones("Puja agregado",1, "Agregar puja");
                         }else{
-                            mostrarMensaje("Notificación puja", "Puja no creado", "El puja no se ha creado", Alert.AlertType.ERROR);
+                            mostrarMensaje("Notificación puja", "Puja no creada", "El puja no se ha creado", Alert.AlertType.ERROR);
                         }
                     }else{
                         mostrarMensaje("Notificación puja", "Puja no seleccionado", "No fue posible realizar la Puja", Alert.AlertType.WARNING);
@@ -194,15 +201,44 @@ public class PujaViewController extends Frame {
                 }else {
                     mostrarMensaje("Notificación puja", "Anuncio Finalizado", "El Anuncio ha finalizado, no se puede pujar por este producto", Alert.AlertType.ERROR);
                 }
-            }else {
-                mostrarMensaje("Notificación puja", "Valor puja no permitido", "El valor pujado es menor al valor Inicial para pujar del anuncio", Alert.AlertType.ERROR);
             }
 
-        }else{
-            mostrarMensaje("Notificación puja", "Puja no creado", "Los datos ingresados son invalidos", Alert.AlertType.ERROR);
         }
 
     }
+
+    private void actualizarTiempoRestante(String horaFinAnuncio) {
+        Thread hilo = new Thread(() -> {
+            boolean tiempoCumplido = false;
+
+            while (!tiempoCumplido) {
+                LocalTime horaActual = LocalTime.now();
+                LocalTime horaFin = LocalTime.parse(horaFinAnuncio);
+
+                if (horaActual.isAfter(horaFin) || horaActual.equals(horaFin)) {
+                    tiempoCumplido = true;
+                    Platform.runLater(() -> txfTiempoRestante.setText("Cerrado"));
+                } else {
+                    long segundosRestantes = horaActual.until(horaFin, ChronoUnit.SECONDS);
+
+                    long horas = segundosRestantes / 3600;
+                    long minutos = (segundosRestantes % 3600) / 60;
+                    long segundos = segundosRestantes % 60;
+
+                    String textoTiempo = String.format("%02d:%02d:%02d", horas, minutos, segundos);
+                    Platform.runLater(() -> txfTiempoRestante.setText(textoTiempo));
+                }
+
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+        hilo.start();
+    }
+
 
 
     public void mostrarProducto(){
@@ -225,6 +261,11 @@ public class PujaViewController extends Frame {
         tableAnuncios.getSelectionModel().clearSelection();
         tableAnuncios.setItems(listaAnunciosDto);
         listenerSelection();
+    }
+
+    public void recargarInformacion(){
+        limpiarCamposAnuncios();
+        mostrarProducto();
     }
 
     private void obtenerAnunciantes() {
@@ -291,13 +332,13 @@ public class PujaViewController extends Frame {
         if(pujaDto.producto() == null || pujaDto.producto() .equals(""))
             mensaje += "El producto de la puja es invalido \n" ;
         if(pujaDto.anuncio()== null || pujaDto.anuncio() .equals(""))
-            mensaje += "El código del anuncio de la puja es invalido \n" ;
+            mensaje += "El código del anuncio que desea pujar está vació \n" ;
         if(pujaDto.comprador() == null || pujaDto.comprador().equals(""))
             mensaje += "El comprador de la puja es invalida \n" ;
         if(pujaDto.oferta() == 0.0 )
-            mensaje += "la oferta de la puja es invalida, debe agregar un valor de oferta \n" ;
+            mensaje += "La oferta de la puja es invalida, debe agregar un valor de oferta \n" ;
         if(pujaDto.estadoAnuncio() == null || pujaDto.estadoAnuncio().equals(""))
-            mensaje += "El estado del anuncio de la puja es invalida \n" ;
+            mensaje += "El estado del anuncio de la puja es invalido \n" ;
         if(mensaje.equals("")){
             return true;
         }else{
@@ -312,7 +353,7 @@ public class PujaViewController extends Frame {
             txaDescripcion.setText(anuncioSeleccionado.descripcion());
             cmbProducto.setValue(anuncioSeleccionado.getProductoDto());
             cmbAnunciante.setValue(anuncioSeleccionado.getAnuncianteDto());
-            txfFechaFinPuja.setText(anuncioSeleccionado.fechaPublicacion());
+            txfFechaFinPuja.setText(anuncioSeleccionado.fechaFinPublicacion());
             txfValorInicial.setText(String.valueOf(anuncioSeleccionado.valorInicial()));
 
             String rutaImagen = anuncioSeleccionado.foto();
@@ -324,6 +365,8 @@ public class PujaViewController extends Frame {
             }else{
                 imagen.setImage(null);
             }
+
+            actualizarTiempoRestante(anuncioSeleccionado.fechaFinPublicacion());
         }
     }
 

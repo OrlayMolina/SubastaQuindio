@@ -3,7 +3,6 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
@@ -14,7 +13,6 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane prefHeight="477.0" prefWidth="788.0" stylesheets="@tema.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.programacion3.subastaquindio.viewController.CrearCuentaViewController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fafbfc" height="450.0" layoutX="18.0" layoutY="14.0" stroke="#bfbcbc" strokeType="INSIDE" width="752.0" />
@@ -23,7 +21,7 @@
             <Image url="@img/logo.PNG" />
          </image>
       </ImageView>
-      <GridPane layoutX="264.0" layoutY="39.0">
+      <GridPane layoutX="264.0" layoutY="84.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="145.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="30.0" />
@@ -33,10 +31,6 @@
           <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
           <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
             <RowConstraints minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
@@ -98,19 +92,7 @@
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label text="Contraseña:" GridPane.rowIndex="16">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
-            <Label text="Confirmar Contraseña: " GridPane.rowIndex="18">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Label>
             <ComboBox fx:id="cmbRoles" prefHeight="45.0" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="14" />
-            <PasswordField fx:id="txfContrasenia" prefHeight="43.0" prefWidth="150.0" promptText="Ingrese una Contraseña ..." GridPane.columnIndex="2" GridPane.rowIndex="16" />
-            <PasswordField fx:id="txfConfirmarContrasenia" promptText="Confimar contraseña ..." GridPane.columnIndex="2" GridPane.rowIndex="18" />
          </children>
       </GridPane>
       <GridPane layoutX="282.0" layoutY="371.0">
