@@ -11,6 +11,8 @@ import java.time.LocalTime;
 import java.time.Period;
 import java.util.ArrayList;
 
+import static co.edu.uniquindio.programacion3.subastaquindio.viewController.InicioViewController.usuarioLogeado;
+
 public class SubastaQuindio implements ISubastaQuindioService, Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -23,6 +25,8 @@ public class SubastaQuindio implements ISubastaQuindioService, Serializable {
     private ArrayList<Anuncio> listaAnuncios = new ArrayList<>();
     private ArrayList<Puja> listaPujas = new ArrayList<>();
     private ArrayList<Chat> listaMensajes = new ArrayList<>();
+
+    public static String rolUsuarioLogeado = "";
 
     public SubastaQuindio() {
 
@@ -143,9 +147,6 @@ public class SubastaQuindio implements ISubastaQuindioService, Serializable {
             if (anuncio.getValorInicial() < puja) {
                 respuesta = true;
             }
-        }else{
-            pujaView.mostrarMensaje("Notificación puja", "Puja no creada", "No se pudo encontrar el valor inicial del anuncio", Alert.AlertType.ERROR);
-
         }
 
         return respuesta;
@@ -455,28 +456,33 @@ public class SubastaQuindio implements ISubastaQuindioService, Serializable {
     }
 
     @Override
-    public boolean usuarioExiste(String nombreUsuario, String password){
+    public boolean usuarioExiste(String cedula, String password){
         boolean usuarioExiste = false;
         for(Usuario usuario : getListaUsuarios()){
-            if(usuario.getUsuario().equalsIgnoreCase(nombreUsuario) &&
+            if(usuario.getUsuario().equalsIgnoreCase(cedula) &&
                     usuario.getContrasenia().equalsIgnoreCase(password)){
                 usuarioExiste = true;
+                usuarioLogeado = cedula;
                 break;
             }
         }
 
         for(Anunciante anunciante : getListaAnunciantes()){
-            if(anunciante.getCedula().equalsIgnoreCase(nombreUsuario) &&
+            if(anunciante.getCedula().equalsIgnoreCase(cedula) &&
                     anunciante.getContrasenia().equalsIgnoreCase(password)){
                 usuarioExiste = true;
+                rolUsuarioLogeado = anunciante.getRol();
+                usuarioLogeado = cedula + "  " + anunciante.getNombre() + " " + anunciante.getApellido();
                 break;
             }
         }
 
         for(Comprador comprador : getListaCompradores()){
-            if(comprador.getCedula().equalsIgnoreCase(nombreUsuario) &&
+            if(comprador.getCedula().equalsIgnoreCase(cedula) &&
                     comprador.getContrasenia().equalsIgnoreCase(password)){
                 usuarioExiste = true;
+                rolUsuarioLogeado = comprador.getRol();
+                usuarioLogeado = cedula + "  " +comprador.getNombre() +" "+comprador.getApellido();
                 break;
             }
         }
@@ -576,11 +582,6 @@ public class SubastaQuindio implements ISubastaQuindioService, Serializable {
                 anuncioEncontrado = anuncio;
                 break;
             }
-        }
-
-        if (anuncioEncontrado == null) {
-            pujaView.mostrarMensaje("Notificación puja", "Puja no se pudo crear", "La Puja no contiene la información suficiente, por favor seleccione un anuncio", Alert.AlertType.ERROR);
-
         }
 
         return anuncioEncontrado;

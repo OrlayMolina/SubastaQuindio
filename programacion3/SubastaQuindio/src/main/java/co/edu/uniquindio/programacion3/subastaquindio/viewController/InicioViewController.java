@@ -52,9 +52,11 @@ public class InicioViewController {
         if(permitirIngreso){
             registrarAcciones("Inicio de sesión, usuario: " + usuario,1, "Inicio Sesión");
             sesionActiva = true;
-            usuarioLogeado = usuario;
             cerrarVentana(btnIniciarSesion);
             app.cargarTabuladores();
+            if(password.equals("123")){
+                mostrarMensaje("Notificación de inicio sesión", "Cambio de contraseña", "Recuerde cambiar la contraseña asignada por defecto", Alert.AlertType.ERROR);
+            }
         }else{
             registrarAcciones("Inicio de sesión incorrecto",1, "Inicio sesión");
             mostrarMensaje("Notificación inicio sesión", "Inicio sesión incorrecto", "usuario o contraseña incorrecta", Alert.AlertType.ERROR);
