@@ -87,7 +87,7 @@ public class HistorialViewController {
         String producto = String.valueOf(cmbProducto.getValue());
         String codigoAnuncio = txfCodigoAnuncio.getText();
         String comprador = String.valueOf(cmbComprador.getValue());
-        Double valorPuja = Double.valueOf(txfValorOferta.getText());
+        String valorPuja = txfValorOferta.getText();
         String estadoAnuncio = cmbEstado.getValue();
         buscarPujas( codigo, producto, codigoAnuncio,
                  comprador, valorPuja, estadoAnuncio);
@@ -130,14 +130,8 @@ public class HistorialViewController {
         colProducto.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getProductoDto().toString()));
         colCodigoAnuncio.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getAnuncioDto().codigo()));
         colComprador.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCompradorDto().toString()));
-        colValorOferta.setCellValueFactory(cellData -> {
-            Double valor = cellData.getValue().oferta();
-            if (valor != null) {
-                return new SimpleStringProperty(String.format("%.2f", valor));
-            } else {
-                return new SimpleStringProperty("");
-            }
-        });colEstado.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().estadoAnuncio()));
+        colValorOferta.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().oferta()));
+        colEstado.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().estadoAnuncio()));
     }
 
     private void obtenerProductos() {
@@ -205,7 +199,7 @@ public class HistorialViewController {
         String producto = String.valueOf(cmbProducto.getValue());
         String codigoAnuncio = txfCodigoAnuncio.getText();
         String comprador = obtenerUsuarioComprador();
-        Double oferta = Double.valueOf(txfValorOferta.getText());
+        String oferta = txfValorOferta.getText();
         String estadoAnuncio = String.valueOf(EstadoAnuncios.Cerrado_pagado_con_exito);
         return new PujaDto(codigoPuja,producto,codigoAnuncio,comprador, oferta, estadoAnuncio);
     }
@@ -236,7 +230,7 @@ public class HistorialViewController {
             mensaje += "El código del anuncio de la puja es invalido \n" ;
         if(pujaDto.comprador() == null || pujaDto.comprador().equals(""))
             mensaje += "El comprador de la puja es invalida \n" ;
-        if(pujaDto.oferta() == 0 )
+        if(pujaDto.oferta() == null || pujaDto.oferta().equals("") )
             mensaje += "la oferta de la puja es invalida \n" ;
         if(pujaDto.estadoAnuncio() == null || pujaDto.estadoAnuncio().equals(""))
             mensaje += "El estado del anuncio de la puja es invalida \n" ;
@@ -295,7 +289,7 @@ public class HistorialViewController {
     }
 
     private void buscarPujas(String codigo, String producto, String codigoAnuncio,
-                             String comprador, Double valorPuja, String estadoAnuncio) {
+                             String comprador, String valorPuja, String estadoAnuncio) {
 
         Predicate<PujaDto> predicado = PujaUtil.buscarPorTodo(codigo, producto, codigoAnuncio,
                 comprador, valorPuja, estadoAnuncio);

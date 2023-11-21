@@ -12,7 +12,7 @@ public class Anuncio implements Serializable {
     private String anunciante;
     private String fechaPublicacion;
     private String fechaFinPublicacion;
-    private double valorInicial;
+    private String valorInicial;
     private String descripcion;
     private String foto;
     private String estado;
@@ -61,11 +61,11 @@ public class Anuncio implements Serializable {
         this.fechaFinPublicacion = fechaFinPublicacion;
     }
 
-    public double getValorInicial() {
+    public String getValorInicial() {
         return valorInicial;
     }
 
-    public void setValorInicial(double valorInicial) {
+    public void setValorInicial(String valorInicial) {
         this.valorInicial = valorInicial;
     }
 

@@ -22,8 +22,8 @@ public class PujaUtil {
         return pujaDto -> pujaDto.getCompradorDto().toString().contains(tipoProducto);
     }
 
-    public static Predicate<PujaDto> buscarPorValorPuja(Double valorPuja){
-        return pujaDto -> pujaDto.oferta() == valorPuja;
+    public static Predicate<PujaDto> buscarPorValorPuja(String valorPuja){
+        return pujaDto -> pujaDto.oferta().equals(valorPuja);
     }
 
     public static Predicate<PujaDto> buscarPorEstadoAnuncio(String tipoProducto){
@@ -32,7 +32,7 @@ public class PujaUtil {
 
 
     public static Predicate<PujaDto> buscarPorTodo(String codigo, String producto, String codigoAnuncio,
-                                                   String comprador, Double valorPuja, String estadoAnuncio) {
+                                                   String comprador, String valorPuja, String estadoAnuncio) {
 
         Predicate<PujaDto> predicado = pujaDto -> true;
 
@@ -48,7 +48,7 @@ public class PujaUtil {
         if( comprador != null && !comprador.isEmpty() && !comprador.equals("null")){
             predicado = predicado.and(buscarPorComprador(comprador));
         }
-        if(valorPuja != null && valorPuja != 0){
+        if(valorPuja != null && !valorPuja.isEmpty() ){
             predicado = predicado.and(buscarPorValorPuja(valorPuja));
         }
         if( estadoAnuncio != null && !estadoAnuncio.isEmpty() && !estadoAnuncio.equals("null")){

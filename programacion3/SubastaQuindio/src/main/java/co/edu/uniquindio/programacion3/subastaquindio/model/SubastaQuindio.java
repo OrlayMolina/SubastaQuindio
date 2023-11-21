@@ -127,7 +127,7 @@ public class SubastaQuindio implements ISubastaQuindioService, Serializable {
         return !horaActual.isAfter(horaFin);
     }
 
-    public boolean validarValorPuja(String codigoAnuncio, Double puja) {
+    public boolean validarValorPuja(String codigoAnuncio, String puja) {
         boolean respuesta = false;
         if(!valorMenorPujado(codigoAnuncio, puja)){
             return respuesta;
@@ -137,11 +137,11 @@ public class SubastaQuindio implements ISubastaQuindioService, Serializable {
         return respuesta;
     }
 
-    public boolean valorMenorPujado(String codigoAnuncio, Double puja) {
+    public boolean valorMenorPujado(String codigoAnuncio, String puja) {
         boolean respuesta = false;
         Anuncio anuncio = obtenerAnuncio(codigoAnuncio);
         if(anuncio != null){
-            if (anuncio.getValorInicial() < puja) {
+            if (Double.parseDouble(anuncio.getValorInicial()) < Double.parseDouble(puja)) {
                 respuesta = true;
             }
         }

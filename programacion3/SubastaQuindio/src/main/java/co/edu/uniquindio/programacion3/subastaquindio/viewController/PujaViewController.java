@@ -161,23 +161,14 @@ public class PujaViewController extends JFrame {
         colProducto.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getProductoDto().toString()));
         colFechaFinAnuncio.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().fechaFinPublicacion()));
         colDescripcion.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().descripcion()));
-        colValorInicial.setCellValueFactory(cellData -> {
-            Double valor = cellData.getValue().valorInicial();
-            if (valor != null) {
-                return new SimpleStringProperty(String.format("%.2f", valor));
-            } else {
-                return new SimpleStringProperty("");
-            }
-        });
+        colValorInicial.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().valorInicial()));
+
     }
 
     private void initDataBindingOferta() {
         colCodigoOferta.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().codigo()));
         colComprador.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().getCompradorDto().toString()));
-        colOferta.setCellValueFactory(cellData -> {
-            Double valor = cellData.getValue().oferta();
-            return new SimpleStringProperty(String.format("%.2f", valor));
-        });
+        colOferta.setCellValueFactory(cellData -> new SimpleStringProperty(cellData.getValue().oferta()));
     }
 
     private void listenerSelection() {
@@ -325,18 +316,7 @@ public class PujaViewController extends JFrame {
         String producto = String.valueOf(cmbProducto.getValue());
         String codigoAnuncio = txfCodigoAnuncio.getText();
         String comprador = obtenerUsuarioComprador();
-        Double oferta;
-
-        String textoOferta = txfOferta.getText();
-
-        if (textoOferta == null || textoOferta.isEmpty()) {
-            oferta = 0.0;
-        } else {
-            oferta = Double.parseDouble(textoOferta);
-            textoOferta = String.format("%.0f", oferta);
-            oferta = Double.parseDouble(textoOferta);
-        }
-
+        String oferta = txfOferta.getText();
         String estadoAnuncio = obtenerEstadoAnuncio();
         return new PujaDto(codigoPuja, producto, codigoAnuncio, comprador, oferta, estadoAnuncio);
     }
@@ -382,7 +362,7 @@ public class PujaViewController extends JFrame {
             mensaje += "El código del anuncio que desea pujar está vació \n" ;
         if(pujaDto.comprador() == null || pujaDto.comprador().equals(""))
             mensaje += "El comprador de la puja es invalida \n" ;
-        if(pujaDto.oferta() == 0.0 )
+        if(pujaDto.oferta()== null || pujaDto.oferta().equals(""))
             mensaje += "La oferta de la puja es invalida, debe agregar un valor de oferta \n" ;
         if(pujaDto.estadoAnuncio() == null || pujaDto.estadoAnuncio().equals(""))
             mensaje += "El estado del anuncio de la puja es invalido \n" ;
