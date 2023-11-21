@@ -152,7 +152,7 @@ public class ModelFactoryController implements IModelFactoryService, Runnable {
     }
 
 
-    public boolean validarValorPuja(String codigo, Double puja){
+    public boolean validarValorPuja(String codigo, String puja){
         return getSubasta().validarValorPuja(codigo, puja);
     }
 

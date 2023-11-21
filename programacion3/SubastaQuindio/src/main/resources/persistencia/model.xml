@@ -37,6 +37,39 @@
     </object>
    </void>
   </void>
+  <void property="listaAnuncios">
+   <void method="add">
+    <object class="co.edu.uniquindio.programacion3.subastaquindio.model.Anuncio">
+     <void property="anunciante">
+      <string>74360360 Ramiro Rojas Bociga</string>
+     </void>
+     <void property="codigo">
+      <string>001</string>
+     </void>
+     <void property="descripcion">
+      <string>casi nuevo</string>
+     </void>
+     <void property="estado">
+      <string>Publicado</string>
+     </void>
+     <void property="fechaFinPublicacion">
+      <string>13:00:00</string>
+     </void>
+     <void property="fechaPublicacion">
+      <string>2023-11-21</string>
+     </void>
+     <void property="foto">
+      <string>src/main/resources/co/edu/uniquindio/programacion3/subastaquindio/img/carro2.jpeg</string>
+     </void>
+     <void property="producto">
+      <string>001  Mitsubishi</string>
+     </void>
+     <void property="valorInicial">
+      <string>97000000</string>
+     </void>
+    </object>
+   </void>
+  </void>
   <void property="listaCompradores">
    <void method="add">
     <object class="co.edu.uniquindio.programacion3.subastaquindio.model.Comprador">
@@ -69,84 +102,6 @@
      </void>
      <void property="usuarioAsociado">
       <string>administrador</string>
-     </void>
-    </object>
-   </void>
-  </void>
-  <void property="listaProductos">
-   <void method="add">
-    <object class="co.edu.uniquindio.programacion3.subastaquindio.model.Producto">
-     <void property="codigoUnico">
-      <string>001</string>
-     </void>
-     <void property="foto">
-      <string>src/main/resources/co/edu/uniquindio/programacion3/subastaquindio/img/lavadora.jpg</string>
-     </void>
-     <void property="nombreAnunciante">
-      <string>74360360 Ramiro Rojas Bociga</string>
-     </void>
-     <void property="nombreProducto">
-      <string>Lavadora</string>
-     </void>
-     <void property="tipoProducto">
-      <string>HOGAR</string>
-     </void>
-    </object>
-   </void>
-   <void method="add">
-    <object class="co.edu.uniquindio.programacion3.subastaquindio.model.Producto">
-     <void property="codigoUnico">
-      <string>002</string>
-     </void>
-     <void property="foto">
-      <string>src/main/resources/co/edu/uniquindio/programacion3/subastaquindio/img/pesas2.png</string>
-     </void>
-     <void property="nombreAnunciante">
-      <string>74360360 Ramiro Rojas Bociga</string>
-     </void>
-     <void property="nombreProducto">
-      <string>Juego de Pesas</string>
-     </void>
-     <void property="tipoProducto">
-      <string>DEPORTES</string>
-     </void>
-    </object>
-   </void>
-   <void method="add">
-    <object class="co.edu.uniquindio.programacion3.subastaquindio.model.Producto">
-     <void property="codigoUnico">
-      <string>003</string>
-     </void>
-     <void property="foto">
-      <string>src/main/resources/co/edu/uniquindio/programacion3/subastaquindio/img/carro2.jpeg</string>
-     </void>
-     <void property="nombreAnunciante">
-      <string>74360360 Ramiro Rojas Bociga</string>
-     </void>
-     <void property="nombreProducto">
-      <string>Camioneta</string>
-     </void>
-     <void property="tipoProducto">
-      <string>VEHICULOS</string>
-     </void>
-    </object>
-   </void>
-   <void method="add">
-    <object class="co.edu.uniquindio.programacion3.subastaquindio.model.Producto">
-     <void property="codigoUnico">
-      <string>004</string>
-     </void>
-     <void property="foto">
-      <string>src/main/resources/co/edu/uniquindio/programacion3/subastaquindio/img/lavadora - copia.jpg</string>
-     </void>
-     <void property="nombreAnunciante">
-      <string>74360360 Ramiro Rojas Bociga</string>
-     </void>
-     <void property="nombreProducto">
-      <string>lavadora 2</string>
-     </void>
-     <void property="tipoProducto">
-      <string>HOGAR</string>
      </void>
     </object>
    </void>

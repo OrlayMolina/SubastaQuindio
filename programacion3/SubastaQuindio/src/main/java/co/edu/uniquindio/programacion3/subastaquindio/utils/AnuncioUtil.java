@@ -29,8 +29,8 @@ public class AnuncioUtil {
         return anuncioDto -> anuncioDto.fechaFinPublicacion().equals(fechaFinPublicacion);
     }
 
-    public static Predicate<AnuncioDto> buscarPorValorInicial(double valorInicial){
-        return anuncioDto -> anuncioDto.valorInicial() == valorInicial;
+    public static Predicate<AnuncioDto> buscarPorValorInicial(String valorInicial){
+        return anuncioDto -> anuncioDto.valorInicial().equals(valorInicial);
     }
 
     public static Predicate<AnuncioDto> buscarPorDescripcion(String descripcion){
@@ -42,7 +42,7 @@ public class AnuncioUtil {
     }
 
     public static Predicate<AnuncioDto> buscarPorTodo(String codigo, ProductoDto productoDto, AnuncianteDto anuncianteDto,
-                                                      String fechaPublicacion, String fechaFinPublicacion, double valorInicial,
+                                                      String fechaPublicacion, String fechaFinPublicacion, String valorInicial,
                                                       String descripcion, String estado) {
 
         Predicate<AnuncioDto> predicado = anuncioDto -> true;
@@ -62,7 +62,7 @@ public class AnuncioUtil {
         if( fechaFinPublicacion != null && !fechaFinPublicacion.isEmpty()){
             predicado = predicado.and(buscarPorFechaFinPublicacion(fechaFinPublicacion));
         }
-        if( valorInicial != 0){
+        if( valorInicial != null && !valorInicial.isEmpty()){
             predicado = predicado.and(buscarPorValorInicial(valorInicial));
         }
         if( descripcion != null && !descripcion.isEmpty() ){

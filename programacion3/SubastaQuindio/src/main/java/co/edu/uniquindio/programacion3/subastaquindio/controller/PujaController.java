@@ -53,7 +53,7 @@ public class PujaController {
         return modelFactoryController.actualizarTiempoRestante(codigo);
     }
 
-    public boolean validarValorPuja(String codigo, Double puja){
+    public boolean validarValorPuja(String codigo, String puja){
         return modelFactoryController.validarValorPuja(codigo, puja);
     }
     public void registrarAcciones(String mensaje, int nivel, String accion) {
