@@ -2,6 +2,7 @@ package co.edu.uniquindio.programacion3.subastaquindio.viewController;
 
 import co.edu.uniquindio.programacion3.subastaquindio.controller.AnuncioController;
 import co.edu.uniquindio.programacion3.subastaquindio.enumm.EstadoAnuncios;
+import co.edu.uniquindio.programacion3.subastaquindio.enumm.Rol;
 import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.AnuncianteDto;
 import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.AnuncioDto;
 import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.ProductoDto;
@@ -10,6 +11,7 @@ import co.edu.uniquindio.programacion3.subastaquindio.utils.AnuncioUtil;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.shape.Rectangle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -20,11 +22,12 @@ import java.io.File;
 import java.util.Optional;
 import java.util.function.Predicate;
 
-import static co.edu.uniquindio.programacion3.subastaquindio.viewController.InicioViewController.usuarioLogeado;
+import static co.edu.uniquindio.programacion3.subastaquindio.viewController.InicioViewController.*;
 
 public class AnuncioViewController {
 
     AnuncioController anuncioControllerService;
+    PujaViewController pujaViewController;
     ObservableList<ProductoDto> listaProductosDto = FXCollections.observableArrayList();
     ObservableList<AnuncianteDto> listaAnunciantesDto = FXCollections.observableArrayList();
     ObservableList<AnuncioDto> listaAnuncioDto = FXCollections.observableArrayList();
@@ -53,6 +56,33 @@ public class AnuncioViewController {
 
     @FXML
     private ImageView imagen;
+
+    @FXML
+    private Label lblAnunciante;
+
+    @FXML
+    private Label lblCodigo;
+
+    @FXML
+    private Label lblEstado;
+
+    @FXML
+    private Label lblFecha;
+
+    @FXML
+    private Label lblFechaFin;
+
+    @FXML
+    private Label lblMensaje;
+
+    @FXML
+    private Label lblProducto;
+
+    @FXML
+    private Label lblValor;
+
+    @FXML
+    private Rectangle shapeFoto;
 
     @FXML
     private ComboBox<AnuncianteDto> cmbAnunciante;
@@ -151,9 +181,12 @@ public class AnuncioViewController {
     @FXML
     void initialize() {
         anuncioControllerService = new AnuncioController();
+        pujaViewController = new PujaViewController();
         subastaQuindio = new SubastaQuindio();
         initView();
+        cmbAnunciante.setValue(obtenerAnunciante(cedulaUsuario));
         cmbEstadoAnuncio.setValue(String.valueOf(EstadoAnuncios.Publicado));
+        cargarPestaniaSegunRol();
     }
 
     private void initView() {
@@ -194,6 +227,36 @@ public class AnuncioViewController {
         });
     }
 
+    private void cargarPestaniaSegunRol(){
+        if(rolUsuarioLogeado.equals(String.valueOf(Rol.Comprador))){
+            btnActualizar.setVisible(false);
+            btnEliminar.setVisible(false);
+            btnAgregar.setVisible(false);
+            btnBuscar.setVisible(false);
+            btnLimpiarCampos.setVisible(false);
+            shapeFoto.setVisible(false);
+            lblAnunciante.setVisible(false);
+            txfCodigoAnuncio.setVisible(false);
+            lblCodigo.setVisible(false);
+            lblEstado.setVisible(false);
+            lblFecha.setVisible(false);
+            lblFechaFin.setVisible(false);
+            lblProducto.setVisible(false);
+            lblValor.setVisible(false);
+            txfFechaPublicacion.setVisible(false);
+            txfFechaFinPublicacion.setVisible(false);
+            txfValorInicial.setVisible(false);
+            txaDescripcion.setVisible(false);
+            tableAnuncios.setVisible(false);
+            cmbAnunciante.setVisible(false);
+            cmbProducto.setVisible(false);
+            cmbEstadoAnuncio.setVisible(false);
+
+        }else{
+            lblMensaje.setVisible(false);
+        }
+    }
+
     public void mostrarProducto(){
         cmbProducto.setItems(listaProductosDto);
     }
@@ -207,6 +270,20 @@ public class AnuncioViewController {
         listaEstados.add(String.valueOf(EstadoAnuncios.Finalizado));
         listaEstados.add(String.valueOf(EstadoAnuncios.Cerrado_pagado_con_exito));
         cmbEstadoAnuncio.setItems(listaEstados);
+    }
+
+    private AnuncianteDto obtenerAnunciante(String cedula){
+        return anuncioControllerService.obtenerAnunciante(cedula);
+    }
+
+    public void recargarInformacion(){
+
+        cmbProducto.getItems().clear();
+        obtenerProductos();
+        cmbProducto.setItems(listaProductosDto);
+        cmbAnunciante.getItems().clear();
+        obtenerAnunciantes();
+        cmbAnunciante.setItems(listaAnunciantesDto);
     }
 
     private void crearAnuncio() {
@@ -292,6 +369,7 @@ public class AnuncioViewController {
         limpiarCamposAnuncios();
         tableAnuncios.getSelectionModel().clearSelection();
         tableAnuncios.setItems(listaAnuncioDto);
+        recargarInformacion();
         listenerSelection();
     }
 

@@ -18,9 +18,9 @@
 <AnchorPane prefHeight="477.0" prefWidth="788.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.programacion3.subastaquindio.viewController.ProductoViewController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ecf1f5" height="48.0" layoutX="7.0" layoutY="205.0" stroke="#b5aeae" strokeType="INSIDE" width="763.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#f3f4f5" height="185.0" layoutX="7.0" layoutY="14.0" stroke="#c3b6b6" strokeType="INSIDE" width="763.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="140.0" layoutX="11.0" layoutY="19.0" stroke="#bca8a8" strokeType="INSIDE" width="203.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#fdfeff" height="172.0" layoutX="222.0" layoutY="20.0" stroke="#cdc2c2" strokeType="INSIDE" width="540.0" />
+      <Rectangle fx:id="shape" arcHeight="5.0" arcWidth="5.0" fill="#f3f4f5" height="185.0" layoutX="7.0" layoutY="14.0" stroke="#c3b6b6" strokeType="INSIDE" width="763.0" />
+      <Rectangle fx:id="shapeFoto" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="140.0" layoutX="11.0" layoutY="19.0" stroke="#bca8a8" strokeType="INSIDE" width="203.0" />
+      <Rectangle fx:id="shapeDetalle" arcHeight="5.0" arcWidth="5.0" fill="#fdfeff" height="172.0" layoutX="222.0" layoutY="20.0" stroke="#cdc2c2" strokeType="INSIDE" width="540.0" />
       <GridPane layoutX="237.0" layoutY="35.0" prefHeight="135.0" prefWidth="510.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="228.0" />
@@ -35,25 +35,25 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="Nombre del Producto:">
+            <Label fx:id="lblNombre" text="Nombre del Producto:">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label text="Anunciante:" GridPane.columnIndex="2">
+            <Label fx:id="lblAnunciante" text="Anunciante:" GridPane.columnIndex="2">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
             <TextField fx:id="txfNombreProducto" prefHeight="34.0" prefWidth="230.0" promptText="Nombre del Producto ..." GridPane.rowIndex="1" />
-            <Label text="Tipo Producto:" GridPane.columnIndex="2" GridPane.rowIndex="3">
+            <Label fx:id="lblTipoProducto" text="Tipo Producto:" GridPane.columnIndex="2" GridPane.rowIndex="3">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
             <ComboBox fx:id="cmbAnunciante" prefWidth="258.0" promptText="Anunciantes ..." GridPane.columnIndex="2" GridPane.rowIndex="1" />
             <ComboBox fx:id="cmbTipoProducto" prefWidth="291.0" promptText="Eligir el Tipo de Producto" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-            <Label text="Código Único:" GridPane.rowIndex="3">
+            <Label fx:id="lblCodigo" text="Código Único:" GridPane.rowIndex="3">
                <font>
                   <Font size="14.0" />
                </font>
@@ -94,6 +94,11 @@
          </children>
       </GridPane>
       <ImageView fx:id="imagen" fitHeight="136.0" fitWidth="136.0" layoutX="43.0" layoutY="21.0" pickOnBounds="true" preserveRatio="true" />
+      <Label fx:id="lblMensaje" layoutX="104.0" layoutY="216.0" text="No tiene el Rol permitido para la pestaña Gestión de Productos.">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
    </children>
    <stylesheets>
       <URL value="@tema.css" />

@@ -8,6 +8,7 @@ import co.edu.uniquindio.programacion3.subastaquindio.utils.UsuarioUtil;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.shape.Rectangle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -15,6 +16,7 @@ import javafx.scene.control.*;
 import java.util.Optional;
 import java.util.function.Predicate;
 
+import static co.edu.uniquindio.programacion3.subastaquindio.viewController.InicioViewController.rolUsuarioLogeado;
 import static co.edu.uniquindio.programacion3.subastaquindio.viewController.InicioViewController.usuarioLogeado;
 
 public class UsuarioViewController {
@@ -39,6 +41,21 @@ public class UsuarioViewController {
 
     @FXML
     private Button btnLimpiarCampos;
+
+    @FXML
+    private Label lblContrasenia;
+
+    @FXML
+    private Label lblMensaje;
+
+    @FXML
+    private Label lblUsuario;
+
+    @FXML
+    private Rectangle shape;
+
+    @FXML
+    private Rectangle shapeBotones;
 
     @FXML
     private TableColumn<UsuarioDto, String> colContrasenia;
@@ -87,6 +104,7 @@ public class UsuarioViewController {
         usuarioControllerService = new UsuarioController();
         subastaQuindio = new SubastaQuindio();
         initView();
+        cargarPestaniaSegunRol();
     }
 
     private void initView() {
@@ -200,6 +218,28 @@ public class UsuarioViewController {
         if(usuarioSeleccionado != null){
             txfUsuario.setText(usuarioSeleccionado.usuario());
             pwdContrasenia.setText(usuarioSeleccionado.contrasenia());
+        }
+    }
+
+    private void cargarPestaniaSegunRol(){
+        if(rolUsuarioLogeado.equals(String.valueOf(Rol.Comprador)) ||
+                rolUsuarioLogeado.equals(String.valueOf(Rol.Anunciante))){
+            btnActualizar.setVisible(false);
+            btnEliminar.setVisible(false);
+            btnAgregar.setVisible(false);
+            btnBuscar.setVisible(false);
+            btnLimpiarCampos.setVisible(false);
+            txfUsuario.setVisible(false);
+            pwdContrasenia.setVisible(false);
+            tableUsuarios.setVisible(false);
+            lblContrasenia.setVisible(false);
+            lblUsuario.setVisible(false);
+            shape.setVisible(false);
+            shapeBotones.setVisible(false);
+            tableUsuarios.setVisible(false);
+
+        }else{
+            lblMensaje.setVisible(false);
         }
     }
 

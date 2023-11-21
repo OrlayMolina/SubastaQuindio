@@ -480,7 +480,7 @@ public class SubastaQuindio implements ISubastaQuindioService, Serializable {
                 usuarioExiste = true;
                 rolUsuarioLogeado = anunciante.getRol();
                 cedulaUsuario = anunciante.getCedula();
-                usuarioLogeado = cedula + "  " + anunciante.getNombre() + " " + anunciante.getApellido();
+                usuarioLogeado = cedula + " " + anunciante.getNombre() + " " + anunciante.getApellido();
                 usuarioChat = anunciante.getNombre() + " " + anunciante.getApellido();
                 break;
             }
@@ -492,7 +492,7 @@ public class SubastaQuindio implements ISubastaQuindioService, Serializable {
                 usuarioExiste = true;
                 rolUsuarioLogeado = comprador.getRol();
                 cedulaUsuario = comprador.getCedula();
-                usuarioLogeado = cedula + "  " +comprador.getNombre() +" "+comprador.getApellido();
+                usuarioLogeado = cedula + " " +comprador.getNombre() +" "+comprador.getApellido();
                 usuarioChat = comprador.getNombre() +" "+comprador.getApellido();
                 break;
             }

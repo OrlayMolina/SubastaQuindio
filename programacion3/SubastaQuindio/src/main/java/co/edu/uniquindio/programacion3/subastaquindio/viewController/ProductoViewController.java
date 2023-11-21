@@ -1,6 +1,7 @@
 package co.edu.uniquindio.programacion3.subastaquindio.viewController;
 
 import co.edu.uniquindio.programacion3.subastaquindio.controller.ProductoController;
+import co.edu.uniquindio.programacion3.subastaquindio.enumm.Rol;
 import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.AnuncianteDto;
 import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.ProductoDto;
 import co.edu.uniquindio.programacion3.subastaquindio.utils.ProductoUtil;
@@ -20,6 +21,8 @@ import javafx.stage.Stage;
 import java.io.*;
 import java.util.Optional;
 import java.util.function.Predicate;
+
+import static co.edu.uniquindio.programacion3.subastaquindio.viewController.InicioViewController.*;
 
 public class ProductoViewController {
 
@@ -51,6 +54,30 @@ public class ProductoViewController {
 
     @FXML
     private Button btnLimpiarCampos;
+
+    @FXML
+    private Label lblAnunciante;
+
+    @FXML
+    private Label lblCodigo;
+
+    @FXML
+    private Label lblMensaje;
+
+    @FXML
+    private Label lblNombre;
+
+    @FXML
+    private Label lblTipoProducto;
+
+    @FXML
+    private Rectangle shapeFoto;
+
+    @FXML
+    private Rectangle shape;
+
+    @FXML
+    private Rectangle shapeDetalle;
 
     @FXML
     private ComboBox<String> cmbTipoProducto;
@@ -118,10 +145,11 @@ public class ProductoViewController {
     void initialize() {
         productoControllerService = new ProductoController();
         intiView();
+        cmbAnunciante.setValue(obtenerAnunciante(cedulaUsuario));
+        cargarPestaniaSegunRol();
     }
 
     private void intiView() {
-        System.out.println("Entró a ProductoView");
         initDataBinding();
         obtenerProductos();
         mostrarAnunciantes();
@@ -153,8 +181,44 @@ public class ProductoViewController {
         });
     }
 
+    private AnuncianteDto obtenerAnunciante(String cedula){
+        return productoControllerService.obtenerAnunciante(cedula);
+    }
+
     public void mostrarAnunciantes(){
         cmbAnunciante.setItems(listaAnunciantesDto);
+    }
+
+    public void recargarInformacion(){
+
+        cmbAnunciante.getItems().clear();
+        getListaAnunciantes();
+        cmbAnunciante.setItems(listaAnunciantesDto);
+    }
+
+    private void cargarPestaniaSegunRol(){
+        if(rolUsuarioLogeado.equals(String.valueOf(Rol.Comprador))){
+            btnActualizar.setVisible(false);
+            btnEliminar.setVisible(false);
+            btnAgregar.setVisible(false);
+            btnAgregarImagen.setVisible(false);
+            btnBuscar.setVisible(false);
+            btnLimpiarCampos.setVisible(false);
+            cmbTipoProducto.setVisible(false);
+            tableProductos.setVisible(false);
+            txfCodigoUnico.setVisible(false);
+            lblAnunciante.setVisible(false);
+            lblCodigo.setVisible(false);
+            lblNombre.setVisible(false);
+            lblTipoProducto.setVisible(false);
+            cmbAnunciante.setVisible(false);
+            txfNombreProducto.setVisible(false);
+            shapeFoto.setVisible(false);
+            shape.setVisible(false);
+            shapeDetalle.setVisible(false);
+        }else{
+            lblMensaje.setVisible(false);
+        }
     }
 
     public void mostrarTipoProducto(){
@@ -284,6 +348,7 @@ public class ProductoViewController {
         limpiarCamposProductos();
         tableProductos.getSelectionModel().clearSelection();
         tableProductos.setItems(listaProductosDto);
+        recargarInformacion();
         listenerSelection();
     }
 

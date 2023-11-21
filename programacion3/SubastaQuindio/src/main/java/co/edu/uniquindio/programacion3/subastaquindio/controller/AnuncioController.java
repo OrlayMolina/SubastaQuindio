@@ -19,6 +19,10 @@ public class AnuncioController {
         return modelFactoryController.obtenerAnuncios();
     }
 
+    public AnuncianteDto obtenerAnunciante(String cedula){
+        return modelFactoryController.obtenerAnunciante(cedula);
+    }
+
     public List<ProductoDto> obtenerProductos(){
         return modelFactoryController.obtenerProductos();
     }

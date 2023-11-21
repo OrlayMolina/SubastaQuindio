@@ -9,6 +9,7 @@ import co.edu.uniquindio.programacion3.subastaquindio.utils.CompradorUtil;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.shape.Rectangle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -16,6 +17,7 @@ import javafx.scene.control.*;
 import java.util.Optional;
 import java.util.function.Predicate;
 
+import static co.edu.uniquindio.programacion3.subastaquindio.viewController.InicioViewController.rolUsuarioLogeado;
 import static co.edu.uniquindio.programacion3.subastaquindio.viewController.InicioViewController.usuarioLogeado;
 
 public class CompradorViewController {
@@ -44,6 +46,39 @@ public class CompradorViewController {
 
     @FXML
     private ComboBox<UsuarioDto> cmbUsuario;
+
+    @FXML
+    private Label lblApellido;
+
+    @FXML
+    private Label lblCedula;
+
+    @FXML
+    private Label lblContrasenia;
+
+    @FXML
+    private Label lblCorreo;
+
+    @FXML
+    private Label lblDireccion;
+
+    @FXML
+    private Label lblFecha;
+
+    @FXML
+    private Label lblNombre;
+
+    @FXML
+    private Label lblMensaje;
+
+    @FXML
+    private Label lblTelefono;
+
+    @FXML
+    private Label lblUsuario;
+
+    @FXML
+    private Rectangle shape;
 
     @FXML
     private TableColumn<CompradorDto, String> colApellidos;
@@ -133,6 +168,10 @@ public class CompradorViewController {
         compradorControllerService = new CompradorController();
         subastaQuindio = new SubastaQuindio();
         initView();
+        if(rolUsuarioLogeado.equals(String.valueOf(Rol.Comprador))){
+            cmbUsuario.setDisable(true);
+        }
+        cargarPestaniaSegunRol();
     }
 
     private void initView() {
@@ -252,6 +291,7 @@ public class CompradorViewController {
         limpiarCamposAnunciantes();
         tableCompradores.getSelectionModel().clearSelection();
         tableCompradores.setItems(listaCompradores);
+        recargarInformacion();
         listenerSelection();
     }
 
@@ -289,6 +329,48 @@ public class CompradorViewController {
         String usuarioAsociado = String.valueOf(cmbUsuario.getValue());
         return new CompradorDto(nombre, apellido, cedula, telefono, contrasenia, direccion, rol,correo, fechaNacimiento, usuarioAsociado);
     }
+
+    public void recargarInformacion(){
+        cmbUsuario.getItems().clear();
+        getListaUsuarios();
+        cmbUsuario.setItems(listaUsuarios);
+    }
+
+
+    private void cargarPestaniaSegunRol(){
+        if(rolUsuarioLogeado.equals(String.valueOf(Rol.Anunciante))){
+            btnActualizar.setVisible(false);
+            btnEliminar.setVisible(false);
+            btnAgregar.setVisible(false);
+            btnBuscar.setVisible(false);
+            btnLimpiarCampos.setVisible(false);
+            txfTelefono.setVisible(false);
+            txfCorreo.setVisible(false);
+            txfDireccion.setVisible(false);
+            txfCedula.setVisible(false);
+            txfFechaNacimiento.setVisible(false);
+            cmbUsuario.setVisible(false);
+            tpdContrasenia.setVisible(false);
+            tableCompradores.setVisible(false);
+            txfNombreComprador.setVisible(false);
+            txfApellidosComprador.setVisible(false);
+            lblApellido.setVisible(false);
+            lblCedula.setVisible(false);
+            lblContrasenia.setVisible(false);
+            lblCorreo.setVisible(false);
+            lblDireccion.setVisible(false);
+            lblFecha.setVisible(false);
+            lblUsuario.setVisible(false);
+            lblTelefono.setVisible(false);
+            lblNombre.setVisible(false);
+            shape.setVisible(false);
+
+        }else{
+            lblMensaje.setVisible(false);
+            cmbUsuario.setEditable(false);
+        }
+    }
+
 
     private void limpiarCamposAnunciantes() {
         txfNombreComprador.setText("");
