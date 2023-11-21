@@ -14,6 +14,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 
 import static co.edu.uniquindio.programacion3.subastaquindio.model.SubastaQuindio.usuarioChat;
+import static co.edu.uniquindio.programacion3.subastaquindio.viewController.InicioViewController.usuarioLogeado;
+
 public class ChatViewController {
 
     SubastaQuindio subastaQuindio;
@@ -52,12 +54,16 @@ public class ChatViewController {
         return subastaQuindio;
     }
 
+    private void registrarAcciones(String mensaje, int nivel, String accion) {
+        chatControllerService.registrarAcciones(mensaje, nivel, accion);
+    }
+
     @FXML
     void enviarComentarioAction(ActionEvent event) {
         String texto = usuarioChat+": ";
          texto += txtAreaComen_chat.getText();
         chatControllerService.iniciarChat(texto);
-
+        registrarAcciones("Mensaje enviado",1, "Mensaje enviado, acción realizada por "  + usuarioLogeado);
         String mensajeAnterior = txtAreaChat_chat.getText();
         if (!mensajeAnterior.isEmpty()) {
             mensajeAnterior += "\n";

@@ -388,6 +388,7 @@ public class SubastaQuindio implements ISubastaQuindioService, Serializable {
         }else{
             return false;
         }
+
     }
 
     @Override

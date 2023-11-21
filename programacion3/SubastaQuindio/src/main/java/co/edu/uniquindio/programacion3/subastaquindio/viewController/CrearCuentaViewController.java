@@ -14,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
+import static co.edu.uniquindio.programacion3.subastaquindio.viewController.InicioViewController.rolUsuarioLogeado;
 import static co.edu.uniquindio.programacion3.subastaquindio.viewController.InicioViewController.usuarioLogeado;
 
 public class CrearCuentaViewController {
@@ -26,6 +27,33 @@ public class CrearCuentaViewController {
 
     @FXML
     private TextField txfApellidos;
+
+    @FXML
+    private Label lblApellido;
+
+    @FXML
+    private Label lblCedula;
+
+    @FXML
+    private Label lblCorreo;
+
+    @FXML
+    private Label lblDireccion;
+
+    @FXML
+    private Label lblFecha;
+
+    @FXML
+    private Label lblMensaje;
+
+    @FXML
+    private Label lblNombre;
+
+    @FXML
+    private Label lblRol;
+
+    @FXML
+    private Label lblTelefono;
 
     @FXML
     private TextField txfCorreo;
@@ -63,15 +91,20 @@ public class CrearCuentaViewController {
         String rol = cmbRoles.getValue();
         if(rol.equals(String.valueOf(Rol.Anunciante))){
             AnuncianteDto anuncianteDto = construirAnuncianteDto();
-            anuncianteControllerService.agregarAnunciante(anuncianteDto);
-            mostrarMensaje("Notificación anunciante", "Anunciante creado", "El anunciante se ha creado con éxito", Alert.AlertType.INFORMATION);
-            registrarAcciones("Anunciante creado",1, "Creación de un anunciante");
-        }else {
+            if(anuncianteControllerService.agregarAnunciante(anuncianteDto)){
+                mostrarMensaje("Notificación anunciante", "Anunciante creado", "El anunciante se ha creado con éxito", Alert.AlertType.INFORMATION);
+                registrarAcciones("Anunciante creado",1, "Creación de un anunciante");
+            }else {
+                mostrarMensaje("Notificación anunciante", "Anunciante no creado", "El anunciante ya existe", Alert.AlertType.ERROR);
+            }
+        }if(rol.equals(String.valueOf(Rol.Comprador))) {
             CompradorDto compradorDto = construirCompradorDto();
-            compradorControllerService.agregarComprador(compradorDto);
-            mostrarMensaje("Notificación comprador", "Comprador actualizado", "El comprador se ha actualizado con éxito.", Alert.AlertType.INFORMATION);
-            registrarAcciones("Comprador actualizado",1, "Comprador actualizado");
-
+            if(compradorControllerService.agregarComprador(compradorDto)){
+                mostrarMensaje("Notificación comprador", "Comprador actualizado", "El comprador se ha actualizado con éxito.", Alert.AlertType.INFORMATION);
+                registrarAcciones("Comprador creado",1, "Comprador creado");
+            }else {
+                mostrarMensaje("Notificación comprador", "Comprador creado", "El comprador ya existe.", Alert.AlertType.ERROR);
+            }
         }
         cerrarVentana(btnCrearCuenta);
         app.cargarTabuladores();
@@ -91,6 +124,32 @@ public class CrearCuentaViewController {
         return new AnuncianteDto(nombre, apellido, cedula, telefono, contrasenia, direccion, rol, correo, fechaNacimiento, usuarioAsociado);
     }
 
+    private void cargarPestaniaSegunRol(){
+        if(rolUsuarioLogeado.equals(String.valueOf(Rol.Comprador)) ||
+                rolUsuarioLogeado.equals(String.valueOf(Rol.Anunciante))){
+            btnCrearCuenta.setVisible(false);
+            lblApellido.setVisible(false);
+            lblCedula.setVisible(false);
+            lblCorreo.setVisible(false);
+            lblRol.setVisible(false);
+            lblTelefono.setVisible(false);
+            lblDireccion.setVisible(false);
+            lblFecha.setVisible(false);
+            lblNombre.setVisible(false);
+            txfCedula.setVisible(false);
+            txfApellidos.setVisible(false);
+            txfDireccion.setVisible(false);
+            txfFechaNacimiento.setVisible(false);
+            txfNombres.setVisible(false);
+            txfCorreo.setVisible(false);
+            cmbRoles.setVisible(false);
+            txfTelefono.setVisible(false);
+
+        }else{
+            lblMensaje.setVisible(false);
+        }
+    }
+
     private CompradorDto construirCompradorDto() {
         String nombre = txfNombres.getText();
         String apellido = txfApellidos.getText();
@@ -102,12 +161,13 @@ public class CrearCuentaViewController {
         String correo = txfCorreo.getText();
         String fechaNacimiento = txfFechaNacimiento.getText();
         String usuarioAsociado = String.valueOf(cmbRoles.getValue());
-        return new CompradorDto(nombre, apellido, cedula, telefono, contrasenia, direccion, rol, correo, fechaNacimiento, usuarioAsociado);
+        return new CompradorDto(nombre, apellido, cedula, telefono, direccion, contrasenia,  rol, correo, fechaNacimiento, usuarioAsociado);
     }
 
     @FXML
     void initialize() {
         mostrarRoles();
+        cargarPestaniaSegunRol();
     }
 
     public void mostrarRoles(){

@@ -17,8 +17,7 @@ import javafx.scene.control.*;
 import java.util.Optional;
 import java.util.function.Predicate;
 
-import static co.edu.uniquindio.programacion3.subastaquindio.viewController.InicioViewController.rolUsuarioLogeado;
-import static co.edu.uniquindio.programacion3.subastaquindio.viewController.InicioViewController.usuarioLogeado;
+import static co.edu.uniquindio.programacion3.subastaquindio.viewController.InicioViewController.*;
 
 public class AnuncianteViewController {
 
@@ -340,6 +339,21 @@ public class AnuncianteViewController {
 
     private void obtenerAnunciantes() {
         listaAnunciantes.addAll(anuncianteControllerService.obtenerAnunciantes());
+    }
+
+    private String obtenerUsuarioAnunciante(){
+        AnuncianteDto anuncianteDto = anuncianteControllerService.obtenerAnunciante(cedulaUsuario);
+        if(anuncianteDto != null){
+            if(anuncianteDto.rol().equals(String.valueOf(Rol.Anunciante))){
+                return anuncianteDto.cedula() + "  " + anuncianteDto.nombre() + " " + anuncianteDto.apellido();
+            }else{
+                mostrarMensaje("Notificación anunciantes", "Anunciante no creado", "El usuario debe tener el rol 'Anunciante' para poder gestionar Anunciantes.", Alert.AlertType.ERROR);
+                return "";
+            }
+
+        }
+        mostrarMensaje("Notificación anunciantes", "Anunciante no creado", "El usuario debe tener el rol 'Anunciante' para poder gestionar Anunciantes.", Alert.AlertType.ERROR);
+        return "";
     }
 
     public void recargarInformacion(){
