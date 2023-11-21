@@ -364,6 +364,8 @@ public class AnuncioViewController {
         tableAnuncios.getSelectionModel().clearSelection();
         tableAnuncios.setItems(listaAnuncioDto);
         recargarInformacion();
+        cmbAnunciante.setValue(obtenerAnunciante(cedulaUsuario));
+        cmbEstadoAnuncio.setValue(String.valueOf(EstadoAnuncios.Publicado));
         listenerSelection();
     }
 
