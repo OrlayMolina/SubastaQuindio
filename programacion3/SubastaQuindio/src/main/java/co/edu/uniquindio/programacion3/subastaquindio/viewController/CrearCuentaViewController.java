@@ -91,23 +91,39 @@ public class CrearCuentaViewController {
         String rol = cmbRoles.getValue();
         if(rol.equals(String.valueOf(Rol.Anunciante))){
             AnuncianteDto anuncianteDto = construirAnuncianteDto();
-            if(anuncianteControllerService.agregarAnunciante(anuncianteDto)){
-                mostrarMensaje("Notificación anunciante", "Anunciante creado", "El anunciante se ha creado con éxito", Alert.AlertType.INFORMATION);
-                registrarAcciones("Anunciante creado",1, "Creación de un anunciante");
-            }else {
-                mostrarMensaje("Notificación anunciante", "Anunciante no creado", "El anunciante ya existe", Alert.AlertType.ERROR);
+            if(validarEdadAnunciante(anuncianteDto)){
+                if(anuncianteControllerService.agregarAnunciante(anuncianteDto)){
+                    mostrarMensaje("Notificación anunciante", "Anunciante creado", "El anunciante se ha creado con éxito", Alert.AlertType.INFORMATION);
+                    registrarAcciones("Anunciante creado",1, "Creación de un anunciante");
+                }else {
+                    mostrarMensaje("Notificación anunciante", "Anunciante no creado", "El anunciante ya existe", Alert.AlertType.ERROR);
+                }
+            }else{
+                mostrarMensaje("Notificación anunciante", "Anunciante no creado", "El Anunciante es menor de edad", Alert.AlertType.ERROR);
             }
         }if(rol.equals(String.valueOf(Rol.Comprador))) {
             CompradorDto compradorDto = construirCompradorDto();
-            if(compradorControllerService.agregarComprador(compradorDto)){
-                mostrarMensaje("Notificación comprador", "Comprador actualizado", "El comprador se ha actualizado con éxito.", Alert.AlertType.INFORMATION);
-                registrarAcciones("Comprador creado",1, "Comprador creado");
+            if(validarEdadComprador(compradorDto)){
+                if(compradorControllerService.agregarComprador(compradorDto)){
+                    mostrarMensaje("Notificación comprador", "Comprador actualizado", "El comprador se ha actualizado con éxito.", Alert.AlertType.INFORMATION);
+                    registrarAcciones("Comprador creado",1, "Comprador creado");
+                }else {
+                    mostrarMensaje("Notificación comprador", "Comprador creado", "El comprador ya existe.", Alert.AlertType.ERROR);
+                }
             }else {
-                mostrarMensaje("Notificación comprador", "Comprador creado", "El comprador ya existe.", Alert.AlertType.ERROR);
+                mostrarMensaje("Notificación comprador", "Comprador no creado", "El comprador es menor de edad", Alert.AlertType.ERROR);
             }
         }
         cerrarVentana(btnCrearCuenta);
         app.cargarTabuladores();
+    }
+
+    public boolean validarEdadComprador(CompradorDto compradorDto){
+        return compradorControllerService.validarEdadComprador(compradorDto);
+    }
+
+    public boolean validarEdadAnunciante(AnuncianteDto anuncianteDto){
+        return anuncianteControllerService.validarEdadAnunciante(anuncianteDto);
     }
 
     public AnuncianteDto construirAnuncianteDto() {
@@ -155,13 +171,13 @@ public class CrearCuentaViewController {
         String apellido = txfApellidos.getText();
         String cedula = txfCedula.getText();
         String telefono = txfTelefono.getText();
-        String direccion = txfDireccion.getText();
         String contrasenia = "123";
+        String direccion = txfDireccion.getText();
         String rol = String.valueOf(Rol.Comprador);
         String correo = txfCorreo.getText();
         String fechaNacimiento = txfFechaNacimiento.getText();
         String usuarioAsociado = String.valueOf(cmbRoles.getValue());
-        return new CompradorDto(nombre, apellido, cedula, telefono, direccion, contrasenia,  rol, correo, fechaNacimiento, usuarioAsociado);
+        return new CompradorDto(nombre, apellido, cedula, telefono, contrasenia, direccion ,rol, correo, fechaNacimiento, usuarioAsociado);
     }
 
     @FXML
