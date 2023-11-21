@@ -340,7 +340,7 @@ public class AnuncioViewController {
                     registrarAcciones("Anuncio actualizado",1, "Anuncio actualizado, acción realizada por " + usuarioLogeado);
                 }else{
                     mostrarMensaje("Notificación anuncio", "Anuncio no actualizado", "El anuncio no se ha actualizado con éxito", Alert.AlertType.INFORMATION);
-                    registrarAcciones("Anuncio no actualizado",1, "Actualizar anuncio");
+                    registrarAcciones("Anuncio no actualizado",1, "Actualizar anuncio "+usuarioLogeado);
                 }
             }else{
                 mostrarMensaje("Notificación anuncio", "Anuncio no creado", "Los datos ingresados son invalidos", Alert.AlertType.ERROR);

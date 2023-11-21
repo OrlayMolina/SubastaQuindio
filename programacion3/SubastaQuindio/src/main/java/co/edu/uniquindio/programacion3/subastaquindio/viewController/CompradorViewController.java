@@ -267,7 +267,7 @@ public class CompradorViewController {
                         registrarAcciones("Comprador actualizado",1, "Comprador actualizado, acción realizada por " + usuarioLogeado);
                     }else{
                         mostrarMensaje("Notificación comprador", "Comprador no actualizado", "El comprador no se ha actualizado con éxito", Alert.AlertType.INFORMATION);
-                        registrarAcciones("Comprador no actualizado",1, "Actualizar anunciante");
+                        registrarAcciones("Comprador no actualizado",1, "Actualizar anunciante" + usuarioLogeado);
                     }
                 }else {
                     mostrarMensaje("Notificación comprador", "Comprador no creado", "El comprador es menor de edad", Alert.AlertType.ERROR);

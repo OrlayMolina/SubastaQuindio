@@ -5,6 +5,7 @@ import co.edu.uniquindio.programacion3.subastaquindio.enumm.Rol;
 import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.*;
 import co.edu.uniquindio.programacion3.subastaquindio.model.SubastaQuindio;
 import co.edu.uniquindio.programacion3.subastaquindio.utils.ListaAnuncioUtil;
+import co.edu.uniquindio.programacion3.subastaquindio.utils.PujaUtil;
 import javafx.application.Platform;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -28,9 +29,7 @@ import java.util.Optional;
 import java.util.UUID;
 import java.util.function.Predicate;
 
-
-import static co.edu.uniquindio.programacion3.subastaquindio.viewController.InicioViewController.cedulaUsuario;
-import static co.edu.uniquindio.programacion3.subastaquindio.viewController.InicioViewController.rolUsuarioLogeado;
+import static co.edu.uniquindio.programacion3.subastaquindio.viewController.InicioViewController.*;
 
 public class PujaViewController extends JFrame {
 
@@ -175,6 +174,16 @@ public class PujaViewController extends JFrame {
         tableAnuncios.getSelectionModel().selectedItemProperty().addListener((obs, oldSelection, newSelection) -> {
             anuncioSeleccionado = newSelection;
             mostrarInformacionAnuncio(anuncioSeleccionado);
+
+            if (anuncioSeleccionado != null) {
+                String codigoAnuncioSeleccionado = anuncioSeleccionado.codigo();
+                Predicate<PujaDto> filtroPorCodigoAnuncio = PujaUtil.buscarPorCodigoAnuncio(codigoAnuncioSeleccionado);
+                ObservableList<PujaDto> ofertasFiltradas = listPujaDto.filtered(filtroPorCodigoAnuncio);
+                tableOfertas.setItems(ofertasFiltradas);
+            } else {
+
+                tableOfertas.setItems(listPujaDto);
+            }
         });
     }
 
@@ -194,7 +203,7 @@ public class PujaViewController extends JFrame {
                                 txfOferta.setText("");
                                 mostrarMensaje("Notificación puja", "Puja creada", "El puja se ha creado con éxito", Alert.AlertType.INFORMATION);
 
-                                registrarAcciones("Puja agregado",1, "Agregar puja");
+                                registrarAcciones("Puja agregado",1, "Agregar puja"+ usuarioLogeado);
                             }else{
                                 mostrarMensaje("Notificación puja", "Puja no creada", "El puja no se ha creado", Alert.AlertType.ERROR);
                             }
@@ -281,8 +290,6 @@ public class PujaViewController extends JFrame {
     }
 
     public void recargarInformacion(){
-        //limpiarCamposAnuncios();
-        //mostrarProducto();
         tableAnuncios.getItems().clear();
         obtenerAnuncios();
         tableAnuncios.setItems(listaAnunciosDto);

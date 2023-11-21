@@ -23,4 +23,7 @@ public class ChatController {
         return modelFactoryController.obtenerChats();
     }
 
+    public void registrarAcciones(String mensaje, int nivel, String accion) {
+        modelFactoryController.registrarAccionesSistema(mensaje, nivel, accion);
+    }
 }

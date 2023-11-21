@@ -349,6 +349,7 @@ public class ProductoViewController {
         tableProductos.getSelectionModel().clearSelection();
         tableProductos.setItems(listaProductosDto);
         recargarInformacion();
+        cmbAnunciante.setValue(obtenerAnunciante(cedulaUsuario));
         listenerSelection();
     }
 

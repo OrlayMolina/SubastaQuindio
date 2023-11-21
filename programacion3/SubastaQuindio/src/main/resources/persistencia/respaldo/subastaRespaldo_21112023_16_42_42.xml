@@ -170,40 +170,6 @@
      </void>
     </object>
    </void>
-   <void method="add">
-    <object class="co.edu.uniquindio.programacion3.subastaquindio.model.Comprador">
-     <void property="apellido">
-      <string>Molina</string>
-     </void>
-     <void property="cedula">
-      <string>1094952205</string>
-     </void>
-     <void property="contrasenia">
-      <string>3680</string>
-     </void>
-     <void property="correo">
-      <string>o@gmail.com</string>
-     </void>
-     <void property="direccion">
-      <string>armenia</string>
-     </void>
-     <void property="fechaNacimiento">
-      <string>2000-12-05</string>
-     </void>
-     <void property="nombre">
-      <string>Orlay</string>
-     </void>
-     <void property="rol">
-      <string>Comprador</string>
-     </void>
-     <void property="telefono">
-      <string>312456621</string>
-     </void>
-     <void property="usuarioAsociado">
-      <string>administrador</string>
-     </void>
-    </object>
-   </void>
   </void>
   <void property="listaProductos">
    <void method="add">
