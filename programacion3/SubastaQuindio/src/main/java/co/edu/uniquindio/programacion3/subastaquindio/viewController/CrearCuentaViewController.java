@@ -63,15 +63,20 @@ public class CrearCuentaViewController {
         String rol = cmbRoles.getValue();
         if(rol.equals(String.valueOf(Rol.Anunciante))){
             AnuncianteDto anuncianteDto = construirAnuncianteDto();
-            anuncianteControllerService.agregarAnunciante(anuncianteDto);
-            mostrarMensaje("Notificación anunciante", "Anunciante creado", "El anunciante se ha creado con éxito", Alert.AlertType.INFORMATION);
-            registrarAcciones("Anunciante creado",1, "Creación de un anunciante");
-        }else {
+            if(anuncianteControllerService.agregarAnunciante(anuncianteDto)){
+                mostrarMensaje("Notificación anunciante", "Anunciante creado", "El anunciante se ha creado con éxito", Alert.AlertType.INFORMATION);
+                registrarAcciones("Anunciante creado",1, "Creación de un anunciante");
+            }else {
+                mostrarMensaje("Notificación anunciante", "Anunciante no creado", "El anunciante ya existe", Alert.AlertType.ERROR);
+            }
+        }if(rol.equals(String.valueOf(Rol.Comprador))) {
             CompradorDto compradorDto = construirCompradorDto();
-            compradorControllerService.agregarComprador(compradorDto);
-            mostrarMensaje("Notificación comprador", "Comprador actualizado", "El comprador se ha actualizado con éxito.", Alert.AlertType.INFORMATION);
-            registrarAcciones("Comprador actualizado",1, "Comprador actualizado");
-
+            if(compradorControllerService.agregarComprador(compradorDto)){
+                mostrarMensaje("Notificación comprador", "Comprador actualizado", "El comprador se ha actualizado con éxito.", Alert.AlertType.INFORMATION);
+                registrarAcciones("Comprador creado",1, "Comprador creado");
+            }else {
+                mostrarMensaje("Notificación comprador", "Comprador creado", "El comprador ya existe.", Alert.AlertType.ERROR);
+            }
         }
         cerrarVentana(btnCrearCuenta);
         app.cargarTabuladores();
