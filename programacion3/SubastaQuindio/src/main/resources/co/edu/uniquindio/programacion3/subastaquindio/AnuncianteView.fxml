@@ -16,7 +16,7 @@
 
 <AnchorPane prefHeight="473.0" prefWidth="774.0" stylesheets="@tema.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.programacion3.subastaquindio.viewController.AnuncianteViewController">
    <children>
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ecf1f5" height="156.0" layoutX="5.0" layoutY="12.0" stroke="#b5aeae" strokeType="INSIDE" width="763.0" />
+      <Rectangle fx:id="shape" arcHeight="5.0" arcWidth="5.0" fill="#ecf1f5" height="156.0" layoutX="5.0" layoutY="12.0" stroke="#b5aeae" strokeType="INSIDE" width="763.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ecf1f5" height="48.0" layoutX="6.0" layoutY="179.0" stroke="#b5aeae" strokeType="INSIDE" width="763.0" />
       <GridPane layoutX="14.0" layoutY="93.0">
         <columnConstraints>
@@ -34,24 +34,24 @@
           <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="Dirección:">
+            <Label fx:id="lblDireccion" text="Dirección:">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
             <TextField fx:id="txfDireccion" prefHeight="46.0" prefWidth="150.0" promptText="Ingrese la dirección ..." GridPane.rowIndex="2" />
-            <Label text="Correo:" GridPane.columnIndex="2">
+            <Label fx:id="lblCorreo" text="Correo:" GridPane.columnIndex="2">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label text="Fecha de Nacimiento:" GridPane.columnIndex="4">
+            <Label fx:id="lblFecha" text="Fecha de Nacimiento:" GridPane.columnIndex="4">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
             <TextField fx:id="txfCorreo" prefHeight="50.0" prefWidth="150.0" promptText="Ingrese el correo ..." GridPane.columnIndex="2" GridPane.rowIndex="2" />
-            <Label text="Usuario Asociado:" GridPane.columnIndex="6">
+            <Label fx:id="lblUsuario" text="Usuario Asociado:" GridPane.columnIndex="6">
                <font>
                   <Font size="14.0" />
                </font>
@@ -78,18 +78,18 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Label text="Nombres:">
+            <Label fx:id="lblNombre" text="Nombres:">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
             <TextField fx:id="txfNombreAnunciante" prefHeight="46.0" prefWidth="150.0" promptText="Ingrese el nombre ..." GridPane.rowIndex="2" />
-            <Label text="Apellidos:" GridPane.columnIndex="2">
+            <Label fx:id="lblApellido" text="Apellidos:" GridPane.columnIndex="2">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label text="Cédula:" GridPane.columnIndex="4">
+            <Label fx:id="lblCedula" text="Cédula:" GridPane.columnIndex="4">
                <font>
                   <Font size="14.0" />
                </font>
@@ -97,12 +97,12 @@
             <TextField fx:id="txfApellidoAnunciante" prefHeight="50.0" prefWidth="150.0" promptText="Ingrese el apellido ..." GridPane.columnIndex="2" GridPane.rowIndex="2" />
             <TextField fx:id="txfCedula" promptText="Ingrese la cédula ..." GridPane.columnIndex="4" GridPane.rowIndex="2" />
             <TextField fx:id="txfTelefono" promptText="Ingrese un teléfono ..." GridPane.columnIndex="6" GridPane.rowIndex="2" />
-            <Label text="Teléfono:" GridPane.columnIndex="6">
+            <Label fx:id="lblTelefono" text="Teléfono:" GridPane.columnIndex="6">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label text="Contraseña:" GridPane.columnIndex="8">
+            <Label fx:id="lblContrasenia" text="Contraseña:" GridPane.columnIndex="8">
                <font>
                   <Font size="14.0" />
                </font>
@@ -145,5 +145,10 @@
             <Button fx:id="btnLimpiarCampos" mnemonicParsing="false" onAction="#limpiarBusqueda" prefHeight="32.0" prefWidth="145.0" styleClass="primary" text="Limpiar Campos" GridPane.columnIndex="8" />
          </children>
       </GridPane>
+      <Label fx:id="lblMensaje" layoutX="175.0" layoutY="189.0" text="No tiene el Rol permitido para Gestionar Anunciantes.">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

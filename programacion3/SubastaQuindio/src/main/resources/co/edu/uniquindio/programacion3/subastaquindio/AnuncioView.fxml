@@ -18,7 +18,7 @@
 <AnchorPane prefHeight="473.0" prefWidth="774.0" stylesheets="@tema.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="co.edu.uniquindio.programacion3.subastaquindio.viewController.AnuncioViewController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#ecf1f5" height="464.0" layoutX="3.0" layoutY="5.0" stroke="#b5aeae" strokeType="INSIDE" width="766.0" />
-      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="165.0" layoutX="14.0" layoutY="14.0" stroke="#b5aeae" strokeType="INSIDE" width="180.0" />
+      <Rectangle fx:id="shapeFoto" arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="165.0" layoutX="14.0" layoutY="14.0" stroke="#b5aeae" strokeType="INSIDE" width="180.0" />
       <GridPane layoutX="212.0" layoutY="16.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="145.0" />
@@ -35,35 +35,35 @@
             <RowConstraints minHeight="10.0" prefHeight="25.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="Seleccione el Producto:" GridPane.columnIndex="3">
+            <Label fx:id="lblProducto" text="Seleccione el Producto:" GridPane.columnIndex="3">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
             <ComboBox fx:id="cmbProducto" onAction="#seleccionImagen" prefWidth="150.0" promptText="Productos ..." GridPane.columnIndex="4" />
-            <Label text="Anunciante:" GridPane.rowIndex="2">
+            <Label fx:id="lblAnunciante" text="Anunciante:" GridPane.rowIndex="2">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
             <ComboBox fx:id="cmbAnunciante" prefHeight="64.0" prefWidth="135.0" promptText="Anunciantes ..." GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <Label text="Hora Fin del Anuncio:" GridPane.rowIndex="4">
+            <Label fx:id="lblFechaFin" text="Hora Fin del Anuncio:" GridPane.rowIndex="4">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label text="Código Anuncio:">
+            <Label fx:id="lblCodigo" text="Código Anuncio:">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
             <TextField fx:id="txfCodigoAnuncio" promptText="Código" GridPane.columnIndex="1" />
-            <Label text="Fecha de publicación:" GridPane.columnIndex="3" GridPane.rowIndex="2">
+            <Label fx:id="lblFecha" text="Fecha de publicación:" GridPane.columnIndex="3" GridPane.rowIndex="2">
                <font>
                   <Font size="14.0" />
                </font>
             </Label>
-            <Label text="Valor Inicial Puja:" GridPane.columnIndex="3" GridPane.rowIndex="4">
+            <Label fx:id="lblValor" text="Valor Inicial Puja:" GridPane.columnIndex="3" GridPane.rowIndex="4">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
@@ -119,11 +119,16 @@
         </columns>
       </TableView>
       <ComboBox fx:id="cmbEstadoAnuncio" layoutX="642.0" layoutY="145.0" prefHeight="52.0" prefWidth="120.0" promptText="Estados" />
-      <Label layoutX="642.0" layoutY="124.0" text="Estado del Anuncio: ">
+      <Label fx:id="lblEstado" layoutX="642.0" layoutY="124.0" text="Estado del Anuncio: ">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
       <ImageView fx:id="imagen" fitHeight="162.0" fitWidth="164.0" layoutX="22.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true" />
+      <Label fx:id="lblMensaje" layoutX="194.0" layoutY="200.0" text="No tiene el Rol para Gestionar Anuncios.">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

@@ -19,6 +19,11 @@ public class ProductoController implements IProductoControllerService {
         return modelFactoryController.obtenerProductos();
     }
 
+    @Override
+    public AnuncianteDto obtenerAnunciante(String cedula){
+        return modelFactoryController.obtenerAnunciante(cedula);
+    }
+
     public List<AnuncianteDto> obtenerAnunciantes(){
         return modelFactoryController.obtenerAnunciantes();
     }

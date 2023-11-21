@@ -2,6 +2,7 @@ package co.edu.uniquindio.programacion3.subastaquindio.viewController;
 
 import co.edu.uniquindio.programacion3.subastaquindio.controller.HistorialController;
 import co.edu.uniquindio.programacion3.subastaquindio.enumm.EstadoAnuncios;
+import co.edu.uniquindio.programacion3.subastaquindio.enumm.Rol;
 import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.AnuncioDto;
 import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.CompradorDto;
 import co.edu.uniquindio.programacion3.subastaquindio.mapping.dto.ProductoDto;
@@ -18,6 +19,7 @@ import java.util.Optional;
 import java.util.UUID;
 import java.util.function.Predicate;
 
+import static co.edu.uniquindio.programacion3.subastaquindio.viewController.InicioViewController.rolUsuarioLogeado;
 import static co.edu.uniquindio.programacion3.subastaquindio.viewController.InicioViewController.usuarioLogeado;
 
 public class HistorialViewController {
@@ -33,6 +35,9 @@ public class HistorialViewController {
 
     @FXML
     private Button btnBuscar;
+
+    @FXML
+    private Button btnElegirPuja;
 
     @FXML
     private Button btnLimpiarCampos;
@@ -102,6 +107,9 @@ public class HistorialViewController {
     void initialize() {
         historialControllerService = new HistorialController();
         intiView();
+        if(rolUsuarioLogeado.equals(String.valueOf(Rol.Comprador))){
+            btnElegirPuja.setDisable(true);
+        }
     }
 
     private void intiView() {
@@ -148,6 +156,18 @@ public class HistorialViewController {
             pujaSeleccionada = newSelection;
             mostrarInformacionPuja(pujaSeleccionada);
         });
+    }
+
+    public void recargarInformacion(){
+        tableHistorial.getItems().clear();
+        obtenerOfertas();
+        tableHistorial.setItems(listaPujasDto);
+        cmbProducto.getItems().clear();
+        obtenerProductos();
+        cmbProducto.setItems(listaProductosDto);
+        cmbComprador.getItems().clear();
+        getListaCompradores();
+        cmbComprador.setItems(listaCompradoresDto);
     }
 
     private void elegirOferta() {
@@ -270,7 +290,7 @@ public class HistorialViewController {
     private void cancelarBusqueda(){
         limpiarCamposPuja();
         tableHistorial.getSelectionModel().clearSelection();
-        tableHistorial.setItems(listaPujasDto);
+        recargarInformacion();
         listenerSelection();
     }
 

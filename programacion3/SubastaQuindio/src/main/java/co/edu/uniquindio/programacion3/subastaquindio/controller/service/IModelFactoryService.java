@@ -26,6 +26,8 @@ public interface IModelFactoryService {
 
     List<AnuncianteDto> obtenerAnunciantes();
 
+    AnuncianteDto obtenerAnunciante(String cedula);
+
     List<CompradorDto> obtenerCompradores();
 
     List<AnuncioDto> obtenerAnuncios();

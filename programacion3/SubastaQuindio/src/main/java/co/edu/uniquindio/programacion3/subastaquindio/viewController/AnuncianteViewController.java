@@ -9,6 +9,7 @@ import co.edu.uniquindio.programacion3.subastaquindio.utils.AnuncianteUtil;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.shape.Rectangle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -16,6 +17,7 @@ import javafx.scene.control.*;
 import java.util.Optional;
 import java.util.function.Predicate;
 
+import static co.edu.uniquindio.programacion3.subastaquindio.viewController.InicioViewController.rolUsuarioLogeado;
 import static co.edu.uniquindio.programacion3.subastaquindio.viewController.InicioViewController.usuarioLogeado;
 
 public class AnuncianteViewController {
@@ -81,6 +83,39 @@ public class AnuncianteViewController {
     private TableView<AnuncianteDto> tableAnunciantes;
 
     @FXML
+    private Label lblApellido;
+
+    @FXML
+    private Label lblCedula;
+
+    @FXML
+    private Label lblContrasenia;
+
+    @FXML
+    private Label lblCorreo;
+
+    @FXML
+    private Label lblDireccion;
+
+    @FXML
+    private Label lblFecha;
+
+    @FXML
+    private Label lblMensaje;
+
+    @FXML
+    private Label lblNombre;
+
+    @FXML
+    private Label lblTelefono;
+
+    @FXML
+    private Label lblUsuario;
+
+    @FXML
+    private Rectangle shape;
+
+    @FXML
     private TextField txfApellidoAnunciante;
 
     @FXML
@@ -135,6 +170,10 @@ public class AnuncianteViewController {
         anuncianteControllerService = new AnuncianteController();
         subastaQuindio = new SubastaQuindio();
         initView();
+        if(rolUsuarioLogeado.equals(String.valueOf(Rol.Anunciante))){
+            cmbUsuario.setDisable(true);
+        }
+        cargarPestaniaSegunRol();
     }
 
     private void initView() {
@@ -258,7 +297,41 @@ public class AnuncianteViewController {
         limpiarCamposAnunciantes();
         tableAnunciantes.getSelectionModel().clearSelection();
         tableAnunciantes.setItems(listaAnunciantes);
+        recargarInformacion();
         listenerSelection();
+    }
+
+    private void cargarPestaniaSegunRol(){
+        if(rolUsuarioLogeado.equals(String.valueOf(Rol.Comprador))){
+            btnActualizar.setVisible(false);
+            btnEliminar.setVisible(false);
+            btnAgregar.setVisible(false);
+            btnBuscar.setVisible(false);
+            btnLimpiarCampos.setVisible(false);
+            shape.setVisible(false);
+            lblApellido.setVisible(false);
+            lblCedula.setVisible(false);
+            lblContrasenia.setVisible(false);
+            lblCorreo.setVisible(false);
+            lblDireccion.setVisible(false);
+            lblFecha.setVisible(false);
+            lblNombre.setVisible(false);
+            lblTelefono.setVisible(false);
+            lblUsuario.setVisible(false);
+            tableAnunciantes.setVisible(false);
+            txfTelefono.setVisible(false);
+            txfCorreo.setVisible(false);
+            txfDireccion.setVisible(false);
+            txfApellidoAnunciante.setVisible(false);
+            txfCedula.setVisible(false);
+            txfFechaNacimiento.setVisible(false);
+            cmbUsuario.setVisible(false);
+            tpdContrasenia.setVisible(false);
+            txfNombreAnunciante.setVisible(false);
+        }else{
+            lblMensaje.setVisible(false);
+            cmbUsuario.setEditable(false);
+        }
     }
 
     public void mostrarUsuarios(){
@@ -269,6 +342,11 @@ public class AnuncianteViewController {
         listaAnunciantes.addAll(anuncianteControllerService.obtenerAnunciantes());
     }
 
+    public void recargarInformacion(){
+        cmbUsuario.getItems().clear();
+        getListaUsuarios();
+        cmbUsuario.setItems(listaUsuarios);
+    }
     private void mostrarInformacionAnunciante(AnuncianteDto anuncianteSeleccionado) {
         if(anuncianteSeleccionado != null){
             txfNombreAnunciante.setText(anuncianteSeleccionado.nombre());

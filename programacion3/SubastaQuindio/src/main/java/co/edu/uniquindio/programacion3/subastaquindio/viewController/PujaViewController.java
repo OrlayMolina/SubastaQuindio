@@ -38,7 +38,6 @@ public class PujaViewController extends JFrame {
     ObservableList<ProductoDto> listaProductosDto = FXCollections.observableArrayList();
     ObservableList<AnuncianteDto> listaAnunciantesDto = FXCollections.observableArrayList();
     ObservableList<PujaDto> listPujaDto = FXCollections.observableArrayList();
-    ObservableList<String> listaTipoProducto = FXCollections.observableArrayList();
     ObservableList<AnuncioDto> listaAnunciosDto = FXCollections.observableArrayList();
     AnuncianteDto anuncianteDto;
     CompradorDto compradorDto;
@@ -283,16 +282,25 @@ public class PujaViewController extends JFrame {
         tableAnuncios.setItems(anunciosFiltrados);
     }
 
-    private void cancelarBusqueda(){
+    public void cancelarBusqueda(){
         limpiarCamposAnuncios();
         tableAnuncios.getSelectionModel().clearSelection();
-        tableAnuncios.setItems(listaAnunciosDto);
+        recargarInformacion();
         listenerSelection();
     }
 
     public void recargarInformacion(){
-        limpiarCamposAnuncios();
-        mostrarProducto();
+        //limpiarCamposAnuncios();
+        //mostrarProducto();
+        tableAnuncios.getItems().clear();
+        obtenerAnuncios();
+        tableAnuncios.setItems(listaAnunciosDto);
+        cmbProducto.getItems().clear();
+        obtenerProductos();
+        cmbProducto.setItems(listaProductosDto);
+        cmbAnunciante.getItems().clear();
+        obtenerAnunciantes();
+        cmbAnunciante.setItems(listaAnunciantesDto);
     }
 
     private void obtenerAnunciantes() {
