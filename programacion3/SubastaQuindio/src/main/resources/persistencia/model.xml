@@ -1,6 +1,190 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <java version="17.0.8.1" class="java.beans.XMLDecoder">
  <object class="co.edu.uniquindio.programacion3.subastaquindio.model.SubastaQuindio" id="SubastaQuindio0">
+  <void property="listaAnunciantes">
+   <void method="add">
+    <object class="co.edu.uniquindio.programacion3.subastaquindio.model.Anunciante">
+     <void property="apellido">
+      <string>Rojas Bociga</string>
+     </void>
+     <void property="cedula">
+      <string>74360360</string>
+     </void>
+     <void property="contrasenia">
+      <string>123</string>
+     </void>
+     <void property="correo">
+      <string>ramiro@gmail.com</string>
+     </void>
+     <void property="direccion">
+      <string>La Tebaida</string>
+     </void>
+     <void property="fechaNacimiento">
+      <string>2000-05-14</string>
+     </void>
+     <void property="nombre">
+      <string>Ramiro</string>
+     </void>
+     <void property="rol">
+      <string>Anunciante</string>
+     </void>
+     <void property="telefono">
+      <string>3124558641</string>
+     </void>
+     <void property="usuarioAsociado">
+      <string>Anunciante</string>
+     </void>
+    </object>
+   </void>
+  </void>
+  <void property="listaAnuncios">
+   <void method="add">
+    <object class="co.edu.uniquindio.programacion3.subastaquindio.model.Anuncio">
+     <void property="anunciante">
+      <string>74360360 Ramiro Rojas Bociga</string>
+     </void>
+     <void property="codigo">
+      <string>001</string>
+     </void>
+     <void property="descripcion">
+      <string>casi nueva</string>
+     </void>
+     <void property="estado">
+      <string>Publicado</string>
+     </void>
+     <void property="fechaFinPublicacion">
+      <string>20:00:00</string>
+     </void>
+     <void property="fechaPublicacion">
+      <string>2023-11-21</string>
+     </void>
+     <void property="foto">
+      <string>src/main/resources/co/edu/uniquindio/programacion3/subastaquindio/img/lavadora - copia.jpg</string>
+     </void>
+     <void property="producto">
+      <string>001  Lavadora Haceb</string>
+     </void>
+     <void property="valorInicial">
+      <string>850000</string>
+     </void>
+    </object>
+   </void>
+  </void>
+  <void property="listaCompradores">
+   <void method="add">
+    <object class="co.edu.uniquindio.programacion3.subastaquindio.model.Comprador">
+     <void property="apellido">
+      <string>Mejia Bedoya</string>
+     </void>
+     <void property="cedula">
+      <string>104455555</string>
+     </void>
+     <void property="contrasenia">
+      <string>123</string>
+     </void>
+     <void property="correo">
+      <string>cymejia@gmail.com</string>
+     </void>
+     <void property="direccion">
+      <string>Calarca</string>
+     </void>
+     <void property="fechaNacimiento">
+      <string>2001-06-14</string>
+     </void>
+     <void property="nombre">
+      <string>Yarley Camilo</string>
+     </void>
+     <void property="rol">
+      <string>Comprador</string>
+     </void>
+     <void property="telefono">
+      <string>3124587314</string>
+     </void>
+     <void property="usuarioAsociado">
+      <string>Comprador</string>
+     </void>
+    </object>
+   </void>
+   <void method="add">
+    <object class="co.edu.uniquindio.programacion3.subastaquindio.model.Comprador">
+     <void property="apellido">
+      <string>Grillo</string>
+     </void>
+     <void property="cedula">
+      <string>4444</string>
+     </void>
+     <void property="contrasenia">
+      <string>2323</string>
+     </void>
+     <void property="correo">
+      <string>wer</string>
+     </void>
+     <void property="direccion">
+      <string>ewr</string>
+     </void>
+     <void property="fechaNacimiento">
+      <string>2000-11-15</string>
+     </void>
+     <void property="nombre">
+      <string>Pepe</string>
+     </void>
+     <void property="rol">
+      <string>Comprador</string>
+     </void>
+     <void property="telefono">
+      <string>3155</string>
+     </void>
+     <void property="usuarioAsociado">
+      <string>administrador</string>
+     </void>
+    </object>
+   </void>
+  </void>
+  <void property="listaProductos">
+   <void method="add">
+    <object class="co.edu.uniquindio.programacion3.subastaquindio.model.Producto">
+     <void property="codigoUnico">
+      <string>001</string>
+     </void>
+     <void property="foto">
+      <string>src/main/resources/co/edu/uniquindio/programacion3/subastaquindio/img/lavadora - copia.jpg</string>
+     </void>
+     <void property="nombreAnunciante">
+      <string>74360360 Ramiro Rojas Bociga</string>
+     </void>
+     <void property="nombreProducto">
+      <string>Lavadora Haceb</string>
+     </void>
+     <void property="tipoProducto">
+      <string>HOGAR</string>
+     </void>
+    </object>
+   </void>
+  </void>
+  <void property="listaPujas">
+   <void method="add">
+    <object class="co.edu.uniquindio.programacion3.subastaquindio.model.Puja">
+     <void property="anuncio">
+      <string>001</string>
+     </void>
+     <void property="codigo">
+      <string>2c6c555f-07a3-45fa-a19e-8e86d11b55d5</string>
+     </void>
+     <void property="comprador">
+      <string>4444  Pepe Grillo</string>
+     </void>
+     <void property="estadoAnuncio">
+      <string>Publicado</string>
+     </void>
+     <void property="oferta">
+      <double>900000.0</double>
+     </void>
+     <void property="producto">
+      <string>  001  Lavadora Haceb</string>
+     </void>
+    </object>
+   </void>
+  </void>
   <void property="listaUsuarios">
    <void method="add">
     <object class="co.edu.uniquindio.programacion3.subastaquindio.model.Usuario">
