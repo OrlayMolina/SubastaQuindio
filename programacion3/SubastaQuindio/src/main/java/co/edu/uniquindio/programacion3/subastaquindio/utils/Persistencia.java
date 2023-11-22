@@ -18,7 +18,7 @@ public class Persistencia {
     public static final String RUTA_ARCHIVO_PRODUCTOS = "src/main/resources/persistencia/archivos/archivoProductos.txt";
     public static final String RUTA_ARCHIVO_USUARIOS = "src/main/resources/persistencia/archivos/archivoUsuarios.txt";
     public static final String RUTA_ARCHIVO_LOG = "C:/Users/Orlay.molina/Desktop/programacion3/programacion3/SubastaQuindio/src/main/resources/persistencia/log/SubastaLog.txt";
-    public static final String RUTA_ARCHIVO_RESPALDO_XML = "C:/Users/Orlay.molina/Desktop/programacion3/programacion3/SubastaQuindio/src/main/resources/persistencia/respaldo/subastaRespaldo" + fechaRespaldo +".xml";
+    public static final String RUTA_ARCHIVO_RESPALDO_XML = "C:/Users/Orlay.molina/Desktop/subastaRespaldo" + fechaRespaldo +".xml";
     public static final String RUTA_ARCHIVO_MODELO_SUBASTA_BINARIO = "src/main/resources/persistencia/model.dat";
     public static final String RUTA_ARCHIVO_MODELO_SUBASTA_XML = "C:/Users/Orlay.molina/Desktop/programacion3/programacion3/SubastaQuindio/src/main/resources/persistencia/model.xml";
 //	C:\td\persistencia
